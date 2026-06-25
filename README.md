@@ -91,16 +91,6 @@ data/
 lessons/                 The sixteen self-contained lesson portals
 ```
 
-## Adding a lesson later
-
-The hub is data-driven, so nothing in the interface is hard-coded. To add a lesson:
-
-1. Drop the lesson file into `lessons/`.
-2. Add one entry (number, title, domain, file) to `data/security-plus.json`.
-3. Rebuild `data/search-index.json` so the new content is searchable.
-
-The same approach supports adding a second certification later by registering a new course in `courses.json`.
-
 ## Tech notes
 
 - No framework and no build pipeline, just standard web files.
