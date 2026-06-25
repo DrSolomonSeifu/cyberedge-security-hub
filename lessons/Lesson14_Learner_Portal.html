@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 14: Summarize Security Governance Concepts · Learner Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=Archivo:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+    --stone:#e7e0d4;
+    --stone-2:#ded5c5;
+    --surface:#fbfaf6;
+    --surface-2:#f2ede2;
+    --crimson:#a8323f;
+    --crimson-deep:#7f2530;
+    --slate:#3c5563;
+    --slate-deep:#24373f;
+    --ochre:#c0892e;
+    --ochre-deep:#956619;
+    --sage:#5d8a6b;
+    --sage-deep:#436b50;
+    --violet:#7a6ba6;
+    --violet-deep:#5e5189;
+    --ink:#2a2620;
+    --muted:#6d6357;
+    --line:#ded6c6;
+    --display:'Zilla Slab',Georgia,serif;
+    --body:'Archivo',-apple-system,sans-serif;
+    --mono:'Space Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:var(--body);
+    color:var(--ink);
+    line-height:1.7;
+    background:
+        radial-gradient(circle at 15% 10%, rgba(168,50,63,0.07) 0%, transparent 40%),
+        radial-gradient(circle at 85% 90%, rgba(60,85,99,0.08) 0%, transparent 45%),
+        linear-gradient(160deg, #eae3d7 0%, #e2dac9 100%);
+    background-attachment:fixed;
+    min-height:100vh;
+    padding:30px 18px 48px;
+}
+
+/* dossier shell */
+.shell{
+    max-width:1160px;margin:0 auto;background:var(--surface);
+    border-radius:6px;overflow:hidden;
+    box-shadow:0 30px 70px rgba(36,55,63,0.32), 0 0 0 1px rgba(42,38,32,0.06);
+}
+
+/* ─── HEADER (report cover) ─── */
+.hd{position:relative;background:linear-gradient(135deg,#2c424c 0%, #1f2f37 100%);color:#f3eee2;overflow:hidden;}
+.hd-bar{height:6px;background:linear-gradient(90deg,var(--crimson) 0%, var(--ochre) 70%, var(--sage) 100%);}
+.hd-tex{position:absolute;inset:0;pointer-events:none;
+    background-image:
+        radial-gradient(circle at 90% 15%, rgba(168,50,63,0.18) 0%, transparent 40%),
+        repeating-linear-gradient(0deg, transparent, transparent 33px, rgba(255,255,255,0.02) 33px, rgba(255,255,255,0.02) 34px);}
+.hd-inner{position:relative;z-index:1;padding:40px 46px 36px;}
+.hd-eyebrow{font-family:var(--mono);font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--ochre);margin-bottom:14px;}
+.hd h1{font-family:var(--display);font-weight:700;font-size:2.5rem;line-height:1.1;letter-spacing:0.2px;margin-bottom:10px;}
+.hd h1 .n{color:var(--crimson);}
+.hd h1 .u{color:var(--ochre);}
+.hd-sub{font-size:1rem;color:rgba(243,238,226,0.72);font-weight:300;max-width:640px;}
+.hd-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;}
+.badge{display:inline-flex;align-items:center;gap:7px;padding:7px 15px;border-radius:4px;font-size:0.75rem;font-weight:600;letter-spacing:0.4px;font-family:var(--mono);}
+.b-learner{background:rgba(93,138,107,0.2);color:#9ccfa9;border:1px solid rgba(93,138,107,0.45);}
+.b-cert{background:rgba(192,137,46,0.16);color:#e3b86b;border:1px solid rgba(192,137,46,0.4);}
+.b-credit{background:rgba(255,255,255,0.05);color:rgba(243,238,226,0.6);border:1px solid rgba(255,255,255,0.12);font-weight:400;}
+.stamp{position:absolute;top:30px;right:38px;z-index:1;transform:rotate(8deg);
+    border:2.5px solid rgba(168,50,63,0.7);color:rgba(168,50,63,0.82);border-radius:6px;
+    padding:8px 14px;font-family:var(--mono);font-weight:700;font-size:0.78rem;letter-spacing:2px;text-transform:uppercase;
+    text-align:center;line-height:1.3;}
+.stamp small{display:block;font-size:0.6rem;letter-spacing:1px;opacity:0.85;font-weight:400;}
+
+/* ─── NAV ─── */
+.nav{position:sticky;top:0;z-index:50;background:#33474f;display:flex;flex-wrap:wrap;border-bottom:3px solid var(--crimson);}
+.tab{flex:1;min-width:150px;padding:15px 18px;border:none;background:transparent;cursor:pointer;text-align:left;
+    font-family:var(--body);font-weight:600;font-size:0.85rem;color:rgba(243,238,226,0.55);transition:all 0.22s ease;
+    border-right:1px solid rgba(255,255,255,0.06);position:relative;}
+.tab .tnum{display:block;font-family:var(--mono);font-size:0.64rem;color:rgba(192,137,46,0.7);margin-bottom:4px;letter-spacing:1px;}
+.tab::after{content:'';position:absolute;left:50%;right:50%;bottom:0;height:3px;background:var(--crimson);transition:all 0.3s ease;}
+.tab:hover{color:#f3eee2;background:rgba(255,255,255,0.04);}
+.tab.active{color:#f3eee2;background:rgba(168,50,63,0.16);}
+.tab.active .tnum{color:var(--ochre);}
+.tab.active::after{left:0;right:0;}
+
+/* ─── SECTIONS ─── */
+.section{display:none;padding:44px 48px;}
+.section.active{display:block;}
+.section.active>*{opacity:0;animation:rise 0.5s cubic-bezier(0.2,0.7,0.2,1) forwards;}
+.section.active>*:nth-child(1){animation-delay:0.02s;}
+.section.active>*:nth-child(2){animation-delay:0.07s;}
+.section.active>*:nth-child(3){animation-delay:0.12s;}
+.section.active>*:nth-child(4){animation-delay:0.17s;}
+.section.active>*:nth-child(5){animation-delay:0.22s;}
+.section.active>*:nth-child(n+6){animation-delay:0.27s;}
+@keyframes rise{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+.shead{display:flex;align-items:center;gap:16px;margin-bottom:24px;}
+.shead-ic{width:54px;height:54px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.5em;color:#f3eee2;box-shadow:0 8px 18px rgba(36,55,63,0.22);}
+.ic-crimson{background:linear-gradient(135deg,var(--crimson),var(--crimson-deep));}
+.ic-slate{background:linear-gradient(135deg,var(--slate),var(--slate-deep));}
+.ic-ochre{background:linear-gradient(135deg,var(--ochre),var(--ochre-deep));}
+.ic-violet{background:linear-gradient(135deg,var(--violet),var(--violet-deep));}
+.shead-tx h2{font-family:var(--display);font-weight:700;font-size:1.7rem;color:var(--ink);line-height:1.12;}
+.shead-tx p{font-size:0.86rem;color:var(--muted);margin-top:2px;font-family:var(--mono);letter-spacing:0.3px;}
+
+.section p{font-size:0.99rem;margin-bottom:14px;}
+.section h3{font-family:var(--display);font-weight:600;font-size:1.32rem;color:var(--slate-deep);margin:34px 0 12px;}
+.section h4{font-size:1rem;font-weight:700;color:var(--ink);margin:20px 0 8px;}
+.section ul,.section ol{margin:10px 0 16px;padding-left:24px;}
+.section li{font-size:0.97rem;margin:6px 0;}
+.section strong{color:var(--ink);}
+
+.rule{height:2px;background:repeating-linear-gradient(90deg,var(--crimson) 0 18px, transparent 18px 28px);opacity:0.4;margin:34px 0;border-radius:1px;}
+
+/* ─── PANELS ─── */
+.panel{border-radius:0 8px 8px 0;padding:22px 26px;margin:22px 0;border-left:5px solid var(--slate);background:var(--surface-2);}
+.panel .ph{font-family:var(--mono);font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:9px;display:flex;align-items:center;gap:8px;}
+.panel p:last-child,.panel ul:last-child{margin-bottom:0;}
+.p-key{border-left-color:var(--slate);background:linear-gradient(135deg,rgba(60,85,99,0.09),rgba(60,85,99,0.03));}
+.p-key .ph{color:var(--slate-deep);}
+.p-def{border-left-color:var(--violet);background:linear-gradient(135deg,rgba(122,107,166,0.11),rgba(122,107,166,0.03));}
+.p-def .ph{color:var(--violet-deep);}.p-def .pc{font-style:italic;}
+.p-insight{border-left-color:var(--ochre);background:linear-gradient(135deg,rgba(192,137,46,0.12),rgba(192,137,46,0.03));}
+.p-insight .ph{color:var(--ochre-deep);}
+.p-example{border-left-color:var(--sage);background:linear-gradient(135deg,rgba(93,138,107,0.12),rgba(93,138,107,0.03));}
+.p-example .ph{color:var(--sage-deep);}
+.p-warn{border-left-color:var(--crimson);background:linear-gradient(135deg,rgba(168,50,63,0.10),rgba(168,50,63,0.03));}
+.p-warn .ph{color:var(--crimson-deep);}
+
+/* ─── IOC NOTE (signature evidence callout) ─── */
+.ioc{border:2px dashed rgba(168,50,63,0.5);border-radius:8px;background:rgba(168,50,63,0.04);padding:16px 20px;margin:16px 0;}
+.ioc .ih{font-family:var(--mono);font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--crimson-deep);font-weight:700;margin-bottom:7px;display:flex;align-items:center;gap:7px;}
+.ioc p{font-size:0.92rem;margin:0;color:var(--ink);}
+.ioc ul{margin:6px 0 0;}.ioc li{font-size:0.92rem;}
+
+/* ─── SUMMARY ─── */
+.summary{background:linear-gradient(135deg,#2c424c,#1f2f37);border-radius:10px;padding:28px 32px;margin:28px 0;box-shadow:0 14px 30px rgba(36,55,63,0.28);}
+.summary .ph{font-family:var(--mono);font-size:0.7rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--ochre);margin-bottom:12px;font-weight:700;}
+.summary .pc{color:rgba(243,238,226,0.88);font-size:0.99rem;line-height:1.85;}
+.summary .pc strong{color:#e89aa2;}.summary .pc em{color:var(--ochre);font-style:normal;}
+
+/* ─── CARDS ─── */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:15px;margin:22px 0;}
+.cards-3{grid-template-columns:repeat(auto-fit,minmax(188px,1fr));}
+.mc{background:#fff;border:1px solid var(--line);border-radius:8px;padding:18px 20px;position:relative;overflow:hidden;transition:transform 0.22s ease,box-shadow 0.22s ease;}
+.mc::before{content:'';position:absolute;top:0;left:0;bottom:0;width:4px;background:var(--crimson);}
+.mc.c-crimson::before{background:var(--crimson);}.mc.c-slate::before{background:var(--slate);}
+.mc.c-ochre::before{background:var(--ochre);}.mc.c-violet::before{background:var(--violet);}
+.mc.c-sage::before{background:var(--sage);}
+.mc:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(36,55,63,0.14);}
+.mc .mc-ic{font-size:1.5em;margin-bottom:8px;}
+.mc h4{font-family:var(--display);font-weight:600;font-size:1.04rem;color:var(--ink);margin:0 0 6px;}
+.mc p{font-size:0.86rem;color:var(--muted);line-height:1.6;margin:0;}
+.mc .tell{display:block;margin-top:8px;font-family:var(--mono);font-size:0.7rem;color:var(--crimson-deep);letter-spacing:0.3px;}
+
+/* ─── FLOW ─── */
+.flow{position:relative;margin:24px 0;}
+.flow::before{content:'';position:absolute;left:22px;top:22px;bottom:22px;width:2px;background:linear-gradient(180deg,var(--crimson),var(--slate));}
+.fitem{display:flex;gap:18px;align-items:flex-start;padding-bottom:16px;position:relative;}
+.fitem:last-child{padding-bottom:0;}
+.fnum{width:46px;height:46px;border-radius:50%;flex-shrink:0;z-index:1;display:flex;align-items:center;justify-content:center;
+    font-family:var(--display);font-weight:700;font-size:1rem;background:var(--surface);color:var(--ink);border:2px solid var(--crimson);box-shadow:0 5px 14px rgba(36,55,63,0.16);}
+.fbody{flex:1;background:#fff;border:1px solid var(--line);border-radius:8px;padding:13px 18px;}
+.fbody h4{margin:0 0 3px;font-size:0.96rem;color:var(--ink);}
+.fbody p{font-size:0.88rem;color:var(--muted);margin:0;}
+
+/* ─── TABLE ─── */
+.tbl{width:100%;border-collapse:collapse;margin:22px 0;border-radius:8px;overflow:hidden;box-shadow:0 6px 18px rgba(36,55,63,0.1);font-size:0.92rem;background:#fff;}
+.tbl thead tr{background:var(--slate-deep);}
+.tbl th{padding:13px 18px;text-align:left;font-family:var(--mono);font-size:0.68rem;letter-spacing:1.3px;text-transform:uppercase;color:var(--ochre);font-weight:700;}
+.tbl td{padding:12px 18px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.6;}
+.tbl tbody tr:nth-child(even){background:#faf7f0;}
+.tbl tbody tr:hover{background:#f1ece1;}
+.tbl tbody tr:last-child td{border-bottom:none;}
+.tbl .lbl{font-weight:700;color:var(--slate-deep);}
+
+/* ─── CHIPS / PILLS ─── */
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0;}
+.pill{padding:5px 13px;border-radius:4px;font-family:var(--mono);font-size:0.72rem;font-weight:400;}
+.pl-crimson{background:rgba(168,50,63,0.1);color:var(--crimson-deep);border:1px solid rgba(168,50,63,0.28);}
+.pl-slate{background:rgba(60,85,99,0.1);color:var(--slate-deep);border:1px solid rgba(60,85,99,0.26);}
+.pl-ochre{background:rgba(192,137,46,0.12);color:var(--ochre-deep);border:1px solid rgba(192,137,46,0.3);}
+.pl-violet{background:rgba(122,107,166,0.12);color:var(--violet-deep);border:1px solid rgba(122,107,166,0.3);}
+
+.objnum{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;background:var(--slate-deep);color:var(--ochre);font-family:var(--mono);font-size:0.75rem;font-weight:700;flex-shrink:0;}
+
+/* ─── FOOTER ─── */
+.ft{background:var(--slate-deep);padding:26px 48px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
+.ft-brand p{font-family:var(--mono);font-size:0.66rem;letter-spacing:2px;text-transform:uppercase;color:var(--ochre);margin-bottom:4px;}
+.ft-brand span{font-size:0.78rem;color:rgba(243,238,226,0.42);}
+.ft-nav{display:flex;gap:10px;flex-wrap:wrap;}
+.ft-nav button{font-family:var(--body);font-weight:600;font-size:0.82rem;padding:9px 18px;border-radius:6px;cursor:pointer;background:transparent;color:rgba(243,238,226,0.62);border:1px solid rgba(192,137,46,0.35);transition:all 0.2s;}
+.ft-nav button:hover{border-color:var(--ochre);color:var(--ochre);background:rgba(192,137,46,0.1);}
+
+@media(max-width:760px){
+    body{padding:14px 8px 30px;}
+    .hd-inner{padding:30px 22px;}
+    .hd h1{font-size:1.75rem;}.stamp{display:none;}
+    .section{padding:28px 22px;}
+    .tab{min-width:46%;}
+    .flow::before{display:none;}
+    .ft{flex-direction:column;text-align:center;padding:22px;}
+}
+@media print{
+    body{background:#fff;padding:0;}.shell{box-shadow:none;}
+    .nav,.ft-nav{display:none;}
+    .section{display:block!important;page-break-after:always;}
+    .section.active>*{opacity:1;animation:none;}
+}
+
+/* ─── REVIEW ACTIVITY QUIZ ─── */
+.rv-prog{display:flex;align-items:center;gap:14px;margin:18px 0 6px;}
+.rv-bar{flex:1;height:9px;border-radius:99px;background:#e7dfd0;border:1px solid var(--line);overflow:hidden;}
+.rv-bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--crimson),var(--ochre));transition:width .4s ease;}
+.rv-count{font-family:var(--mono);font-size:.82rem;color:var(--crimson-deep);white-space:nowrap;font-weight:700;}
+.rv-sec{display:flex;align-items:center;gap:14px;margin:36px 0 6px;}
+.rv-sec .num{font-family:var(--display);font-weight:700;font-size:1rem;color:#f3eee2;background:var(--slate-deep);border-radius:8px;width:36px;height:36px;display:grid;place-items:center;flex-shrink:0;}
+.rv-sec h3{font-family:var(--display);font-weight:700;font-size:1.28rem;margin:0;color:var(--slate-deep);}
+.qcard{background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px 24px;margin:16px 0;box-shadow:0 8px 22px rgba(36,55,63,0.08);}
+.qcard .q-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:9px;}
+.qcard .q-num{font-family:var(--mono);font-size:.7rem;color:var(--ochre-deep);letter-spacing:.12em;text-transform:uppercase;font-weight:700;}
+.qcard .q-tag{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--slate-deep);background:rgba(60,85,99,0.1);border:1px solid rgba(60,85,99,0.3);padding:3px 9px;border-radius:999px;}
+.qcard .q-text{font-size:1.04rem;font-weight:600;margin:0 0 16px;color:var(--ink);line-height:1.5;}
+.qcard .opts{display:flex;flex-direction:column;gap:10px;}
+.qcard .opt{text-align:left;width:100%;cursor:pointer;background:var(--surface-2);border:1px solid var(--line);color:var(--ink);border-radius:9px;padding:12px 15px;font-size:0.95rem;font-family:var(--body);line-height:1.45;display:flex;gap:11px;align-items:flex-start;transition:border-color .15s,background .15s;}
+.qcard .opt:hover:not(:disabled){border-color:var(--ochre);background:#efe7d8;}
+.qcard .opt:focus-visible{outline:2px solid var(--ochre);outline-offset:2px;}
+.qcard .opt .letter{font-family:var(--mono);font-size:.8rem;color:var(--ochre-deep);flex-shrink:0;width:16px;font-weight:700;}
+.qcard .opt:disabled{cursor:default;}
+.qcard .opt.correct{background:rgba(93,138,107,0.14);border-color:var(--sage);}
+.qcard .opt.correct .letter{color:var(--sage-deep);}
+.qcard .opt.wrong{background:rgba(168,50,63,0.1);border-color:var(--crimson);}
+.qcard .opt.wrong .letter{color:var(--crimson-deep);}
+.qcard .fb{margin-top:13px;padding:12px 15px;border-radius:9px;font-size:.9rem;display:none;border:1px solid transparent;line-height:1.6;}
+.qcard .fb.show{display:block;}
+.qcard .fb.ok{background:rgba(93,138,107,0.12);border-color:var(--sage);color:var(--sage-deep);}
+.qcard .fb.no{background:rgba(168,50,63,0.08);border-color:var(--crimson);color:var(--crimson-deep);}
+.qcard .fb b{color:var(--ink);}
+.rv-results{text-align:center;display:none;background:linear-gradient(135deg,#2c424c,#1f2f37);border:1px solid var(--ochre);border-radius:12px;padding:34px 30px;margin:32px 0 10px;box-shadow:0 18px 40px rgba(36,55,63,0.3);}
+.rv-results.show{display:block;}
+.rv-results .score{font-family:var(--display);font-weight:700;font-size:2.8rem;color:var(--ochre);line-height:1;}
+.rv-results .pct{color:rgba(243,238,226,0.7);font-family:var(--mono);margin-top:6px;font-size:0.85rem;}
+.rv-results .verdict{font-size:1.2rem;font-weight:700;margin:16px 0 6px;font-family:var(--display);}
+.rv-results .verdict.pass{color:#9ccfa9;}
+.rv-results .verdict.fail{color:#e89aa2;}
+.rv-results p{color:rgba(243,238,226,0.75);margin:0 auto;max-width:470px;font-size:0.92rem;}
+.rv-btn{margin-top:20px;cursor:pointer;font-family:var(--body);font-weight:700;background:var(--ochre);color:var(--slate-deep);border:none;padding:12px 28px;border-radius:8px;font-size:0.95rem;transition:box-shadow .15s,transform .05s;}
+.rv-btn:hover{box-shadow:0 10px 22px rgba(192,137,46,0.4);}
+.rv-btn:active{transform:translateY(1px);}
+</style>
+  <link rel="stylesheet" href="../shared/mobile-responsive.css">
+</head>
+<body>
+<div class="shell">
+
+    <!-- HEADER -->
+    <div class="hd">
+        <div class="hd-bar"></div>
+        <div class="hd-tex"></div>
+        <div class="stamp">Security<br>Governance<small>Framework · L14</small></div>
+        <div class="hd-inner">
+            <div class="hd-eyebrow">CyberEdge · Security+</div>
+            <h1><span class="n">Lesson 14:</span> Summarize Security<br><span class="u">Governance</span> Concepts</h1>
+            <div class="hd-sub">How an organization directs and controls its security: the policies and standards that set the rules, the laws it must follow, the people held accountable, and the processes that govern change and automation.</div>
+            <div class="hd-meta">
+                <span class="badge b-learner">📖 Learner Portal</span>
+                <span class="badge b-cert">⚡ CompTIA Security+</span>
+                <span class="badge b-credit">Dr. Solomon Seifu (Lead Technical Instructor &amp; Author)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAV -->
+    <div class="nav">
+        <button class="tab active" onclick="showSection('overview',this)"><span class="tnum">01</span>Overview</button>
+        <button class="tab" onclick="showSection('governance',this)"><span class="tnum">14A</span>Security Governance</button>
+        <button class="tab" onclick="showSection('change',this)"><span class="tnum">14B</span>Change Management</button>
+        <button class="tab" onclick="showSection('automation',this)"><span class="tnum">14C</span>Automation &amp; Orchestration</button>
+        <button class="tab" onclick="showSection('review',this)"><span class="tnum">RA</span>Review Activity</button>
+    </div>
+
+    <!-- ═══ OVERVIEW ═══ -->
+    <div id="overview" class="section active">
+        <div class="shead">
+            <div class="shead-ic ic-slate">🏛️</div>
+            <div class="shead-tx"><h2>Lesson Overview</h2><p>The framework that governs security</p></div>
+        </div>
+
+        <p>Security is not only tools and configurations. Behind every control is a set of decisions about what to protect, who is responsible, and which rules to follow. That decision-making structure is called <strong>governance</strong>.</p>
+        <p>Governance is just a plain word for how an organization makes decisions and stays in control of itself. Put the word security in front of it, and it means how an organization stays in control of how it protects its information. This lesson steps back from the technical detail to look at the policies that set the rules, the laws the organization must obey, the people who hold authority, and the processes that keep change and automation under control.</p>
+
+        <div class="panel p-key">
+            <div class="ph">🔑 Key Idea</div>
+            <div class="pc">Security governance is the <strong>framework</strong> an organization uses to manage its cybersecurity risks. It defines the policies, standards, procedures, and guidelines that protect information assets and technical infrastructure, spreads responsibility across many stakeholders, and keeps the organization compliant with the laws it is bound by. Without that structure, security becomes a guessing game where everyone protects things their own way.</div>
+        </div>
+
+        <h3>Lesson Objectives</h3>
+        <table class="tbl">
+            <thead><tr><th>#</th><th>Objective</th><th>What You Will Be Able to Do</th></tr></thead>
+            <tbody>
+                <tr><td><span class="objnum">1</span></td><td><strong>Distinguish the governing documents</strong></td><td>Tell policies, standards, procedures, and guidelines apart and know what level each one sits at.</td></tr>
+                <tr><td><span class="objnum">2</span></td><td><strong>Navigate the legal environment</strong></td><td>Recognize the layers of law and regulation that shape security operations.</td></tr>
+                <tr><td><span class="objnum">3</span></td><td><strong>Explain governance and leadership</strong></td><td>Understand boards, committees, governance models, and the data roles that hold accountability.</td></tr>
+                <tr><td><span class="objnum">4</span></td><td><strong>Apply change management</strong></td><td>Make changes safely and on purpose, with rollback plans and review.</td></tr>
+                <tr><td><span class="objnum">5</span></td><td><strong>Use automation and orchestration</strong></td><td>Let software handle repetitive work and coordinate security tools into workflows.</td></tr>
+            </tbody>
+        </table>
+
+        <div class="rule"></div>
+        <h3>The Four Building Blocks</h3>
+        <p>A governance framework is built from four kinds of documents. They work as a team, each sitting at a different level from the big picture down to the fine detail. You will see them again and again throughout this lesson.</p>
+        <div class="cards">
+            <div class="mc c-crimson"><div class="mc-ic">📜</div><h4>Policies</h4><p>High-level, authoritative documents that state the organization's commitment to security. They say what we will do and why, not how.</p><span class="tell">Level: highest · mandatory</span></div>
+            <div class="mc c-slate"><div class="mc-ic">📐</div><h4>Standards</h4><p>Specific requirements that turn a policy into measurable terms, like the exact settings or methods that must be met.</p><span class="tell">Level: specific · mandatory</span></div>
+            <div class="mc c-ochre"><div class="mc-ic">🪜</div><h4>Procedures</h4><p>Detailed, step-by-step instructions for completing a task in a way that meets the standards.</p><span class="tell">Level: detailed · mandatory</span></div>
+            <div class="mc c-violet"><div class="mc-ic">🧭</div><h4>Guidelines</h4><p>Recommended best practices that steer decisions while leaving room for individual judgment.</p><span class="tell">Level: advisory · optional</span></div>
+        </div>
+
+        <div class="rule"></div>
+        <h3>How to Use This Portal</h3>
+        <ul>
+            <li>Use the <strong>tabs</strong> above, the <strong>← →</strong> arrow keys, or the footer buttons to move between topics.</li>
+            <li>Each topic opens with a <strong>Key Idea</strong> or <strong>Definition</strong> panel; read it first to frame what follows.</li>
+            <li>Watch for <strong>Example</strong> panels, which show how a concept plays out in a real situation.</li>
+            <li>Before class, be ready to answer: <em>What is the difference between a policy and a standard, and why does an organization need both?</em></li>
+        </ul>
+
+        <div class="summary">
+            <div class="ph">📝 Big Picture Takeaway</div>
+            <div class="pc">Good security needs more than good tools. It needs a <strong>framework of decisions</strong> behind it. Governance sets the rules through policies, standards, procedures, and guidelines, keeps the organization inside the law, makes leadership accountable, and controls how change and automation happen. <strong>Governance is never finished</strong>, because threats, the business, and the regulations all keep changing, so it includes constant monitoring and improvement.</div>
+        </div>
+    </div>
+
+    <!-- ═══ 14A SECURITY GOVERNANCE ═══ -->
+    <div id="governance" class="section">
+        <div class="shead">
+            <div class="shead-ic ic-crimson">📜</div>
+            <div class="shead-tx"><h2>Topic 14A · Security Governance Concepts</h2><p>The documents, the law, and the people in charge</p></div>
+        </div>
+
+        <div class="panel p-def">
+            <div class="ph">📖 Definition</div>
+            <div class="pc"><strong>Governance</strong> is the set of processes used to direct and control an organization, including how decisions are made and how risk is managed. <strong>Policies, standards, procedures, and guidelines are the outputs of that governance</strong>, the written results of its thinking.</div>
+        </div>
+
+        <h3>The Document Hierarchy</h3>
+        <p>The four governing documents move from the big picture down to fine detail. A simple way to feel the difference is a restaurant kitchen.</p>
+        <table class="tbl">
+            <thead><tr><th>Document</th><th>What It Is</th><th>Binding?</th><th>Kitchen Analogy</th></tr></thead>
+            <tbody>
+                <tr><td class="lbl">Policy</td><td>High-level commitment that states what the organization will do and why.</td><td>Mandatory</td><td>"We will serve food that is safe to eat."</td></tr>
+                <tr><td class="lbl">Standard</td><td>Specific, measurable requirement that meets the policy.</td><td>Mandatory</td><td>"Chicken must reach 165 degrees."</td></tr>
+                <tr><td class="lbl">Procedure</td><td>Step-by-step instructions that carry out the standard.</td><td>Mandatory</td><td>"Set the oven here, cook this long, check the temperature here."</td></tr>
+                <tr><td class="lbl">Guideline</td><td>Recommended best practice that allows judgment.</td><td>Advisory</td><td>"Plating suggestions the cook may adapt."</td></tr>
+            </tbody>
+        </table>
+        <div class="panel p-insight">
+            <div class="ph">🔎 The Key Distinction</div>
+            <div class="pc">Both policies and guidelines steer how people act, but <strong>policies are mandatory and define strict rules</strong>, while <strong>guidelines are recommendations that allow individual judgment</strong>. Said simply, a policy is a <em>must</em>, and a guideline is a <em>should</em>. Guidelines also need regular review so they stay practical as technology and threats change.</div>
+        </div>
+
+        <h3>Policies and Compliance</h3>
+        <p>Policies frame how decisions are made, support fairness and transparency, set expectations for performance, align the organization around common goals, and help prevent misconduct. They are also the main way an organization stays <strong>compliant</strong>, by building legal and regulatory requirements into daily operations. A data privacy policy, for example, explains how the company follows the laws that protect customer data, covering how data is collected, stored, processed, and shared. During an audit, a policy gives the auditor a roadmap to check whether the organization really operates the way it claims.</p>
+        <table class="tbl">
+            <thead><tr><th>Common Policy</th><th>What It Governs</th></tr></thead>
+            <tbody>
+                <tr><td class="lbl">Acceptable Use Policy (AUP)</td><td>Acceptable ways people may use network and computer systems, with consequences for misuse.</td></tr>
+                <tr><td class="lbl">Information Security Policies</td><td>Rules ensuring all IT users follow the security requirements for the organization's information.</td></tr>
+                <tr><td class="lbl">Business Continuity &amp; COOP</td><td>Critical processes that must keep running during a major disruption.</td></tr>
+                <tr><td class="lbl">Disaster Recovery</td><td>Steps to recover after a catastrophic event and restore operations quickly.</td></tr>
+                <tr><td class="lbl">Incident Response</td><td>How to identify, investigate, control, and reduce the impact of a security incident.</td></tr>
+                <tr><td class="lbl">Software Development Life Cycle (SDLC)</td><td>How software is built, from requirements through maintenance, to meet security standards.</td></tr>
+                <tr><td class="lbl">Change Management</td><td>How changes to IT systems are requested, reviewed, approved, and documented.</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Procedures and Playbooks</h3>
+        <p>A procedure gives clear, step-by-step instructions so work is done consistently, securely, and efficiently, the same way every time. One important kind of procedure is the <strong>playbook</strong>, a collection of critical actions usually tied to the Security Operations Center (SOC). Playbooks keep operations consistent, share knowledge when staff move on, and shine during an emergency by helping a stressed team make quick, correct decisions. Trusted guides for building them include the <strong>MITRE ATT&amp;CK framework</strong> and <strong>NIST Special Publication 800-61</strong>. Procedures cover routine work such as onboarding and offboarding, background checks, provisioning, desktop deployment, patching, and ticket management.</p>
+        <div class="ioc">
+            <div class="ih">🔐 Onboarding and Offboarding Watchpoints</div>
+            <p><strong>Onboarding</strong> joins IT and HR to create accounts and assign privileges, with care around secure credential transmission (a default password is an easy backdoor). <strong>Offboarding</strong> disables accounts, recovers company assets, wipes corporate data from personal devices, and immediately changes any shared or generic credentials the departing person knew.</p>
+        </div>
+
+        <h3>Standards</h3>
+        <p>A standard defines the expected outcome of a task, such as a particular configuration state for a server or a performance baseline for a service. Standards are often owned by subject matter experts and can change often while the policy stays the same. Choosing which standards to adopt is a <strong>strategic decision</strong>, driven by several forces.</p>
+        <div class="pills">
+            <span class="pill pl-slate">Regulatory requirements</span>
+            <span class="pill pl-slate">Business-specific needs</span>
+            <span class="pill pl-slate">Risk management</span>
+            <span class="pill pl-slate">Industry best practices</span>
+            <span class="pill pl-slate">Stakeholder expectations</span>
+        </div>
+        <p>Common <strong>industry standards</strong> come from outside the organization and are adopted, not invented: the ISO 27k series, the NIST 800 series, PCI-DSS, and FIPS. A healthcare provider follows <strong>HIPAA</strong>; a company handling card data adopts <strong>PCI DSS</strong> to protect the cardholder data environment (CDE); a cloud-reliant organization adopts <strong>ISO/IEC 27017 and 27018</strong>; and <strong>ISO/IEC 27001</strong> provides a framework for an information security management system (ISMS).</p>
+        <p>An organization also builds its own <strong>internal standards</strong> to carry the technical detail.</p>
+        <div class="cards">
+            <div class="mc c-slate"><div class="mc-ic">🔑</div><h4>Password Standards</h4><p>Hashing, salting against rainbow tables, secure transmission and cipher suites, reset verification, and password managers.</p></div>
+            <div class="mc c-slate"><div class="mc-ic">🚪</div><h4>Access Control Standards</h4><p>Models like RBAC, DAC, and MAC; identity verification; privilege management; protocols such as Kerberos, OAuth, and SAML; session management; audit trails.</p></div>
+            <div class="mc c-slate"><div class="mc-ic">🏢</div><h4>Physical Security Standards</h4><p>Building security, workstation security, datacenter access, secure equipment disposal, and visitor management.</p></div>
+            <div class="mc c-slate"><div class="mc-ic">🔒</div><h4>Encryption Standards</h4><p>Allowed algorithms such as AES and ECC, minimum key lengths, and key management for generating, storing, and revoking keys.</p></div>
+        </div>
+
+        <div class="rule"></div>
+        <h3>The Legal Environment</h3>
+        <p>Governance committees keep the organization compliant with every cybersecurity law and rule that applies to it, in order to protect it from <strong>legal liability</strong>. They lean on ready-made frameworks, benchmarks, and configuration guides as the evidence that shows a regulator the law is being followed. A company sits inside several layers of law at once.</p>
+        <div class="pills">
+            <span class="pill pl-crimson">Global Law</span>
+            <span class="pill pl-crimson">National Law</span>
+            <span class="pill pl-crimson">State / Local Law</span>
+            <span class="pill pl-crimson">Industry Regulations</span>
+            <span class="pill pl-crimson">Privacy Legislation</span>
+        </div>
+        <p>Almost every industry has its own cybersecurity laws. The table below names key examples by sector, with each abbreviation spelled out.</p>
+        <table class="tbl">
+            <thead><tr><th>Sector</th><th>Key Laws and Regulations</th></tr></thead>
+            <tbody>
+                <tr><td class="lbl">Privacy</td><td>GDPR (General Data Protection Regulation, EU); CCPA (California Consumer Privacy Act).</td></tr>
+                <tr><td class="lbl">Energy</td><td>NERC (North American Electric Reliability Corporation), US and Canada.</td></tr>
+                <tr><td class="lbl">Education &amp; Children</td><td>FERPA (Family Educational Rights and Privacy Act); CIPA (Children's Internet Protection Act); COPPA (Children's Online Privacy Protection Act).</td></tr>
+                <tr><td class="lbl">Healthcare</td><td>HIPAA (Health Insurance Portability and Accountability Act).</td></tr>
+                <tr><td class="lbl">Financial Services</td><td>GLBA (Gramm-Leach-Bliley Act); PCI DSS (a contractual obligation, not a government law).</td></tr>
+                <tr><td class="lbl">Government</td><td>FISMA (Federal Information Security Modernization Act); CJIS (Criminal Justice Information Services) Security Policy; GSC (Government Security Classifications, UK).</td></tr>
+            </tbody>
+        </table>
+
+        <div class="rule"></div>
+        <h3>Governance Structures and Accountability</h3>
+        <p>Governance only works when leadership stands behind it. At the top sits the <strong>governance board</strong>, which sets strategic objectives, policies, and guidelines, oversees how controls are implemented, and judges whether the program works. Because a board cannot master every technical detail, it relies on <strong>committees</strong> of subject matter experts who study an issue and bring back analysis and recommendations.</p>
+        <p>Organizations also differ in <em>where</em> decisions are made.</p>
+        <div class="cards cards-3">
+            <div class="mc c-ochre"><div class="mc-ic">🎯</div><h4>Centralized</h4><p>One core group makes the security decisions for everyone, giving consistency across the whole organization.</p></div>
+            <div class="mc c-ochre"><div class="mc-ic">🌿</div><h4>Decentralized</h4><p>Each department makes its own decisions, giving flexibility to fit local needs.</p></div>
+            <div class="mc c-ochre"><div class="mc-ic">⚖️</div><h4>Hybrid</h4><p>A blend that centralizes some decisions and leaves others to the departments.</p></div>
+        </div>
+        <p>Whatever the model, the rules cannot sit still. <strong>Monitoring and revision</strong> keep policies, procedures, and standards current as laws, technology, and risks change, supported by audits and regular training. Protecting data also depends on four clear <strong>data governance roles</strong>.</p>
+        <table class="tbl">
+            <thead><tr><th>Role</th><th>Responsibility</th></tr></thead>
+            <tbody>
+                <tr><td class="lbl">Owner</td><td>A senior employee, ultimately responsible for protecting the data and deciding its sensitivity and who may access it.</td></tr>
+                <tr><td class="lbl">Controller</td><td>Decides why and how personal data is processed; tied closely to GDPR and to keeping processing legal.</td></tr>
+                <tr><td class="lbl">Processor</td><td>Handles data on the controller's behalf, often a cloud service provider (CSP), vendor, or partner.</td></tr>
+                <tr><td class="lbl">Custodian / Data Steward</td><td>Keeps the data safe day to day, usually the IT department, implementing controls and reporting incidents.</td></tr>
+            </tbody>
+        </table>
+
+        <div class="panel p-example">
+            <div class="ph">📌 Example</div>
+            <div class="pc">A hospital's governance board sets a policy that patient data must be protected under HIPAA. A committee of security experts writes the encryption <strong>standard</strong> (AES-256 at rest), a team documents the <strong>procedure</strong> for encrypting a new database, and a <strong>guideline</strong> suggests how staff should phrase privacy notices. The data owner, controller, processor, and custodian each hold a piece of the responsibility, and a yearly audit confirms it all still lines up with the law.</div>
+        </div>
+    </div>
+
+    <!-- ═══ 14B CHANGE MANAGEMENT ═══ -->
+    <div id="change" class="section">
+        <div class="shead">
+            <div class="shead-ic ic-ochre">🔧</div>
+            <div class="shead-tx"><h2>Topic 14B · Change Management</h2><p>Changing systems safely and on purpose</p></div>
+        </div>
+
+        <div class="panel p-key">
+            <div class="ph">🔑 Key Idea</div>
+            <div class="pc">Even a small change to a live system can open a door for an attacker or break something that other systems depend on. <strong>Change management</strong> is the systematic way an organization makes changes safely and deliberately, minimizing risk and disruption while keeping a way to undo a change if it goes wrong.</div>
+        </div>
+
+        <h3>What a Change Management Program Does</h3>
+        <p>A change management program follows the same set process for every change, so nothing slips through unmanaged. It rests on four basic moves: <strong>plan, test, approve, and implement</strong>. Before any change, the team weighs its potential impacts and its dependencies, the other parts that rely on what is changing. Every change covers a wide range of work, from minor patches to complex system migrations.</p>
+        <div class="pills">
+            <span class="pill pl-slate">Software deployments</span>
+            <span class="pill pl-slate">System updates &amp; patching</span>
+            <span class="pill pl-slate">Hardware upgrades</span>
+            <span class="pill pl-slate">Network modifications</span>
+            <span class="pill pl-slate">Configuration changes</span>
+            <span class="pill pl-slate">New integrations</span>
+        </div>
+        <p>If a change is not managed well, it can introduce new vulnerabilities, disrupt services, or damage compliance. So a strong program puts every change through four stages: it is <strong>tracked, assessed, approved, and reviewed</strong>. The bottom line is that a change should never weaken <strong>security</strong>, hurt <strong>availability</strong>, or drag down <strong>performance</strong>.</p>
+
+        <h3>Key Change Management Concepts</h3>
+        <table class="tbl">
+            <thead><tr><th>Concept</th><th>What It Means</th></tr></thead>
+            <tbody>
+                <tr><td class="lbl">Stakeholder Input</td><td>Gathering views from everyone affected, surfacing hidden risks and building acceptance.</td></tr>
+                <tr><td class="lbl">Change Review Board (CAB)</td><td>The group that reviews and approves proposed changes; also called a Change Advisory Board.</td></tr>
+                <tr><td class="lbl">Impact Analysis</td><td>Assessing how a change affects users, business processes, and interconnected systems.</td></tr>
+                <tr><td class="lbl">Test Results</td><td>Trying the change in a test environment first to confirm it works without disrupting operations.</td></tr>
+                <tr><td class="lbl">Rollout Plans</td><td>How the change is deployed, often in phases to limit damage if something goes wrong.</td></tr>
+                <tr><td class="lbl">Backout Plans</td><td>A contingency plan to reverse the change and return systems to their original state.</td></tr>
+                <tr><td class="lbl">Maintenance Windows</td><td>Predefined, low-activity time blocks scheduled for changes to minimize disruption.</td></tr>
+                <tr><td class="lbl">Standard Operating Procedures (SOPs)</td><td>Detailed written steps so changes are implemented the same consistent way every time.</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Allowed and Blocked Changes</h3>
+        <p>Allow lists and deny lists help decide which changes get a fast lane and which get stopped. An <strong>allow list</strong> names approved software, hardware, and low-risk change types that can skip the full process, streamlining trusted changes. A <strong>deny list</strong> blocks risky software, hardware, and high-impact changes that must always go through the full process. These same terms also describe technical controls in other contexts, such as access controls, firewall rules, and software restriction mechanisms.</p>
+        <div class="panel p-warn">
+            <div class="ph">⚠ A Hidden Pitfall</div>
+            <div class="pc">If an allow list approves software by its <strong>file hash value</strong>, patching that software changes its contents, and therefore its hash. The allow list no longer recognizes the patched version, which can leave a fully patched system where none of the approved software will run. This is why the impact of allow and deny lists must be built into the testing plan.</div>
+        </div>
+
+        <h3>Restarts, Dependencies, and Downtime</h3>
+        <p>Many changes force a service or application to restart, which causes <strong>downtime</strong>, time when the service is unavailable. Downtime can be <strong>scheduled</strong>, planned in advance, or <strong>unscheduled</strong>, when a service drops unexpectedly. The trickiest part is dependencies: a restart in one place can ripple out to many others.</p>
+        <div class="panel p-example">
+            <div class="ph">📌 Dependency Example</div>
+            <div class="pc">Restarting a single database server sounds minor, but every application that depends on that database will likely go down with it. A change that looked small can suddenly affect a wide range of operations, which is why a careful analysis of dependencies, and a backout plan that accounts for them, comes before any change.</div>
+        </div>
+        <p>The primary goal is to minimize disruption by timing the work for maintenance windows or off-peak hours, and by communicating outages to stakeholders ahead of time. <strong>Legacy systems</strong> deserve special caution: their outdated technology often creates compatibility issues, they tend to have poor documentation and no vendor support, and that mix of high complexity and business criticality makes them a serious security problem.</p>
+
+        <h3>Documentation and Version Control</h3>
+        <p>When a change is made, the team must assess how it affects existing policies, procedures, documentation, and diagrams, and update them as part of the change. New versions are clearly labeled and old ones archived but kept for reference. <strong>Version control</strong> tracks and controls changes to documents, diagrams, and code, keeping a historical record, ensuring only approved changes are applied, allowing a quick revert to a previous version, and preventing the confusion of outdated documents. The underlying truth is simple: policies and procedures must change as often as the technology does.</p>
+    </div>
+
+    <!-- ═══ 14C AUTOMATION & ORCHESTRATION ═══ -->
+    <div id="automation" class="section">
+        <div class="shead">
+            <div class="shead-ic ic-violet">🤖</div>
+            <div class="shead-tx"><h2>Topic 14C · Automation and Orchestration</h2><p>Letting software carry the repetitive load</p></div>
+        </div>
+
+        <div class="panel p-def">
+            <div class="ph">📖 Definition</div>
+            <div class="pc"><strong>Automation</strong> uses software to perform repetitive, rule-based tasks, such as monitoring for threats, applying patches, maintaining baselines, or responding to incidents. <strong>Orchestration</strong> goes a step further by coordinating those automated tasks across many different tools into a single, seamless workflow, like a conductor leading an orchestra.</div>
+        </div>
+
+        <p>Automation improves efficiency and reduces human error, while orchestration ties separate tools together so work flows from one to the next without a manual handoff. Both also create clear <strong>audit trails</strong> that support compliance and incident investigation. They matter most in large, complex environments running many security tools at once.</p>
+
+        <h3>Where Automation Helps</h3>
+        <div class="cards">
+            <div class="mc c-violet"><div class="mc-ic">👤</div><h4>Provisioning</h4><p>Creating or removing user accounts and access, and allocating resources like servers and storage, with less manual effort and fewer errors.</p></div>
+            <div class="mc c-violet"><div class="mc-ic">🛡️</div><h4>Guardrails &amp; Security Groups</h4><p>Enforcing policy, flagging risky activity, and controlling which resources a user or system can reach.</p></div>
+            <div class="mc c-violet"><div class="mc-ic">🎫</div><h4>Ticketing</h4><p>Auto-creating, routing, and escalating support tickets, for example anything that risks violating an SLA (service level agreement).</p></div>
+            <div class="mc c-violet"><div class="mc-ic">⚙️</div><h4>Service Management</h4><p>Automating routine tasks like enabling or disabling services and adjusting access rights.</p></div>
+            <div class="mc c-violet"><div class="mc-ic">🔁</div><h4>Continuous Integration &amp; Testing</h4><p>Merging code changes often and testing each merge automatically to catch problems early.</p></div>
+            <div class="mc c-violet"><div class="mc-ic">🔌</div><h4>APIs</h4><p>Application Programming Interfaces let tools talk to each other; orchestration coordinates them to build systems like SOAR platforms.</p></div>
+        </div>
+        <div class="panel p-insight">
+            <div class="ph">🔎 The Payoff: A Workforce Multiplier</div>
+            <div class="pc">Automation lets a small team do far more, which is why it is sometimes called a workforce multiplier. It also fights <strong>operator fatigue</strong>, the mental exhaustion analysts feel from constant alerts and false positives. By taking over routine tasks, it frees people for complex, strategic work, which improves alertness, threat response, and even staff retention. Automation can also enforce a known-good <strong>baseline</strong> and override unauthorized changes, controlling configuration drift.</div>
+        </div>
+
+        <h3>Orchestration in Action</h3>
+        <div class="panel p-example">
+            <div class="ph">📌 Example</div>
+            <div class="pc">The moment a threat is detected, an orchestrated system can act on its own: it isolates the affected subnet, runs basic analysis and reporting, notifies the security team, generates a ticket, and documents the whole incident, all without human intervention. Coordinating those tools is what cuts detection and reaction times.</div>
+        </div>
+
+        <h3>Security Automation and DevOps</h3>
+        <p><strong>Security automation</strong> uses tools and scripts to carry out security tasks like detection, response, and patching on their own. <strong>DevOps</strong>, a blend of Development and Operations, brings those two teams together and relies on automation to build, test, and release software quickly and reliably.</p>
+
+        <h3>Important Considerations</h3>
+        <p>The benefits are real, but these tools have to be managed carefully. Five challenges deserve attention.</p>
+        <div class="cards cards-3">
+            <div class="mc c-crimson"><div class="mc-ic">🧩</div><h4>Complexity</h4><p>Setting up automation well requires deep knowledge of systems and their dependencies; a poor plan can add complexity.</p></div>
+            <div class="mc c-crimson"><div class="mc-ic">💰</div><h4>Cost</h4><p>High upfront costs for tools, integration, and training, plus ongoing maintenance and upgrades.</p></div>
+            <div class="mc c-crimson"><div class="mc-ic">⛓️</div><h4>Single Point of Failure</h4><p>If one critical automated process fails, it can ripple across many areas and cause widespread problems.</p></div>
+            <div class="mc c-crimson"><div class="mc-ic">🏚️</div><h4>Technical Debt</h4><p>Rushed tools leave sloppy code and fragile integrations that cause instability and rising costs later.</p></div>
+            <div class="mc c-crimson"><div class="mc-ic">🛠️</div><h4>Ongoing Support</h4><p>These systems need constant updates, review, and education, or the benefits quickly fade.</p></div>
+        </div>
+
+        <div class="summary">
+            <div class="ph">📝 Final Lesson Takeaway</div>
+            <div class="pc">Security governance is the structure that holds everything together. <strong>Policies, standards, procedures, and guidelines</strong> set the rules; the <strong>legal environment</strong> sets the boundaries; <strong>boards, committees, and data roles</strong> make leadership accountable; <strong>change management</strong> keeps systems changing safely; and <strong>automation and orchestration</strong> let a small team keep pace with a large environment. To govern well, fit the structure to the organization's objectives, lean on committees for expertise, keep a full set of governing documents, control change for transparency, and use automation for consistency, faster response, and compliance. And remember, <em>governance is never finished</em>.</div>
+        </div>
+    </div>
+
+    <!-- ═══ REVIEW ACTIVITY ═══ -->
+    <div id="review" class="section">
+        <div class="shead">
+            <div class="shead-ic ic-ochre">🔁</div>
+            <div class="shead-tx"><h2>Review Activity</h2><p>Check your understanding across all of Lesson 14</p></div>
+        </div>
+
+        <div class="panel p-key">
+            <div class="ph">🔑 How This Works</div>
+            <div class="pc">There are <strong>30 questions</strong> across the three review activities, blending scenario-based situations with direct concept checks. Every question has four plausible options, but only one is the best answer. Choices reshuffle each time you reset, so a fixed position never gives the answer away. Select a choice to lock it in and reveal why it is right or wrong. Your score appears at the end, with <strong>70% or higher</strong> as the passing mark.</div>
+        </div>
+
+        <div class="rv-prog">
+            <div class="rv-bar"><i id="rvBarFill"></i></div>
+            <div class="rv-count"><span id="rvAnswered">0</span> / <span id="rvTotal">30</span></div>
+        </div>
+
+        <div id="rvQuiz"></div>
+
+        <div class="rv-results" id="rvResults">
+            <div class="score"><span id="rvScoreNum">0</span> / <span id="rvScoreTotal">30</span></div>
+            <div class="pct"><span id="rvScorePct">0</span>% correct</div>
+            <div class="verdict" id="rvVerdict"></div>
+            <p id="rvVerdictMsg"></p>
+            <button class="rv-btn" id="rvRetry">Reset and try again</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="ft">
+        <div class="ft-brand">
+            <p>CyberEdge</p>
+            <span>CompTIA Security+ · Lesson 14: Summarize Security Governance Concepts · Learner Portal</span>
+        </div>
+        <div class="ft-nav">
+            <button onclick="prevSection()">← Previous</button>
+            <button onclick="nextSection()">Next →</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const ids=['overview','governance','change','automation','review'];
+    let cur=0;
+    function showSection(id,el){
+        document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        const idx=ids.indexOf(id);const tabs=document.querySelectorAll('.tab');
+        if(el){el.classList.add('active');}else if(idx>=0&&tabs[idx]){tabs[idx].classList.add('active');}
+        cur=idx>=0?idx:0;
+        window.scrollTo({top:0,behavior:'smooth'});
+    }
+    function nextSection(){if(cur<ids.length-1){cur++;showSection(ids[cur]);}}
+    function prevSection(){if(cur>0){cur--;showSection(ids[cur]);}}
+    document.addEventListener('keydown',e=>{
+        if(e.key==='ArrowRight')nextSection();
+        if(e.key==='ArrowLeft')prevSection();
+    });
+
+    /* ===== Review Activity quiz =====
+       Options are balanced in length and parallel in structure so the
+       correct choice carries no tell. Positions shuffle (Fisher-Yates)
+       on every build. scenario:true marks situation-based items. */
+    const RV_SECTIONS=[
+      {
+        title:"Review Activity 1 · Policies, Standards, and Procedures",
+        questions:[
+          {
+            q:"A document states that the company will protect all customer data and comply with applicable privacy laws, but it lists no technical settings or steps. Which type of governing document is this?",
+            opts:[
+              {t:"A policy, a high-level statement of what the organization will do and why",correct:true,
+               fb:"Correct. A policy sets the authoritative, high-level commitment without specifying the technical detail or steps."},
+              {t:"A standard, a specific requirement that defines a measurable outcome",correct:false,
+               fb:"A standard would name measurable specifics like key lengths or settings, which this document avoids."},
+              {t:"A procedure, a detailed sequence of steps for completing a task",correct:false,
+               fb:"A procedure gives step-by-step instructions. This document states intent, not actions."},
+              {t:"A guideline, an optional recommendation that allows for judgment",correct:false,
+               fb:"A guideline is advisory, but this document is a binding organizational commitment."}
+            ]
+          },
+          {
+            q:"Which statement best captures the difference between a policy and a guideline?",
+            opts:[
+              {t:"A policy is mandatory and sets strict rules, while a guideline is a recommendation that allows judgment",correct:true,
+               fb:"Correct. A policy is a must; a guideline is a should that leaves room for discretion."},
+              {t:"A policy is an optional suggestion, while a guideline is enforced and mandatory",correct:false,
+               fb:"That reverses the two. Policies are mandatory and guidelines are advisory."},
+              {t:"A policy and a guideline are the same thing under two different names",correct:false,
+               fb:"They are genuinely different in how binding they are."},
+              {t:"A policy applies only to hardware, while a guideline applies only to staff",correct:false,
+               fb:"Neither is limited to a single domain; the real difference is whether it is mandatory."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"A committee must define the exact minimum password length and the approved hashing algorithm that every system has to meet. Which governing document should carry these specifics?",
+            opts:[
+              {t:"A standard, which specifies the measurable technical requirements that meet a policy",correct:true,
+               fb:"Correct. Standards translate a policy into specific, measurable requirements like length and algorithm."},
+              {t:"A policy, which states the high-level commitment without the technical detail",correct:false,
+               fb:"A policy sets the intent but does not carry the exact settings."},
+              {t:"A guideline, which recommends practices but does not require them",correct:false,
+               fb:"A guideline is optional, so it cannot enforce a required configuration."},
+              {t:"A playbook, which lists the response actions used by the SOC",correct:false,
+               fb:"A playbook is a response procedure, not the place for configuration requirements."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"A team wants every analyst to follow the same exact sequence of steps each time they provision a new user account. Which document type best meets this need?",
+            opts:[
+              {t:"A procedure, which gives detailed step-by-step instructions for a task",correct:true,
+               fb:"Correct. Procedures make a task repeatable by laying out the exact steps."},
+              {t:"A policy, which sets the high-level rule but not the individual steps",correct:false,
+               fb:"A policy frames the rule; it does not document each action."},
+              {t:"A standard, which defines the required outcome but not the actions",correct:false,
+               fb:"A standard sets the target state, while the procedure describes how to reach it."},
+              {t:"A guideline, which offers optional suggestions the analyst may adapt",correct:false,
+               fb:"A guideline allows judgment, which is the opposite of a fixed sequence."}
+            ]
+          },
+          {
+            q:"Which policy specifically defines the acceptable ways employees may use the organization's network and computer systems?",
+            opts:[
+              {t:"The Acceptable Use Policy (AUP)",correct:true,
+               fb:"Correct. The AUP sets out acceptable use of systems and the consequences for misuse."},
+              {t:"The Business Continuity Policy",correct:false,
+               fb:"Business continuity keeps critical processes running during a disruption, not user conduct."},
+              {t:"The Incident Response Policy",correct:false,
+               fb:"Incident response governs how the team reacts to a security incident, not daily system use."},
+              {t:"The Disaster Recovery Policy",correct:false,
+               fb:"Disaster recovery covers restoring operations after a catastrophe, not acceptable use."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"A Security Operations Center wants one standardized set of critical actions so any analyst handles a phishing incident the same way, even under pressure. What should they build?",
+            opts:[
+              {t:"A playbook, a standardized collection of critical response procedures",correct:true,
+               fb:"Correct. Playbooks keep response consistent and help a stressed team make correct decisions quickly."},
+              {t:"A guideline, which only recommends actions without standardizing them",correct:false,
+               fb:"A guideline allows judgment, so it would not standardize the response."},
+              {t:"An acceptable use policy, which governs how users may use systems",correct:false,
+               fb:"An AUP covers user conduct, not SOC response steps."},
+              {t:"A data inventory, which records what data the organization holds",correct:false,
+               fb:"A data inventory catalogs data; it does not direct incident response."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"A U.S. hospital must protect patient health records to satisfy federal law. Which regulation most directly drives its data protection standards?",
+            opts:[
+              {t:"HIPAA, the Health Insurance Portability and Accountability Act",correct:true,
+               fb:"Correct. HIPAA governs the protection of health information for healthcare organizations."},
+              {t:"PCI DSS, the Payment Card Industry Data Security Standard",correct:false,
+               fb:"PCI DSS protects cardholder data, not health records."},
+              {t:"GDPR, the General Data Protection Regulation",correct:false,
+               fb:"GDPR is the EU privacy law; HIPAA is the U.S. healthcare law in play here."},
+              {t:"FERPA, the Family Educational Rights and Privacy Act",correct:false,
+               fb:"FERPA protects student education records, not hospital patient data."}
+            ]
+          },
+          {
+            q:"What is the main difference between a governance board and a governance committee?",
+            opts:[
+              {t:"The board sets strategic direction and policy, while a committee of experts studies issues and brings recommendations",correct:true,
+               fb:"Correct. The board governs at a strategic level and relies on committees for in-depth expertise."},
+              {t:"The committee sets overall strategy, while the board performs the daily technical tasks",correct:false,
+               fb:"That reverses the roles. The board is strategic; committees feed it analysis."},
+              {t:"The board and the committee perform the same role with no real distinction",correct:false,
+               fb:"They are distinct: one directs, the other advises with specialized knowledge."},
+              {t:"The board handles only legal matters, while the committee handles only budgets",correct:false,
+               fb:"Neither is limited to one narrow area; the difference is strategy versus expert analysis."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"A large company lets each regional office make its own security decisions to fit local needs, rather than routing everything through one central group. Which governance model is this?",
+            opts:[
+              {t:"Decentralized governance, which distributes decision-making for local flexibility",correct:true,
+               fb:"Correct. Decentralized governance pushes decisions out to departments for flexibility."},
+              {t:"Centralized governance, which concentrates decisions in one core group",correct:false,
+               fb:"Centralized governance would route decisions through a single group, which is the opposite here."},
+              {t:"Hybrid governance, which centralizes some decisions and delegates others",correct:false,
+               fb:"Hybrid blends both, but this example delegates decisions entirely to the offices."},
+              {t:"Attestation, which formally confirms that controls are working",correct:false,
+               fb:"Attestation is a confirmation of controls, not a model for where decisions are made."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"Under data protection regulations, a cloud provider handles customer data strictly according to the instructions of the company that collected it. Which data governance role does the cloud provider fill?",
+            opts:[
+              {t:"Processor, which handles data on behalf of and as directed by the controller",correct:true,
+               fb:"Correct. A processor acts on the controller's instructions, which fits a third-party cloud provider."},
+              {t:"Controller, which decides the purposes and the means of processing",correct:false,
+               fb:"The controller decides why and how; here the provider only follows instructions."},
+              {t:"Owner, the senior employee ultimately accountable for the data",correct:false,
+               fb:"The owner is an internal senior role, not an external service acting on instructions."},
+              {t:"Custodian, the internal IT function that safeguards data day to day",correct:false,
+               fb:"The custodian is the organization's own IT steward, not a third party processing on instruction."}
+            ]
+          },
+          {
+            q:"Why must a governance program include ongoing monitoring and revision of its policies and standards?",
+            opts:[
+              {t:"Because threats, technology, and regulations keep changing, so the rules must be updated to stay effective",correct:true,
+               fb:"Correct. Governance is never finished; it adapts as the environment and the law evolve."},
+              {t:"Because policies are legally required to be rewritten in full every single month",correct:false,
+               fb:"There is no universal monthly rewrite rule; revision is driven by change, not a fixed clock."},
+              {t:"Because monitoring removes the need for any audits or staff training",correct:false,
+               fb:"Monitoring works alongside audits and training; it does not replace them."},
+              {t:"Because standards, once written, never need to change again",correct:false,
+               fb:"Standards change often as technology and risk shift, which is exactly why revision matters."}
+            ]
+          }
+        ]
+      },
+      {
+        title:"Review Activity 2 · Change Management",
+        questions:[
+          {
+            q:"What is the primary purpose of a change management program?",
+            opts:[
+              {t:"To make changes safely and deliberately while minimizing risk and disruption",correct:true,
+               fb:"Correct. Change management exists to control change so it does not harm the organization."},
+              {t:"To prevent the organization from ever changing its systems at all",correct:false,
+               fb:"The goal is safe change, not no change."},
+              {t:"To speed up changes by skipping the testing and approval steps",correct:false,
+               fb:"Skipping testing and approval is exactly what change management guards against."},
+              {t:"To assign blame to a specific person after a change causes an outage",correct:false,
+               fb:"Change management is about preventing harm, not assigning blame afterward."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"Before a major change, a team needs a way to reverse it quickly and restore the previous state if it causes unforeseen problems. Which element provides this?",
+            opts:[
+              {t:"A backout plan, the contingency to reverse the change and restore the prior state",correct:true,
+               fb:"Correct. A backout plan is the rehearsed way to undo a change that goes wrong."},
+              {t:"An impact analysis, which assesses what the change might affect",correct:false,
+               fb:"Impact analysis predicts effects beforehand; it does not reverse the change."},
+              {t:"A maintenance window, the scheduled low-activity time for the change",correct:false,
+               fb:"A maintenance window is when the change happens, not how it is undone."},
+              {t:"A rollout plan, which describes how the change is deployed",correct:false,
+               fb:"A rollout plan covers deployment forward, not the reversal."}
+            ]
+          },
+          {
+            q:"Which group is responsible for reviewing and approving proposed changes before they are implemented?",
+            opts:[
+              {t:"The Change Advisory Board (CAB)",correct:true,
+               fb:"Correct. The CAB, or change review board, reviews and approves proposed changes."},
+              {t:"The Security Operations Center (SOC)",correct:false,
+               fb:"The SOC monitors and responds to threats; it does not approve changes."},
+              {t:"The incident response team",correct:false,
+               fb:"The incident response team handles active incidents, not change approvals."},
+              {t:"The audit committee",correct:false,
+               fb:"An audit committee oversees controls and reporting, not day-to-day change approval."}
+            ]
+          },
+          {
+            q:"A change should be implemented without negatively affecting three key areas. Which three?",
+            opts:[
+              {t:"Security, availability, and performance",correct:true,
+               fb:"Correct. A well-managed change must not weaken security, hurt availability, or drag down performance."},
+              {t:"Budget, staffing, and marketing",correct:false,
+               fb:"These are business concerns, not the three technical areas a change must protect."},
+              {t:"Speed, simplicity, and convenience",correct:false,
+               fb:"Convenience is not one of the protected areas; security, availability, and performance are."},
+              {t:"Encryption, hashing, and tokenization",correct:false,
+               fb:"These are data protection methods, not the areas change management safeguards."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"An organization keeps a list of pre-approved, low-risk software and change types that may skip the full change process to save time. What is this list called?",
+            opts:[
+              {t:"An allow list, which streamlines trusted, preauthorized changes",correct:true,
+               fb:"Correct. An allow list lets approved, low-risk changes move through quickly."},
+              {t:"A deny list, which blocks risky or unauthorized changes",correct:false,
+               fb:"A deny list stops changes; this list speeds approved ones through."},
+              {t:"A backout plan, which reverses a change that fails",correct:false,
+               fb:"A backout plan undoes a change; it is not a list of approved changes."},
+              {t:"A maintenance window, which schedules changes during low activity",correct:false,
+               fb:"A maintenance window is a time block, not a list of approved items."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"An allow list approves software by its file hash. After a routine patch, users find the application will no longer run. What most likely happened?",
+            opts:[
+              {t:"Patching changed the file's contents and its hash, so the allow list no longer recognized it",correct:true,
+               fb:"Correct. A new hash after patching fails the allow list, which can block fully patched software."},
+              {t:"The patch deleted the application entirely from every affected system",correct:false,
+               fb:"A patch updates software; it does not delete it, and that would not explain a hash mismatch."},
+              {t:"The deny list automatically added the application right after the patch",correct:false,
+               fb:"The issue is the allow list failing to match the new hash, not a deny-list action."},
+              {t:"The maintenance window expired before the patch could finish installing",correct:false,
+               fb:"A window timing out would not change the file's hash or block it from running."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"A team restarts a single database server during a change, and several unrelated business applications suddenly go offline. What does this illustrate?",
+            opts:[
+              {t:"Dependencies, where a change in one component affects others that rely on it",correct:true,
+               fb:"Correct. The applications depended on that database, so restarting it rippled outward."},
+              {t:"A backout plan, the procedure for reversing a failed change",correct:false,
+               fb:"This is the ripple effect of a restart, not the act of reversing a change."},
+              {t:"Configuration drift, where systems wander from their approved baseline",correct:false,
+               fb:"Drift is gradual divergence from a baseline, not an immediate dependency outage."},
+              {t:"A maintenance window, the scheduled time for authorized downtime",correct:false,
+               fb:"A window is when work is scheduled; the issue here is the dependency chain."}
+            ]
+          },
+          {
+            q:"What is the difference between scheduled and unscheduled downtime?",
+            opts:[
+              {t:"Scheduled downtime is planned in advance, while unscheduled downtime is an unexpected outage",correct:true,
+               fb:"Correct. Scheduled downtime is arranged ahead of time; unscheduled downtime happens without warning."},
+              {t:"Scheduled downtime is caused by attackers, while unscheduled is caused by patching",correct:false,
+               fb:"The distinction is whether it was planned, not the cause."},
+              {t:"Scheduled downtime affects only hardware, while unscheduled affects only software",correct:false,
+               fb:"Either kind can affect hardware or software; the difference is planning."},
+              {t:"Scheduled and unscheduled downtime are two names for the same event",correct:false,
+               fb:"They are different: one is planned and one is unexpected."}
+            ]
+          },
+          {
+            q:"Why are legacy systems a particular challenge for change management?",
+            opts:[
+              {t:"Their outdated technology, poor documentation, and lack of vendor support raise the risk of any change",correct:true,
+               fb:"Correct. That mix of fragility and missing support makes changes to legacy systems especially risky."},
+              {t:"They are always the newest and best-supported systems in the environment",correct:false,
+               fb:"Legacy systems are old and often unsupported, the opposite of this claim."},
+              {t:"They can never be changed under any circumstances by anyone",correct:false,
+               fb:"They can be changed; the point is that doing so carries extra risk and care."},
+              {t:"They automatically roll back every change without needing a backout plan",correct:false,
+               fb:"Legacy systems do not self-revert; if anything they make rollback harder."}
+            ]
+          },
+          {
+            q:"What does version control provide for an organization's documents, diagrams, and code?",
+            opts:[
+              {t:"A historical record of changes and the ability to revert to a previous approved version",correct:true,
+               fb:"Correct. Version control tracks changes, keeps history, and allows a clean revert when needed."},
+              {t:"A way to permanently delete all prior versions to free up storage",correct:false,
+               fb:"Version control preserves history rather than destroying it."},
+              {t:"A guarantee that no document will ever need to be updated again",correct:false,
+               fb:"Documents still change; version control simply manages those changes."},
+              {t:"A method for skipping the review and approval of proposed changes",correct:false,
+               fb:"Version control supports controlled change; it does not bypass review."}
+            ]
+          }
+        ]
+      },
+      {
+        title:"Review Activity 3 · Automation and Orchestration",
+        questions:[
+          {
+            q:"What is the key difference between automation and orchestration?",
+            opts:[
+              {t:"Automation performs individual repetitive tasks, while orchestration coordinates many automated tasks across tools into one workflow",correct:true,
+               fb:"Correct. Automation handles single tasks; orchestration is the conductor that ties them together."},
+              {t:"Automation coordinates many tools, while orchestration runs only a single task",correct:false,
+               fb:"That reverses the two. Orchestration is the coordinating layer."},
+              {t:"Automation and orchestration are identical and fully interchangeable terms",correct:false,
+               fb:"They are related but distinct; one is task-level, the other workflow-level."},
+              {t:"Automation applies only to hardware, while orchestration applies only to people",correct:false,
+               fb:"Neither is limited that way; the difference is task versus coordinated workflow."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"The instant a threat is detected, a system on its own isolates the affected subnet, runs analysis, notifies the team, opens a ticket, and documents the incident, with no human action. This best demonstrates:",
+            opts:[
+              {t:"Orchestration, coordinating several automated tasks across different tools",correct:true,
+               fb:"Correct. Multiple automated actions woven into one seamless workflow is orchestration."},
+              {t:"A single automated task running entirely on its own in isolation",correct:false,
+               fb:"This is many coordinated tasks, not one isolated automation."},
+              {t:"A manual incident response carried out entirely by a human analyst",correct:false,
+               fb:"The whole sequence runs without human action, so it is not manual."},
+              {t:"A change management rollout following a scheduled maintenance window",correct:false,
+               fb:"This is an automated threat response, not a change rollout."}
+            ]
+          },
+          {
+            q:"Automation is sometimes called a workforce multiplier because it:",
+            opts:[
+              {t:"Lets a smaller team accomplish far more by handling repetitive tasks",correct:true,
+               fb:"Correct. By absorbing routine work, automation extends what a small team can do."},
+              {t:"Completely replaces the need for any human staff in the organization",correct:false,
+               fb:"It augments people and frees them for complex work rather than replacing them."},
+              {t:"Increases the number of alerts that analysts must review by hand",correct:false,
+               fb:"Automation reduces manual load; it does not pile on more by-hand work."},
+              {t:"Slows routine work down so humans can inspect every step closely",correct:false,
+               fb:"Automation speeds routine work up, which is the source of the multiplier effect."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"A SOC analyst is worn down from constantly triaging a flood of repetitive, low-value alerts, many of them false positives. How does automation most directly help?",
+            opts:[
+              {t:"It takes over the routine tasks, easing operator fatigue and freeing the analyst for complex work",correct:true,
+               fb:"Correct. Offloading repetitive work is exactly how automation relieves operator fatigue."},
+              {t:"It increases the alert volume so the analyst always stays fully occupied",correct:false,
+               fb:"More alerts would worsen fatigue, not relieve it."},
+              {t:"It removes all monitoring so that no alerts are generated at all",correct:false,
+               fb:"Turning off monitoring would create blind spots, not a healthy fix for fatigue."},
+              {t:"It transfers the analyst's entire job to an outside third-party vendor",correct:false,
+               fb:"Automation reduces the analyst's routine load; it does not outsource the role."}
+            ]
+          },
+          {
+            q:"Which capability uses automation to create or remove user accounts and assign access based on established roles?",
+            opts:[
+              {t:"Provisioning",correct:true,
+               fb:"Correct. Provisioning automates creating, removing, and granting access to accounts and resources."},
+              {t:"Ticketing",correct:false,
+               fb:"Ticketing automates creating and routing support tickets, not account creation."},
+              {t:"Continuous integration",correct:false,
+               fb:"Continuous integration merges and tests code changes, not user accounts."},
+              {t:"Guardrails",correct:false,
+               fb:"Guardrails enforce policy and flag risky activity rather than provision accounts."}
+            ]
+          },
+          {
+            q:"What does SOAR stand for, and what is its role?",
+            opts:[
+              {t:"Security Orchestration, Automation, and Response, a platform that coordinates security tools and actions",correct:true,
+               fb:"Correct. SOAR ties tools together so detection, analysis, and response flow as one workflow."},
+              {t:"Secure Online Access Repository, a central vault for storing user credentials",correct:false,
+               fb:"That is not what SOAR means; it is about orchestrating security operations."},
+              {t:"System Operations and Recovery, a framework for disaster recovery planning",correct:false,
+               fb:"SOAR is not a recovery framework; it orchestrates and automates response."},
+              {t:"Standard Operating Audit Review, a checklist used during compliance audits",correct:false,
+               fb:"SOAR is not an audit checklist; it coordinates automated security response."}
+            ]
+          },
+          {
+            q:"Which of the following is a genuine risk of relying heavily on automation and orchestration?",
+            opts:[
+              {t:"A single point of failure, where one broken automated process disrupts many areas",correct:true,
+               fb:"Correct. Centralized automation can become a single point of failure with wide impact."},
+              {t:"A guarantee that no system in the environment will ever fail again",correct:false,
+               fb:"Automation does not guarantee against failure; it can concentrate risk."},
+              {t:"The complete elimination of all operating and maintenance costs",correct:false,
+               fb:"Automation carries real upfront and ongoing costs rather than removing them."},
+              {t:"The removal of any need for documentation or ongoing support",correct:false,
+               fb:"Automated systems still require documentation and continual support."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"A team rushes automation tools into production with sloppy, undocumented scripts and fragile integrations. Months later the system is unstable and expensive to maintain. This is an example of:",
+            opts:[
+              {t:"Technical debt accumulating from hasty, poorly built automation",correct:true,
+               fb:"Correct. Cutting corners now creates fragile automation that costs more to fix later, which is technical debt."},
+              {t:"A workforce multiplier steadily improving the team's efficiency",correct:false,
+               fb:"This is the downside of rushed work, not an efficiency gain."},
+              {t:"Configuration drift being corrected by an enforced baseline",correct:false,
+               fb:"Drift is divergence from a baseline; this is the cost of sloppy automation."},
+              {t:"An orchestrated response reducing detection and reaction time",correct:false,
+               fb:"That describes a benefit of good orchestration, not this poorly built system."}
+            ]
+          },
+          {
+            q:"In the context of automation, what is configuration drift, and how does automation help with it?",
+            opts:[
+              {t:"Drift is when systems wander from their approved baseline; automation can detect and override unauthorized changes",correct:true,
+               fb:"Correct. Automation enforces a known-good baseline and reins systems back from drift."},
+              {t:"Drift is when automation speeds up over time, and baselines deliberately slow it back down",correct:false,
+               fb:"Drift refers to systems diverging from a baseline, not automation changing speed."},
+              {t:"Drift is a type of phishing attack, and automation blocks the malicious emails",correct:false,
+               fb:"Drift is not an attack; it is divergence from an intended configuration."},
+              {t:"Drift is the cost of software licensing, and automation negotiates it lower",correct:false,
+               fb:"Drift has nothing to do with licensing cost; it is configuration divergence."}
+            ]
+          }
+        ]
+      }
+    ];
+
+    const RV_LETTERS=["A","B","C","D"];
+    let rvTotalCount=0; RV_SECTIONS.forEach(s=>rvTotalCount+=s.questions.length);
+    let rvAnsweredCount=0, rvCorrectCount=0, rvFlags=[];
+
+    function rvShuffle(arr){
+        const a=arr.slice();
+        for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+        return a;
+    }
+    function rvBuild(){
+        rvAnsweredCount=0; rvCorrectCount=0; rvFlags=[];
+        const quiz=document.getElementById("rvQuiz");
+        quiz.innerHTML="";
+        document.getElementById("rvTotal").textContent=rvTotalCount;
+        document.getElementById("rvScoreTotal").textContent=rvTotalCount;
+        document.getElementById("rvResults").classList.remove("show");
+        let gIndex=0;
+        RV_SECTIONS.forEach((section,sIdx)=>{
+            const head=document.createElement("div");
+            head.className="rv-sec";
+            head.innerHTML=`<div class="num">${sIdx+1}</div><h3>${section.title}</h3>`;
+            quiz.appendChild(head);
+            section.questions.forEach(item=>{
+                const myIndex=gIndex++;
+                rvFlags[myIndex]=false;
+                const card=document.createElement("div");
+                card.className="qcard";
+                const shuffled=rvShuffle(item.opts);
+                let optsHtml="";
+                shuffled.forEach((o,i)=>{optsHtml+=`<button class="opt" data-correct="${o.correct}"><span class="letter">${RV_LETTERS[i]}</span><span>${o.t}</span></button>`;});
+                const tag=item.scenario?`<span class="q-tag">Scenario</span>`:"";
+                card.innerHTML=`<div class="q-head"><span class="q-num">Question ${myIndex+1}</span>${tag}</div><div class="q-text">${item.q}</div><div class="opts">${optsHtml}</div><div class="fb"></div>`;
+                const buttons=card.querySelectorAll(".opt");
+                const fb=card.querySelector(".fb");
+                buttons.forEach((btn,i)=>{
+                    btn.addEventListener("click",()=>{
+                        if(rvFlags[myIndex])return;
+                        rvFlags[myIndex]=true; rvAnsweredCount++;
+                        const isCorrect=btn.dataset.correct==="true";
+                        if(isCorrect)rvCorrectCount++;
+                        buttons.forEach(b=>{b.disabled=true;if(b.dataset.correct==="true")b.classList.add("correct");});
+                        if(!isCorrect)btn.classList.add("wrong");
+                        const chosen=shuffled[i];
+                        fb.innerHTML=(isCorrect?"":"<b>Not quite. </b>")+chosen.fb;
+                        fb.classList.add("show",isCorrect?"ok":"no");
+                        rvUpdateProgress();
+                    });
+                });
+                quiz.appendChild(card);
+            });
+        });
+        rvUpdateProgress();
+    }
+    function rvUpdateProgress(){
+        document.getElementById("rvAnswered").textContent=rvAnsweredCount;
+        document.getElementById("rvBarFill").style.width=(rvAnsweredCount/rvTotalCount*100)+"%";
+        if(rvAnsweredCount===rvTotalCount)rvShowResults();
+    }
+    function rvShowResults(){
+        const pct=Math.round(rvCorrectCount/rvTotalCount*100);
+        document.getElementById("rvScoreNum").textContent=rvCorrectCount;
+        document.getElementById("rvScorePct").textContent=pct;
+        const verdict=document.getElementById("rvVerdict");
+        const msg=document.getElementById("rvVerdictMsg");
+        const pass=pct>=70;
+        verdict.textContent=pass?"Passed":"Keep reviewing";
+        verdict.className="verdict "+(pass?"pass":"fail");
+        msg.textContent=pass
+            ?"You cleared the 70% line. Revisit any question you missed so the reasoning is solid before the exam."
+            :"You landed below the 70% line. Review the feedback above, focus on the topics that tripped you up, and run it again.";
+        const r=document.getElementById("rvResults");
+        r.classList.add("show");
+        r.scrollIntoView({behavior:"smooth",block:"center"});
+    }
+    document.getElementById("rvRetry").addEventListener("click",()=>{
+        rvBuild();
+        document.getElementById("review").scrollIntoView({behavior:"smooth",block:"start"});
+    });
+    rvBuild();
+</script>
+  <script src="../shared/lesson-bridge.js"></script>
+</body>
+</html>

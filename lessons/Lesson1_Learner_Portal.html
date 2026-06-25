@@ -1,0 +1,2360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security+ Lesson 1: Summarizing Fundamental Security Concepts - Learner Portal</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #333;
+            line-height: 1.7;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0d1117 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            padding: 22px 30px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            border-bottom: 3px solid #e63946;
+        }
+
+        .header h1 {
+            font-size: 1.6em;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .header h2 {
+            font-size: 1.1em;
+            font-weight: 400;
+            color: #a8b2d8;
+            margin-bottom: 4px;
+        }
+
+        .header .sub {
+            font-size: 0.88em;
+            color: #e63946;
+            font-style: italic;
+            margin-bottom: 2px;
+        }
+
+        .header .instructors {
+            font-size: 0.82em;
+            color: #8892b0;
+        }
+
+        .container {
+            display: flex;
+            min-height: calc(100vh - 130px);
+        }
+
+        .sidebar {
+            width: 270px;
+            background: #1c2333;
+            color: white;
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: 2px 0 12px rgba(0,0,0,0.4);
+            flex-shrink: 0;
+        }
+
+        .sidebar h3 {
+            color: #e63946;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e63946;
+            font-size: 0.95em;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .sidebar ul { list-style: none; margin-bottom: 22px; }
+
+        .sidebar li {
+            padding: 9px 10px;
+            margin: 4px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-size: 0.9em;
+            color: #ccd6f6;
+        }
+
+        .sidebar li:hover { background: #2d3561; padding-left: 15px; color: white; }
+        .sidebar li.active { background: #e63946; color: white; font-weight: bold; }
+
+        .progress-container {
+            background: #252d3d;
+            padding: 14px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            background: #0d1117;
+            height: 22px;
+            border-radius: 11px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #e63946, #f4a261);
+            height: 100%;
+            width: 0%;
+            transition: width 0.6s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+
+        .main-content {
+            flex: 1;
+            background: #f5f5f0;
+            padding: 28px 32px;
+            overflow-y: auto;
+        }
+
+        .tab-navigation {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 28px;
+            border-bottom: 3px solid #e63946;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 11px 22px;
+            background: #dde1e7;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-family: 'Times New Roman', Times, serif;
+            border-radius: 8px 8px 0 0;
+            transition: all 0.3s;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .tab-btn:hover { background: #c8cdd4; }
+        .tab-btn.active { background: #e63946; color: white; }
+
+        .tab-content { display: none; animation: fadeIn 0.4s; }
+        .tab-content.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hook-box {
+            background: linear-gradient(135deg, #1a1a2e 0%, #e63946 100%);
+            color: white;
+            padding: 26px;
+            border-radius: 10px;
+            margin-bottom: 26px;
+            box-shadow: 0 5px 18px rgba(230,57,70,0.35);
+        }
+
+        .hook-box h2 { margin-bottom: 14px; font-size: 1.4em; }
+        .hook-box p { margin-top: 10px; font-size: 0.97em; line-height: 1.7; }
+        .hook-box .highlight { font-weight: bold; font-size: 1.05em; color: #f4a261; margin-top: 14px; }
+
+        .scenario-box {
+            background: #fff8e1;
+            border-left: 5px solid #f4a261;
+            padding: 18px 22px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .objective-list {
+            background: #e8f5e9;
+            padding: 20px 24px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #2e7d32;
+        }
+
+        .objective-list h3 { color: #2e7d32; margin-bottom: 12px; }
+        .objective-list li { margin: 10px 0; padding-left: 6px; color: #1b5e20; }
+
+        .quest-section {
+            background: white;
+            padding: 24px 28px;
+            margin: 22px 0;
+            border-radius: 10px;
+            border-left: 5px solid #e63946;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+        }
+
+        .quest-section h3 {
+            color: #1a1a2e;
+            margin-bottom: 14px;
+            font-size: 1.25em;
+            border-bottom: 1px solid #e63946;
+            padding-bottom: 8px;
+        }
+
+        .quest-section h4 {
+            color: #e63946;
+            margin-top: 18px;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        .quest-section p { margin-bottom: 10px; color: #2c2c2c; }
+        .quest-section ul, .quest-section ol { padding-left: 22px; color: #2c2c2c; }
+        .quest-section ul li, .quest-section ol li { margin: 7px 0; }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #1565c0;
+            padding: 14px 18px;
+            margin: 14px 0;
+            border-radius: 5px;
+            font-size: 0.95em;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #e65100;
+            padding: 14px 18px;
+            margin: 14px 0;
+            border-radius: 5px;
+            font-size: 0.95em;
+        }
+
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid #2e7d32;
+            padding: 14px 18px;
+            margin: 14px 0;
+            border-radius: 5px;
+            font-size: 0.95em;
+        }
+
+        .example-box {
+            background: #f3e5f5;
+            padding: 14px 18px;
+            margin: 14px 0;
+            border-radius: 5px;
+            border-left: 4px solid #6a1b9a;
+            font-size: 0.95em;
+        }
+
+        .cia-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 18px 0;
+        }
+
+        .cia-card {
+            padding: 18px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .cia-card.conf { background: linear-gradient(135deg, #1565c0, #1976d2); color: white; }
+        .cia-card.integ { background: linear-gradient(135deg, #2e7d32, #388e3c); color: white; }
+        .cia-card.avail { background: linear-gradient(135deg, #e65100, #f4511e); color: white; }
+        .cia-card h4 { font-size: 1.1em; margin-bottom: 8px; }
+        .cia-card p { font-size: 0.88em; line-height: 1.5; }
+
+        .nist-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin: 18px 0;
+        }
+
+        .nist-card {
+            padding: 14px 10px;
+            border-radius: 8px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+
+        .nist-card.identify { background: #1565c0; }
+        .nist-card.protect { background: #6a1b9a; }
+        .nist-card.detect { background: #e65100; }
+        .nist-card.respond { background: #c62828; }
+        .nist-card.recover { background: #2e7d32; }
+        .nist-card h4 { font-size: 0.95em; margin-bottom: 6px; }
+        .nist-card p { font-size: 0.78em; line-height: 1.4; }
+
+        .control-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin: 18px 0;
+        }
+
+        .control-card {
+            padding: 16px;
+            border-radius: 8px;
+            border: 2px solid;
+        }
+
+        .control-card.managerial { border-color: #1565c0; background: #e3f2fd; }
+        .control-card.operational { border-color: #2e7d32; background: #e8f5e9; }
+        .control-card.technical { border-color: #6a1b9a; background: #f3e5f5; }
+        .control-card.physical { border-color: #e65100; background: #fff3e0; }
+        .control-card h4 { margin-bottom: 8px; font-size: 1em; }
+        .control-card p { font-size: 0.88em; }
+
+        .quiz-question {
+            background: white;
+            padding: 20px 24px;
+            margin: 16px 0;
+            border-radius: 8px;
+            border: 2px solid #e63946;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .quiz-question h4 { color: #1a1a2e; margin-bottom: 12px; font-size: 1em; }
+        .quiz-question p { margin-bottom: 10px; font-weight: 500; }
+
+        .quiz-options { list-style: none; margin-top: 10px; }
+
+        .quiz-options li {
+            padding: 10px 14px;
+            margin: 7px 0;
+            background: #f0f0f0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95em;
+            border: 2px solid transparent;
+        }
+
+        .quiz-options li:hover { background: #e63946; color: white; transform: translateX(4px); }
+        .quiz-options li.correct { background: #2e7d32 !important; color: white !important; border-color: #1b5e20; }
+        .quiz-options li.incorrect { background: #c62828 !important; color: white !important; border-color: #b71c1c; }
+        .quiz-options li.selected { background: #1565c0; color: white; }
+
+        .feedback-msg {
+            margin-top: 10px;
+            padding: 10px 14px;
+            border-radius: 5px;
+            font-size: 0.92em;
+            font-weight: 600;
+            display: none;
+        }
+
+        .feedback-msg.correct { background: #c8e6c9; color: #1b5e20; display: block; }
+        .feedback-msg.incorrect { background: #ffcdd2; color: #b71c1c; display: block; }
+
+        .quiz-score-box {
+            background: linear-gradient(135deg, #1a1a2e, #e63946);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .quiz-score-box h3 { font-size: 1.4em; margin-bottom: 8px; }
+        .quiz-score-box p { font-size: 1.1em; }
+
+        .submit-btn {
+            background: #e63946;
+            color: white;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: 700;
+            margin-top: 16px;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover { background: #c1121f; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(230,57,70,0.4); }
+
+        .reset-btn {
+            background: #1565c0;
+            color: white;
+            padding: 10px 22px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: 600;
+            margin-top: 10px;
+            margin-left: 10px;
+            transition: all 0.3s;
+        }
+
+        .reset-btn:hover { background: #0d47a1; }
+
+        /* ===== REVIEW ACTIVITY (integrated) ===== */
+        .rv-intro {
+            background: #fff;
+            border: 2px solid #e63946;
+            border-left: 6px solid #e63946;
+            border-radius: 8px;
+            padding: 18px 22px;
+            margin-bottom: 22px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .rv-intro p { margin: 0; color: #333; }
+        .rv-intro strong { color: #1a1a2e; }
+
+        .rv-progress-wrap {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: #f4f5f8;
+            padding: 12px 14px 14px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            border: 1px solid #d4d8e0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+        .rv-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .rv-stat .count {
+            font-size: 0.95em;
+            color: #1a1a2e;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .rv-controls { display: flex; gap: 10px; flex-wrap: wrap; }
+        .rv-btn {
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: 700;
+            font-size: 0.92em;
+            padding: 9px 18px;
+            border-radius: 6px;
+            border: none;
+            background: #e63946;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .rv-btn:hover { background: #c1121f; transform: translateY(-1px); }
+        .rv-btn.ghost {
+            background: #1565c0;
+        }
+        .rv-btn.ghost:hover { background: #0d47a1; }
+        .rv-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+        .rv-bar {
+            height: 12px;
+            background: #d4d8e0;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+        .rv-bar-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #e63946, #1a1a2e);
+            transition: width 0.4s ease;
+        }
+
+        .rv-section-label {
+            font-weight: 700;
+            font-size: 1.25em;
+            color: #1a1a2e;
+            margin: 28px 0 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #e63946;
+            padding-bottom: 6px;
+        }
+        .rv-section-label .badge-ra {
+            font-size: 0.62em;
+            background: #e63946;
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 6px;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        .rv-section-sub { font-size: 0.9em; color: #555; margin-bottom: 6px; font-style: italic; }
+
+        .rv-q {
+            background: #fff;
+            border: 2px solid #e63946;
+            border-radius: 8px;
+            padding: 20px 22px 16px;
+            margin: 16px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .rv-q .qhead {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        .rv-q .qnum {
+            font-size: 0.82em;
+            font-weight: 700;
+            background: #1a1a2e;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 6px;
+            flex: 0 0 auto;
+            letter-spacing: 0.5px;
+        }
+        .rv-q .qtext { font-weight: 600; font-size: 1.02em; color: #1a1a2e; line-height: 1.55; }
+        .rv-q .qchips { margin-bottom: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
+        .rv-chip {
+            font-size: 0.7em;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 4px 9px;
+            border-radius: 5px;
+            font-weight: 700;
+        }
+        .rv-chip.topic { background: #e8eaf0; color: #1a1a2e; }
+        .rv-chip.scn { background: #fde2e4; color: #c1121f; }
+
+        .rv-opt {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            width: 100%;
+            text-align: left;
+            background: #f0f0f0;
+            border: 2px solid transparent;
+            border-radius: 6px;
+            padding: 12px 14px;
+            margin: 8px 0;
+            cursor: pointer;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 0.98em;
+            color: #333;
+            transition: all 0.25s;
+        }
+        .rv-opt:hover:not(:disabled) { background: #e63946; color: #fff; transform: translateX(4px); }
+        .rv-opt:hover:not(:disabled) .ltr { color: #fff; }
+        .rv-opt .ltr { font-weight: 700; font-size: 0.92em; color: #e63946; flex: 0 0 auto; margin-top: 1px; }
+        .rv-opt:disabled { cursor: default; }
+        .rv-opt.correct { background: #2e7d32 !important; border-color: #1b5e20; color: #fff !important; transform: none; }
+        .rv-opt.correct .ltr { color: #fff; }
+        .rv-opt.wrong { background: #c62828 !important; border-color: #b71c1c; color: #fff !important; transform: none; }
+        .rv-opt.wrong .ltr { color: #fff; }
+        .rv-opt.dim { opacity: 0.55; }
+
+        .rv-fb {
+            display: none;
+            margin: 8px 0 4px;
+            padding: 11px 14px;
+            border-radius: 6px;
+            font-size: 0.92em;
+            line-height: 1.55;
+        }
+        .rv-fb.show { display: block; animation: fadeIn 0.25s ease; }
+        .rv-fb.good { background: #c8e6c9; border: 1px solid #a5d6a7; color: #1b5e20; }
+        .rv-fb.bad { background: #ffcdd2; border: 1px solid #ef9a9a; color: #b71c1c; }
+        .rv-fb b { font-weight: 800; }
+
+        .rv-results {
+            display: none;
+            margin: 26px 0 8px;
+            border-radius: 10px;
+            padding: 26px;
+            text-align: center;
+            color: #fff;
+            background: linear-gradient(135deg, #1a1a2e, #e63946);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+        }
+        .rv-results.show { display: block; animation: fadeIn 0.35s ease; }
+        .rv-results h3 { font-size: 1.5em; margin-bottom: 6px; }
+        .rv-score-num { font-size: 2.8em; font-weight: 700; margin: 6px 0; letter-spacing: 1px; }
+        .rv-score-pct { font-size: 1.1em; color: #f3d6da; }
+        .rv-verdict {
+            display: inline-block;
+            margin-top: 14px;
+            font-weight: 800;
+            font-size: 1em;
+            padding: 8px 22px;
+            border-radius: 999px;
+        }
+        .rv-verdict.pass { background: #2e7d32; color: #fff; }
+        .rv-verdict.fail { background: #ffd166; color: #5a3e00; }
+        .rv-results p.note { margin-top: 14px; color: #e8d9dc; font-size: 0.88em; }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin: 5px;
+            font-weight: 600;
+        }
+
+        .badge.earned { background: #2e7d32; color: white; }
+        .badge.locked { background: #78909c; color: white; }
+
+        .glossary-search {
+            width: 100%;
+            padding: 12px 16px;
+            margin-bottom: 18px;
+            border: 2px solid #e63946;
+            border-radius: 6px;
+            font-size: 1em;
+            font-family: 'Times New Roman', Times, serif;
+            outline: none;
+        }
+
+        .glossary-search:focus { border-color: #1565c0; box-shadow: 0 0 0 3px rgba(21,101,192,0.15); }
+
+        .glossary-term {
+            background: white;
+            padding: 14px 18px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border-left: 4px solid #e63946;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            transition: all 0.2s;
+        }
+
+        .glossary-term:hover { transform: translateX(4px); border-left-color: #1565c0; }
+        .glossary-term strong { color: #1a1a2e; font-size: 1.02em; }
+        .glossary-term p { margin-top: 5px; color: #444; font-size: 0.93em; }
+        .glossary-term .category { font-size: 0.78em; color: #e63946; font-weight: 600; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .glossary-letter {
+            background: #1a1a2e;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 1em;
+            font-weight: bold;
+            margin: 16px 0 8px 0;
+            display: inline-block;
+        }
+
+        table { width: 100%; border-collapse: collapse; margin: 18px 0; }
+        th, td { padding: 11px 14px; text-align: left; border-bottom: 1px solid #ddd; font-size: 0.93em; }
+        th { background: #1a1a2e; color: white; font-weight: 600; }
+        tr:hover { background: #f5f5f0; }
+
+        .checklist { list-style: none; }
+        .checklist li {
+            padding: 10px 10px 10px 40px;
+            margin: 7px 0;
+            background: #f8f8f5;
+            border-radius: 5px;
+            position: relative;
+            font-size: 0.93em;
+            cursor: pointer;
+        }
+        .checklist li::before { content: "☐"; position: absolute; left: 14px; font-size: 1.2em; color: #e63946; }
+        .checklist li.checked { background: #e8f5e9; text-decoration: line-through; color: #666; }
+        .checklist li.checked::before { content: "☑"; color: #2e7d32; }
+
+        .reflection-prompt {
+            background: #fff9e6;
+            padding: 20px 24px;
+            border-radius: 8px;
+            border-left: 5px solid #f4a261;
+            margin: 20px 0;
+        }
+
+        .reflection-prompt h4 { color: #e65100; margin-bottom: 10px; font-size: 1.05em; }
+
+        .section-label {
+            display: inline-block;
+            padding: 3px 10px;
+            background: #e63946;
+            color: white;
+            border-radius: 12px;
+            font-size: 0.78em;
+            font-weight: 700;
+            margin-right: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .timeline-bar {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin: 18px 0;
+        }
+
+        .timeline-step {
+            flex: 1;
+            padding: 14px 10px;
+            text-align: center;
+            color: white;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .timeline-step.preventive { background: #1565c0; border-radius: 8px 0 0 8px; }
+        .timeline-step.detective { background: #e65100; }
+        .timeline-step.corrective { background: #2e7d32; border-radius: 0 8px 8px 0; }
+        .timeline-step span { display: block; font-size: 0.78em; font-weight: 400; margin-top: 4px; }
+
+        .role-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin: 10px 0;
+            transition: all 0.2s;
+        }
+
+        .role-card:hover { border-color: #e63946; box-shadow: 0 2px 10px rgba(230,57,70,0.15); }
+        .role-card h4 { color: #e63946; margin-bottom: 6px; }
+        .role-card p { font-size: 0.9em; color: #444; }
+
+        .resource-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #1a1a2e;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 6px 6px 6px 0;
+            font-size: 0.9em;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .resource-link:hover { background: #e63946; border-color: #e63946; transform: translateY(-2px); }
+
+        .progress-quest-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 6px;
+            border-left: 4px solid #78909c;
+            font-size: 0.92em;
+        }
+
+        .progress-quest-item.done { border-left-color: #2e7d32; }
+        .status-dot { font-size: 1.1em; }
+
+        @media (max-width: 768px) {
+            .container { flex-direction: column; }
+            .sidebar { width: 100%; }
+            .cia-grid { grid-template-columns: 1fr; }
+            .nist-grid { grid-template-columns: repeat(2, 1fr); }
+            .control-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+  <link rel="stylesheet" href="../shared/mobile-responsive.css">
+</head>
+<body>
+
+<div class="header">
+    <h1>PER SCHOLAS GREATER BOSTON — CYBERSECURITY PROGRAM</h1>
+    <h2>CompTIA Security+ (SY0-701) — Lesson 1: Summarizing Fundamental Security Concepts</h2>
+    <p class="sub">CompTIA Security+ Exam SY0-701</p>
+    <p class="instructors">Dr. Solomon Seifu, Lead Instructor</p>
+</div>
+
+<div class="container">
+    <div class="sidebar">
+        <h3>📚 Lesson Topics</h3>
+        <ul>
+            <li onclick="scrollTo('cia')">🔐 CIA Triad & Non-Repudiation</li>
+            <li onclick="scrollTo('nist')">🏛️ NIST Cybersecurity Framework</li>
+            <li onclick="scrollTo('gap')">📊 Gap Analysis</li>
+            <li onclick="scrollTo('iam')">🔑 Access Control & IAM</li>
+            <li onclick="scrollTo('controls')">🛡️ Security Controls</li>
+            <li onclick="scrollTo('functional')">⚙️ Control Functional Types</li>
+            <li onclick="scrollTo('roles')">👥 Roles & Responsibilities</li>
+            <li onclick="scrollTo('competencies')">🎯 Security Competencies</li>
+            <li onclick="scrollTo('units')">🏢 Security Business Units</li>
+        </ul>
+
+        <h3>🗺️ Navigation</h3>
+        <ul>
+            <li onclick="showTab('overview', event)">🏠 Lesson Overview</li>
+            <li onclick="showTab('content', event)">📖 Study Content</li>
+            <li onclick="showTab('quiz', event)">🧪 Knowledge Check</li>
+            <li onclick="showTab('resources', event)">📦 Glossary & Resources</li>
+            <li onclick="showTab('progress', event)">🏆 Progress</li>
+        </ul>
+
+        <div class="progress-container">
+            <h3>📈 Your Progress</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0%</div>
+            </div>
+            <p style="margin-top:10px; font-size:0.85em; color:#8892b0;">Complete the quiz to track mastery.</p>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="tab-navigation">
+            <button class="tab-btn active" onclick="showTab('overview', event)">Lesson Overview</button>
+            <button class="tab-btn" onclick="showTab('content', event)">Study Content</button>
+            <button class="tab-btn" onclick="showTab('quiz', event)">Knowledge Check</button>
+            <button class="tab-btn" onclick="showTab('review', event)">Review Activity</button>
+            <button class="tab-btn" onclick="showTab('resources', event)">Glossary & Resources</button>
+            <button class="tab-btn" onclick="showTab('progress', event)">Progress & Badges</button>
+        </div>
+
+        <!-- ===== OVERVIEW TAB ===== -->
+        <div id="overview" class="tab-content active">
+            <div class="hook-box">
+                <h2>🚨 Why This Lesson Is Your Foundation</h2>
+                <p>On May 7, 2021, Colonial Pipeline — the company supplying nearly half of the East Coast's fuel — was shut down by a ransomware attack. The attacker used a single compromised password to access the network through a VPN account that lacked multi-factor authentication.</p>
+                <p>No advanced zero-day exploit. No nation-state magic. Just one leaked password, and a missing basic control.</p>
+                <p class="highlight">Every concept in this lesson — CIA Triad, access control, security controls, frameworks — exists to prevent exactly this kind of failure. Master this lesson and you will understand why Colonial Pipeline happened — and what should have stopped it.</p>
+            </div>
+
+            <div class="scenario-box">
+                <h3>🎯 Your Mission for This Lesson</h3>
+                <p>As a Security+ candidate and future security professional, you will build the conceptual vocabulary that underpins everything else in this course. Every lesson that follows builds on what you learn here. Security is not a product — it is a process — and this lesson is your blueprint for understanding that process.</p>
+            </div>
+
+            <div class="objective-list">
+                <h3>What You Will Be Able to Do After This Lesson</h3>
+                <ul>
+                    <li>✅ <strong>Objective 1:</strong> Summarize information security concepts — including the CIA Triad, non-repudiation, and cybersecurity frameworks.</li>
+                    <li>✅ <strong>Objective 2:</strong> Compare and contrast security control types — by category and by functional type.</li>
+                    <li>✅ <strong>Objective 3:</strong> Describe security roles and responsibilities — from the CIO down to non-technical staff.</li>
+                </ul>
+            </div>
+
+            <div class="quest-section">
+                <h3>📋 Lesson at a Glance</h3>
+                <table>
+                    <thead>
+                        <tr><th>Topic</th><th>Key Concept</th><th>Exam Weight</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>CIA Triad</td><td>Confidentiality, Integrity, Availability</td><td>⭐⭐⭐⭐⭐</td></tr>
+                        <tr><td>Non-Repudiation</td><td>Cannot deny an action</td><td>⭐⭐⭐⭐</td></tr>
+                        <tr><td>NIST Framework</td><td>Identify, Protect, Detect, Respond, Recover</td><td>⭐⭐⭐⭐⭐</td></tr>
+                        <tr><td>Gap Analysis</td><td>Current state vs. required state</td><td>⭐⭐⭐</td></tr>
+                        <tr><td>IAM / AAA</td><td>Identification, Authentication, Authorization, Accounting</td><td>⭐⭐⭐⭐⭐</td></tr>
+                        <tr><td>Control Categories</td><td>Managerial, Operational, Technical, Physical</td><td>⭐⭐⭐⭐⭐</td></tr>
+                        <tr><td>Control Functions</td><td>Preventive, Detective, Corrective + 3 more</td><td>⭐⭐⭐⭐⭐</td></tr>
+                        <tr><td>Security Roles</td><td>CIO, CISO, ISSO, Due Care</td><td>⭐⭐⭐</td></tr>
+                        <tr><td>Business Units</td><td>SOC, CIRT, DevSecOps</td><td>⭐⭐⭐⭐</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="reflection-prompt">
+                <h4>🤔 Opening Reflection</h4>
+                <p>Before diving in: What do you think the difference is between having a security tool and having a security program? Why does that distinction matter?</p>
+            </div>
+        </div>
+
+        <!-- ===== CONTENT TAB ===== -->
+        <div id="content" class="tab-content">
+            <h2 style="color:#1a1a2e; margin-bottom:20px;">📖 Study Content — Lesson 1</h2>
+
+            <!-- CIA Triad -->
+            <div class="quest-section" id="cia">
+                <h3>🔐 The CIA Triad & Non-Repudiation</h3>
+                <p>Information security — shortened to <strong>infosec</strong> — protects data from unauthorized access, attack, theft, or damage. Data is vulnerable at every stage: while stored, while transmitted, and while being processed.</p>
+
+                <div class="cia-grid">
+                    <div class="cia-card conf">
+                        <h4>🔒 Confidentiality</h4>
+                        <p>Information can only be read by explicitly authorized individuals. Unauthorized access — regardless of intent — must be prevented.</p>
+                        <p style="margin-top:8px; font-size:0.82em;"><em>Example: Patient records visible only to treating physicians.</em></p>
+                    </div>
+                    <div class="cia-card integ">
+                        <h4>✅ Integrity</h4>
+                        <p>Data is stored and transferred exactly as intended. Any modification must be explicitly authorized through proper channels.</p>
+                        <p style="margin-top:8px; font-size:0.82em;"><em>Example: A $500 transaction must arrive as $500 — not altered in transit.</em></p>
+                    </div>
+                    <div class="cia-card avail">
+                        <h4>📡 Availability</h4>
+                        <p>Information must be readily accessible to those authorized to view or modify it. Locking out legitimate users is a failure of availability.</p>
+                        <p style="margin-top:8px; font-size:0.82em;"><em>Example: An ER physician needs patient records immediately — downtime is dangerous.</em></p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong>📝 Exam Note:</strong> The CIA Triad is also called <strong>AIC</strong> (Availability, Integrity, Confidentiality) to avoid confusion with the Central Intelligence Agency. Know both — the exam may use either term.
+                </div>
+
+                <h4>Non-Repudiation — The Fourth Property</h4>
+                <p>Non-repudiation means a person <strong>cannot deny</strong> having performed an action — creating, modifying, or sending a resource. It provides proof of origin and proof of action.</p>
+                <div class="example-box">
+                    <strong>Real-World Example:</strong> A legally witnessed will cannot be disputed by claiming it was never signed — the witness provides the non-repudiation evidence. In digital environments, digital signatures and audit logs enforce non-repudiation.
+                </div>
+            </div>
+
+            <!-- NIST Framework -->
+            <div class="quest-section" id="nist">
+                <h3>🏛️ The NIST Cybersecurity Framework — Five Core Functions</h3>
+                <p>NIST (National Institute of Standards and Technology) developed one of the most widely adopted cybersecurity frameworks. It organizes all cybersecurity activity into <strong>five core functions</strong> that operate continuously and simultaneously.</p>
+
+                <div class="nist-grid">
+                    <div class="nist-card identify">
+                        <h4>🔍 Identify</h4>
+                        <p>Develop security policies. Evaluate risks, threats, and vulnerabilities. Recommend controls.</p>
+                    </div>
+                    <div class="nist-card protect">
+                        <h4>🛡️ Protect</h4>
+                        <p>Procure, deploy, operate, and decommission IT assets with security embedded at every stage.</p>
+                    </div>
+                    <div class="nist-card detect">
+                        <h4>🔎 Detect</h4>
+                        <p>Perform continuous, proactive monitoring to identify threats before they escalate.</p>
+                    </div>
+                    <div class="nist-card respond">
+                        <h4>⚡ Respond</h4>
+                        <p>Identify, analyze, contain, and eradicate threats to systems and data.</p>
+                    </div>
+                    <div class="nist-card recover">
+                        <h4>🔄 Recover</h4>
+                        <p>Restore systems and data after an attack. Build resilience to bounce back faster.</p>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Important:</strong> These five functions are <strong>not sequential steps</strong>. They operate simultaneously within a mature security program. Detection feeds back into Identification. Recovery strengthens Protection. Think of them as a continuous cycle — not a checklist.
+                </div>
+            </div>
+
+            <!-- Gap Analysis -->
+            <div class="quest-section" id="gap">
+                <h3>📊 Gap Analysis</h3>
+                <p>A <strong>gap analysis</strong> compares what an organization currently has in place against what a framework requires or recommends. It answers one fundamental question: <em>where does our current security posture fall short?</em></p>
+
+                <h4>When to Perform a Gap Analysis</h4>
+                <ul>
+                    <li>When first adopting a new security framework.</li>
+                    <li>When a new regulation or compliance requirement takes effect.</li>
+                    <li>Periodically — every few years — to validate changes and confirm compliance.</li>
+                </ul>
+
+                <h4>What a Gap Analysis Report Produces</h4>
+                <ul>
+                    <li>An <strong>overall capability score</strong> for each section of the framework.</li>
+                    <li>A detailed list of <strong>missing or poorly configured controls.</strong></li>
+                    <li>Specific <strong>recommendations for remediation.</strong></li>
+                </ul>
+
+                <div class="info-box">
+                    <strong>Color-Coded Capability Levels:</strong> 🟢 Green = Advanced capability &nbsp;|&nbsp; 🟡 Yellow = Intermediate capability &nbsp;|&nbsp; 🔴 Red = No or basic capability
+                </div>
+
+                <h4>Internal vs. External Consultants</h4>
+                <p>Gap analysis can be handled internally — but complex frameworks often require third-party consultants who bring an objective perspective and current knowledge of best practices.</p>
+            </div>
+
+            <!-- IAM -->
+            <div class="quest-section" id="iam">
+                <h3>🔑 Access Control and Identity and Access Management (IAM)</h3>
+                <p>Access control ensures a system upholds the CIA Triad by governing how <strong>subjects</strong> interact with <strong>objects</strong>.</p>
+                <ul>
+                    <li><strong>Subjects</strong> — entities requesting access: people, devices, software processes.</li>
+                    <li><strong>Objects</strong> — resources being accessed: networks, servers, databases, files.</li>
+                </ul>
+
+                <h4>The Four IAM Processes (AAA + Identification)</h4>
+                <table>
+                    <thead>
+                        <tr><th>Process</th><th>What It Does</th><th>Example</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Identification</strong></td><td>Creates a unique account or ID to represent a user, device, or process.</td><td>IT creates a new employee's user account.</td></tr>
+                        <tr><td><strong>Authentication</strong></td><td>Proves the subject is who it claims to be using an authentication factor.</td><td>Entering a username and password to log in.</td></tr>
+                        <tr><td><strong>Authorization</strong></td><td>Determines what rights the subject has on each resource and enforces them.</td><td>Employee can read a file but cannot write to it.</td></tr>
+                        <tr><td><strong>Accounting</strong></td><td>Tracks all actions in an audit log; creates a non-repudiation trail.</td><td>Log records that User 101 accessed a file at 2:14 AM.</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="info-box">
+                    <strong>AAA vs. IAM:</strong> AAA (Authentication, Authorization, Accounting) is an older term. IAM is increasingly preferred because it also acknowledges the critical first step — Identification. Both describe the same system.
+                </div>
+            </div>
+
+            <!-- Security Control Categories -->
+            <div class="quest-section" id="controls">
+                <h3>🛡️ Security Control Categories</h3>
+                <p>Security controls are safeguards that give systems the properties of the CIA Triad and non-repudiation. Controls are divided into <strong>four categories</strong> based on how they are implemented.</p>
+
+                <div class="control-grid">
+                    <div class="control-card managerial">
+                        <h4>📋 Managerial</h4>
+                        <p>Provide oversight and governance. They govern how security decisions are made — not how attacks are blocked. Examples: risk identification processes, control selection tools.</p>
+                    </div>
+                    <div class="control-card operational">
+                        <h4>👤 Operational</h4>
+                        <p>Implemented primarily by people. Depend on human action and judgment. Examples: security awareness training, security guards, workstation lock policies.</p>
+                    </div>
+                    <div class="control-card technical">
+                        <h4>💻 Technical</h4>
+                        <p>Implemented through hardware, software, or firmware. Operate automatically. Examples: firewalls, antivirus software, OS access control models.</p>
+                    </div>
+                    <div class="control-card physical">
+                        <h4>🏢 Physical</h4>
+                        <p>Govern access to physical premises and hardware. Deter and detect physical intrusion. Examples: cameras, locks, alarms, security lighting, security personnel.</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong>The Control Pyramid:</strong> Managerial sits at the top (strategy). Operational sits in the middle (people). Technical and Physical share the base (frontline). <strong>All four layers must work together</strong> — no single category is sufficient on its own.
+                </div>
+            </div>
+
+            <!-- Functional Types -->
+            <div class="quest-section" id="functional">
+                <h3>⚙️ Security Control Functional Types</h3>
+                <p>Controls can also be classified by <strong>what they are designed to accomplish</strong> — their functional type. A single control belongs to both a category and a functional type simultaneously.</p>
+
+                <div class="timeline-bar">
+                    <div class="timeline-step preventive">🔒 Preventive<span>Before the attack</span></div>
+                    <div class="timeline-step detective">🔎 Detective<span>During the attack</span></div>
+                    <div class="timeline-step corrective">🔧 Corrective<span>After the attack</span></div>
+                </div>
+
+                <h4>The Three Primary Functional Types</h4>
+                <ul>
+                    <li><strong>Preventive</strong> — Eliminates or reduces the likelihood of a successful attack. Operates <em>before</em> the attack. Examples: firewall ACLs, antimalware software, proactive patch management.</li>
+                    <li><strong>Detective</strong> — Identifies and records an intrusion — but does not stop it. Operates <em>during</em> the attack. Examples: logs, intrusion detection systems.</li>
+                    <li><strong>Corrective</strong> — Reduces the impact of a policy violation or attack. Operates <em>after</em> the attack. Examples: backup and recovery systems.</li>
+                </ul>
+
+                <h4>Three Additional Functional Types</h4>
+                <ul>
+                    <li><strong>Directive</strong> — Enforces rules of behavior through policy, procedure, or training. Examples: employee contracts with disciplinary terms, security awareness programs.</li>
+                    <li><strong>Deterrent</strong> — Discourages attackers psychologically without physically blocking access. Examples: warning signs, visible cameras. The attacker chooses a different target.</li>
+                    <li><strong>Compensating</strong> — A substitute for a primary control that cannot be implemented. Must provide equivalent or better protection through a different method. Example: network segmentation to isolate a system that cannot be patched.</li>
+                </ul>
+
+                <div class="warning-box">
+                    <strong>⚠️ Exam Nuance:</strong> Patch management is typically <strong>preventive</strong>. However, if applied after a vulnerability has already been exploited, it becomes <strong>corrective</strong>. Context determines the functional type.
+                </div>
+            </div>
+
+            <!-- Security Roles -->
+            <div class="quest-section" id="roles">
+                <h3>👥 Information Security Roles and Responsibilities</h3>
+                <p>A <strong>security policy</strong> is a formalized written statement defining how an organization protects its data. Every employee — from the executive level to non-technical staff — has a defined role in the security posture.</p>
+
+                <div class="role-card">
+                    <h4>CIO — Chief Information Officer</h4>
+                    <p>Holds overall responsibility for the IT function. May carry direct responsibility for security. Larger organizations may also appoint a CTO focused on emerging technologies.</p>
+                </div>
+                <div class="role-card">
+                    <h4>CSO / CISO — Chief Security Officer / Chief Information Security Officer</h4>
+                    <p>Leads the dedicated security function in larger organizations. Responsible for design, implementation, and oversight of the entire security program.</p>
+                </div>
+                <div class="role-card">
+                    <h4>Managers</h4>
+                    <p>Hold domain-level security responsibility — building control, web services, accounting, etc. Translate organizational policy into day-to-day practice within their teams.</p>
+                </div>
+                <div class="role-card">
+                    <h4>ISSO — Information Systems Security Officer</h4>
+                    <p>Technical specialist responsible for implementing and enforcing security policy. A dedicated security administrator title within the technical/specialist staff category.</p>
+                </div>
+                <div class="role-card">
+                    <h4>Non-Technical Staff</h4>
+                    <p>Responsible for complying with policies and applicable laws. Their behavior — handling data, following procedures, reporting anomalies — directly impacts the security posture.</p>
+                </div>
+                <div class="role-card">
+                    <h4>Due Care and Liability (External)</h4>
+                    <p>External accountability rests primarily with directors and owners. Failure to exercise due care can result in legal liability. All employees share some measure of responsibility.</p>
+                </div>
+            </div>
+
+            <!-- Competencies -->
+            <div class="quest-section" id="competencies">
+                <h3>🎯 Information Security Competencies</h3>
+                <p>Security professionals must be competent across a wide range of disciplines — from technical network design to non-technical areas like procurement and human resources.</p>
+                <ul>
+                    <li><strong>Risk assessments and testing</strong> — evaluate systems, identify weaknesses, make actionable recommendations.</li>
+                    <li><strong>Specifying, sourcing, installing, and configuring secure devices and software</strong> — security is embedded from procurement through deployment.</li>
+                    <li><strong>Access control and user privilege management</strong> — implement least privilege; users get only what they need.</li>
+                    <li><strong>Auditing logs and reviewing access</strong> — detect anomalies, review privilege assignments, document controls.</li>
+                    <li><strong>Incident response and reporting</strong> — identify, contain, eradicate, recover, and report on incidents.</li>
+                    <li><strong>Business continuity and disaster recovery</strong> — create and <em>test</em> plans; an untested plan is an untested assumption.</li>
+                    <li><strong>Security training and education programs</strong> — human behavior is consistently a major factor in security incidents.</li>
+                </ul>
+            </div>
+
+            <!-- Business Units -->
+            <div class="quest-section" id="units">
+                <h3>🏢 Information Security Business Units</h3>
+
+                <h4>SOC — Security Operations Center</h4>
+                <p>A dedicated facility where security professionals monitor and protect critical information assets 24/7. Enables rapid incident detection and response across all business functions. Resource-intensive — typically found in larger organizations such as government agencies, healthcare companies, and financial institutions.</p>
+
+                <h4>DevSecOps</h4>
+                <p><strong>DevOps</strong> integrates development and IT operations to break down silos. <strong>DevSecOps</strong> extends this by embedding security specialists into every stage of development and operations from the very beginning. This principle is also known as <strong>shift left</strong> — security must be addressed during requirements and planning, not grafted on at the end.</p>
+
+                <h4>CIRT / CSIRT / CERT</h4>
+                <p>A dedicated team serving as the single point of contact for all security incidents. Receives notifications, coordinates the response, and manages recovery. May be part of the SOC or operate as an independent business unit.</p>
+
+                <div class="info-box">
+                    <strong>Know All Three Names:</strong> Computer Incident Response Team (CIRT) | Computer Security Incident Response Team (CSIRT) | Computer Emergency Response Team (CERT). All three describe the same core function.
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== QUIZ TAB ===== -->
+        <div id="quiz" class="tab-content">
+            <h2 style="color:#1a1a2e; margin-bottom:6px;">🧪 Knowledge Check — Lesson 1</h2>
+            <p style="color:#555; margin-bottom:20px;">Select your answer for each question. Submit when ready to see your score and explanations.</p>
+
+            <div id="quiz-container">
+
+                <!-- Q1 -->
+                <div class="quiz-question" data-answer="B" data-explanation="The CIA Triad stands for Confidentiality, Integrity, and Availability — the three foundational properties of secure information.">
+                    <h4>Question 1</h4>
+                    <p>What do the letters in the CIA Triad stand for?</p>
+                    <ul class="quiz-options">
+                        <li>A) Compliance, Infrastructure, Accountability</li>
+                        <li>B) Confidentiality, Integrity, Availability</li>
+                        <li>C) Control, Identification, Authentication</li>
+                        <li>D) Cybersecurity, Intelligence, Assessment</li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="quiz-question" data-answer="C" data-explanation="Non-repudiation means a person cannot deny having performed an action. It provides proof of origin and proof of action — enforced through digital signatures and audit logs.">
+                    <h4>Question 2</h4>
+                    <p>Which security property ensures that a person cannot deny having created, modified, or sent a resource?</p>
+                    <ul class="quiz-options">
+                        <li>A) Confidentiality</li>
+                        <li>B) Availability</li>
+                        <li>C) Non-repudiation</li>
+                        <li>D) Authorization</li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="quiz-question" data-answer="A" data-explanation="The CIA Triad is sometimes referred to as AIC — Availability, Integrity, Confidentiality — to avoid confusion with the Central Intelligence Agency. Both terms refer to the same three properties.">
+                    <h4>Question 3</h4>
+                    <p>Why is the CIA Triad sometimes called AIC instead?</p>
+                    <ul class="quiz-options">
+                        <li>A) To avoid confusion with the Central Intelligence Agency</li>
+                        <li>B) Because Availability is more important than Confidentiality</li>
+                        <li>C) AIC is the European version of the framework</li>
+                        <li>D) AIC applies only to cloud environments</li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="quiz-question" data-answer="D" data-explanation="The NIST Cybersecurity Framework organizes cybersecurity activity into five functions: Identify, Protect, Detect, Respond, and Recover.">
+                    <h4>Question 4</h4>
+                    <p>What are the five core functions of the NIST Cybersecurity Framework?</p>
+                    <ul class="quiz-options">
+                        <li>A) Plan, Do, Check, Act, Review</li>
+                        <li>B) Assess, Implement, Monitor, Report, Improve</li>
+                        <li>C) Prevent, Detect, Respond, Recover, Learn</li>
+                        <li>D) Identify, Protect, Detect, Respond, Recover</li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Q5 -->
+                <div class="quiz-question" data-answer="B" data-explanation="Gap analysis compares what an organization currently has in place against what a framework requires or recommends — identifying where the security posture falls short.">
+                    <h4>Question 5</h4>
+                    <p>What is the primary purpose of a gap analysis in cybersecurity?</p>
+                    <ul class="quiz-options">
+                        <li>A) To identify individual employee security violations</li>
+                        <li>B) To compare current security capabilities against framework requirements</li>
+                        <li>C) To calculate the cost of implementing new security tools</li>
+                        <li>D) To train employees on security policies</li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Q6 -->
+                <div class="quiz-question" data-answer="C" data-explanation="Authorization determines what rights a subject has on each resource and enforces those rights. It happens after authentication confirms identity.">
+                    <h4>Question 6</h4>
+                    <p>An authenticated employee can read a shared file but cannot write to it. Which IAM process is being applied?</p>
+                    <ul class="quiz-options">
+                        <li>A) Identification</li>
+                        <li>B) Authentication</li>
+                        <li>C) Authorization</li>
+                        <li>D) Accounting</li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Q7 -->
+                <div class="quiz-question" data-answer="D" data-explanation="Accounting tracks all authorized actions in an audit log and generates alerts for unauthorized access. It creates a non-repudiation trail — users cannot deny actions that have been logged.">
+                    <h4>Question 7</h4>
+                    <p>Which IAM function generates an audit log that creates a non-repudiation trail?</p>
+                    <ul class="quiz-options">
+                        <li>A) Identification</li>
+                        <li>B) Authentication</li>
+                        <li>C) Authorization</li>
+                        <li>D) Accounting</li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Q8 -->
+                <div class="quiz-question" data-answer="A" data-explanation="Managerial controls provide oversight and governance of the security program. They govern how security decisions are made — not how attacks are directly blocked.">
+                    <h4>Question 8</h4>
+                    <p>A risk identification process used to evaluate and select other security controls belongs to which category?</p>
+                    <ul class="quiz-options">
+                        <li>A) Managerial</li>
+                        <li>B) Operational</li>
+                        <li>C) Technical</li>
+                        <li>D) Physical</li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Q9 -->
+                <div class="quiz-question" data-answer="B" data-explanation="Operational controls are implemented primarily by people. Security awareness training programs depend on human behavior — not technology — to be effective.">
+                    <h4>Question 9</h4>
+                    <p>A security awareness training program is an example of which type of security control by category?</p>
+                    <ul class="quiz-options">
+                        <li>A) Managerial</li>
+                        <li>B) Operational</li>
+                        <li>C) Technical</li>
+                        <li>D) Physical</li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Q10 -->
+                <div class="quiz-question" data-answer="C" data-explanation="A firewall is a technical control — implemented through hardware, software, or firmware — that operates automatically without requiring human intervention for each action.">
+                    <h4>Question 10</h4>
+                    <p>A firewall that automatically blocks traffic from a suspicious IP address is which type of control by category?</p>
+                    <ul class="quiz-options">
+                        <li>A) Physical</li>
+                        <li>B) Operational</li>
+                        <li>C) Technical</li>
+                        <li>D) Managerial</li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Q11 -->
+                <div class="quiz-question" data-answer="A" data-explanation="Preventive controls act before an attack — they eliminate or reduce the likelihood that an attack can succeed. Firewall ACLs and antimalware software are classic examples.">
+                    <h4>Question 11</h4>
+                    <p>Which functional type of control operates before an attack to eliminate or reduce its likelihood of success?</p>
+                    <ul class="quiz-options">
+                        <li>A) Preventive</li>
+                        <li>B) Detective</li>
+                        <li>C) Corrective</li>
+                        <li>D) Compensating</li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Q12 -->
+                <div class="quiz-question" data-answer="B" data-explanation="A backup and recovery system is a corrective control — it reduces the impact of an attack after the fact by restoring damaged or destroyed data.">
+                    <h4>Question 12</h4>
+                    <p>After a ransomware attack destroys data, the organization restores from backup. What functional type of control is the backup system?</p>
+                    <ul class="quiz-options">
+                        <li>A) Preventive</li>
+                        <li>B) Corrective</li>
+                        <li>C) Detective</li>
+                        <li>D) Directive</li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Q13 -->
+                <div class="quiz-question" data-answer="D" data-explanation="A compensating control is a substitute for a primary recommended control. Network segmentation — used to isolate a system that cannot be patched — is the classic example.">
+                    <h4>Question 13</h4>
+                    <p>A legacy system cannot be patched. The organization uses network segmentation to isolate it. This is an example of which functional control type?</p>
+                    <ul class="quiz-options">
+                        <li>A) Deterrent</li>
+                        <li>B) Directive</li>
+                        <li>C) Detective</li>
+                        <li>D) Compensating</li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Q14 -->
+                <div class="quiz-question" data-answer="C" data-explanation="The CISO (Chief Information Security Officer) leads the dedicated security function in larger organizations, overseeing the design, implementation, and oversight of the entire security program.">
+                    <h4>Question 14</h4>
+                    <p>Which role is responsible for leading the dedicated security department in a large organization?</p>
+                    <ul class="quiz-options">
+                        <li>A) ISSO</li>
+                        <li>B) CIO</li>
+                        <li>C) CISO</li>
+                        <li>D) CTO</li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Q15 -->
+                <div class="quiz-question" data-answer="B" data-explanation="Due care is the legal and ethical obligation of directors and owners to take reasonable steps to protect the organization. Failure to exercise due care can result in legal liability.">
+                    <h4>Question 15</h4>
+                    <p>Which concept describes the legal and ethical obligation of organizational directors to take reasonable steps to protect the organization and those it serves?</p>
+                    <ul class="quiz-options">
+                        <li>A) Security posture</li>
+                        <li>B) Due care</li>
+                        <li>C) Least privilege</li>
+                        <li>D) Non-repudiation</li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Q16 -->
+                <div class="quiz-question" data-answer="A" data-explanation="DevSecOps embeds security into every stage of development and operations from the very beginning — a principle also known as 'shift left.' Security is addressed during requirements and planning, not added at the end.">
+                    <h4>Question 16</h4>
+                    <p>The principle of embedding security into every stage of the software development lifecycle — including requirements and planning — is called what?</p>
+                    <ul class="quiz-options">
+                        <li>A) Shift left</li>
+                        <li>B) Shift right</li>
+                        <li>C) Defense in depth</li>
+                        <li>D) Security by obscurity</li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Q17 -->
+                <div class="quiz-question" data-answer="D" data-explanation="Logs are one of the strongest examples of detective controls — they identify and record that an intrusion is occurring or has occurred, but they do not prevent or stop the attack.">
+                    <h4>Question 17</h4>
+                    <p>System logs that capture what happened, when it happened, and who was involved are an example of which functional control type?</p>
+                    <ul class="quiz-options">
+                        <li>A) Preventive</li>
+                        <li>B) Directive</li>
+                        <li>C) Corrective</li>
+                        <li>D) Detective</li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+                <!-- Q18 -->
+                <div class="quiz-question" data-answer="C" data-explanation="The SOC (Security Operations Center) is a dedicated facility where security professionals monitor and protect critical information assets continuously across all business functions.">
+                    <h4>Question 18</h4>
+                    <p>Which organizational unit provides continuous 24/7 monitoring and protection of an organization's critical information assets?</p>
+                    <ul class="quiz-options">
+                        <li>A) CIRT</li>
+                        <li>B) DevSecOps team</li>
+                        <li>C) SOC</li>
+                        <li>D) ISSO</li>
+                    </ul>
+                    <div class="feedback-msg"></div>
+                </div>
+
+            </div>
+
+            <button class="submit-btn" onclick="submitQuiz()">✅ Submit Answers</button>
+            <button class="reset-btn" onclick="resetQuiz()">🔄 Reset Quiz</button>
+
+            <div class="quiz-score-box" id="scoreBox">
+                <h3 id="scoreTitle"></h3>
+                <p id="scoreText"></p>
+                <p id="scoreFeedback" style="margin-top:10px; font-size:0.95em;"></p>
+            </div>
+        </div>
+
+
+        <!-- ===== REVIEW ACTIVITY TAB ===== -->
+        <div id="review" class="tab-content">
+            <h2 style="color:#1a1a2e; margin-bottom:6px;">🎯 Review Activity — Lesson 1</h2>
+            <div class="rv-intro">
+                <p>Forty-two CompTIA Security+ style questions drawn from both Lesson 1 review activities: <strong>Security Concepts</strong> (CIA Triad, NIST Framework, Gap Analysis, Access Control / IAM) and <strong>Security Controls</strong> (control categories, functional types, roles &amp; responsibilities, competencies, business units). Each question has one best answer among four options. Answer choices are shuffled on every load. Pick an option to see immediate feedback explaining why it is right or wrong. Your final score out of 42 appears once you have answered them all, with <strong>70% to pass</strong>. Use <strong>Reshuffle &amp; reset</strong> to start over with a fresh order.</p>
+            </div>
+
+            <div class="rv-progress-wrap">
+                <div class="rv-stat">
+                    <span class="count" id="rvCount">Answered 0 / 42</span>
+                    <div class="rv-controls">
+                        <button class="rv-btn ghost" id="rvResults" disabled>See my score</button>
+                        <button class="rv-btn" id="rvReset">🔄 Reshuffle &amp; reset</button>
+                    </div>
+                </div>
+                <div class="rv-bar"><div class="rv-bar-fill" id="rvFill"></div></div>
+            </div>
+
+            <div class="rv-results" id="rvResultsPanel">
+                <h3>Your Result</h3>
+                <div class="rv-score-num" id="rvScoreNum">0 / 42</div>
+                <div class="rv-score-pct" id="rvScorePct">0%</div>
+                <div class="rv-verdict" id="rvVerdict">&nbsp;</div>
+                <p class="note">Pass line is 70% (30 / 42). Review any questions you missed, then reshuffle and try again.</p>
+            </div>
+
+            <div id="rvQuiz"></div>
+        </div>
+
+        <!-- ===== RESOURCES TAB ===== -->
+        <div id="resources" class="tab-content">
+            <h2 style="color:#1a1a2e; margin-bottom:20px;">📖 Glossary of Key Terms — Lesson 1</h2>
+
+            <input type="text" class="glossary-search" id="glossarySearch" placeholder="🔍 Search terms... (e.g. CIA, IAM, control, NIST)" oninput="filterGlossary()">
+
+            <div id="glossary-content">
+
+                <div class="glossary-letter">A</div>
+
+                <div class="glossary-term" data-term="audit log">
+                    <strong>Audit Log</strong>
+                    <p class="category">Accounting / Monitoring</p>
+                    <p>A recorded history of system activity used to detect unauthorized access or policy violations. Audit logs create a non-repudiation trail — users cannot later deny actions that have been logged.</p>
+                </div>
+
+                <div class="glossary-term" data-term="aaa authentication authorization accounting">
+                    <strong>AAA (Authentication, Authorization, and Accounting)</strong>
+                    <p class="category">Identity & Access Management</p>
+                    <p>The three core operational functions within an IAM system. Sometimes used interchangeably with IAM, though IAM is increasingly preferred because it also acknowledges the Identification step.</p>
+                </div>
+
+                <div class="glossary-term" data-term="availability cia triad">
+                    <strong>Availability</strong>
+                    <p class="category">CIA Triad</p>
+                    <p>The property ensuring that information is readily accessible to those authorized to view or modify it. A system so locked down that legitimate users cannot access their data has failed on availability.</p>
+                </div>
+
+                <div class="glossary-letter">B</div>
+
+                <div class="glossary-term" data-term="business continuity">
+                    <strong>Business Continuity</strong>
+                    <p class="category">Resilience</p>
+                    <p>The capability of an organization to maintain essential functions during and after a disruption. Distinguished from disaster recovery — continuity focuses on keeping operations running; recovery focuses on restoring them.</p>
+                </div>
+
+                <div class="glossary-letter">C</div>
+
+                <div class="glossary-term" data-term="cia triad confidentiality integrity availability">
+                    <strong>CIA Triad (also AIC)</strong>
+                    <p class="category">Core Security Concept</p>
+                    <p>The three foundational properties of secure information: Confidentiality, Integrity, and Availability. Sometimes called AIC to avoid confusion with the Central Intelligence Agency. Both terms refer to the same three properties.</p>
+                </div>
+
+                <div class="glossary-term" data-term="cio chief information officer">
+                    <strong>CIO (Chief Information Officer)</strong>
+                    <p class="category">Security Roles</p>
+                    <p>Holds overall responsibility for the IT function across the organization. In some organizations, the CIO also carries direct responsibility for security.</p>
+                </div>
+
+                <div class="glossary-term" data-term="cirt csirt cert computer incident response team">
+                    <strong>CIRT / CSIRT / CERT</strong>
+                    <p class="category">Security Business Units</p>
+                    <p>Computer Incident Response Team / Computer Security Incident Response Team / Computer Emergency Response Team. Three names for the same core function: serving as the single point of contact for managing security incidents.</p>
+                </div>
+
+                <div class="glossary-term" data-term="cso ciso chief security officer chief information security officer">
+                    <strong>CSO / CISO</strong>
+                    <p class="category">Security Roles</p>
+                    <p>Chief Security Officer / Chief Information Security Officer. Leads the dedicated security function in larger organizations, responsible for the design, implementation, and oversight of the entire security program.</p>
+                </div>
+
+                <div class="glossary-term" data-term="compensating control">
+                    <strong>Compensating Control</strong>
+                    <p class="category">Control Functional Types</p>
+                    <p>An alternative control used when the primary recommended control cannot be implemented. Must provide the same level of protection — or better — through a different method or technology. Example: network segmentation to isolate an unpatched legacy system.</p>
+                </div>
+
+                <div class="glossary-term" data-term="compliance regulatory">
+                    <strong>Compliance</strong>
+                    <p class="category">Governance</p>
+                    <p>Meeting the security requirements imposed by applicable laws, regulations, or contractual obligations. Non-compliance is both a security risk and a legal liability.</p>
+                </div>
+
+                <div class="glossary-term" data-term="confidentiality cia triad">
+                    <strong>Confidentiality</strong>
+                    <p class="category">CIA Triad</p>
+                    <p>The property ensuring that information can only be read by people who have been explicitly authorized to access it. Unauthorized individuals — regardless of intent — should never be able to view protected data.</p>
+                </div>
+
+                <div class="glossary-term" data-term="continuous monitoring">
+                    <strong>Continuous Monitoring</strong>
+                    <p class="category">NIST Framework</p>
+                    <p>The ongoing, proactive process of observing systems and controls to ensure they remain effective against current and emerging threats. Supports the Detect function of the NIST framework.</p>
+                </div>
+
+                <div class="glossary-term" data-term="corrective control functional">
+                    <strong>Corrective Control</strong>
+                    <p class="category">Control Functional Types</p>
+                    <p>A control that reduces the impact of a security policy violation or attack. Operates after the attack. Example: a backup and recovery system that restores data damaged during an intrusion.</p>
+                </div>
+
+                <div class="glossary-term" data-term="cybersecurity resilience">
+                    <strong>Cybersecurity Resilience</strong>
+                    <p class="category">NIST Framework</p>
+                    <p>The capacity to recover and continue operating after a successful attack. Supports the Recover function of the NIST framework.</p>
+                </div>
+
+                <div class="glossary-letter">D</div>
+
+                <div class="glossary-term" data-term="detective control functional">
+                    <strong>Detective Control</strong>
+                    <p class="category">Control Functional Types</p>
+                    <p>A control that identifies and records an intrusion attempt or success. Operates during the attack — it does not stop access but captures what is happening. Example: system logs and intrusion detection systems.</p>
+                </div>
+
+                <div class="glossary-term" data-term="deterrent control functional">
+                    <strong>Deterrent Control</strong>
+                    <p class="category">Control Functional Types</p>
+                    <p>A control that psychologically discourages attackers from attempting an intrusion without physically blocking access. Example: visible security cameras and legal warning signs — the attacker chooses a different target.</p>
+                </div>
+
+                <div class="glossary-term" data-term="devops devsecops shift left">
+                    <strong>DevSecOps / DevOps / Shift Left</strong>
+                    <p class="category">Security Business Units</p>
+                    <p>DevOps integrates software development and IT operations. DevSecOps extends this by embedding security at every stage of development and operations. Shift left means security must be addressed during requirements and planning — not added at the end.</p>
+                </div>
+
+                <div class="glossary-term" data-term="directive control functional">
+                    <strong>Directive Control</strong>
+                    <p class="category">Control Functional Types</p>
+                    <p>A control that enforces rules of behavior through policies, best practice standards, or standard operating procedures. Sets expectations and defines consequences for non-compliance. Example: employee contracts with disciplinary terms.</p>
+                </div>
+
+                <div class="glossary-term" data-term="disaster recovery">
+                    <strong>Disaster Recovery</strong>
+                    <p class="category">Resilience</p>
+                    <p>The processes and procedures for restoring systems and data following a major incident. A recovery plan that has never been tested is an untested assumption — not a real safeguard.</p>
+                </div>
+
+                <div class="glossary-term" data-term="due care liability">
+                    <strong>Due Care</strong>
+                    <p class="category">Security Roles</p>
+                    <p>The legal and ethical obligation of directors and owners to take reasonable and appropriate steps to protect the organization and those it serves. Failure to exercise due care can result in legal liability.</p>
+                </div>
+
+                <div class="glossary-letter">F</div>
+
+                <div class="glossary-term" data-term="framework it service">
+                    <strong>Framework (IT Service Framework)</strong>
+                    <p class="category">Governance</p>
+                    <p>A structured set of guidelines that organizations use to build and evaluate their security programs. Saves organizations from building security programs in isolation by providing a proven, structured foundation. Examples: NIST CSF, ISO 27001, CIS Controls.</p>
+                </div>
+
+                <div class="glossary-letter">G</div>
+
+                <div class="glossary-term" data-term="gap analysis">
+                    <strong>Gap Analysis</strong>
+                    <p class="category">Governance</p>
+                    <p>The process of identifying how an organization's current security capabilities deviate from framework requirements or recommendations. Produces a capability score, a list of missing controls, and remediation recommendations.</p>
+                </div>
+
+                <div class="glossary-letter">H</div>
+
+                <div class="glossary-term" data-term="hardening attack surface">
+                    <strong>Hardening</strong>
+                    <p class="category">Security Controls</p>
+                    <p>The process of reducing a system's attack surface by eliminating unnecessary services, applying patches, and enforcing configuration standards. Part of the Protect function in the NIST framework.</p>
+                </div>
+
+                <div class="glossary-letter">I</div>
+
+                <div class="glossary-term" data-term="iam identity access management">
+                    <strong>IAM (Identity and Access Management)</strong>
+                    <p class="category">Identity & Access Management</p>
+                    <p>The system that manages the full lifecycle of digital identities and their access to resources. Encompasses Identification, Authentication, Authorization, and Accounting. The modern preferred term over AAA because it acknowledges the Identification step.</p>
+                </div>
+
+                <div class="glossary-term" data-term="incident response">
+                    <strong>Incident Response</strong>
+                    <p class="category">Security Competencies</p>
+                    <p>The structured process of identifying, containing, eradicating, and recovering from a security incident. Accurate and timely reporting is critical — both for internal decisions and for legal or regulatory obligations.</p>
+                </div>
+
+                <div class="glossary-term" data-term="infosec information security">
+                    <strong>Infosec (Information Security)</strong>
+                    <p class="category">Core Security Concept</p>
+                    <p>The protection of data resources from unauthorized access, attack, theft, or damage. Data is vulnerable while stored, while in transit, and while being processed — making infosec a multidimensional discipline.</p>
+                </div>
+
+                <div class="glossary-term" data-term="integrity cia triad">
+                    <strong>Integrity</strong>
+                    <p class="category">CIA Triad</p>
+                    <p>The property ensuring that data is stored and transferred exactly as intended. Any modification must be explicitly authorized through proper channels. Unauthorized changes — even small ones — compromise the trustworthiness of the entire dataset.</p>
+                </div>
+
+                <div class="glossary-term" data-term="isso information systems security officer">
+                    <strong>ISSO (Information Systems Security Officer)</strong>
+                    <p class="category">Security Roles</p>
+                    <p>A technical specialist responsible for implementing and enforcing security policy. A dedicated security administrator title within the technical/specialist staff category.</p>
+                </div>
+
+                <div class="glossary-term" data-term="it service framework">
+                    <strong>IT Service Framework</strong>
+                    <p class="category">Governance</p>
+                    <p>A structured best practice guide used to govern IT and cybersecurity functions in alignment with business needs. Provides checklists of procedures, activities, and technologies that represent best practice.</p>
+                </div>
+
+                <div class="glossary-letter">L</div>
+
+                <div class="glossary-term" data-term="least privilege access control">
+                    <strong>Least Privilege</strong>
+                    <p class="category">Access Control</p>
+                    <p>The principle that users and systems should have access only to what is necessary to perform their assigned function — nothing more. Directly supports the Authorization component of IAM.</p>
+                </div>
+
+                <div class="glossary-term" data-term="liability due care">
+                    <strong>Liability</strong>
+                    <p class="category">Security Roles</p>
+                    <p>The external accountability that falls on organizational leadership when due care obligations are not met. Directors and owners bear primary external responsibility for the organization's security posture.</p>
+                </div>
+
+                <div class="glossary-letter">M</div>
+
+                <div class="glossary-term" data-term="managerial control category">
+                    <strong>Managerial Control</strong>
+                    <p class="category">Control Categories</p>
+                    <p>A control that provides governance and oversight of the security program. Governs how security decisions are made and evaluated — does not directly block attacks. Sits at the top of the control pyramid.</p>
+                </div>
+
+                <div class="glossary-letter">N</div>
+
+                <div class="glossary-term" data-term="nist cybersecurity framework identify protect detect respond recover">
+                    <strong>NIST Cybersecurity Framework</strong>
+                    <p class="category">Frameworks</p>
+                    <p>A widely adopted structure developed by the National Institute of Standards and Technology that organizes all cybersecurity activity into five functions: Identify, Protect, Detect, Respond, and Recover. These functions operate continuously and simultaneously.</p>
+                </div>
+
+                <div class="glossary-term" data-term="non-repudiation">
+                    <strong>Non-Repudiation</strong>
+                    <p class="category">Core Security Concept</p>
+                    <p>The assurance that an action or event cannot be denied after the fact. Provides proof of origin and proof of action. Enforced through digital signatures and audit logs in digital environments.</p>
+                </div>
+
+                <div class="glossary-letter">O</div>
+
+                <div class="glossary-term" data-term="operational control category">
+                    <strong>Operational Control</strong>
+                    <p class="category">Control Categories</p>
+                    <p>A control that depends on human implementation and behavior to be effective. Examples include security awareness training programs and security guards. Sits in the middle of the control pyramid.</p>
+                </div>
+
+                <div class="glossary-term" data-term="object access control">
+                    <strong>Object</strong>
+                    <p class="category">Access Control</p>
+                    <p>The resource being accessed in an access control system. Objects can include networks, servers, databases, applications, and files. Subjects are assigned rights or permissions on objects.</p>
+                </div>
+
+                <div class="glossary-letter">P</div>
+
+                <div class="glossary-term" data-term="physical control category">
+                    <strong>Physical Control</strong>
+                    <p class="category">Control Categories</p>
+                    <p>A control that governs access to physical locations and tangible assets. Deters and detects physical access rather than digital access. Examples: security cameras, locks, alarms, lighting, security personnel. Shares the base of the control pyramid with technical controls.</p>
+                </div>
+
+                <div class="glossary-term" data-term="preventive control functional">
+                    <strong>Preventive Control</strong>
+                    <p class="category">Control Functional Types</p>
+                    <p>A control that eliminates or reduces the likelihood of a successful attack. Operates before the attack occurs. Examples: firewall ACLs, antimalware software, proactive patch management, SOPs.</p>
+                </div>
+
+                <div class="glossary-letter">R</div>
+
+                <div class="glossary-term" data-term="regulatory compliance">
+                    <strong>Regulatory Compliance</strong>
+                    <p class="category">Governance</p>
+                    <p>The demonstration that an organization meets the security requirements imposed by applicable laws or industry regulations. Non-compliance is both a security risk and a legal liability.</p>
+                </div>
+
+                <div class="glossary-term" data-term="remediation gap analysis">
+                    <strong>Remediation</strong>
+                    <p class="category">Governance</p>
+                    <p>The corrective action taken to close a gap between an organization's current security capability and the required standard. Gap analysis reports include specific remediation recommendations for each identified gap.</p>
+                </div>
+
+                <div class="glossary-letter">S</div>
+
+                <div class="glossary-term" data-term="security control safeguard countermeasure">
+                    <strong>Security Control</strong>
+                    <p class="category">Core Security Concept</p>
+                    <p>A safeguard or countermeasure designed to give a system or data asset the properties of confidentiality, integrity, availability, and non-repudiation. Controls are classified by category (how implemented) and functional type (what they accomplish).</p>
+                </div>
+
+                <div class="glossary-term" data-term="security policy formalized statement">
+                    <strong>Security Policy</strong>
+                    <p class="category">Governance</p>
+                    <p>A formalized, written statement that defines how an organization will implement and maintain security. It is not a suggestion — it is the official standard against which security decisions and behaviors are measured.</p>
+                </div>
+
+                <div class="glossary-term" data-term="security posture strength">
+                    <strong>Security Posture</strong>
+                    <p class="category">Governance</p>
+                    <p>The overall strength and effectiveness of an organization's security program. An organization with clear security policies and framework-based controls has a strong security posture.</p>
+                </div>
+
+                <div class="glossary-term" data-term="soc security operations center">
+                    <strong>SOC (Security Operations Center)</strong>
+                    <p class="category">Security Business Units</p>
+                    <p>A centralized facility — physical or virtual — where security professionals monitor and protect critical information assets continuously. Enables rapid incident detection and response across all business functions. Typically found in larger organizations due to high resource requirements.</p>
+                </div>
+
+                <div class="glossary-term" data-term="subject access control">
+                    <strong>Subject</strong>
+                    <p class="category">Access Control</p>
+                    <p>Any entity that requests access to a resource in an access control system. Subjects can be people, devices, software processes, or any other system that can be granted access to a resource.</p>
+                </div>
+
+                <div class="glossary-letter">T</div>
+
+                <div class="glossary-term" data-term="technical control category hardware software firmware">
+                    <strong>Technical Control</strong>
+                    <p class="category">Control Categories</p>
+                    <p>A control implemented through hardware, software, or firmware. Operates automatically or semi-automatically without requiring human intervention for each action. Examples: firewalls, antivirus software, OS access control models. Shares the base of the control pyramid with physical controls.</p>
+                </div>
+
+            </div>
+
+            <div class="quest-section" style="margin-top:30px;">
+                <h3>📚 External Study Resources</h3>
+                <h4>Official References</h4>
+                <a href="https://www.nist.gov/cyberframework" target="_blank" class="resource-link">🏛️ NIST Cybersecurity Framework</a>
+                <a href="https://www.nist.gov/cyberframework/online-learning/five-functions" target="_blank" class="resource-link">🔍 NIST Five Functions</a>
+                <a href="https://www.comptia.org/certifications/security" target="_blank" class="resource-link">📋 CompTIA Security+ Exam Page</a>
+                <a href="https://attack.mitre.org" target="_blank" class="resource-link">🎯 MITRE ATT&CK Framework</a>
+                <a href="https://www.cisecurity.org/cis-controls" target="_blank" class="resource-link">🛡️ CIS Controls</a>
+            </div>
+        </div>
+
+        <!-- ===== PROGRESS TAB ===== -->
+        <div id="progress" class="tab-content">
+            <h2 style="color:#1a1a2e; margin-bottom:20px;">🏆 Your Progress & Achievements</h2>
+
+            <div class="quest-section">
+                <h3>📊 Overall Lesson Progress</h3>
+                <div style="background: #f5f5f0; padding:24px; border-radius:8px;">
+                    <div class="progress-bar" style="height:36px;">
+                        <div class="progress-fill" id="mainProgressBar">0%</div>
+                    </div>
+                    <p style="margin-top:16px; text-align:center; color:#555;">Complete the Knowledge Check to update your progress.</p>
+                </div>
+            </div>
+
+            <div class="quest-section">
+                <h3>🎖️ Badges</h3>
+                <p style="margin-bottom:14px;">Earn badges by mastering each section of Lesson 1.</p>
+                <div>
+                    <span class="badge locked" id="badge-cia">🔒 CIA Triad Master</span>
+                    <span class="badge locked" id="badge-nist">🔒 NIST Navigator</span>
+                    <span class="badge locked" id="badge-iam">🔒 IAM Expert</span>
+                    <span class="badge locked" id="badge-controls">🔒 Controls Specialist</span>
+                    <span class="badge locked" id="badge-roles">🔒 Org Security Pro</span>
+                    <span class="badge locked" id="badge-quiz">🔒 Quiz Champion</span>
+                    <span class="badge locked" id="badge-perfect">🔒 Perfect Score</span>
+                </div>
+            </div>
+
+            <div class="quest-section">
+                <h3>📋 Topic Completion Checklist</h3>
+                <ul class="checklist" id="progressChecklist">
+                    <li onclick="toggleCheck(this)">Read: CIA Triad and Non-Repudiation</li>
+                    <li onclick="toggleCheck(this)">Read: NIST Cybersecurity Framework — Five Functions</li>
+                    <li onclick="toggleCheck(this)">Read: Gap Analysis</li>
+                    <li onclick="toggleCheck(this)">Read: Access Control and IAM</li>
+                    <li onclick="toggleCheck(this)">Read: Security Control Categories</li>
+                    <li onclick="toggleCheck(this)">Read: Security Control Functional Types</li>
+                    <li onclick="toggleCheck(this)">Read: Information Security Roles and Responsibilities</li>
+                    <li onclick="toggleCheck(this)">Read: Information Security Competencies</li>
+                    <li onclick="toggleCheck(this)">Read: Information Security Business Units</li>
+                    <li onclick="toggleCheck(this)">Reviewed the Glossary of Key Terms</li>
+                    <li onclick="toggleCheck(this)">Completed the Knowledge Check Quiz</li>
+                </ul>
+            </div>
+
+            <div class="quest-section">
+                <h3>🎯 Recommended Study Path</h3>
+                <div class="success-box">
+                    <ol style="padding-left:18px;">
+                        <li style="margin:8px 0;">Start with the <strong>Lesson Overview</strong> to understand the big picture and objectives.</li>
+                        <li style="margin:8px 0;">Work through the <strong>Study Content</strong> tab section by section.</li>
+                        <li style="margin:8px 0;">Search the <strong>Glossary</strong> whenever a term needs reinforcement.</li>
+                        <li style="margin:8px 0;">Take the <strong>Knowledge Check</strong> — read the explanations for any questions missed.</li>
+                        <li style="margin:8px 0;">Retake the quiz until you score 80% or above.</li>
+                        <li style="margin:8px 0;">Return to the study content for any areas where you scored below confidence.</li>
+                    </ol>
+                </div>
+
+                <div class="info-box" style="margin-top:16px;">
+                    <strong>💡 Exam Preparation Tips for Lesson 1:</strong>
+                    <ul style="margin-top:8px; padding-left:18px;">
+                        <li style="margin:6px 0;">Know the CIA Triad and be able to identify violations of each property in a scenario.</li>
+                        <li style="margin:6px 0;">Be able to match each NIST function to a real-world security activity.</li>
+                        <li style="margin:6px 0;">Understand that a control can have both a category (managerial/operational/technical/physical) and a functional type (preventive/detective/corrective/etc.) simultaneously.</li>
+                        <li style="margin:6px 0;">Know the difference between IAM and AAA — and why IAM is now preferred.</li>
+                        <li style="margin:6px 0;">Remember: patch management is normally preventive — but becomes corrective after exploitation.</li>
+                        <li style="margin:6px 0;">Know all three names for the incident response team: CIRT, CSIRT, and CERT.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // ===== TAB MANAGEMENT =====
+    function showTab(tabName, event) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabName).classList.add('active');
+        if (event && event.target) event.target.classList.add('active');
+        updateProgress();
+    }
+
+    // ===== SCROLL TO SECTION =====
+    function scrollTo(sectionId) {
+        showTab('content', null);
+        setTimeout(() => {
+            const el = document.getElementById(sectionId);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 150);
+    }
+
+    // ===== QUIZ LOGIC =====
+    let quizSubmitted = false;
+    let quizScore = 0;
+
+    function submitQuiz() {
+        if (quizSubmitted) return;
+        quizSubmitted = true;
+        quizScore = 0;
+        const questions = document.querySelectorAll('.quiz-question');
+        let answered = 0;
+
+        questions.forEach(q => {
+            const correct = q.getAttribute('data-answer');
+            const explanation = q.getAttribute('data-explanation');
+            const selected = q.querySelector('.quiz-options li.selected');
+            const feedback = q.querySelector('.feedback-msg');
+            const options = q.querySelectorAll('.quiz-options li');
+
+            // Highlight correct answer
+            options.forEach((li, idx) => {
+                const letter = String.fromCharCode(65 + idx);
+                if (letter === correct) {
+                    li.classList.add('correct');
+                }
+            });
+
+            if (selected) {
+                answered++;
+                const selectedLetter = String.fromCharCode(65 + Array.from(selected.parentElement.children).indexOf(selected));
+                if (selectedLetter === correct) {
+                    quizScore++;
+                    feedback.className = 'feedback-msg correct';
+                    feedback.textContent = '✅ Correct! ' + explanation;
+                } else {
+                    selected.classList.add('incorrect');
+                    feedback.className = 'feedback-msg incorrect';
+                    feedback.textContent = '❌ Incorrect. ' + explanation;
+                }
+            } else {
+                feedback.className = 'feedback-msg incorrect';
+                feedback.textContent = '⚠️ Not answered. ' + explanation;
+            }
+        });
+
+        const total = questions.length;
+        const pct = Math.round((quizScore / total) * 100);
+        const scoreBox = document.getElementById('scoreBox');
+        scoreBox.style.display = 'block';
+        document.getElementById('scoreTitle').textContent = `Your Score: ${quizScore} / ${total} (${pct}%)`;
+
+        let grade = '';
+        if (pct === 100) grade = '🏆 Perfect Score! Outstanding mastery of Lesson 1.';
+        else if (pct >= 80) grade = '✅ Excellent! You are ready to move to Lesson 2.';
+        else if (pct >= 60) grade = '📖 Good effort. Review the topics you missed and retake the quiz.';
+        else grade = '🔄 Keep studying. Return to the Study Content tab and review before retaking.';
+        document.getElementById('scoreText').textContent = grade;
+        document.getElementById('scoreFeedback').textContent = `You answered ${quizScore} questions correctly out of ${total}.`;
+
+        // Update progress bar
+        const bar = document.getElementById('progressBar');
+        const mainBar = document.getElementById('mainProgressBar');
+        bar.style.width = pct + '%';
+        bar.textContent = pct + '%';
+        mainBar.style.width = pct + '%';
+        mainBar.textContent = pct + '%';
+
+        // Unlock badges
+        if (pct >= 60) {
+            ['badge-cia','badge-nist','badge-iam','badge-controls','badge-roles','badge-quiz'].forEach(id => {
+                const b = document.getElementById(id);
+                b.className = 'badge earned';
+                b.textContent = b.textContent.replace('🔒 ','✅ ');
+            });
+        }
+        if (pct === 100) {
+            const p = document.getElementById('badge-perfect');
+            p.className = 'badge earned';
+            p.textContent = '⭐ Perfect Score';
+        }
+    }
+
+    function resetQuiz() {
+        quizSubmitted = false;
+        quizScore = 0;
+        document.querySelectorAll('.quiz-options li').forEach(li => {
+            li.className = '';
+            li.style.background = '';
+            li.style.color = '';
+        });
+        document.querySelectorAll('.feedback-msg').forEach(f => {
+            f.className = 'feedback-msg';
+            f.textContent = '';
+        });
+        document.getElementById('scoreBox').style.display = 'none';
+
+        // Re-attach click events
+        attachQuizClicks();
+    }
+
+    function attachQuizClicks() {
+        document.querySelectorAll('.quiz-options li').forEach(li => {
+            li.onclick = function() {
+                if (quizSubmitted) return;
+                this.parentElement.querySelectorAll('li').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+            };
+        });
+    }
+
+    // ===== GLOSSARY SEARCH =====
+    function filterGlossary() {
+        const query = document.getElementById('glossarySearch').value.toLowerCase();
+        document.querySelectorAll('.glossary-term').forEach(term => {
+            const text = term.getAttribute('data-term') + ' ' + term.textContent.toLowerCase();
+            term.style.display = text.includes(query) ? 'block' : 'none';
+        });
+        document.querySelectorAll('.glossary-letter').forEach(letter => {
+            letter.style.display = query ? 'none' : 'inline-block';
+        });
+    }
+
+    // ===== CHECKLIST =====
+    function toggleCheck(el) {
+        el.classList.toggle('checked');
+        updateProgress();
+    }
+
+    // ===== PROGRESS =====
+    function updateProgress() {
+        const checked = document.querySelectorAll('.checklist li.checked').length;
+        const total = document.querySelectorAll('.checklist li').length;
+        const quizPct = quizSubmitted ? Math.round((quizScore / 18) * 100) : 0;
+        const checkPct = Math.round((checked / total) * 100);
+        const combined = Math.round((checkPct + quizPct) / 2);
+
+        const bar = document.getElementById('progressBar');
+        const mainBar = document.getElementById('mainProgressBar');
+        if (bar) { bar.style.width = combined + '%'; bar.textContent = combined + '%'; }
+        if (mainBar) { mainBar.style.width = combined + '%'; mainBar.textContent = combined + '%'; }
+    }
+
+    // ===== INIT =====
+    document.addEventListener('DOMContentLoaded', () => {
+        attachQuizClicks();
+    });
+
+    /* ===================== REVIEW ACTIVITY ENGINE ===================== */
+    (function(){
+      var RV_TOTAL=42, RV_PASS=0.70;
+
+  var RV_QUESTIONS=[
+    /* ===== SECTION 1: SECURITY CONCEPTS (Review Activity Part 1) ===== */
+    {s:1,cat:"CIA Triad",scn:true,q:"A hospital administrator accesses a patient database and reads sensitive medical records without modifying any data. The administrator was not authorized to view those records. Which property of the CIA Triad has been violated?",o:[
+      {t:"Integrity \u2014 the data was read without proper authorization",c:false,f:"Not the best answer. The correct choice is: Confidentiality."},
+      {t:"Confidentiality \u2014 unauthorized individuals accessed protected information",c:true,f:"Confidentiality ensures that information can only be read by explicitly authorized individuals. The data was not modified or made unavailable \u2014 it was simply accessed by someone without permission, which is a confidentiality violation."},
+      {t:"Availability \u2014 the system failed to restrict unauthorized access",c:false,f:"Not the best answer. The correct choice is: Confidentiality."},
+      {t:"Non-repudiation \u2014 the administrator cannot deny reading the records",c:false,f:"Not the best answer. The correct choice is: Confidentiality."}
+    ]},
+    {s:1,cat:"CIA Triad",scn:true,q:"A ransomware attack encrypts all files on a company's file server. Employees are completely unable to access critical business documents needed for daily operations. Which component of the CIA Triad is PRIMARILY affected?",o:[
+      {t:"Confidentiality \u2014 encrypted files could be read by the attacker",c:false,f:"Not the best answer. The correct choice is: Availability."},
+      {t:"Integrity \u2014 the file content was altered by encryption",c:false,f:"Not the best answer. The correct choice is: Availability."},
+      {t:"Non-repudiation \u2014 users cannot confirm file authenticity",c:false,f:"Not the best answer. The correct choice is: Availability."},
+      {t:"Availability \u2014 authorized users are denied access to the data",c:true,f:"Availability ensures that information is accessible to those authorized to view or modify it. Ransomware that prevents access to data is a direct attack on availability \u2014 the data still exists and may not be readable by the attacker, but it is inaccessible to the organization."}
+    ]},
+    {s:1,cat:"CIA Triad",scn:true,q:"During a financial audit, an investigator discovers that transaction records were silently altered during transmission between two systems. Amounts were changed and records show no sign of tampering on the surface. Which CIA Triad property was violated?",o:[
+      {t:"Availability \u2014 the records were delayed during transmission",c:false,f:"Not the best answer. The correct choice is: Integrity."},
+      {t:"Confidentiality \u2014 the records were exposed to unauthorized parties",c:false,f:"Not the best answer. The correct choice is: Integrity."},
+      {t:"Integrity \u2014 the data was modified without authorization",c:true,f:"Integrity requires that data is stored and transferred exactly as intended \u2014 any modification must be explicitly authorized. Silent, unauthorized modification of data in transit is a direct integrity violation."},
+      {t:"Non-repudiation \u2014 the sender denied transmitting the records",c:false,f:"Not the best answer. The correct choice is: Integrity."}
+    ]},
+    {s:1,cat:"CIA Triad",scn:true,q:"An organization implements digital signatures on all outbound legal documents. The purpose is to ensure that the document signer cannot later deny having signed the document. Which security property does this BEST support?",o:[
+      {t:"Confidentiality \u2014 preventing unauthorized parties from reading the document",c:false,f:"Not the best answer. The correct choice is: Non-repudiation."},
+      {t:"Availability \u2014 ensuring the document is accessible when needed",c:false,f:"Not the best answer. The correct choice is: Non-repudiation."},
+      {t:"Integrity \u2014 verifying the document content was not altered",c:false,f:"Not the best answer. The correct choice is: Non-repudiation."},
+      {t:"Non-repudiation \u2014 ensuring the signer cannot deny their action",c:true,f:"Non-repudiation ensures that a person cannot deny having performed an action. Digital signatures provide cryptographic proof of origin \u2014 the signer cannot credibly deny signing the document, making non-repudiation the primary property supported."}
+    ]},
+    {s:1,cat:"CIA Triad",scn:true,q:"A security trainer mentions the term AIC when discussing core information security properties. A learner asks why AIC is used instead of CIA. What is the MOST accurate reason?",o:[
+      {t:"AIC is the European Union's preferred terminology for the framework",c:false,f:"Not the best answer. The correct choice is: AIC is used to avoid confusion with the Central Intelligence Agency."},
+      {t:"AIC stands for Authentication, Integrity, and Compliance",c:false,f:"Not the best answer. The correct choice is: AIC is used to avoid confusion with the Central Intelligence Agency."},
+      {t:"AIC is used to avoid confusion with the Central Intelligence Agency",c:true,f:"The CIA Triad is sometimes referred to as AIC \u2014 Availability, Integrity, Confidentiality \u2014 specifically to avoid confusion with the Central Intelligence Agency. Both terms refer to the exact same three properties and are used interchangeably."},
+      {t:"AIC places Availability first because it is the most critical property",c:false,f:"Not the best answer. The correct choice is: AIC is used to avoid confusion with the Central Intelligence Agency."}
+    ]},
+    {s:1,cat:"CIA Triad",scn:false,q:"Which of the following scenarios represents a violation of integrity?",o:[
+      {t:"An attacker steals a copy of a customer database and sells it online",c:false,f:"Not the best answer. The correct choice is: A threat actor modifies a pricing record from $500 to $5 during transmission."},
+      {t:"A DDoS attack prevents customers from accessing a company's website",c:false,f:"Not the best answer. The correct choice is: A threat actor modifies a pricing record from $500 to $5 during transmission."},
+      {t:"A threat actor modifies a pricing record from $500 to $5 during transmission",c:true,f:"Integrity ensures data is stored and transferred exactly as intended \u2014 any unauthorized modification violates integrity. Modifying a pricing record in transit is a direct integrity violation. The other options describe confidentiality violations (theft and unauthorized viewing) and an availability violation (DDoS)."},
+      {t:"An unauthorized user views confidential HR files without making changes",c:false,f:"Not the best answer. The correct choice is: A threat actor modifies a pricing record from $500 to $5 during transmission."}
+    ]},
+    {s:1,cat:"NIST Framework",scn:true,q:"A security analyst is tasked with performing continuous, proactive monitoring of all security controls to verify they are effective and capable of detecting new types of threats. According to the NIST Cybersecurity Framework, which function does this BEST describe?",o:[
+      {t:"Identify \u2014 evaluating risks and recommending controls",c:false,f:"Not the best answer. The correct choice is: Detect."},
+      {t:"Protect \u2014 configuring and maintaining security systems",c:false,f:"Not the best answer. The correct choice is: Detect."},
+      {t:"Detect \u2014 performing ongoing monitoring to identify intrusions",c:true,f:"The Detect function involves performing continuous, proactive monitoring to ensure that controls remain effective and capable of identifying new threat types. The goal is to recognize when something is wrong before it escalates."},
+      {t:"Respond \u2014 analyzing and containing active threats",c:false,f:"Not the best answer. The correct choice is: Detect."}
+    ]},
+    {s:1,cat:"NIST Framework",scn:true,q:"An organization is rolling out new laptops company-wide. The security team is involved from the procurement decision through deployment configuration and will eventually manage secure decommissioning. Which NIST Cybersecurity Framework function is being applied?",o:[
+      {t:"Identify \u2014 because asset inventory is being maintained",c:false,f:"Not the best answer. The correct choice is: Protect."},
+      {t:"Protect \u2014 because security is embedded across the full asset lifecycle",c:true,f:"The Protect function covers procuring, deploying, operating, and decommissioning IT assets with security embedded at every stage. Security is not added at the end \u2014 it is built in from the moment an asset enters the organization to the moment it leaves."},
+      {t:"Detect \u2014 because the new systems will be monitored",c:false,f:"Not the best answer. The correct choice is: Protect."},
+      {t:"Recover \u2014 because decommissioning is part of system recovery",c:false,f:"Not the best answer. The correct choice is: Protect."}
+    ]},
+    {s:1,cat:"NIST Framework",scn:true,q:"After a ransomware attack, the incident response team has contained the threat and eradicated the malware. The team is now restoring servers from clean backups and verifying system integrity before returning services to users. Which NIST function is being performed?",o:[
+      {t:"Respond \u2014 the team is still managing the active incident",c:false,f:"Not the best answer. The correct choice is: Recover."},
+      {t:"Protect \u2014 restoring systems strengthens future defenses",c:false,f:"Not the best answer. The correct choice is: Recover."},
+      {t:"Detect \u2014 the team is verifying that no malware remains",c:false,f:"Not the best answer. The correct choice is: Recover."},
+      {t:"Recover \u2014 restoring systems and data after the attack",c:true,f:"The Recover function involves restoring systems and data to normal operation following an attack. Once eradication is complete and the team is actively restoring from backups, the Recover function is in progress. This function builds cybersecurity resilience."}
+    ]},
+    {s:1,cat:"NIST Framework",scn:true,q:"A security manager is conducting a risk assessment, cataloging all organizational assets, evaluating vulnerabilities, and recommending security controls to mitigate identified risks. Which NIST Cybersecurity Framework function does this BEST describe?",o:[
+      {t:"Identify \u2014 developing policies, evaluating risks, and recommending controls",c:true,f:"The Identify function involves developing security policies and capabilities, evaluating risks and vulnerabilities, and recommending security controls to mitigate them. It is the foundational function \u2014 knowing what you have, what threatens it, and what you need."},
+      {t:"Protect \u2014 implementing the recommended controls",c:false,f:"Not the best answer. The correct choice is: Identify."},
+      {t:"Detect \u2014 monitoring for vulnerabilities on an ongoing basis",c:false,f:"Not the best answer. The correct choice is: Identify."},
+      {t:"Respond \u2014 addressing identified vulnerabilities before they are exploited",c:false,f:"Not the best answer. The correct choice is: Identify."}
+    ]},
+    {s:1,cat:"NIST Framework",scn:true,q:"A security operations team receives an alert that a threat has been confirmed on the network. They immediately begin analyzing the scope of the breach, isolating affected systems, and working to eradicate the malware. Which NIST function are they performing?",o:[
+      {t:"Detect \u2014 they identified the threat through monitoring",c:false,f:"Not the best answer. The correct choice is: Respond."},
+      {t:"Protect \u2014 they are implementing controls to stop the spread",c:false,f:"Not the best answer. The correct choice is: Respond."},
+      {t:"Respond \u2014 identifying, analyzing, containing, and eradicating the threat",c:true,f:"The Respond function covers identifying, analyzing, containing, and eradicating threats to systems and data security. Speed and accuracy during Respond determine how much damage the attack ultimately causes."},
+      {t:"Recover \u2014 bringing systems back online after the incident",c:false,f:"Not the best answer. The correct choice is: Respond."}
+    ]},
+    {s:1,cat:"Gap Analysis",scn:true,q:"A healthcare organization has recently adopted the NIST Cybersecurity Framework. Leadership wants to understand where current security capabilities fall short of the framework's requirements before investing in new controls. Which process should the security team perform?",o:[
+      {t:"Risk assessment \u2014 to identify threats and vulnerabilities",c:false,f:"Not the best answer. The correct choice is: Gap analysis."},
+      {t:"Penetration testing \u2014 to verify which systems can be exploited",c:false,f:"Not the best answer. The correct choice is: Gap analysis."},
+      {t:"Gap analysis \u2014 to compare current capabilities against framework requirements",c:true,f:"Gap analysis is the process of identifying how an organization's current security capabilities deviate from framework requirements or recommendations. It is specifically performed when adopting a new framework to establish a baseline and prioritize improvements."},
+      {t:"Business impact analysis \u2014 to determine the cost of a breach",c:false,f:"Not the best answer. The correct choice is: Gap analysis."}
+    ]},
+    {s:1,cat:"Gap Analysis",scn:true,q:"During a gap analysis, an organization's Identity and Access Management controls are rated as 'no/basic capability' \u2014 shown in red on the report. The team identifies missing controls and configuration gaps. What is the CORRECT next step?",o:[
+      {t:"Ignore the red-rated areas if they are not legally mandated",c:false,f:"Not the best answer. The correct choice is: Prioritize remediation of the identified gaps based on risk level and target timeline."},
+      {t:"Replace the entire IT department to fix the capability gaps",c:false,f:"Not the best answer. The correct choice is: Prioritize remediation of the identified gaps based on risk level and target timeline."},
+      {t:"Prioritize remediation of the identified gaps based on risk level and target timeline",c:true,f:"After a gap analysis report identifies missing or poorly configured controls, the correct next step is prioritizing remediation based on risk level and the organization's target compliance timeline \u2014 typically organized by quarter. Remediation closes the gap between current capability and the required standard."},
+      {t:"Re-perform the gap analysis with different consultants to verify the findings",c:false,f:"Not the best answer. The correct choice is: Prioritize remediation of the identified gaps based on risk level and target timeline."}
+    ]},
+    {s:1,cat:"Gap Analysis",scn:true,q:"An organization's internal security team has strong technical skills but lacks expertise in interpreting complex healthcare compliance regulations for a gap analysis. What is the BEST course of action?",o:[
+      {t:"Conduct the gap analysis using only the internal team to save costs",c:false,f:"Not the best answer. The correct choice is: Engage third-party consultants with healthcare compliance specialization."},
+      {t:"Skip compliance evaluation and focus on technical vulnerability scanning",c:false,f:"Not the best answer. The correct choice is: Engage third-party consultants with healthcare compliance specialization."},
+      {t:"Adopt a simpler framework that the internal team can evaluate independently",c:false,f:"Not the best answer. The correct choice is: Engage third-party consultants with healthcare compliance specialization."},
+      {t:"Engage third-party consultants with healthcare compliance specialization",c:true,f:"Gap analysis for complex frameworks \u2014 especially those tied to regulations and legislation \u2014 often requires outside expertise. Third-party consultants bring an objective perspective, current knowledge of best practices, and regulatory specialization the internal team may lack."}
+    ]},
+    {s:1,cat:"Access Control",scn:true,q:"A new employee joins a technology company. The IT department creates a unique username and system account to represent the employee on the corporate network. No credentials have been issued yet. Which IAM process has just been performed?",o:[
+      {t:"Authentication \u2014 the employee's identity is being confirmed",c:false,f:"Not the best answer. The correct choice is: Identification."},
+      {t:"Authorization \u2014 the employee's access rights are being defined",c:false,f:"Not the best answer. The correct choice is: Identification."},
+      {t:"Accounting \u2014 a log entry is created for the new account",c:false,f:"Not the best answer. The correct choice is: Identification."},
+      {t:"Identification \u2014 a unique account is created to represent the user",c:true,f:"Identification is the process of creating an account or unique ID that represents a user, device, or process on the network. This is the starting point \u2014 before authentication or authorization can occur, the system must first know who or what it is dealing with."}
+    ]},
+    {s:1,cat:"Access Control",scn:true,q:"An employee enters their username and password to log into the corporate VPN. The system compares the entered password against the stored hashed credential. Access is granted when they match. Which IAM process is being performed?",o:[
+      {t:"Identification \u2014 the system is identifying the user by username",c:false,f:"Not the best answer. The correct choice is: Authentication."},
+      {t:"Authorization \u2014 the system is granting access to the VPN resource",c:false,f:"Not the best answer. The correct choice is: Authentication."},
+      {t:"Authentication \u2014 the user is proving their identity with a credential",c:true,f:"Authentication is the process of proving that a subject is who or what it claims to be at the moment of access. Comparing the entered password against a stored hashed value is authentication \u2014 the method used is a password, which is the authentication factor."},
+      {t:"Accounting \u2014 the login event is being recorded in the audit log",c:false,f:"Not the best answer. The correct choice is: Authentication."}
+    ]},
+    {s:1,cat:"Access Control",scn:true,q:"A successfully authenticated employee attempts to open a folder on the shared drive. The system checks the employee's role against the folder's access control list and denies write access \u2014 the employee can only read the files. Which IAM process is being applied?",o:[
+      {t:"Identification \u2014 the employee's account is confirmed to exist",c:false,f:"Not the best answer. The correct choice is: Authorization."},
+      {t:"Authentication \u2014 the employee's credentials are being re-verified",c:false,f:"Not the best answer. The correct choice is: Authorization."},
+      {t:"Accounting \u2014 the denied access attempt is being logged",c:false,f:"Not the best answer. The correct choice is: Authorization."},
+      {t:"Authorization \u2014 determining and enforcing what the user is allowed to do",c:true,f:"Authorization determines what rights a subject has on each resource and enforces those rights. Once identity is confirmed through authentication, authorization decides which actions \u2014 read, write, delete \u2014 the authenticated user is permitted to perform."}
+    ]},
+    {s:1,cat:"Access Control",scn:true,q:"During a security audit, an investigator finds that a privileged user account accessed a sensitive financial database at 2:47 AM on a weekend. The account holder denies it. Which IAM component provides the evidence needed to challenge this denial?",o:[
+      {t:"Authentication \u2014 the system verified the credentials used",c:false,f:"Not the best answer. The correct choice is: Accounting."},
+      {t:"Authorization \u2014 the account had permissions to access the database",c:false,f:"Not the best answer. The correct choice is: Accounting."},
+      {t:"Identification \u2014 the account is linked to a specific user",c:false,f:"Not the best answer. The correct choice is: Accounting."},
+      {t:"Accounting \u2014 the audit log records the access event with timestamp and user ID",c:true,f:"Accounting tracks all access events and generates an audit log. Crucially, accounting creates a non-repudiation trail \u2014 users cannot later deny actions that the system has logged. The audit log entry with timestamp and user ID is the accounting component at work."}
+    ]},
+    {s:1,cat:"Access Control",scn:true,q:"A security manager explains that the preferred modern term for the access control framework has evolved beyond AAA because it more fully acknowledges all steps in the access lifecycle, including the creation of digital identities. Which term is the manager describing?",o:[
+      {t:"DAC \u2014 Discretionary Access Control",c:false,f:"Not the best answer. The correct choice is: IAM."},
+      {t:"RBAC \u2014 Role-Based Access Control",c:false,f:"Not the best answer. The correct choice is: IAM."},
+      {t:"IAM \u2014 Identity and Access Management",c:true,f:"IAM (Identity and Access Management) is increasingly preferred over AAA because it explicitly includes Identification \u2014 the critical first step of creating a unique account or ID. AAA covers Authentication, Authorization, and Accounting but does not formally acknowledge Identification."},
+      {t:"PAM \u2014 Privileged Access Management",c:false,f:"Not the best answer. The correct choice is: IAM."}
+    ]},
+    {s:1,cat:"Access Control",scn:true,q:"In an access control system, a security analyst refers to the resources \u2014 such as databases, file shares, and application servers \u2014 that users request access to. Using correct IAM terminology, these resources are called:",o:[
+      {t:"Subjects \u2014 entities that request and are granted access",c:false,f:"Not the best answer. The correct choice is: Objects."},
+      {t:"Principals \u2014 verified identities within the IAM system",c:false,f:"Not the best answer. The correct choice is: Objects."},
+      {t:"Objects \u2014 resources that subjects attempt to access",c:true,f:"In access control, objects are the resources being accessed \u2014 networks, servers, databases, applications, or files. Subjects are the entities requesting access. Subjects are assigned rights or permissions that determine what they can do with each object."},
+      {t:"Agents \u2014 software components that enforce access policies",c:false,f:"Not the best answer. The correct choice is: Objects."}
+    ]},
+    {s:1,cat:"Access Control",scn:true,q:"An e-commerce platform records every action customers take \u2014 including order placement, payment updates, and account changes. When a customer disputes a charge and claims they never placed a specific order, the system uses these records to prove otherwise. Which IAM function does this BEST illustrate?",o:[
+      {t:"Identification \u2014 proving the account belongs to the customer",c:false,f:"Not the best answer. The correct choice is: Accounting."},
+      {t:"Authentication \u2014 verifying the customer logged in using valid credentials",c:false,f:"Not the best answer. The correct choice is: Accounting."},
+      {t:"Authorization \u2014 confirming the customer had permission to place orders",c:false,f:"Not the best answer. The correct choice is: Accounting."},
+      {t:"Accounting \u2014 generating a non-repudiation trail of customer actions",c:true,f:"Accounting tracks authorized usage and creates an audit log that cannot be prevented by the user. In this scenario, accounting provides non-repudiation evidence \u2014 the system's record proves the customer placed the order, preventing a credible denial."}
+    ]},
+    /* ===== SECTION 2: SECURITY CONTROLS (Review Activity Part 2) ===== */
+    {s:2,cat:"Control Categories",scn:true,q:"A security team conducts a formal risk assessment and uses the findings to evaluate which additional security controls are needed and to prioritize their deployment. This activity is BEST classified under which control category?",o:[
+      {t:"Technical \u2014 the assessment uses software-based scanning tools",c:false,f:"Not the best answer. The correct choice is: Managerial."},
+      {t:"Operational \u2014 the assessment is carried out by security personnel",c:false,f:"Not the best answer. The correct choice is: Managerial."},
+      {t:"Managerial \u2014 provides governance and oversight of the security program",c:true,f:"Managerial controls provide oversight and governance of the information system. A risk assessment used to evaluate and select other security controls is a classic example of a managerial control \u2014 it governs how security decisions are made, not how attacks are directly blocked."},
+      {t:"Physical \u2014 the assessment inventories physical assets",c:false,f:"Not the best answer. The correct choice is: Managerial."}
+    ]},
+    {s:2,cat:"Control Categories",scn:true,q:"A company requires all employees to complete annual security awareness training and enforces a policy that workstations must be locked whenever an employee steps away. These measures rely on human behavior to be effective. Which control category do they belong to?",o:[
+      {t:"Managerial \u2014 they are defined by organizational policy",c:false,f:"Not the best answer. The correct choice is: Operational."},
+      {t:"Technical \u2014 they are enforced by software configurations",c:false,f:"Not the best answer. The correct choice is: Operational."},
+      {t:"Operational \u2014 implemented primarily through people and their behavior",c:true,f:"Operational controls are implemented primarily by people. They depend on human action and judgment to be effective \u2014 a company policy requiring workstation locking only works if employees follow it. Security awareness training is a textbook operational control."},
+      {t:"Physical \u2014 they protect physical access to workstations",c:false,f:"Not the best answer. The correct choice is: Operational."}
+    ]},
+    {s:2,cat:"Control Categories",scn:true,q:"An organization deploys a next-generation firewall, an endpoint detection and response (EDR) platform, and an OS-level access control model across its infrastructure. These controls operate automatically without requiring human intervention for each action. Which category do they belong to?",o:[
+      {t:"Managerial \u2014 they are defined in the security policy",c:false,f:"Not the best answer. The correct choice is: Technical."},
+      {t:"Operational \u2014 they require security staff to manage them",c:false,f:"Not the best answer. The correct choice is: Technical."},
+      {t:"Technical \u2014 implemented through hardware, software, or firmware",c:true,f:"Technical controls are implemented as systems \u2014 through hardware, software, or firmware. Firewalls, EDR platforms, and OS access control models are all technical controls that operate automatically or semi-automatically."},
+      {t:"Physical \u2014 they protect network and endpoint hardware",c:false,f:"Not the best answer. The correct choice is: Technical."}
+    ]},
+    {s:2,cat:"Control Categories",scn:false,q:"A data center installs biometric scanners at all entry points, mounts security cameras in every corridor, adds perimeter lighting around the building, and stations a guard at the front desk. Which control category do these measures belong to?",o:[
+      {t:"Technical \u2014 hardware devices are used to enforce access",c:false,f:"Not the best answer. The correct choice is: Physical."},
+      {t:"Operational \u2014 security personnel implement the controls",c:false,f:"Not the best answer. The correct choice is: Physical."},
+      {t:"Physical \u2014 controls that deter and detect access to premises and hardware",c:true,f:"Physical controls govern access to physical premises and hardware. They are placed in their own category \u2014 separate from technical controls \u2014 because their function is to deter and detect physical access rather than digital access. Cameras, biometric scanners, lighting, and guards are all physical controls."},
+      {t:"Managerial \u2014 the security program oversees the building",c:false,f:"Not the best answer. The correct choice is: Physical."}
+    ]},
+    {s:2,cat:"Control Categories",scn:false,q:"In the security control pyramid, which category occupies the top position and provides strategic oversight that directs and shapes all other control categories below it?",o:[
+      {t:"Physical \u2014 frontline controls that directly interact with the environment",c:false,f:"Not the best answer. The correct choice is: Managerial."},
+      {t:"Technical \u2014 automated systems that enforce policy without human intervention",c:false,f:"Not the best answer. The correct choice is: Managerial."},
+      {t:"Operational \u2014 people-driven controls that execute policy day to day",c:false,f:"Not the best answer. The correct choice is: Managerial."},
+      {t:"Managerial \u2014 strategic oversight that governs all other control decisions",c:true,f:"Managerial controls sit at the top of the control pyramid because they provide strategic governance and direction. They do not directly block attacks \u2014 they govern how security decisions are made, what controls are selected, and how they are evaluated. Without managerial oversight, all other controls lack strategic direction."}
+    ]},
+    {s:2,cat:"Functional Types",scn:true,q:"A security administrator configures access control lists on the organization's perimeter firewall to block all traffic from unauthorized IP ranges before it can reach internal systems. This control acts before any attack occurs. Which functional type does this describe?",o:[
+      {t:"Detective \u2014 identifies unauthorized access attempts in real time",c:false,f:"Not the best answer. The correct choice is: Preventive."},
+      {t:"Corrective \u2014 reduces damage after unauthorized traffic reaches the system",c:false,f:"Not the best answer. The correct choice is: Preventive."},
+      {t:"Preventive \u2014 eliminates or reduces the likelihood of a successful attack",c:true,f:"Preventive controls act before an attack to eliminate or reduce the likelihood it can succeed. Firewall ACLs configured to block unauthorized traffic before it reaches internal systems are a classic preventive technical control."},
+      {t:"Deterrent \u2014 discourages attackers from attempting intrusion",c:false,f:"Not the best answer. The correct choice is: Preventive."}
+    ]},
+    {s:2,cat:"Functional Types",scn:true,q:"During a forensic investigation, the security team reviews system logs and discovers evidence that an unauthorized account accessed a financial database the previous evening. The logs captured timestamps, account IDs, and the specific queries executed. Which functional type are the logs serving?",o:[
+      {t:"Preventive \u2014 the logs stopped the unauthorized access",c:false,f:"Not the best answer. The correct choice is: Detective."},
+      {t:"Detective \u2014 the logs identified and recorded the intrusion event",c:true,f:"Detective controls identify and record attempted or successful intrusions \u2014 they operate during or after an attack, not before. Logs are one of the strongest examples of detective controls: they do not prevent access, but they capture exactly what happened and when."},
+      {t:"Corrective \u2014 the logs help recover the affected data",c:false,f:"Not the best answer. The correct choice is: Detective."},
+      {t:"Directive \u2014 the logs enforce the acceptable use policy",c:false,f:"Not the best answer. The correct choice is: Detective."}
+    ]},
+    {s:2,cat:"Functional Types",scn:false,q:"Following a successful ransomware attack that encrypted critical business data, the IT team restores all affected systems and files from a verified, clean backup. Normal operations resume within four hours. The backup system is an example of which functional control type?",o:[
+      {t:"Preventive \u2014 protects data from future encryption attacks",c:false,f:"Not the best answer. The correct choice is: Corrective."},
+      {t:"Detective \u2014 identifies which files were encrypted by the ransomware",c:false,f:"Not the best answer. The correct choice is: Corrective."},
+      {t:"Corrective \u2014 reduces the impact of the attack by restoring normal operations",c:true,f:"Corrective controls eliminate or reduce the impact of a security policy violation after it has occurred. A backup and recovery system that restores data damaged during an intrusion is the textbook example of a corrective control \u2014 it operates after the attack."},
+      {t:"Compensating \u2014 substitutes for a patching control that was not applied",c:false,f:"Not the best answer. The correct choice is: Corrective."}
+    ]},
+    {s:2,cat:"Functional Types",scn:true,q:"An employee's contract explicitly states that accessing any system beyond the scope of their role, sharing credentials, or introducing unauthorized software will result in immediate termination. This enforces a rule of behavior rather than technically preventing the action. Which functional control type does this represent?",o:[
+      {t:"Deterrent \u2014 psychologically discourages violations by creating fear of consequences",c:false,f:"Not the best answer. The correct choice is: Directive."},
+      {t:"Preventive \u2014 blocks the prohibited behavior before it occurs",c:false,f:"Not the best answer. The correct choice is: Directive."},
+      {t:"Directive \u2014 enforces rules of behavior through policy and defined consequences",c:true,f:"Directive controls enforce rules of behavior through policy, best practice standards, or standard operating procedures. An employment contract that defines prohibited actions and their consequences is a directive control \u2014 it does not technically prevent the behavior, it establishes the rule and its enforcement."},
+      {t:"Compensating \u2014 substitutes for a technical access control",c:false,f:"Not the best answer. The correct choice is: Directive."}
+    ]},
+    {s:2,cat:"Functional Types",scn:false,q:"A building manager posts large signs at all facility entry points stating that unauthorized access is recorded, monitored, and subject to federal prosecution under computer fraud statutes. The signs do not physically prevent entry. Their purpose is to make potential intruders choose a different target. Which functional type is this?",o:[
+      {t:"Directive \u2014 the signs enforce a legal rule of behavior",c:false,f:"Not the best answer. The correct choice is: Deterrent."},
+      {t:"Preventive \u2014 the signs reduce the likelihood of unauthorized access",c:false,f:"Not the best answer. The correct choice is: Deterrent."},
+      {t:"Deterrent \u2014 psychologically discourages attack without physically blocking it",c:true,f:"Deterrent controls do not physically or logically prevent access \u2014 they work psychologically by making the risk appear too high. Warning signs of legal penalties create a deterrent effect: many potential intruders will choose a less risky target rather than risk prosecution."},
+      {t:"Detective \u2014 the signs indicate that monitoring is in place",c:false,f:"Not the best answer. The correct choice is: Deterrent."}
+    ]},
+    {s:2,cat:"Functional Types",scn:true,q:"A hospital runs a legacy infusion pump system that cannot be patched due to FDA certification restrictions. To reduce risk, the security team places the device on an isolated VLAN and configures firewall rules so that only the specific nursing station systems can communicate with it. Which functional control type is this?",o:[
+      {t:"Corrective \u2014 applied after the vulnerability was discovered",c:false,f:"Not the best answer. The correct choice is: Compensating."},
+      {t:"Directive \u2014 enforces a network segmentation policy",c:false,f:"Not the best answer. The correct choice is: Compensating."},
+      {t:"Compensating \u2014 provides equivalent protection through an alternative method",c:true,f:"A compensating control substitutes for a primary recommended control when that control cannot be implemented as specified. Since patching is not possible due to FDA restrictions, network segmentation is used as an alternative that provides equivalent or better protection \u2014 a compensating control."},
+      {t:"Preventive \u2014 proactively reduces the likelihood of exploitation",c:false,f:"Not the best answer. The correct choice is: Compensating."}
+    ]},
+    {s:2,cat:"Functional Types",scn:true,q:"A security team applies patches to all servers every month as part of a scheduled maintenance cycle \u2014 before any known exploits targeting those vulnerabilities have been used in the wild. Which functional type BEST describes this patching activity?",o:[
+      {t:"Corrective \u2014 patches fix vulnerabilities that have already been exploited",c:false,f:"Not the best answer. The correct choice is: Preventive."},
+      {t:"Detective \u2014 patch status monitoring identifies missing updates",c:false,f:"Not the best answer. The correct choice is: Preventive."},
+      {t:"Preventive \u2014 proactive patching closes vulnerabilities before they can be exploited",c:true,f:"When patch management is applied proactively \u2014 before a vulnerability is exploited \u2014 it is a preventive control. It is important to note the nuance: if a patch is applied after a vulnerability has already been discovered and exploited in the organization, it shifts to a corrective function."},
+      {t:"Compensating \u2014 patching substitutes for network segmentation",c:false,f:"Not the best answer. The correct choice is: Preventive."}
+    ]},
+    {s:2,cat:"Roles & Responsibilities",scn:false,q:"A large financial institution creates a dedicated department solely responsible for designing, implementing, and overseeing the organization's entire information security program. The leader of this department reports directly to the CEO. Which role BEST describes the head of this department?",o:[
+      {t:"CIO \u2014 holds overall responsibility for the IT function",c:false,f:"Not the best answer. The correct choice is: CISO."},
+      {t:"ISSO \u2014 technical specialist enforcing security policy",c:false,f:"Not the best answer. The correct choice is: CISO."},
+      {t:"CTO \u2014 oversees adoption of emerging technologies",c:false,f:"Not the best answer. The correct choice is: CISO."},
+      {t:"CISO \u2014 leads the dedicated security function in the organization",c:true,f:"The CISO (Chief Information Security Officer) \u2014 or CSO \u2014 leads the dedicated security department in larger organizations. This role carries internal responsibility for the design, implementation, and oversight of the entire security program. It is distinct from the CIO, who holds overall IT responsibility."}
+    ]},
+    {s:2,cat:"Roles & Responsibilities",scn:false,q:"A government agency employs a specialist whose sole responsibility is to implement, maintain, and monitor the enforcement of the agency's security policies on a day-to-day technical basis. Which job title BEST describes this person?",o:[
+      {t:"CIO \u2014 holds overall responsibility for IT functions",c:false,f:"Not the best answer. The correct choice is: ISSO."},
+      {t:"CISO \u2014 leads the overall security department",c:false,f:"Not the best answer. The correct choice is: ISSO."},
+      {t:"ISSO \u2014 Information Systems Security Officer, focused on technical policy enforcement",c:true,f:"The ISSO (Information Systems Security Officer) is a technical specialist responsible for implementing and enforcing security policy. This is a dedicated security administrator role \u2014 distinct from the CISO who leads the overall security program at a strategic level."},
+      {t:"CTO \u2014 responsible for emerging technology strategy",c:false,f:"Not the best answer. The correct choice is: ISSO."}
+    ]},
+    {s:2,cat:"Roles & Responsibilities",scn:false,q:"Following a major data breach, a class-action lawsuit argues that the organization's board of directors failed to take reasonable and appropriate steps to protect customer data, despite known risks. The legal standard being applied to the board is BEST described as:",o:[
+      {t:"Security posture \u2014 the overall effectiveness of the security program",c:false,f:"Not the best answer. The correct choice is: Due care."},
+      {t:"Due care \u2014 the obligation of directors to take reasonable protective steps",c:true,f:"Due care is the legal and ethical obligation of directors and owners to take reasonable and appropriate steps to protect the organization and those it serves. Failure to exercise due care can result in legal liability \u2014 which is exactly what the lawsuit is arguing in this scenario."},
+      {t:"Regulatory compliance \u2014 adherence to applicable data protection laws",c:false,f:"Not the best answer. The correct choice is: Due care."},
+      {t:"Security policy \u2014 the formal statement of how security is implemented",c:false,f:"Not the best answer. The correct choice is: Due care."}
+    ]},
+    {s:2,cat:"Roles & Responsibilities",scn:true,q:"A company's non-technical marketing staff do not configure systems or manage controls, but they handle sensitive customer data daily. According to information security role definitions, which of the following BEST describes their security obligation?",o:[
+      {t:"They have no formal security responsibility \u2014 only technical staff do",c:false,f:"Not the best answer. The correct choice is: They must comply with security policies and applicable laws relevant to their work."},
+      {t:"They must comply with security policies and applicable laws relevant to their work",c:true,f:"Non-technical staff are responsible for complying with security policies and with relevant laws and regulations that apply to their work. While they may not configure systems, their behavior \u2014 handling data correctly, following procedures, and reporting anomalies \u2014 directly impacts the organization's security posture."},
+      {t:"They must report directly to the CISO on all data handling activities",c:false,f:"Not the best answer. The correct choice is: They must comply with security policies and applicable laws relevant to their work."},
+      {t:"They are responsible for implementing operational controls in their department",c:false,f:"Not the best answer. The correct choice is: They must comply with security policies and applicable laws relevant to their work."}
+    ]},
+    {s:2,cat:"Competencies",scn:true,q:"During a quarterly access review, a security analyst discovers that several employees who changed roles six months ago still retain access to systems from their previous positions. The analyst revokes the excess permissions. Which foundational security principle is being applied?",o:[
+      {t:"Non-repudiation \u2014 ensuring users cannot deny their system actions",c:false,f:"Not the best answer. The correct choice is: Least privilege."},
+      {t:"Due care \u2014 protecting the organization from legal liability",c:false,f:"Not the best answer. The correct choice is: Least privilege."},
+      {t:"Separation of duties \u2014 dividing critical tasks among multiple users",c:false,f:"Not the best answer. The correct choice is: Least privilege."},
+      {t:"Least privilege \u2014 users should have only what their current role requires",c:true,f:"Least privilege is the principle that users and systems should have access only to what is necessary to perform their assigned function \u2014 nothing more. Employees who changed roles but retained old access are violating least privilege. Revoking excess permissions restores compliance with this principle."}
+    ]},
+    {s:2,cat:"Competencies",scn:true,q:"A senior security consultant reviews an organization's disaster recovery plan and notes that it has never been executed. She advises leadership that the plan does not yet constitute a real operational safeguard. What specific action does she recommend to validate the plan?",o:[
+      {t:"Submit the plan to a third-party auditor for review and certification",c:false,f:"Not the best answer. The correct choice is: Test the plan end-to-end to verify it works as documented."},
+      {t:"Publish the plan in the employee portal so all staff can read it",c:false,f:"Not the best answer. The correct choice is: Test the plan end-to-end to verify it works as documented."},
+      {t:"Test the plan end-to-end to verify it works as documented",c:true,f:"A recovery plan that has never been tested is an untested assumption \u2014 not a proven safeguard. Testing business continuity and disaster recovery plans is as important as creating them. Only through actual testing can organizations confirm that plans work correctly under real conditions."},
+      {t:"Archive the plan in an offsite facility for regulatory compliance",c:false,f:"Not the best answer. The correct choice is: Test the plan end-to-end to verify it works as documented."}
+    ]},
+    {s:2,cat:"Business Units",scn:false,q:"A large healthcare system establishes a centralized facility staffed 24/7 by security professionals who simultaneously monitor network traffic, endpoint alerts, and access logs across all hospitals and clinics in the system. They are empowered to respond immediately to detected threats. This facility is BEST described as a:",o:[
+      {t:"CIRT \u2014 the single point of contact for incident notifications",c:false,f:"Not the best answer. The correct choice is: SOC."},
+      {t:"DevSecOps team \u2014 integrating security into healthcare software development",c:false,f:"Not the best answer. The correct choice is: SOC."},
+      {t:"SOC \u2014 Security Operations Center providing continuous monitoring and response",c:true,f:"A SOC (Security Operations Center) is a dedicated facility where security professionals monitor and protect critical information assets continuously. It provides rapid incident detection and response, plus oversight of all cybersecurity operations. SOCs are resource-intensive and typically found in larger organizations like healthcare systems."},
+      {t:"ISSO office \u2014 responsible for enforcing technical security policy",c:false,f:"Not the best answer. The correct choice is: SOC."}
+    ]},
+    {s:2,cat:"Business Units",scn:true,q:"A software development company restructures its engineering process so that security specialists participate from the requirements phase through deployment. Security testing runs in parallel with development \u2014 not after it. The principle guiding this approach holds that security must be addressed early, not grafted on at the end. This approach is called:",o:[
+      {t:"Continuous monitoring \u2014 ongoing oversight of deployed security controls",c:false,f:"Not the best answer. The correct choice is: DevSecOps implementing the shift left principle."},
+      {t:"Gap analysis \u2014 comparing current vs. required security capability in development",c:false,f:"Not the best answer. The correct choice is: DevSecOps implementing the shift left principle."},
+      {t:"DevSecOps implementing the shift left principle",c:true,f:"DevSecOps extends the DevOps model by embedding security at every stage of software development and operations. The shift left principle means security is addressed during the requirements and planning phases \u2014 not added at the end. Addressing security late in development is far more expensive and disruptive than building it in from the start."},
+      {t:"CIRT formation \u2014 embedding incident response in the development pipeline",c:false,f:"Not the best answer. The correct choice is: DevSecOps implementing the shift left principle."}
+    ]},
+    {s:2,cat:"Business Units",scn:true,q:"An organization establishes a team that serves as the single point of contact for all security incident notifications. When an employee reports a suspicious email that delivered malware, this team investigates, contains the threat, and coordinates the full recovery \u2014 regardless of which department is affected. This team can legitimately be referred to by all of the following names EXCEPT which one?",o:[
+      {t:"CIRT \u2014 Computer Incident Response Team",c:false,f:"Not the best answer. The correct choice is: SIEM."},
+      {t:"CSIRT \u2014 Computer Security Incident Response Team",c:false,f:"Not the best answer. The correct choice is: SIEM."},
+      {t:"CERT \u2014 Computer Emergency Response Team",c:false,f:"Not the best answer. The correct choice is: SIEM."},
+      {t:"SIEM \u2014 Security Information and Event Management",c:true,f:"CIRT, CSIRT, and CERT are all valid names for a dedicated incident response team that serves as the central contact for managing security incidents. SIEM (Security Information and Event Management) is a technology platform \u2014 a logging and monitoring tool \u2014 not an organizational team or business unit."}
+    ]}
+  ];
+
+      var SECTION_META={
+        1:{label:"Review Activity 1 \u00b7 Security Concepts",sub:"CIA Triad, NIST Cybersecurity Framework, gap analysis, and access control / IAM."},
+        2:{label:"Review Activity 2 \u00b7 Security Controls",sub:"Control categories, functional types, roles and responsibilities, competencies, and business units."}
+      };
+
+      var LETTERS=['A','B','C','D','E'];
+      var rvOrder=[], rvAnswered={}, rvCorrectCount=0;
+
+      function shuffle(a){
+        for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
+        return a;
+      }
+
+      function buildQuiz(){
+        rvAnswered={}; rvCorrectCount=0;
+        rvOrder=RV_QUESTIONS.map(function(_,i){return i;});
+        var s1=rvOrder.filter(function(i){return RV_QUESTIONS[i].s===1;});
+        var s2=rvOrder.filter(function(i){return RV_QUESTIONS[i].s===2;});
+        shuffle(s1); shuffle(s2);
+        rvOrder=s1.concat(s2);
+
+        var host=document.getElementById('rvQuiz');
+        host.innerHTML='';
+        var displayNum=0, lastSection=null;
+
+        rvOrder.forEach(function(qi){
+          var Q=RV_QUESTIONS[qi];
+          if(Q.s!==lastSection){
+            lastSection=Q.s;
+            var meta=SECTION_META[Q.s];
+            var lab=document.createElement('div');
+            lab.className='rv-section-label';
+            lab.innerHTML='<span class="badge-ra">'+(Q.s===1?'RA1':'RA2')+'</span> '+meta.label;
+            host.appendChild(lab);
+            var sub=document.createElement('div');
+            sub.className='rv-section-sub'; sub.textContent=meta.sub;
+            host.appendChild(sub);
+          }
+          displayNum++;
+          var card=document.createElement('div');
+          card.className='rv-q'; card.setAttribute('data-qi',qi);
+
+          var topic=Q.cat||(Q.s===1?'Security Concepts':'Security Controls');
+          var chips='<div class="qchips"><span class="rv-chip topic">'+topic+'</span>'+(Q.scn?'<span class="rv-chip scn">Scenario</span>':'')+'</div>';
+          var head='<div class="qhead"><span class="qnum">Q'+displayNum+'</span><span class="qtext">'+Q.q+'</span></div>';
+          card.innerHTML=chips+head;
+
+          var optOrder=shuffle(Q.o.map(function(_,i){return i;}));
+          optOrder.forEach(function(oi,pos){
+            var O=Q.o[oi];
+            var btn=document.createElement('button');
+            btn.className='rv-opt';
+            btn.innerHTML='<span class="ltr">'+LETTERS[pos]+'</span><span>'+O.t+'</span>';
+            btn.addEventListener('click',function(){ answer(card,qi,O,btn); });
+            card.appendChild(btn);
+          });
+
+          var fb=document.createElement('div');
+          fb.className='rv-fb';
+          card.appendChild(fb);
+          host.appendChild(card);
+        });
+
+        document.getElementById('rvResultsPanel').classList.remove('show');
+        document.getElementById('rvResults').disabled=true;
+        updateRvProgress();
+      }
+
+      function answer(card,qi,O,btn){
+        if(rvAnswered[qi]) return;
+        rvAnswered[qi]=true;
+        if(O.c) rvCorrectCount++;
+
+        var opts=card.querySelectorAll('.rv-opt');
+        opts.forEach(function(b){ b.disabled=true; });
+        btn.classList.add(O.c?'correct':'wrong');
+        if(!O.c){
+          var Q=RV_QUESTIONS[qi];
+          var correctText=Q.o.filter(function(x){return x.c;})[0].t;
+          opts.forEach(function(b){
+            if(b.querySelector('span:last-child').innerHTML===correctText){ b.classList.add('correct'); }
+            else if(b!==btn){ b.classList.add('dim'); }
+          });
+        } else {
+          opts.forEach(function(b){ if(b!==btn) b.classList.add('dim'); });
+        }
+
+        var fb=card.querySelector('.rv-fb');
+        fb.className='rv-fb show '+(O.c?'good':'bad');
+        fb.innerHTML='<b>'+(O.c?'Correct.':'Not the best answer.')+'</b> '+O.f;
+
+        updateRvProgress();
+      }
+
+      function updateRvProgress(){
+        var n=Object.keys(rvAnswered).length;
+        document.getElementById('rvCount').textContent='Answered '+n+' / '+RV_TOTAL;
+        document.getElementById('rvFill').style.width=(n/RV_TOTAL*100)+'%';
+        var btn=document.getElementById('rvResults');
+        btn.disabled = n<RV_TOTAL;
+        if(n>=RV_TOTAL) showRvResults(false);
+      }
+
+      function showRvResults(scroll){
+        var pct=Math.round(rvCorrectCount/RV_TOTAL*100);
+        var pass=(rvCorrectCount/RV_TOTAL)>=RV_PASS;
+        document.getElementById('rvScoreNum').textContent=rvCorrectCount+' / '+RV_TOTAL;
+        document.getElementById('rvScorePct').textContent=pct+'% correct';
+        var v=document.getElementById('rvVerdict');
+        v.textContent=pass?'PASS \u2713':'Keep studying';
+        v.className='rv-verdict '+(pass?'pass':'fail');
+        var panel=document.getElementById('rvResultsPanel');
+        panel.classList.add('show');
+        if(scroll) panel.scrollIntoView({behavior:'smooth',block:'center'});
+      }
+
+      document.getElementById('rvResults').addEventListener('click',function(){ showRvResults(true); });
+      document.getElementById('rvReset').addEventListener('click',function(){
+        buildQuiz();
+        document.getElementById('review').scrollIntoView({behavior:'smooth',block:'start'});
+      });
+
+      buildQuiz();
+    })();
+
+</script>
+  <script src="../shared/lesson-bridge.js"></script>
+</body>
+</html>

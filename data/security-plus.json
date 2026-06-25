@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "course": {
+    "id": "security-plus-sy0-701",
+    "name": "CompTIA Security+",
+    "examCode": "SY0-701",
+    "passScore": "750 / 900",
+    "questionsAndTime": "Up to 90 questions in 90 minutes"
+  },
+  "domains": [
+    { "id": "1", "name": "General Security Concepts", "weight": 12, "accent": "#1E4E79" },
+    { "id": "2", "name": "Threats, Vulnerabilities & Mitigations", "weight": 22, "accent": "#1B5E4A" },
+    { "id": "3", "name": "Security Architecture", "weight": 18, "accent": "#7A4E12" },
+    { "id": "4", "name": "Security Operations", "weight": 28, "accent": "#5A2E6B" },
+    { "id": "5", "name": "Security Program Management & Oversight", "weight": 20, "accent": "#7A2230" }
+  ],
+  "lessons": [
+    { "number": 1,  "domain": "1", "title": "Summarize Fundamental Security Concepts",            "file": "lessons/Lesson1_Learner_Portal.html" },
+    { "number": 3,  "domain": "1", "title": "Explain Cryptographic Solutions",                     "file": "lessons/Lesson3_Learner_Portal.html" },
+    { "number": 4,  "domain": "1", "title": "Implement Identity and Access Management",            "file": "lessons/Lesson4_Learner_Portal.html" },
+    { "number": 2,  "domain": "2", "title": "Compare Threat Types",                                "file": "lessons/Lesson2_Learner_Portal.html" },
+    { "number": 8,  "domain": "2", "title": "Explain Vulnerability Management",                    "file": "lessons/Lesson8_Learner_Portal.html" },
+    { "number": 13, "domain": "2", "title": "Analyze Indicators of Malicious Activity",            "file": "lessons/Lesson13_Learner_Portal.html" },
+    { "number": 5,  "domain": "3", "title": "Secure Enterprise Network Architecture",              "file": "lessons/Lesson5_Learner_Portal.html" },
+    { "number": 6,  "domain": "3", "title": "Secure Cloud Network Architecture",                   "file": "lessons/Lesson6_Learner_Portal.html" },
+    { "number": 7,  "domain": "3", "title": "Explain Resiliency and Site Security Concepts",       "file": "lessons/Lesson7_Learner_Portal.html" },
+    { "number": 9,  "domain": "4", "title": "Evaluate Network Security Capabilities",              "file": "lessons/Lesson9_Learner_Portal.html" },
+    { "number": 10, "domain": "4", "title": "Assess Endpoint Security Capabilities",               "file": "lessons/Lesson10_Learner_Portal.html" },
+    { "number": 11, "domain": "4", "title": "Enhance Application Security Capabilities",            "file": "lessons/Lesson11_Learner_Portal.html" },
+    { "number": 12, "domain": "4", "title": "Explain Incident Response and Monitoring Concepts",   "file": "lessons/Lesson12_Learner_Portal.html" },
+    { "number": 14, "domain": "5", "title": "Summarize Security Governance Concepts",              "file": "lessons/Lesson14_Learner_Portal.html" },
+    { "number": 15, "domain": "5", "title": "Explain Risk Management Processes",                   "file": "lessons/Lesson15_Learner_Portal.html" },
+    { "number": 16, "domain": "5", "title": "Summarize Data Protection and Compliance Concepts",   "file": "lessons/Lesson16_Learner_Portal.html" }
+  ]
+}

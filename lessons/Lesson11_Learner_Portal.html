@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 11: Enhance Application Security Capabilities, Learner Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0e2747;
+    --blue:#1763b8;
+    --blue-soft:#e9f1fb;
+    --gold:#bb8a2c;
+    --gold-soft:#fbf2db;
+    --teal:#127079;
+    --teal-soft:#e1f2f3;
+    --red:#b04429;
+    --red-soft:#faeae4;
+    --paper:#f6f5f1;
+    --surface:#ffffff;
+    --ink:#1f2b3a;
+    --slate:#586677;
+    --line:#e4e2da;
+    --display:'Fraunces',Georgia,serif;
+    --body:'IBM Plex Sans',system-ui,-apple-system,sans-serif;
+    --mono:'IBM Plex Mono','Courier New',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--body);
+    font-size:17px;
+    line-height:1.7;
+    color:var(--ink);
+    background:var(--paper);
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+
+  /* ---------- Masthead ---------- */
+  .masthead{
+    background:
+      radial-gradient(720px 360px at 88% -30%, #18365c, transparent 70%),
+      var(--navy);
+    color:#fff;
+    padding:46px 28px 40px;
+  }
+  .mast-inner{max-width:1160px;margin:0 auto;}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;
+    color:#9fc3ef;margin-bottom:18px;
+  }
+  .mast-lesson{
+    font-family:var(--mono);font-size:13px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:8px;
+  }
+  .mast-title{
+    font-family:var(--display);font-weight:600;font-size:clamp(30px,5vw,46px);
+    line-height:1.08;margin-bottom:14px;
+  }
+  .mast-sub{font-size:18px;color:#d4def0;max-width:680px;font-weight:400;}
+  .mast-credit{
+    margin-top:26px;padding-top:16px;border-top:1px solid rgba(255,255,255,.18);
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.03em;color:#bccde4;line-height:1.8;
+  }
+
+  /* ---------- Layout ---------- */
+  .wrap{max-width:1160px;margin:0 auto;padding:0 28px;display:grid;grid-template-columns:230px 1fr;gap:46px;}
+  @media (max-width:900px){.wrap{grid-template-columns:1fr;gap:0;}}
+
+  /* ---------- TOC ---------- */
+  .toc{position:sticky;top:18px;align-self:start;padding:34px 0;max-height:calc(100vh - 36px);overflow:auto;}
+  .toc h4{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--slate);margin-bottom:14px;font-weight:600;
+  }
+  .toc a{
+    display:block;text-decoration:none;color:var(--slate);
+    font-size:14.5px;padding:7px 12px 7px 14px;border-left:2px solid var(--line);
+    transition:color .15s,border-color .15s,background .15s;
+  }
+  .toc a .n{font-family:var(--mono);font-size:12px;color:var(--gold);margin-right:8px;}
+  .toc a:hover{color:var(--navy);background:var(--blue-soft);}
+  .toc a.active{color:var(--navy);border-left-color:var(--gold);font-weight:600;background:var(--blue-soft);}
+
+  .toc-mobile{display:none;}
+  @media (max-width:900px){
+    .toc{display:none;}
+    .toc-mobile{
+      display:block;position:sticky;top:0;z-index:50;
+      background:var(--surface);border-bottom:1px solid var(--line);
+      padding:11px 0;box-shadow:0 2px 10px rgba(14,39,71,.06);
+    }
+    .toc-mobile .row{display:flex;gap:8px;overflow-x:auto;padding:0 20px;}
+    .toc-mobile a{
+      white-space:nowrap;text-decoration:none;font-family:var(--mono);font-size:12.5px;
+      color:var(--slate);border:1px solid var(--line);border-radius:999px;padding:6px 13px;
+    }
+    .toc-mobile a:hover{color:var(--navy);border-color:var(--blue);}
+  }
+
+  /* ---------- Content ---------- */
+  main{padding:38px 0 70px;min-width:0;}
+  section{scroll-margin-top:24px;margin-bottom:8px;}
+  @media (max-width:900px){section{scroll-margin-top:70px;}}
+
+  .sec-num{
+    font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:6px;display:block;
+  }
+  h2{
+    font-family:var(--display);font-weight:600;font-size:28px;color:var(--navy);
+    line-height:1.18;margin-bottom:8px;padding-bottom:14px;border-bottom:2px solid var(--line);
+  }
+  h3{font-family:var(--display);font-weight:600;font-size:21px;color:var(--navy);margin:34px 0 10px;}
+  h4{font-size:16px;font-weight:600;color:var(--ink);margin:22px 0 8px;}
+  p{margin:12px 0;color:var(--ink);}
+  .sec-intro{font-size:18px;color:var(--slate);margin-top:14px;}
+  strong{color:var(--navy);font-weight:600;}
+
+  ul,ol{margin:14px 0;padding-left:22px;}
+  li{margin:8px 0;}
+  li strong{color:var(--navy);}
+
+  .divider{height:1px;background:var(--line);margin:48px 0;border:none;}
+
+  /* ---------- Callouts (learner lens) ---------- */
+  .lens{border-radius:10px;padding:18px 20px;margin:20px 0;border-left:4px solid;}
+  .lens .tag{
+    font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    display:block;margin-bottom:7px;
+  }
+  .lens p{margin:6px 0;}
+  .lens p:first-of-type{margin-top:0;}
+  .lens p:last-child{margin-bottom:0;}
+
+  .plain{background:var(--gold-soft);border-color:var(--gold);}
+  .plain .tag{color:var(--gold);}
+  .picture{background:var(--teal-soft);border-color:var(--teal);}
+  .picture .tag{color:var(--teal);}
+  .why{background:var(--blue-soft);border-color:var(--blue);}
+  .why .tag{color:var(--blue);}
+  .watch{background:var(--red-soft);border-color:var(--red);}
+  .watch .tag{color:var(--red);}
+
+  /* ---------- Terms ---------- */
+  .terms{margin:18px 0 6px;}
+  .terms .tag{
+    font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--slate);display:block;margin-bottom:9px;
+  }
+  .chips{display:flex;flex-wrap:wrap;gap:7px;}
+  .chip{
+    font-family:var(--mono);font-size:12.5px;color:var(--navy);
+    background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:5px 10px;
+  }
+
+  /* ---------- Tables ---------- */
+  .tbl-wrap{overflow-x:auto;margin:20px 0;border:1px solid var(--line);border-radius:10px;}
+  table{width:100%;border-collapse:collapse;font-size:15.5px;background:var(--surface);}
+  thead{background:var(--navy);color:#fff;}
+  th{font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;font-weight:600;text-align:left;padding:13px 16px;}
+  td{padding:13px 16px;border-top:1px solid var(--line);vertical-align:top;}
+  tbody tr:nth-child(even){background:#fbfaf7;}
+  td code,p code,li code{
+    font-family:var(--mono);font-size:13.5px;background:#eef1f5;color:var(--blue);
+    padding:2px 6px;border-radius:4px;
+  }
+
+  /* ---------- Check yourself ---------- */
+  .check{
+    background:var(--surface);border:1px dashed var(--blue);border-radius:10px;
+    padding:18px 20px;margin:24px 0;
+  }
+  .check .tag{
+    font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--blue);display:block;margin-bottom:8px;
+  }
+  .check ol{margin:0;padding-left:20px;}
+  .check li{color:var(--slate);}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--navy);color:#bccde4;padding:34px 28px;text-align:center;}
+  footer .credit{color:#fff;font-family:var(--mono);font-size:13px;letter-spacing:.03em;line-height:1.9;}
+  footer .design{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.04em;margin-top:4px;}
+
+  a.totop{
+    display:inline-block;margin-top:14px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;
+    color:#9fc3ef;text-decoration:none;text-transform:uppercase;
+  }
+  a.totop:hover{color:#fff;}
+
+  /* ===== REVIEW ACTIVITY (integrated) ===== */
+  .rv-intro{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-left:4px solid var(--gold);
+    border-radius:14px;
+    padding:22px 26px;
+    margin-bottom:26px;
+    box-shadow:0 1px 2px rgba(14,39,71,0.04);
+  }
+  .rv-intro p{margin:0;color:var(--slate);font-size:16px;line-height:1.7;}
+  .rv-intro strong{color:var(--navy);}
+
+  .rv-progress-wrap{
+    position:sticky;
+    top:14px;
+    z-index:40;
+    background:rgba(246,245,241,0.92);
+    backdrop-filter:blur(10px);
+    padding:16px 18px;
+    margin-bottom:18px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow:0 6px 22px -12px rgba(14,39,71,0.3);
+  }
+  .rv-stat{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px;flex-wrap:wrap;gap:12px;}
+  .rv-stat .count{font-family:var(--mono);font-size:12.5px;letter-spacing:1px;text-transform:uppercase;color:var(--teal);font-weight:600;}
+  .rv-controls{display:flex;gap:10px;flex-wrap:wrap;}
+  .rv-btn{
+    font-family:var(--body);font-weight:600;font-size:13.5px;
+    padding:10px 20px;border-radius:9px;border:none;cursor:pointer;transition:all .2s;
+    background:var(--navy);color:var(--surface);
+  }
+  .rv-btn:hover{background:var(--blue);transform:translateY(-1px);}
+  .rv-btn.ghost{background:transparent;color:var(--teal);border:1px solid var(--line);}
+  .rv-btn.ghost:hover{background:var(--teal-soft);border-color:var(--teal);}
+  .rv-btn:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+  .rv-bar{height:10px;background:var(--blue-soft);border-radius:999px;overflow:hidden;border:1px solid var(--line);}
+  .rv-bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--teal));transition:width .45s cubic-bezier(.4,0,.2,1);}
+
+  .rv-section-label{
+    font-family:var(--display);font-size:24px;font-weight:600;color:var(--navy);
+    margin:34px 0 6px;display:flex;align-items:center;gap:12px;letter-spacing:-0.01em;
+  }
+  .rv-section-label .badge-ra{
+    font-family:var(--mono);font-size:11px;background:var(--navy);color:var(--gold-soft);
+    padding:5px 12px;border-radius:20px;letter-spacing:1px;font-weight:500;text-transform:uppercase;
+  }
+  .rv-section-rule{height:2px;background:linear-gradient(90deg,var(--gold),transparent);border:none;margin:0 0 6px;border-radius:2px;}
+  .rv-cat-label{
+    font-family:var(--mono);font-size:12px;font-weight:600;color:var(--teal);text-transform:uppercase;
+    letter-spacing:1.5px;margin:24px 0 4px;
+  }
+
+  .rv-q{
+    background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:24px 28px;margin:16px 0;box-shadow:0 1px 2px rgba(14,39,71,0.04);transition:box-shadow .2s;
+  }
+  .rv-q:hover{box-shadow:0 6px 24px -16px rgba(14,39,71,0.35);}
+  .rv-q .qhead{display:flex;align-items:flex-start;gap:14px;margin-bottom:16px;}
+  .rv-q .qnum{
+    font-family:var(--mono);font-size:13px;font-weight:600;background:var(--blue-soft);color:var(--blue);
+    padding:6px 11px;border-radius:8px;flex:0 0 auto;margin-top:1px;
+  }
+  .rv-q .qtext{font-size:17px;font-weight:500;color:var(--ink);line-height:1.55;}
+  .rv-q .qchips{margin-bottom:14px;display:flex;gap:7px;flex-wrap:wrap;}
+  .rv-chip{font-family:var(--mono);font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;padding:4px 11px;border-radius:20px;font-weight:500;}
+  .rv-chip.topic{background:var(--teal-soft);color:var(--teal);}
+  .rv-chip.scn{background:var(--gold-soft);color:var(--gold);}
+
+  .rv-opt{
+    display:flex;align-items:flex-start;gap:13px;width:100%;text-align:left;
+    background:var(--paper);border:1.5px solid var(--line);border-radius:10px;
+    padding:14px 17px;margin:9px 0;cursor:pointer;
+    font-family:var(--body);font-size:15.5px;color:var(--ink);transition:all .18s;
+  }
+  .rv-opt:hover:not(:disabled){border-color:var(--gold);background:var(--gold-soft);}
+  .rv-opt .ltr{
+    font-family:var(--mono);font-size:13px;font-weight:600;min-width:26px;height:26px;display:inline-flex;
+    align-items:center;justify-content:center;border:1px solid var(--line);border-radius:7px;
+    color:var(--gold);flex:0 0 auto;background:var(--surface);
+  }
+  .rv-opt:disabled{cursor:default;}
+  .rv-opt.correct{border-color:var(--teal);background:var(--teal-soft);color:#0c5159;}
+  .rv-opt.correct .ltr{background:var(--teal);border-color:var(--teal);color:#fff;}
+  .rv-opt.wrong{border-color:var(--red);background:var(--red-soft);color:#8a341e;}
+  .rv-opt.wrong .ltr{background:var(--red);border-color:var(--red);color:#fff;}
+  .rv-opt.dim{opacity:.5;}
+
+  .rv-fb{display:none;margin-top:15px;padding:14px 18px;border-radius:10px;font-size:14.5px;line-height:1.6;}
+  .rv-fb.show{display:block;}
+  .rv-fb.good{background:var(--teal-soft);border-left:3px solid var(--teal);color:#0c5159;}
+  .rv-fb.bad{background:var(--red-soft);border-left:3px solid var(--red);color:#8a341e;}
+  .rv-fb b{font-weight:700;}
+
+  .rv-results{
+    display:none;margin:28px 0 8px;border-radius:18px;padding:34px;text-align:center;color:var(--surface);
+    background:linear-gradient(135deg,var(--navy) 0%,var(--blue) 70%,var(--teal) 135%);
+    box-shadow:0 16px 40px -18px rgba(14,39,71,0.55);
+  }
+  .rv-results.show{display:block;}
+  .rv-results h3{font-family:var(--display);font-size:26px;font-weight:600;color:var(--gold-soft);margin-bottom:6px;}
+  .rv-score-num{font-family:var(--display);font-size:46px;font-weight:600;margin:8px 0;letter-spacing:-0.01em;}
+  .rv-score-pct{font-size:16px;color:var(--blue-soft);}
+  .rv-verdict{display:inline-block;margin-top:16px;font-weight:600;font-size:15px;padding:9px 26px;border-radius:999px;}
+  .rv-verdict.pass{background:var(--teal);color:#fff;}
+  .rv-verdict.fail{background:var(--gold);color:var(--navy);}
+  .rv-results p.note{margin-top:16px;color:var(--blue-soft);font-size:13.5px;}
+
+</style>
+  <link rel="stylesheet" href="../shared/mobile-responsive.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="mast-inner">
+    <div class="eyebrow">CyberEdge &middot; CompTIA Security+</div>
+    <div class="mast-lesson">Lesson 11 &middot; Learner Study Guide</div>
+    <h1 class="mast-title">Enhance Application Security Capabilities</h1>
+    <p class="mast-sub">Securing the channels that data travels through, and the applications it lives inside. Read this before class, then use it to review.</p>
+    <div class="mast-credit">Dr. Solomon Seifu (Lead Technical Instructor &amp; Author)</div>
+  </div>
+</header>
+
+<!-- Mobile nav -->
+<nav class="toc-mobile">
+  <div class="row">
+    <a href="#overview">Overview</a>
+    <a href="#protocols">Secure Protocols</a>
+    <a href="#tls">TLS</a>
+    <a href="#directory">Directory</a>
+    <a href="#snmp">SNMP</a>
+    <a href="#filetransfer">File Transfer</a>
+    <a href="#email">Email in Transit</a>
+    <a href="#emailauth">SPF/DKIM/DMARC</a>
+    <a href="#gateway">Gateway &amp; DLP</a>
+    <a href="#coding">Secure Coding</a>
+    <a href="#cloud">Cloud Hardening</a>
+    <a href="#reference">Quick Reference</a>
+    <a href="#review">Review Activity</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- Desktop TOC -->
+  <aside class="toc">
+    <h4>On this page</h4>
+    <a href="#overview"><span class="n">00</span>Overview</a>
+    <a href="#protocols"><span class="n">01</span>Secure Protocols</a>
+    <a href="#tls"><span class="n">02</span>A Closer Look at TLS</a>
+    <a href="#directory"><span class="n">03</span>Directory Services</a>
+    <a href="#snmp"><span class="n">04</span>SNMP Security</a>
+    <a href="#filetransfer"><span class="n">05</span>File Transfer</a>
+    <a href="#email"><span class="n">06</span>Email in Transit</a>
+    <a href="#emailauth"><span class="n">07</span>SPF, DKIM, DMARC</a>
+    <a href="#gateway"><span class="n">08</span>Gateway &amp; DLP</a>
+    <a href="#coding"><span class="n">09</span>Secure Coding</a>
+    <a href="#cloud"><span class="n">10</span>Cloud Hardening</a>
+    <a href="#reference"><span class="n">11</span>Quick Reference</a>
+    <a href="#review"><span class="n">12</span>Review Activity</a>
+  </aside>
+
+  <main>
+
+    <!-- 00 OVERVIEW -->
+    <section id="overview">
+      <span class="sec-num">Start here</span>
+      <h2>What this lesson is really about</h2>
+      <p class="sec-intro">In Lesson 10 you secured the endpoint, the device that connects to the network. In Lesson 11 you move up one level, from the device to the application.</p>
+      <p>Applications are where people actually do things: log in, send email, move files, look up records, make purchases. That also makes them where many of the most exploited weaknesses in all of cybersecurity live. So securing the device underneath an application, without securing the application itself, only gets you part of the way.</p>
+      <div class="lens picture">
+        <span class="tag">Picture it</span>
+        <p>Securing the endpoint but ignoring the application is like reinforcing the walls of a building and then leaving the windows wide open. The strong perimeter does not matter if the way in is the application itself.</p>
+      </div>
+      <p>The lesson is built on two connected ideas that we will keep coming back to:</p>
+      <ul>
+        <li><strong>Secure protocols</strong>, the communication channels that protect data while it moves between systems.</li>
+        <li><strong>Secure application development</strong>, the coding and configuration practices that keep weaknesses from being built into the application in the first place, including how we harden cloud and web applications.</li>
+      </ul>
+      <div class="lens why">
+        <span class="tag">Why it matters</span>
+        <p>A secure channel protecting a vulnerable application is not enough, and a well-written application sending its data over an open channel is not enough either. Real protection needs both layers present and working together. Hold onto that idea, it is the thread running through everything below.</p>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- 01 SECURE PROTOCOLS -->
+    <section id="protocols">
+      <span class="sec-num">Section 01</span>
+      <h2>Secure protocols: protecting data in motion</h2>
+      <p class="sec-intro">A protocol is just an agreed set of rules that lets two systems talk to each other. A secure protocol takes that same conversation and adds protection around it.</p>
+
+      <p>Every secure protocol you will meet in this lesson is built to provide some combination of three guarantees. It helps to learn them once here, because the same three keep coming up.</p>
+      <ul>
+        <li><strong>Confidentiality:</strong> the data is encrypted, so anyone who intercepts it, for example on coffee-shop Wi-Fi, sees only scrambled text instead of passwords or account numbers.</li>
+        <li><strong>Integrity:</strong> any tampering with the data in transit can be detected, so an altered message is rejected rather than trusted.</li>
+        <li><strong>Authentication:</strong> the identity of the other side is verified, so you know you are really talking to the bank and not an impostor.</li>
+      </ul>
+
+      <div class="lens plain">
+        <span class="tag">In plain terms</span>
+        <p>The insecure originals send everything in plain text, often including the username and password. The secure versions carry the exact same conversation, but wrapped so it cannot be read or changed along the way. The work the protocol does does not change, it just travels protected.</p>
+      </div>
+
+      <h3>The secure protocols and what they replace</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Secure protocol</th><th>What it protects</th><th>Replaces / secures</th><th>Port</th></tr></thead>
+          <tbody>
+            <tr><td><strong>HTTPS</strong></td><td>Web traffic between a browser and a web server, encrypted with TLS.</td><td>Insecure HTTP</td><td><code>443</code></td></tr>
+            <tr><td><strong>SMTPS / IMAPS</strong></td><td>Email moving between mail servers and clients.</td><td>Plain SMTP / IMAP</td><td><code>465</code> / <code>993</code></td></tr>
+            <tr><td><strong>SFTP / FTPS</strong></td><td>File transfer sessions, secured with SSH (SFTP) or TLS (FTPS).</td><td>Insecure FTP</td><td><code>22</code> / <code>21</code></td></tr>
+            <tr><td><strong>LDAPS</strong></td><td>Directory queries to systems such as Active Directory.</td><td>Plain LDAP</td><td><code>636</code></td></tr>
+            <tr><td><strong>DNSSEC</strong></td><td>DNS responses, by signing records so they cannot be forged.</td><td>Unauthenticated DNS</td><td><code>53</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lens why">
+        <span class="tag">Why it matters</span>
+        <p>Every insecure protocol in that table sends its data, and sometimes its credentials, in plain text. An attacker on the network path can read it or change it. Replacing each one with its secure equivalent is a baseline expectation today, not an optional upgrade.</p>
+      </div>
+
+      <h4>One detail worth noticing: DNSSEC works differently</h4>
+      <p>Most of the protocols above encrypt the data so it cannot be read. DNSSEC does something different: it <strong>signs</strong> DNS records rather than encrypting them. The content stays visible, but it cannot be forged, because changing or faking a record would break the signature and the answer gets rejected. DNSSEC gives you integrity and authentication, not secrecy.</p>
+
+      <div class="terms">
+        <span class="tag">Key terms</span>
+        <div class="chips">
+          <span class="chip">secure protocol</span><span class="chip">confidentiality</span><span class="chip">integrity</span><span class="chip">authentication</span><span class="chip">HTTPS</span><span class="chip">SMTPS / IMAPS</span><span class="chip">SFTP / FTPS</span><span class="chip">LDAPS</span><span class="chip">DNSSEC</span><span class="chip">plaintext</span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- 02 TLS -->
+    <section id="tls">
+      <span class="sec-num">Section 02</span>
+      <h2>A closer look at TLS, the engine underneath</h2>
+      <p class="sec-intro">HTTPS, SMTPS, FTPS, and LDAPS are all really the same trick: take a normal protocol and run it inside TLS. So it is worth understanding TLS on its own.</p>
+
+      <p>TLS, Transport Layer Security, is the cryptographic protocol that actually does the encrypting whenever you see a padlock in the browser. It is the successor to SSL, which is now retired and considered insecure. When people say "SSL certificate," they almost always mean a TLS certificate.</p>
+
+      <h3>The handshake: setting up the secure channel</h3>
+      <p>Before any real data is sent, the two sides go through a short setup process called the handshake. In plain steps:</p>
+      <ul>
+        <li>They agree on a <strong>cipher suite</strong>, the set of algorithms they will use.</li>
+        <li>The server presents its <strong>certificate</strong> to prove its identity.</li>
+        <li>They establish a shared <strong>session key</strong>.</li>
+        <li>From that point on, the conversation is encrypted. This is the moment the padlock appears.</li>
+      </ul>
+
+      <div class="lens plain">
+        <span class="tag">In plain terms</span>
+        <p>TLS uses two kinds of encryption together. Slower asymmetric encryption (public and private keys) does the heavy lifting of agreeing on a secret at the start. Then fast symmetric session keys take over to encrypt the actual data, because they are much quicker for moving large amounts of traffic.</p>
+      </div>
+
+      <h3>Cipher suites and forward secrecy</h3>
+      <p>A cipher suite is a named bundle of algorithms, almost like a recipe. A name such as <code>TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256</code> simply lists the key exchange (ECDHE), the authentication (RSA), the bulk cipher that encrypts the data (AES_128_GCM), and the hash that checks integrity (SHA256). During the handshake the two sides pick the strongest suite they both support.</p>
+      <p>The ECDHE part also gives <strong>forward secrecy</strong>. It uses an <strong>ephemeral</strong> key, a fresh, single-use key that is generated for the session and then thrown away. Because the key is temporary, capturing one session, or even stealing the server's long-term key later, does not let an attacker decrypt past recorded sessions.</p>
+
+      <div class="lens watch">
+        <span class="tag">Watch out</span>
+        <p>SSL 2.0 and SSL 3.0 are completely broken at the design level. SSL 3.0 falls to the POODLE attack, and SSL 2.0 cannot even protect its own handshake. TLS 1.0 and 1.1 are also deprecated. The secure baseline is to disable all of these and require <strong>TLS 1.2 or higher</strong>. These flaws are in the protocol design, so no setting can patch them.</p>
+      </div>
+
+      <div class="terms">
+        <span class="tag">Key terms</span>
+        <div class="chips">
+          <span class="chip">TLS</span><span class="chip">SSL (deprecated)</span><span class="chip">handshake</span><span class="chip">certificate</span><span class="chip">cipher suite</span><span class="chip">symmetric session key</span><span class="chip">asymmetric encryption</span><span class="chip">ephemeral key</span><span class="chip">forward secrecy</span><span class="chip">POODLE</span><span class="chip">TLS 1.2+</span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- 03 DIRECTORY -->
+    <section id="directory">
+      <span class="sec-num">Section 03</span>
+      <h2>Secure directory services: LDAP and LDAPS</h2>
+      <p class="sec-intro">A directory is the organization's central record of its users, groups, and computers. Active Directory is the most common example.</p>
+
+      <p>LDAP is the protocol used to query that directory. The problem is that plain LDAP, on port <code>389</code>, sends its queries and its login credentials in cleartext. LDAPS, on port <code>636</code>, fixes this by wrapping the whole session in TLS.</p>
+
+      <div class="lens picture">
+        <span class="tag">Picture it</span>
+        <p>Think of the directory as the organization's master phonebook and staff list combined. Useful to everyone, but you do not want the keys to it traveling across the network in plain view.</p>
+      </div>
+
+      <h3>Binding: how a client identifies itself</h3>
+      <p>A "bind" is the login step in LDAP. There are three methods you should recognize, from least to most protected:</p>
+      <ul>
+        <li><strong>Anonymous bind (no authentication):</strong> the client connects without any credentials. It can only read the <strong>public directory</strong> entries, the parts meant to be looked up freely, such as a general staff email list. Fine for non-sensitive data, but it proves nothing about who is connecting.</li>
+        <li><strong>Simple bind:</strong> the client supplies a <strong>Distinguished Name (DN)</strong> and a password. The DN is the account's full, unique address in the directory tree, and it acts as the username here.</li>
+        <li><strong>SASL bind:</strong> uses stronger authentication mechanisms. Kerberos, for example, plugs in through a mechanism called GSSAPI.</li>
+      </ul>
+
+      <div class="lens plain">
+        <span class="tag">In plain terms, what is a Distinguished Name?</span>
+        <p>A DN is the full path to one specific entry, read from the most specific part up to the root, just like a complete file path points to one file. For example, <code>cn=John Smith,ou=IT,dc=example,dc=com</code> identifies the user John Smith, in the IT unit, of the example.com organization. In a simple bind, that DN is how the client says "I am exactly this account," and the password proves it.</p>
+      </div>
+
+      <div class="terms">
+        <span class="tag">Key terms</span>
+        <div class="chips">
+          <span class="chip">directory service</span><span class="chip">Active Directory</span><span class="chip">LDAP (389)</span><span class="chip">LDAPS (636)</span><span class="chip">bind</span><span class="chip">anonymous bind</span><span class="chip">simple bind</span><span class="chip">SASL / GSSAPI</span><span class="chip">Distinguished Name (DN)</span><span class="chip">public directory</span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- 04 SNMP -->
+    <section id="snmp">
+      <span class="sec-num">Section 04</span>
+      <h2>SNMP security</h2>
+      <p class="sec-intro">SNMP, the Simple Network Management Protocol, lets a monitoring station watch and manage network devices like routers, switches, and printers.</p>
+
+      <p>There are two roles. The <strong>SNMP manager</strong> is the monitoring station that asks for information. The <strong>SNMP agent</strong> is the software running on the device being monitored, which answers those requests.</p>
+
+      <h3>Community strings, and why the defaults are dangerous</h3>
+      <p>In SNMP v1 and v2c, access is controlled by a <strong>community string</strong>, which works just like a password. Two defaults exist on devices everywhere:</p>
+      <ul>
+        <li><strong>public</strong>, the default for read-only access ("let me view your data").</li>
+        <li><strong>private</strong>, the default for read-write access ("let me view and change your settings").</li>
+      </ul>
+
+      <div class="lens watch">
+        <span class="tag">Watch out</span>
+        <p>Because these defaults ship the same worldwide, an attacker simply tries <code>public</code> and <code>private</code> first. Worse, in v1 and v2c the string travels in plain text, so anyone sniffing the network can read it. Changing them is the very first step, and moving to SNMPv3, which adds real authentication and encryption, is the real fix.</p>
+      </div>
+
+      <div class="lens picture">
+        <span class="tag">Picture it</span>
+        <p>A default community string is like a new lock that still has the factory code printed in every manual. Until you change it, the lock is not really protecting anything.</p>
+      </div>
+
+      <div class="terms">
+        <span class="tag">Key terms</span>
+        <div class="chips">
+          <span class="chip">SNMP</span><span class="chip">SNMP manager</span><span class="chip">SNMP agent</span><span class="chip">community string</span><span class="chip">public (read-only)</span><span class="chip">private (read-write)</span><span class="chip">SNMPv3</span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- 05 FILE TRANSFER -->
+    <section id="filetransfer">
+      <span class="sec-num">Section 05</span>
+      <h2>File transfer services: SFTP vs FTPS</h2>
+      <p class="sec-intro">Both protocols move files securely, but they are built differently, and that difference is a classic source of confusion.</p>
+
+      <ul>
+        <li><strong>SFTP</strong> runs an entire file-transfer protocol <em>inside an SSH session</em>. SSH does all the encryption work, and the commands and the file data share one encrypted channel, usually on port <code>22</code>. It is not "FTP with encryption added," it is a distinct protocol that rides inside SSH.</li>
+        <li><strong>FTPS</strong> is regular FTP wrapped in TLS. It uses <em>two separate channels</em>: a control channel for commands and login, and a data channel for the file contents. Each one is encrypted independently.</li>
+      </ul>
+
+      <div class="lens picture">
+        <span class="tag">Picture it</span>
+        <p>Think of FTPS as two phone lines into the same office, one for the conversation and one for sending documents. You can scramble the conversation line and still send your documents in plain readable form. The <code>PROT P</code> command is what tells FTPS to scramble the document (data) line too. If it is set to <code>PROT C</code>, the files travel in cleartext even though the login was encrypted.</p>
+      </div>
+
+      <div class="lens watch">
+        <span class="tag">Watch out</span>
+        <p>SFTP and FTPS are not the same thing, and SFTP is not "FTP over SSL." On the exam, if a question mentions SSH, it is pointing at SFTP. If it mentions a separate data channel, certificates, or the <code>PROT</code> command, it is pointing at FTPS.</p>
+      </div>
+
+      <div class="terms">
+        <span class="tag">Key terms</span>
+        <div class="chips">
+          <span class="chip">SFTP</span><span class="chip">SSH (port 22)</span><span class="chip">FTPS</span><span class="chip">control channel</span><span class="chip">data channel</span><span class="chip">PROT P / PROT C</span><span class="chip">insecure FTP</span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- 06 EMAIL IN TRANSIT -->
+    <section id="email">
+      <span class="sec-num">Section 06</span>
+      <h2>Securing email in transit</h2>
+      <p class="sec-intro">Email travels by store-and-forward: your client hands it to a server, which holds it and forwards it on, server to server, until it reaches the destination mailbox.</p>
+
+      <p>There are two ways to encrypt a mail connection, and the difference is when the encryption starts:</p>
+      <ul>
+        <li><strong>Implicit TLS (SMTPS, port 465):</strong> the connection is encrypted from the very first byte. The two sides perform the TLS handshake immediately, before any email commands.</li>
+        <li><strong>STARTTLS (port 587 or 25):</strong> the connection starts in plain text, then the client issues the <code>STARTTLS</code> command to upgrade the same connection to encryption partway through. This is an "in-band" upgrade and is called opportunistic encryption.</li>
+      </ul>
+
+      <div class="lens watch">
+        <span class="tag">Watch out</span>
+        <p>Encrypting the connection only protects that one hop. It does not protect the message while it sits on the servers, and it does not guarantee the next hop is encrypted. For a message that stays protected end to end, so that not even the mail servers in between can read it, you need <strong>S/MIME</strong>, which encrypts the message itself rather than just the connection.</p>
+      </div>
+
+      <div class="terms">
+        <span class="tag">Key terms</span>
+        <div class="chips">
+          <span class="chip">store-and-forward</span><span class="chip">SMTPS (465)</span><span class="chip">implicit TLS</span><span class="chip">STARTTLS (587/25)</span><span class="chip">opportunistic encryption</span><span class="chip">S/MIME</span><span class="chip">end-to-end encryption</span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- 07 EMAIL AUTH -->
+    <section id="emailauth">
+      <span class="sec-num">Section 07</span>
+      <h2>Email authentication: SPF, DKIM, and DMARC</h2>
+      <p class="sec-intro">Email is one of the most heavily exploited attack vectors, through phishing, spam, and spoofing. Three protocols work together to verify who really sent a message.</p>
+
+      <p>The clearest way to keep them straight is to notice that each one checks a different thing:</p>
+      <ul>
+        <li><strong>SPF (Sender Policy Framework)</strong> is a DNS record listing the mail servers allowed to send email for a domain. If a message arrives from a server not on the list, SPF flags it. SPF verifies the <em>sending server</em>.</li>
+        <li><strong>DKIM (DomainKeys Identified Mail)</strong> adds a cryptographic signature to each message using the sender's private key, which the receiver checks against the public key published in DNS. DKIM verifies that the <em>message content</em> was not altered and truly came from the domain.</li>
+        <li><strong>DMARC (Domain-based Message Authentication, Reporting, and Conformance)</strong> defines what to do when SPF or DKIM fails, and reports the results back to the domain owner. DMARC sets the <em>policy</em> and builds on the other two.</li>
+      </ul>
+
+      <div class="lens picture">
+        <span class="tag">Picture it</span>
+        <p>SPF is checking a delivery against a list of approved couriers. DKIM is a tamper-evident wax seal that proves the envelope was not opened or swapped. DMARC is the standing instruction at the mailroom for what to do when a delivery fails either check, plus a daily report on what was caught.</p>
+      </div>
+
+      <h3>DMARC policy options</h3>
+      <p>The domain owner publishes a DMARC policy in DNS telling receiving servers how to handle messages that fail authentication:</p>
+      <ul>
+        <li><code>p=none</code>, monitor only: deliver the message but send reports. Used while first rolling out DMARC.</li>
+        <li><code>p=quarantine</code>, send failing messages to the spam or junk folder.</li>
+        <li><code>p=reject</code>, refuse delivery of failing messages entirely. The strongest setting.</li>
+      </ul>
+
+      <div class="lens why">
+        <span class="tag">Why it matters, a worked example</span>
+        <p>A company publishes <code>v=DMARC1; p=reject; rua=mailto:reports@company.com</code>. An attacker spoofs the company's domain in a phishing email, but it fails SPF and DKIM alignment, so the receiving server rejects it outright. At the same time, the company receives an aggregate report that reveals the spoofing campaign and the infrastructure behind it.</p>
+      </div>
+
+      <div class="terms">
+        <span class="tag">Key terms</span>
+        <div class="chips">
+          <span class="chip">SPF</span><span class="chip">DKIM</span><span class="chip">DMARC</span><span class="chip">sending server vs message vs policy</span><span class="chip">p=none</span><span class="chip">p=quarantine</span><span class="chip">p=reject</span><span class="chip">spoofing</span><span class="chip">phishing</span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- 08 GATEWAY & DLP -->
+    <section id="gateway">
+      <span class="sec-num">Section 08</span>
+      <h2>The email gateway and data loss prevention</h2>
+      <p class="sec-intro">An email gateway is the control point that every message passes through, both coming in and going out. It is the gatekeeper that inspects mail before it reaches the inbox or leaves the organization.</p>
+
+      <h3>What the gateway enforces on inbound mail</h3>
+      <ul>
+        <li><strong>Anti-spam filters</strong> to block unwanted bulk email.</li>
+        <li><strong>Antivirus scanning</strong> of attachments for known malware.</li>
+        <li><strong>Threat detection</strong> for phishing attempts, malicious links, and dangerous attachments.</li>
+        <li><strong>SPF, DKIM, and DMARC checks</strong> that validate every incoming sender automatically.</li>
+        <li><strong>Attachment blocking</strong> of risky file types by policy.</li>
+      </ul>
+
+      <h3>Email data loss prevention on outbound mail</h3>
+      <p>The gateway also looks the other way, at mail leaving the organization. <strong>Email DLP</strong> inspects outbound messages for sensitive data, such as Social Security numbers or credit card numbers, and blocks or quarantines them before they leave.</p>
+
+      <div class="lens why">
+        <span class="tag">Why it matters, a worked example</span>
+        <p>An employee accidentally attaches a spreadsheet of customer Social Security numbers to an outbound email. The DLP policy recognizes that pattern, quarantines the message, and alerts the security team, all before it ever reaches an outside recipient. Spam filters, SPF, and TLS would not have caught this, because the problem is not a malicious sender or an open channel, it is sensitive data on its way out.</p>
+      </div>
+
+      <div class="terms">
+        <span class="tag">Key terms</span>
+        <div class="chips">
+          <span class="chip">email gateway</span><span class="chip">Secure Email Gateway (SEG)</span><span class="chip">anti-spam</span><span class="chip">antivirus scanning</span><span class="chip">threat detection</span><span class="chip">attachment blocking</span><span class="chip">email DLP</span><span class="chip">data loss prevention</span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- 09 SECURE CODING -->
+    <section id="coding">
+      <span class="sec-num">Section 09</span>
+      <h2>Secure coding practices</h2>
+      <p class="sec-intro">Even when secure protocols protect data in transit, a weakness in the application's own code can expose that same data from the inside. These practices must be built in throughout development, not bolted on at the end.</p>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Practice</th><th>What it means</th><th>Threat it prevents</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Input validation</strong></td><td>Define what acceptable input looks like and reject anything else.</td><td>SQL injection and cross-site scripting (XSS) from untrusted input.</td></tr>
+            <tr><td><strong>Least privilege</strong></td><td>The application runs with only the permissions it actually needs.</td><td>Wide-reaching damage if the app or an account is compromised.</td></tr>
+            <tr><td><strong>Secure session management</strong></td><td>Session tokens are random, expire appropriately, and are invalidated on logout.</td><td>Session hijacking and replay using stolen or guessable tokens.</td></tr>
+            <tr><td><strong>Encryption</strong></td><td>Data is protected both at rest and in transit.</td><td>Exposure of data if it is intercepted or stolen.</td></tr>
+            <tr><td><strong>Patching</strong></td><td>The app and its dependencies are kept consistently updated.</td><td>Exploitation of known, already-fixed vulnerabilities.</td></tr>
+            <tr><td><strong>Structured logging</strong></td><td>The software produces clear, structured logs and real-time alerts.</td><td>Blind spots; an app that fails silently gives defenders nothing to investigate.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lens plain">
+        <span class="tag">In plain terms</span>
+        <p>Input validation is the one to anchor on, because it stops two of the most common web attacks at once. If the application only accepts the shape of data it expects, and rejects everything else, an attacker cannot slip in database commands (SQL injection) or malicious scripts (XSS) through the input fields.</p>
+      </div>
+
+      <div class="terms">
+        <span class="tag">Key terms</span>
+        <div class="chips">
+          <span class="chip">input validation</span><span class="chip">least privilege</span><span class="chip">session management</span><span class="chip">encryption at rest / in transit</span><span class="chip">patching</span><span class="chip">structured logging</span><span class="chip">SQL injection</span><span class="chip">XSS</span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- 10 CLOUD -->
+    <section id="cloud">
+      <span class="sec-num">Section 10</span>
+      <h2>Cloud and web application hardening</h2>
+      <p class="sec-intro">The last piece turns to the applications themselves, in the cloud and on the web. Cloud hardening protects the environment the application runs in, while secure coding protects the application. Both layers are needed.</p>
+
+      <p><strong>Cloud hardening</strong> applies the same reduce-the-attack-surface idea you learned for endpoints, now to cloud infrastructure: disable unnecessary services, enforce least privilege, and apply secure configurations. It addresses three things in particular:</p>
+      <ul>
+        <li><strong>Misconfiguration</strong>, the leading cause of cloud breaches. Settings left open by default are the most common way cloud data ends up exposed.</li>
+        <li><strong>Identity and access management (IAM)</strong>, controlling who can reach cloud resources and exactly what they can do.</li>
+        <li><strong>In-cloud network segmentation</strong>, using VPCs, security groups, and firewall rules to isolate workloads from one another inside the cloud.</li>
+      </ul>
+
+      <div class="lens why">
+        <span class="tag">Why it matters, a worked example</span>
+        <p>A team launches a cloud storage bucket and leaves it open to the public by default. Cloud hardening catches that misconfiguration, restricts access through an IAM policy, and places the workload behind a security group that allows only the traffic it needs, turning an exposed bucket into a controlled resource.</p>
+      </div>
+
+      <div class="lens plain">
+        <span class="tag">In plain terms, the layered defense</span>
+        <p>Hardening protects the environment; secure coding protects the application. Skip either layer and an attacker has a path in. A hardened cloud cannot save vulnerable code, and clean code cannot save a misconfigured cloud. This is the same "both layers together" idea from the very start of the lesson.</p>
+      </div>
+
+      <div class="terms">
+        <span class="tag">Key terms</span>
+        <div class="chips">
+          <span class="chip">cloud hardening</span><span class="chip">attack surface</span><span class="chip">misconfiguration</span><span class="chip">IAM</span><span class="chip">network segmentation</span><span class="chip">VPC</span><span class="chip">security group</span><span class="chip">layered defense</span>
+        </div>
+      </div>
+
+      <div class="check">
+        <span class="tag">Check yourself</span>
+        <ol>
+          <li>Why is securing the endpoint not enough on its own?</li>
+          <li>How do SPF, DKIM, and DMARC each defend against email attacks differently?</li>
+          <li>Which secure coding practice stops SQL injection and XSS, and why?</li>
+          <li>What is the leading cause of cloud breaches, and how does hardening address it?</li>
+        </ol>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- 11 REFERENCE -->
+    <section id="reference">
+      <span class="sec-num">Section 11</span>
+      <h2>Quick reference: ports cheat sheet</h2>
+      <p class="sec-intro">Keep this handy. Knowing which port maps to which protocol, and whether it is the secure or insecure version, is a reliable source of exam points.</p>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Service</th><th>Insecure</th><th>Secure</th></tr></thead>
+          <tbody>
+            <tr><td>Web</td><td>HTTP <code>80</code></td><td>HTTPS <code>443</code></td></tr>
+            <tr><td>Email send</td><td>SMTP <code>25</code></td><td>SMTPS <code>465</code>, or STARTTLS <code>587</code></td></tr>
+            <tr><td>Email retrieve (IMAP)</td><td>IMAP <code>143</code></td><td>IMAPS <code>993</code></td></tr>
+            <tr><td>Email retrieve (POP3)</td><td>POP3 <code>110</code></td><td>POP3S <code>995</code></td></tr>
+            <tr><td>File transfer</td><td>FTP <code>21</code></td><td>SFTP <code>22</code> (SSH), FTPS <code>21</code> (TLS)</td></tr>
+            <tr><td>Directory</td><td>LDAP <code>389</code></td><td>LDAPS <code>636</code></td></tr>
+            <tr><td>Remote access</td><td>Telnet <code>23</code></td><td>SSH <code>22</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lens plain">
+        <span class="tag">The one-sentence summary of the whole lesson</span>
+        <p>Protect the data while it moves with secure protocols, and protect the application it lives in with secure coding and cloud hardening, because real security needs both layers working together.</p>
+      </div>
+    </section>
+
+
+    <!-- 12 REVIEW ACTIVITY -->
+    <section id="review">
+      <span class="sec-num">Review</span>
+      <h2>Review Activity</h2>
+      <p class="sec-intro">Bring the whole lesson together. Forty-one exam-style questions span both halves of Lesson 11: the secure application protocols that protect data in transit, and the secure application development practices that keep weaknesses out of the code itself.</p>
+
+      <div class="rv-intro">
+        <p>Section one covers <strong>Secure Application Protocols</strong> — secure protocols and ports, TLS, directory services, SNMP, file transfer, and email in transit with SPF, DKIM, DMARC, and DLP. Section two covers <strong>Secure Application Development</strong> — secure coding techniques, application protections, and software sandboxing. Answer choices are shuffled on every load, and each option gives immediate feedback. Your score out of 41 appears once you have answered them all, with <strong>70% to pass</strong>. Use <strong>Reshuffle &amp; reset</strong> to start over with a fresh order.</p>
+      </div>
+
+      <div class="rv-progress-wrap">
+        <div class="rv-stat">
+          <span class="count" id="rvCount">Answered 0 / 41</span>
+          <div class="rv-controls">
+            <button class="rv-btn ghost" id="rvResults" disabled>See my score</button>
+            <button class="rv-btn" id="rvReset">Reshuffle &amp; reset</button>
+          </div>
+        </div>
+        <div class="rv-bar"><div class="rv-bar-fill" id="rvFill"></div></div>
+      </div>
+
+      <div class="rv-results" id="rvResultsPanel">
+        <h3>Your Result</h3>
+        <div class="rv-score-num" id="rvScoreNum">0 / 41</div>
+        <div class="rv-score-pct" id="rvScorePct">0%</div>
+        <div class="rv-verdict" id="rvVerdict">&nbsp;</div>
+        <p class="note">Pass line is 70% (29 / 41). Review any questions you missed, then reshuffle and try again.</p>
+      </div>
+
+      <div id="rvQuiz"></div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="credit">Dr. Solomon Seifu (Lead Technical Instructor &amp; Author)</div>
+  <div class="design">Designed by: Dr. Solomon Seifu / CyberEdge</div>
+  <a class="totop" href="#overview">Back to top &uarr;</a>
+</footer>
+
+<script>
+  // Scroll-spy: highlight the current section in the table of contents
+  (function(){
+    var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+    var map = {};
+    links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+    var sections = Array.prototype.slice.call(document.querySelectorAll('main section'));
+
+    if(!('IntersectionObserver' in window)) return;
+
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          links.forEach(function(l){ l.classList.remove('active'); });
+          var active = map[entry.target.id];
+          if(active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+    sections.forEach(function(s){ observer.observe(s); });
+  })();
+
+
+  /* ===================== REVIEW ACTIVITY ENGINE ===================== */
+  (function(){
+    var RV_TOTAL=41, RV_PASS=0.70;
+    var RV_QUESTIONS=[
+    /* ===== SECTION 1: SECURE APPLICATION PROTOCOLS ===== */
+    {s:1,cat:"Secure Protocols",scn:true,q:"A security analyst is hardening a web server and must ensure that all administrative traffic to its web interface is encrypted in transit. The interface currently accepts connections on port 80. Which change best meets the requirement?",o:[
+      {t:"Redirect all traffic to port 443 and enforce HTTPS",c:true,f:"Port 443 with HTTPS wraps the traffic in TLS, encrypting it in transit. Restricting source addresses, changing ports, or limiting hours adds no encryption."},
+      {t:"Restrict port 80 to the internal subnet only",c:false,f:"Not the best answer. The correct choice is: Redirect all traffic to port 443 and enforce HTTPS"},
+      {t:"Move the interface to port 8080",c:false,f:"Not the best answer. The correct choice is: Redirect all traffic to port 443 and enforce HTTPS"},
+      {t:"Allow connections only during business hours",c:false,f:"Not the best answer. The correct choice is: Redirect all traffic to port 443 and enforce HTTPS"}
+    ]},
+    {s:1,cat:"Transport Layer Security",scn:true,q:"An auditor finds that a server still supports SSL 3.0 and TLS 1.0 for backward compatibility. Management wants the most secure configuration consistent with current best practice. What should the analyst recommend?",o:[
+      {t:"Disable SSL 3.0 and TLS 1.0, and require TLS 1.2 or higher",c:true,f:"SSL 3.0 and TLS 1.0 are deprecated and broken at the protocol level, so both should be disabled and only TLS 1.2 or higher allowed."},
+      {t:"Keep TLS 1.0 enabled but disable SSL 3.0",c:false,f:"Not the best answer. The correct choice is: Disable SSL 3.0 and TLS 1.0, and require TLS 1.2 or higher"},
+      {t:"Enable SSL 3.0 only for legacy clients",c:false,f:"Not the best answer. The correct choice is: Disable SSL 3.0 and TLS 1.0, and require TLS 1.2 or higher"},
+      {t:"Replace TLS with a host firewall rule",c:false,f:"Not the best answer. The correct choice is: Disable SSL 3.0 and TLS 1.0, and require TLS 1.2 or higher"}
+    ]},
+    {s:1,cat:"Transport Layer Security",scn:true,q:"An organization wants assurance that if a server's long-term private key is later compromised, previously captured encrypted sessions still cannot be decrypted. Which TLS capability provides this?",o:[
+      {t:"Ephemeral key exchange, which provides forward secrecy",c:true,f:"Ephemeral keys are generated per session and discarded, so a later key compromise cannot decrypt past sessions. That property is forward secrecy."},
+      {t:"Static RSA key exchange",c:false,f:"Not the best answer. The correct choice is: Ephemeral key exchange, which provides forward secrecy"},
+      {t:"Reusing one session key across all connections",c:false,f:"Not the best answer. The correct choice is: Ephemeral key exchange, which provides forward secrecy"},
+      {t:"A larger certificate serial number",c:false,f:"Not the best answer. The correct choice is: Ephemeral key exchange, which provides forward secrecy"}
+    ]},
+    {s:1,cat:"Transport Layer Security",scn:true,q:"Two systems begin a TLS connection. Before any application data is sent, they agree on a cipher suite, the server presents its certificate, and a shared session key is established. What is this initial process called?",o:[
+      {t:"The TLS handshake",c:true,f:"The TLS handshake negotiates the cipher suite, authenticates the server, and establishes the session key before any encrypted data flows."},
+      {t:"The three-way handshake",c:false,f:"Not the best answer. The correct choice is: The TLS handshake"},
+      {t:"A protocol downgrade",c:false,f:"Not the best answer. The correct choice is: The TLS handshake"},
+      {t:"A directory bind",c:false,f:"Not the best answer. The correct choice is: The TLS handshake"}
+    ]},
+    {s:1,cat:"Transport Layer Security",scn:true,q:"A server's TLS configuration lists the suite TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256. Which component of this suite encrypts the actual application data?",o:[
+      {t:"AES_128_GCM",c:true,f:"AES_128_GCM is the symmetric bulk cipher that encrypts the data. ECDHE handles key exchange, RSA handles authentication, and SHA256 is the hash."},
+      {t:"ECDHE",c:false,f:"Not the best answer. The correct choice is: AES_128_GCM"},
+      {t:"RSA",c:false,f:"Not the best answer. The correct choice is: AES_128_GCM"},
+      {t:"SHA256",c:false,f:"Not the best answer. The correct choice is: AES_128_GCM"}
+    ]},
+    {s:1,cat:"Secure Directory Services",scn:true,q:"A directory service accepts queries over port 389 in cleartext, and an auditor reports that credentials sent during authentication are exposed on the network. Which change best resolves the finding?",o:[
+      {t:"Move the directory to port 636 using LDAPS",c:true,f:"LDAPS on port 636 encrypts the directory session with TLS, protecting credentials in transit. Password policy and access scope do not encrypt traffic."},
+      {t:"Increase the directory password complexity policy",c:false,f:"Not the best answer. The correct choice is: Move the directory to port 636 using LDAPS"},
+      {t:"Limit queries to read-only access",c:false,f:"Not the best answer. The correct choice is: Move the directory to port 636 using LDAPS"},
+      {t:"Rename the default administrator account",c:false,f:"Not the best answer. The correct choice is: Move the directory to port 636 using LDAPS"}
+    ]},
+    {s:1,cat:"Secure Directory Services",scn:true,q:"A penetration tester connects to an organization's directory service without supplying any credentials and is able to list employee names and email addresses. Which configuration allowed this?",o:[
+      {t:"Anonymous bind",c:true,f:"An anonymous bind requires no credentials and grants access to publicly readable entries. The other binds all require some form of authentication."},
+      {t:"Simple bind",c:false,f:"Not the best answer. The correct choice is: Anonymous bind"},
+      {t:"SASL bind using Kerberos",c:false,f:"Not the best answer. The correct choice is: Anonymous bind"},
+      {t:"Mutual certificate authentication",c:false,f:"Not the best answer. The correct choice is: Anonymous bind"}
+    ]},
+    {s:1,cat:"Secure Directory Services",scn:true,q:"An administrator wants directory authentication to use Kerberos rather than sending a username and password directly to the directory. Which LDAP binding method supports this?",o:[
+      {t:"A SASL bind using the GSSAPI mechanism",c:true,f:"SASL binds support stronger mechanisms, and Kerberos is used through the GSSAPI mechanism. A simple bind sends the distinguished name and password directly."},
+      {t:"A simple bind over port 389",c:false,f:"Not the best answer. The correct choice is: A SASL bind using the GSSAPI mechanism"},
+      {t:"An anonymous bind",c:false,f:"Not the best answer. The correct choice is: A SASL bind using the GSSAPI mechanism"},
+      {t:"An implicit TLS bind",c:false,f:"Not the best answer. The correct choice is: A SASL bind using the GSSAPI mechanism"}
+    ]},
+    {s:1,cat:"SNMP Security",scn:false,q:"A network administrator inherits switches that still use SNMP with the community strings public and private. Which action provides the greatest security improvement?",o:[
+      {t:"Migrate the devices to SNMPv3 with authentication and encryption",c:true,f:"SNMPv3 adds authentication and encryption, while v1 and v2c send community strings in cleartext. Renaming strings on v2c still leaves them exposed on the wire."},
+      {t:"Change the community strings to longer random values on SNMPv2c",c:false,f:"Not the best answer. The correct choice is: Migrate the devices to SNMPv3 with authentication and encryption"},
+      {t:"Set all SNMP access to read-only",c:false,f:"Not the best answer. The correct choice is: Migrate the devices to SNMPv3 with authentication and encryption"},
+      {t:"Poll the devices less frequently",c:false,f:"Not the best answer. The correct choice is: Migrate the devices to SNMPv3 with authentication and encryption"}
+    ]},
+    {s:1,cat:"SNMP Security",scn:true,q:"While reviewing a switch configuration, an analyst notes that any device presenting the community string private can both read and change the switch settings over SNMP. What does the community string function as here?",o:[
+      {t:"A shared password that controls SNMP access",c:true,f:"In SNMP v1 and v2c the community string acts like a password, and private is the default read-write value. It does not encrypt or sign anything."},
+      {t:"A symmetric session key used for encryption",c:false,f:"Not the best answer. The correct choice is: A shared password that controls SNMP access"},
+      {t:"A digital certificate that identifies the device",c:false,f:"Not the best answer. The correct choice is: A shared password that controls SNMP access"},
+      {t:"A DNS record used to locate the agent",c:false,f:"Not the best answer. The correct choice is: A shared password that controls SNMP access"}
+    ]},
+    {s:1,cat:"File Transfer Services",scn:true,q:"A developer must transfer sensitive files to a remote server so that both the commands and the file contents are encrypted through a single channel built on an existing SSH connection. Which protocol meets this requirement?",o:[
+      {t:"SFTP",c:true,f:"SFTP runs as a subsystem inside the SSH tunnel, so commands and data share one encrypted channel. TFTP and plain FTP provide no encryption."},
+      {t:"TFTP",c:false,f:"Not the best answer. The correct choice is: SFTP"},
+      {t:"FTP using PROT C",c:false,f:"Not the best answer. The correct choice is: SFTP"},
+      {t:"An HTTP file upload",c:false,f:"Not the best answer. The correct choice is: SFTP"}
+    ]},
+    {s:1,cat:"File Transfer Services",scn:true,q:"An administrator configures FTPS, but file contents are still transmitted in cleartext even though the login succeeded over an encrypted channel. Which setting most likely needs to be corrected?",o:[
+      {t:"The PROT command is set to C instead of P",c:true,f:"PROT P encrypts the data channel, while PROT C leaves it clear. PBSZ 0 is normal and is set before PROT P, so it is not the problem."},
+      {t:"The control channel is using port 21",c:false,f:"Not the best answer. The correct choice is: The PROT command is set to C instead of P"},
+      {t:"PBSZ is set to 0",c:false,f:"Not the best answer. The correct choice is: The PROT command is set to C instead of P"},
+      {t:"The server presents a valid certificate",c:false,f:"Not the best answer. The correct choice is: The PROT command is set to C instead of P"}
+    ]},
+    {s:1,cat:"Email Services",scn:false,q:"A mail administrator needs client email submission to be encrypted from the first byte of the connection, without relying on an upgrade command. Which configuration meets this requirement?",o:[
+      {t:"SMTPS using implicit TLS on port 465",c:true,f:"Implicit TLS on port 465 encrypts the session from the start. STARTTLS begins in plaintext and then upgrades, which does not meet the from-the-first-byte requirement."},
+      {t:"SMTP with STARTTLS on port 587",c:false,f:"Not the best answer. The correct choice is: SMTPS using implicit TLS on port 465"},
+      {t:"SMTP on port 25 with no encryption",c:false,f:"Not the best answer. The correct choice is: SMTPS using implicit TLS on port 465"},
+      {t:"POP3 on port 110",c:false,f:"Not the best answer. The correct choice is: SMTPS using implicit TLS on port 465"}
+    ]},
+    {s:1,cat:"Email Services",scn:true,q:"An organization's mail server opens each connection in plaintext on port 587 and then upgrades the session to an encrypted one partway through the conversation. Which mechanism is being described?",o:[
+      {t:"STARTTLS",c:true,f:"STARTTLS is an in-band command that upgrades an existing plaintext connection to TLS. Implicit TLS is encrypted from the first byte instead."},
+      {t:"Implicit TLS",c:false,f:"Not the best answer. The correct choice is: STARTTLS"},
+      {t:"S/MIME",c:false,f:"Not the best answer. The correct choice is: STARTTLS"},
+      {t:"DMARC",c:false,f:"Not the best answer. The correct choice is: STARTTLS"}
+    ]},
+    {s:1,cat:"Email Security",scn:true,q:"A company wants recipients to be able to verify that an email truly came from its domain and was not altered in transit, using a cryptographic signature added by the sending mail server. Which technology provides this?",o:[
+      {t:"DKIM",c:true,f:"DKIM adds a digital signature that proves the message origin and integrity. SPF only authorizes sending servers and does not sign the message."},
+      {t:"SPF",c:false,f:"Not the best answer. The correct choice is: DKIM"},
+      {t:"POP3S",c:false,f:"Not the best answer. The correct choice is: DKIM"},
+      {t:"LDAPS",c:false,f:"Not the best answer. The correct choice is: DKIM"}
+    ]},
+    {s:1,cat:"Email Security",scn:true,q:"A security team wants to publish, in DNS, the list of mail servers authorized to send email for its domain so that receiving servers can reject spoofed messages from other sources. Which record should they create?",o:[
+      {t:"An SPF record",c:true,f:"SPF is a DNS record listing authorized sending servers, letting recipients reject mail from unauthorized sources. DKIM signs messages but does not list senders."},
+      {t:"A DKIM key only",c:false,f:"Not the best answer. The correct choice is: An SPF record"},
+      {t:"A PTR record",c:false,f:"Not the best answer. The correct choice is: An SPF record"},
+      {t:"A certificate revocation list",c:false,f:"Not the best answer. The correct choice is: An SPF record"}
+    ]},
+    {s:1,cat:"Email Security",scn:true,q:"An organization has already deployed SPF and DKIM and now wants to tell receiving servers what to do with messages that fail those checks and to receive reports on the results. Which should it implement?",o:[
+      {t:"DMARC",c:true,f:"DMARC builds on SPF and DKIM, sets a policy for failing messages, and provides reporting back to the domain owner."},
+      {t:"S/MIME",c:false,f:"Not the best answer. The correct choice is: DMARC"},
+      {t:"STARTTLS",c:false,f:"Not the best answer. The correct choice is: DMARC"},
+      {t:"SFTP",c:false,f:"Not the best answer. The correct choice is: DMARC"}
+    ]},
+    {s:1,cat:"Email Security",scn:false,q:"An executive must send an email whose body stays encrypted end to end, so that not even the mail servers along the delivery path can read it. Which solution meets this requirement?",o:[
+      {t:"S/MIME",c:true,f:"S/MIME encrypts the message itself, so it stays protected at rest and across every hop. TLS and SMTPS only protect a single connection in transit."},
+      {t:"TLS between the mail servers",c:false,f:"Not the best answer. The correct choice is: S/MIME"},
+      {t:"SMTPS on port 465",c:false,f:"Not the best answer. The correct choice is: S/MIME"},
+      {t:"An SPF record",c:false,f:"Not the best answer. The correct choice is: S/MIME"}
+    ]},
+    {s:1,cat:"Email Data Loss Prevention",scn:false,q:"An employee accidentally attaches a spreadsheet containing customer Social Security numbers to an outbound email. The message is automatically quarantined and the security team is alerted before it leaves the organization. Which control most likely triggered this action?",o:[
+      {t:"An email data loss prevention policy",c:true,f:"Email DLP inspects outbound content and blocks or quarantines messages that contain sensitive data. SPF, spam filtering, and TLS do not inspect for data loss."},
+      {t:"A Sender Policy Framework record",c:false,f:"Not the best answer. The correct choice is: An email data loss prevention policy"},
+      {t:"A spam filter",c:false,f:"Not the best answer. The correct choice is: An email data loss prevention policy"},
+      {t:"An implicit TLS connection",c:false,f:"Not the best answer. The correct choice is: An email data loss prevention policy"}
+    ]},
+    {s:1,cat:"Email Data Loss Prevention",scn:false,q:"A financial firm wants outbound email automatically inspected so that messages containing credit card numbers are blocked before they reach external recipients. Which control best accomplishes this?",o:[
+      {t:"An email data loss prevention policy on the email gateway",c:true,f:"DLP on the email gateway detects sensitive data patterns and blocks the message. DMARC, greylisting, and key length all address different problems."},
+      {t:"A DMARC policy of reject",c:false,f:"Not the best answer. The correct choice is: An email data loss prevention policy on the email gateway"},
+      {t:"Greylisting on the mail server",c:false,f:"Not the best answer. The correct choice is: An email data loss prevention policy on the email gateway"},
+      {t:"A longer TLS key length",c:false,f:"Not the best answer. The correct choice is: An email data loss prevention policy on the email gateway"}
+    ]},
+    /* ===== SECTION 2: SECURE APPLICATION DEVELOPMENT ===== */
+    {s:2,cat:"Secure Coding Techniques",scn:false,q:"Which secure coding practice most directly prevents SQL injection and cross-site scripting attacks?",o:[
+      {t:"Validating and sanitizing every input before the application processes it",c:true,f:"Correct. Most injection and scripting attacks arrive through unchecked input, so validating and sanitizing it at the boundary is the front-line defense."},
+      {t:"Granting each process the broadest permissions it could possibly need",c:false,f:"That is the opposite of least privilege. Wide permissions increase damage during a breach and do nothing to stop injection."},
+      {t:"Storing all session identifiers directly inside the page's URL string",c:false,f:"Putting session IDs in the URL exposes them in logs and history. It is a session-handling weakness, not an injection defense."},
+      {t:"Disabling the logging subsystem to reduce the application's overhead",c:false,f:"Turning off logging blinds your monitoring and never prevents an attack from reaching the code."}
+    ]},
+    {s:2,cat:"Secure Coding Techniques",scn:false,q:"What is the main benefit of using parameterized queries in application code?",o:[
+      {t:"They separate user data from command logic so input cannot alter the query",c:true,f:"Correct. Parameterized queries treat input strictly as data, so an attacker's text can never be executed as part of the SQL command."},
+      {t:"They compress the database responses so the pages render noticeably faster",c:false,f:"Parameterized queries are about safety, not speed or compression."},
+      {t:"They remove the need to ever patch the underlying database software",c:false,f:"Patching is still required. Query parameterization addresses injection, not the database's own vulnerabilities."},
+      {t:"They encrypt every stored record at rest using the strongest available cipher",c:false,f:"Encryption at rest is a separate control. Parameterization governs how queries are built, not how data is stored."}
+    ]},
+    {s:2,cat:"Secure Coding Techniques",scn:true,q:"Applying the principle of least privilege to an application account means the account should be:",o:[
+      {t:"Granted only the permissions required to perform its specific function",c:true,f:"Correct. Least privilege limits each account to exactly what it needs, shrinking what an attacker can reach if it is compromised."},
+      {t:"Shared across every service so that administration stays simple to manage",c:false,f:"Shared accounts remove accountability and widen the blast radius. That contradicts least privilege."},
+      {t:"Configured with full administrative rights to avoid any permission errors",c:false,f:"Granting admin rights to dodge errors is convenience over security and is exactly what least privilege guards against."},
+      {t:"Allowed to bypass logging so that its actions never appear in the records",c:false,f:"Bypassing logging hides activity from monitoring and has nothing to do with privilege scope."}
+    ]},
+    {s:2,cat:"Secure Coding Techniques",scn:true,q:"Which practice strengthens secure session management in a web application?",o:[
+      {t:"Issuing a new random session token after a user successfully authenticates",c:true,f:"Correct. Regenerating the token at login defeats session fixation, where an attacker plants a known token before sign-in."},
+      {t:"Reusing one fixed session token for every user across all of their visits",c:false,f:"A single shared token is trivially stolen and replayed. Tokens must be unique and unpredictable per session."},
+      {t:"Embedding the session token in plain text inside the page's source code",c:false,f:"Exposing the token in the page makes it easy to harvest. Tokens belong in protected, HttpOnly cookies."},
+      {t:"Extending each session indefinitely so that users never have to sign in again",c:false,f:"Sessions that never expire give a stolen token unlimited life. Timeouts are a core part of secure session handling."}
+    ]},
+    {s:2,cat:"Secure Coding Techniques",scn:false,q:"Encoding output before it is rendered in the browser primarily defends against:",o:[
+      {t:"Cross-site scripting that runs attacker code inside a victim's session",c:true,f:"Correct. Output encoding turns active script characters into harmless text, so injected markup is displayed rather than executed."},
+      {t:"Physical theft of the server hardware from inside the data center facility",c:false,f:"That is a physical security concern, unrelated to how output is rendered."},
+      {t:"Power fluctuations that could corrupt data written to the disk array",c:false,f:"Power and storage reliability are operational issues, not something output encoding touches."},
+      {t:"Social engineering calls that trick staff into revealing their passwords",c:false,f:"Social engineering targets people. Output encoding is a code-level control against script injection."}
+    ]},
+    {s:2,cat:"Secure Coding Techniques",scn:false,q:"Why is keeping third-party libraries and components updated a secure coding concern?",o:[
+      {t:"Known vulnerabilities in outdated dependencies can be exploited in the app",c:true,f:"Correct. An application inherits the flaws of every library it ships, so unpatched dependencies become its weakest link."},
+      {t:"Newer libraries always shrink the total size of the compiled application",c:false,f:"Size is not the issue, and updates do not reliably make builds smaller. The concern is inherited vulnerabilities."},
+      {t:"Updated components remove the need to validate any user-supplied input",c:false,f:"Input validation is always required. Updating libraries never replaces it."},
+      {t:"Current versions guarantee the software can never be reverse engineered",c:false,f:"No version prevents reverse engineering. Updates address known security defects, not that."}
+    ]},
+    {s:2,cat:"Secure Coding Techniques",scn:true,q:"Static application security testing (SAST) examines an application by:",o:[
+      {t:"Analyzing the source code for flaws without executing the program",c:true,f:"Correct. SAST is white-box testing that inspects code, configuration, and structure while the application is not running."},
+      {t:"Running the live application and observing it respond to crafted input",c:false,f:"That describes dynamic testing (DAST), which exercises the running app rather than reading its source."},
+      {t:"Interviewing the developers about the choices they made while coding",c:false,f:"Interviews are a review activity, not automated static analysis of the code itself."},
+      {t:"Monitoring the network traffic between the finished app and its users",c:false,f:"Traffic monitoring is an operational measure, not source-level static testing."}
+    ]},
+    {s:2,cat:"Application Protections",scn:true,q:"A web application firewall (WAF) protects an application primarily by:",o:[
+      {t:"Filtering and inspecting HTTP traffic to block malicious web requests",c:true,f:"Correct. A WAF sits in front of the app and screens application-layer requests for patterns like injection and scripting."},
+      {t:"Encrypting the hard drives on every workstation across the network",c:false,f:"Disk encryption protects data at rest on endpoints, not inbound web requests."},
+      {t:"Managing the physical access badges used to enter the server room",c:false,f:"Badge systems are physical access control, unrelated to filtering web traffic."},
+      {t:"Scheduling the nightly backups of the organization's email archives",c:false,f:"Backups support recovery, not the inspection of live application requests."}
+    ]},
+    {s:2,cat:"Application Protections",scn:false,q:"What assurance does code signing provide to users who install software?",o:[
+      {t:"Confirmation that the code came from the publisher and was not altered",c:true,f:"Correct. A valid signature verifies both authenticity, who published it, and integrity, that it has not been tampered with."},
+      {t:"A guarantee that the software will run faster than any competing product",c:false,f:"Signing says nothing about performance. It verifies origin and integrity only."},
+      {t:"Automatic removal of every advertisement bundled inside the installer",c:false,f:"Signing does not modify the program's contents or strip out bundled components."},
+      {t:"Permanent protection against all future vulnerabilities in the program",c:false,f:"A signature cannot prevent future flaws. It only confirms the code's source and that it is unchanged."}
+    ]},
+    {s:2,cat:"Application Protections",scn:true,q:"An application that uses an allow list to control which programs may run will:",o:[
+      {t:"Permit only approved programs and block everything not on the list",c:true,f:"Correct. An allow list is deny-by-default: only explicitly approved software executes, which stops unknown malware."},
+      {t:"Permit every program except the few that appear on a blocked list",c:false,f:"That describes a deny list, which allows by default and only blocks known-bad items."},
+      {t:"Allow any program to run as long as it was signed by any vendor",c:false,f:"Trusting any signature is far weaker than an allow list, which approves specific applications."},
+      {t:"Block all programs until an administrator approves each one daily",c:false,f:"Allow lists are configured ahead of time, not re-approved program by program each day."}
+    ]},
+    {s:2,cat:"Application Protections",scn:false,q:"Setting the Secure and HttpOnly attributes on a session cookie helps to:",o:[
+      {t:"Limit the cookie to encrypted channels and hide it from page scripts",c:true,f:"Correct. Secure restricts the cookie to HTTPS, and HttpOnly keeps JavaScript from reading it, blunting theft via scripting."},
+      {t:"Increase the maximum number of cookies a single site may store",c:false,f:"These attributes govern how a cookie is protected, not how many a site may set."},
+      {t:"Translate the cookie's contents into several supported languages",c:false,f:"Cookies are not localized this way. The attributes are security flags, not language settings."},
+      {t:"Speed up the rate at which the browser caches static page images",c:false,f:"Caching of images is unrelated to cookie security attributes."}
+    ]},
+    {s:2,cat:"Application Protections",scn:false,q:"Why should input validation be enforced on the server side rather than only in the browser?",o:[
+      {t:"Client-side checks can be bypassed, so the server must validate input too",c:true,f:"Correct. An attacker controls the client and can skip browser checks, so the server must never trust input it receives."},
+      {t:"Server-side checks consume far less processing power than client checks",c:false,f:"Performance is not the reason. Server validation exists because the client cannot be trusted."},
+      {t:"Browsers are unable to perform any form of input validation at all",c:false,f:"Browsers can validate, but those checks are easily bypassed, which is exactly the problem."},
+      {t:"Validation on the server removes the need to encrypt the connection",c:false,f:"Validation and encryption are separate controls. One never replaces the other."}
+    ]},
+    {s:2,cat:"Application Protections",scn:true,q:"Application hardening reduces an application's attack surface by:",o:[
+      {t:"Disabling unused features and services that are not required to operate",c:true,f:"Correct. Every enabled feature is a potential entry point, so removing what is not needed shrinks the attack surface."},
+      {t:"Adding as many optional plugins as possible to extend its functions",c:false,f:"More plugins mean more code and more risk, which enlarges the attack surface rather than reducing it."},
+      {t:"Granting all users administrative access to simplify their daily tasks",c:false,f:"Broad admin access widens exposure and works against hardening."},
+      {t:"Turning off the audit logs so the application produces fewer records",c:false,f:"Disabling logs harms visibility and is not part of reducing attack surface."}
+    ]},
+    {s:2,cat:"Application Protections",scn:true,q:"How does a web application firewall differ from a traditional network firewall?",o:[
+      {t:"It inspects application-layer web requests rather than only ports and IPs",c:true,f:"Correct. A network firewall filters on addresses and ports, while a WAF understands HTTP and web request content."},
+      {t:"It operates strictly at the physical layer of the network hardware stack",c:false,f:"A WAF works at the application layer, not the physical layer."},
+      {t:"It replaces the need for any encryption between the client and the server",c:false,f:"A WAF does not provide or replace encryption. TLS still secures the channel."},
+      {t:"It blocks email spam before messages reach the user's inbox folder",c:false,f:"Spam filtering is the job of an email gateway, not a web application firewall."}
+    ]},
+    {s:2,cat:"Software Sandboxing",scn:false,q:"What is the primary purpose of running software in a sandbox?",o:[
+      {t:"Isolating code so its actions cannot affect the rest of the host system",c:true,f:"Correct. A sandbox is a contained environment where a program's behavior is walled off from the underlying system."},
+      {t:"Increasing the clock speed of the processor that executes the program",c:false,f:"Sandboxing is about isolation, not performance, and usually adds overhead rather than speed."},
+      {t:"Permanently deleting any program that has not yet been fully tested",c:false,f:"A sandbox runs and observes code safely. It does not delete untested programs."},
+      {t:"Sharing one set of credentials among every application on the device",c:false,f:"Credential sharing is a poor practice and the opposite of the isolation a sandbox provides."}
+    ]},
+    {s:2,cat:"Software Sandboxing",scn:false,q:"Why do analysts often detonate suspicious files inside a sandbox?",o:[
+      {t:"To observe the file's behavior safely without risking production systems",c:true,f:"Correct. Detonating in isolation lets analysts watch what malware tries to do while keeping real systems untouched."},
+      {t:"To permanently increase the storage capacity of the analysis workstation",c:false,f:"Sandboxing has nothing to do with adding storage."},
+      {t:"To sign the file so that it can be trusted by other users on the network",c:false,f:"You would never sign and trust a suspicious file. The point is safe observation."},
+      {t:"To translate the file's code into a language the analyst prefers to read",c:false,f:"Sandboxes execute and monitor code; they do not translate it."}
+    ]},
+    {s:2,cat:"Software Sandboxing",scn:false,q:"A sandbox is useful in software development because it lets teams:",o:[
+      {t:"Test new or untrusted code in isolation before deploying it widely",c:true,f:"Correct. A development sandbox is a safe space to run and validate code without touching production."},
+      {t:"Release code to all production users without any prior review steps",c:false,f:"Skipping review is the opposite of what a sandbox encourages."},
+      {t:"Remove the requirement to validate any input the program receives",c:false,f:"Input validation is still essential. A sandbox does not replace it."},
+      {t:"Guarantee the finished software will contain no defects whatsoever",c:false,f:"No environment guarantees defect-free software. A sandbox only contains risk during testing."}
+    ]},
+    {s:2,cat:"Software Sandboxing",scn:false,q:"Modern browsers sandbox individual tabs and processes mainly to:",o:[
+      {t:"Contain a compromise in one tab so it cannot reach the others or the OS",c:true,f:"Correct. Per-process isolation means a malicious page is boxed into its own tab rather than seizing the whole browser or host."},
+      {t:"Allow each tab to share its memory freely with every other open tab",c:false,f:"Shared memory between tabs would defeat isolation. Sandboxing keeps them separate."},
+      {t:"Increase the number of advertisements that each page is able to display",c:false,f:"Sandboxing is a security boundary, not an advertising feature."},
+      {t:"Disable the encryption that protects traffic to and from secure sites",c:false,f:"Sandboxing does not touch transport encryption. HTTPS still applies."}
+    ]},
+    {s:2,cat:"Software Sandboxing",scn:false,q:"Which statement best describes a limitation of sandboxing?",o:[
+      {t:"Some advanced malware can detect a sandbox and hide its true behavior",c:true,f:"Correct. Evasive malware checks for sandbox artifacts and stays dormant, so analysis can miss its real intent."},
+      {t:"Sandboxing makes it impossible for any program to ever run on the host",c:false,f:"Programs run normally outside the sandbox. Isolation does not block the whole host."},
+      {t:"A sandbox automatically patches every flaw in the code it contains",c:false,f:"A sandbox contains code; it does not fix or patch it."},
+      {t:"Code inside a sandbox always runs faster than code on the real system",c:false,f:"Isolation usually adds overhead, so sandboxed code tends to run slower, not faster."}
+    ]},
+    {s:2,cat:"Software Sandboxing",scn:false,q:"Sandboxing supports defense in depth because it:",o:[
+      {t:"Adds a layer of isolation that limits the damage a single flaw can cause",c:true,f:"Correct. As one layer among many, a sandbox contains the impact of a breach so it does not spread to the wider system."},
+      {t:"Replaces every other control an organization has already put in place",c:false,f:"Defense in depth means layering controls, not replacing them with one."},
+      {t:"Removes the need to keep the host operating system fully patched",c:false,f:"Patching the host is still required. A sandbox adds to it rather than excusing it."},
+      {t:"Grants contained programs direct access to all system resources",c:false,f:"Direct access to everything would defeat containment, which is the whole point of a sandbox."}
+    ]},
+    {s:2,cat:"Software Sandboxing",scn:false,q:"Which scenario is the best example of sandboxing in practice?",o:[
+      {t:"Opening an email attachment inside an isolated environment to inspect it",c:true,f:"Correct. Examining an unknown attachment in a contained space is a textbook use of sandboxing."},
+      {t:"Granting a new application administrator rights on the production server",c:false,f:"That is over-privileging on a live system, the opposite of safe containment."},
+      {t:"Storing user passwords in a plain text file on a shared network drive",c:false,f:"That is a serious storage failure and has nothing to do with isolation."},
+      {t:"Emailing a sensitive document to an external address for safekeeping",c:false,f:"That exposes data rather than containing code, so it is not sandboxing."}
+    ]}
+  ];
+    var SECTION_META={
+      1:{label:"Secure Application Protocols"},
+      2:{label:"Secure Application Development"}
+    };
+    var LETTERS=['A','B','C','D','E'];
+    var rvAnswered={}, rvCorrectCount=0;
+    function shuffle(a){ for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
+
+    function build(){
+      rvAnswered={}; rvCorrectCount=0;
+      var order=RV_QUESTIONS.map(function(_,i){return i;});
+      var s1=order.filter(function(i){return RV_QUESTIONS[i].s===1;});
+      var s2=order.filter(function(i){return RV_QUESTIONS[i].s===2;});
+      function groupShuffle(idxs){
+        var seen=[], groups={};
+        idxs.forEach(function(i){ var c=RV_QUESTIONS[i].cat; if(!groups[c]){groups[c]=[];seen.push(c);} groups[c].push(i); });
+        var out=[]; seen.forEach(function(c){ out=out.concat(shuffle(groups[c])); }); return out;
+      }
+      var finalOrder=groupShuffle(s1).concat(groupShuffle(s2));
+      var host=document.getElementById('rvQuiz');
+      host.innerHTML=''; var displayNum=0, lastSection=null, lastCat=null;
+      finalOrder.forEach(function(qi){
+        var Q=RV_QUESTIONS[qi];
+        if(Q.s!==lastSection){
+          lastSection=Q.s; lastCat=null;
+          var lab=document.createElement('div'); lab.className='rv-section-label';
+          lab.innerHTML='<span class="badge-ra">'+(Q.s===1?'Part 1':'Part 2')+'</span> '+SECTION_META[Q.s].label;
+          host.appendChild(lab);
+          var rule=document.createElement('div'); rule.className='rv-section-rule'; host.appendChild(rule);
+        }
+        if(Q.cat!==lastCat){
+          lastCat=Q.cat;
+          var cl=document.createElement('div'); cl.className='rv-cat-label'; cl.textContent=Q.cat; host.appendChild(cl);
+        }
+        displayNum++;
+        var card=document.createElement('div'); card.className='rv-q'; card.setAttribute('data-qi',qi);
+        var chips='<div class="qchips"><span class="rv-chip topic">'+Q.cat+'</span>'+(Q.scn?'<span class="rv-chip scn">Scenario</span>':'')+'</div>';
+        var head='<div class="qhead"><span class="qnum">Q'+displayNum+'</span><span class="qtext">'+Q.q+'</span></div>';
+        card.innerHTML=chips+head;
+        var optOrder=shuffle(Q.o.map(function(_,i){return i;}));
+        optOrder.forEach(function(oi,pos){
+          var O=Q.o[oi];
+          var btn=document.createElement('button'); btn.className='rv-opt';
+          btn.innerHTML='<span class="ltr">'+LETTERS[pos]+'</span><span>'+O.t+'</span>';
+          btn.addEventListener('click',function(){ answer(card,qi,O,btn); });
+          card.appendChild(btn);
+        });
+        var fb=document.createElement('div'); fb.className='rv-fb'; card.appendChild(fb);
+        host.appendChild(card);
+      });
+      document.getElementById('rvResultsPanel').classList.remove('show');
+      document.getElementById('rvResults').disabled=true;
+      updateRv();
+    }
+
+    function answer(card,qi,O,btn){
+      if(rvAnswered[qi]) return; rvAnswered[qi]=true; if(O.c) rvCorrectCount++;
+      var opts=card.querySelectorAll('.rv-opt');
+      opts.forEach(function(b){ b.disabled=true; });
+      btn.classList.add(O.c?'correct':'wrong');
+      if(!O.c){
+        var Q=RV_QUESTIONS[qi]; var ct=Q.o.filter(function(x){return x.c;})[0].t;
+        opts.forEach(function(b){ if(b.querySelector('span:last-child').innerHTML===ct){ b.classList.add('correct'); } else if(b!==btn){ b.classList.add('dim'); } });
+      } else { opts.forEach(function(b){ if(b!==btn) b.classList.add('dim'); }); }
+      var fb=card.querySelector('.rv-fb'); fb.className='rv-fb show '+(O.c?'good':'bad');
+      fb.innerHTML='<b>'+(O.c?'Correct.':'Not the best answer.')+'</b> '+O.f;
+      updateRv();
+    }
+
+    function updateRv(){
+      var n=Object.keys(rvAnswered).length;
+      document.getElementById('rvCount').textContent='Answered '+n+' / '+RV_TOTAL;
+      document.getElementById('rvFill').style.width=(n/RV_TOTAL*100)+'%';
+      document.getElementById('rvResults').disabled = n<RV_TOTAL;
+      if(n>=RV_TOTAL) showRv(false);
+    }
+
+    function showRv(scroll){
+      var pct=Math.round(rvCorrectCount/RV_TOTAL*100), pass=(rvCorrectCount/RV_TOTAL)>=RV_PASS;
+      document.getElementById('rvScoreNum').textContent=rvCorrectCount+' / '+RV_TOTAL;
+      document.getElementById('rvScorePct').textContent=pct+'% correct';
+      var v=document.getElementById('rvVerdict'); v.textContent=pass?'PASS \u2713':'Keep studying';
+      v.className='rv-verdict '+(pass?'pass':'fail');
+      document.getElementById('rvResultsPanel').classList.add('show');
+      if(scroll){ var r=document.getElementById('rvResultsPanel'); if(r.scrollIntoView) r.scrollIntoView({behavior:'smooth',block:'center'}); }
+    }
+
+    document.getElementById('rvResults').addEventListener('click',function(){ showRv(true); });
+    document.getElementById('rvReset').addEventListener('click',function(){
+      build();
+      var s=document.getElementById('review'); if(s&&s.scrollIntoView) s.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    build();
+  })();
+
+</script>
+  <script src="../shared/lesson-bridge.js"></script>
+</body>
+</html>

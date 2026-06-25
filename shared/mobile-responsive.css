@@ -1,0 +1,92 @@
+/* ============================================================================
+   Learning Hub — Mobile Hardening Layer
+   Loaded LAST inside each self-contained lesson. Every rule is gated behind a
+   mobile breakpoint, so desktop and tablet-wide layouts are untouched. This
+   only fixes how existing content reflows on small screens: it never changes
+   text, structure, questions, answers, or the desktop design.
+   Goal: no horizontal scroll, no clipped content, no overlap, tappable nav.
+============================================================================ */
+
+/* Phones and small tablets (portrait) */
+@media (max-width: 768px) {
+  /* nothing may exceed the viewport width */
+  html, body { overflow-x: hidden !important; max-width: 100vw !important; }
+  * { max-width: 100% !important; }
+
+  /* multi-column grids collapse to a single column */
+  .two-col, .three-col, .four-col, .five-col,
+  .col-2, .col-3, .col-4, .grid-2, .grid-3, .grid-4,
+  .nist-grid, .cia-grid, .card-grid, .badge-grid,
+  [class*="-grid"], [class*="grid-"], .grid,
+  [style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* header / hero / toolbar / credit rows wrap instead of overflowing */
+  .header-top, [class*="header"], [class*="masthead"], [class*="hero"],
+  [class*="toolbar"], [class*="-actions"], [class*="meta"], [class*="credit"],
+  [class*="instructor"], [class*="brand"], [class*="byline"] {
+    flex-wrap: wrap !important;
+  }
+
+  /* lesson tab / section navigation wraps and scrolls, stays tappable */
+  .tab-bar, .tabbar, .tab-navigation, .nav-tabs, .tabs, .pills, .tab-pills,
+  .chiprow, [class*="tab-nav"], [class*="tabbar"], [role="tablist"] {
+    flex-wrap: wrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    white-space: normal !important;
+    max-width: 100% !important;
+  }
+  .tab-pill, .nav-tab, .tab-btn, .pill, .tab, [role="tab"] {
+    white-space: normal !important;
+  }
+
+  /* let flex / grid children shrink (fixes the classic overflow bug) */
+  [class*="grid"] > *, [class*="col"] > *, [class*="row"] > *,
+  .header-top > *, [class*="flex"] > * { min-width: 0 !important; }
+
+  /* media never overflows */
+  img, svg, video, canvas, iframe { height: auto; }
+
+  /* wide tables scroll inside themselves instead of widening the page */
+  table {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    white-space: normal;
+  }
+
+  /* code blocks wrap */
+  pre, code { white-space: pre-wrap !important; word-break: break-word !important; }
+
+  /* generic page containers fit the screen */
+  .container, .wrap, .wrapper, .page, .content, .shell,
+  [class*="container"], [class*="wrapper"] { max-width: 100% !important; }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  body { font-size: 15px; }
+  h1 { font-size: 1.5rem !important; line-height: 1.22; word-break: break-word; }
+  h2 { font-size: 1.2rem !important; }
+  h3 { font-size: 1.05rem !important; }
+  /* trim oversized horizontal padding so text isn't squeezed into a sliver */
+  .container, .content, .wrap, .wrapper, [class*="container"],
+  [class*="card"], [class*="panel"], [class*="section"] {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+}
+
+/* Card / objective rows: stack one-per-row on phones so they aren't cramped.
+   Scoped to card-row containers only, so chip and button rows are unaffected. */
+@media (max-width: 600px) {
+  .obj-row > *, .summary-cards > *, .sum-cards > *, .cards > *,
+  .card-row > *, .cardrow > *, .feature-row > *, .feature-cards > *,
+  [class*="card-grid"] > *, [class*="-cards"] > *, [class*="cards-"] > * {
+    flex: 1 1 100% !important;
+    max-width: 100% !important;
+  }
+}

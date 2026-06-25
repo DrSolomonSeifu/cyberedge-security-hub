@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 12: Explain Incident Response and Monitoring Concepts — Learner Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Mulish:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+    --ink:#0c181b;
+    --ink-2:#12262b;
+    --ink-3:#1b363c;
+    --paper:#f7f3ec;
+    --paper-2:#efe8da;
+    --teal:#16b6a6;
+    --teal-deep:#0c8e80;
+    --amber:#e0a23c;
+    --amber-deep:#b87d1d;
+    --coral:#e0655a;
+    --coral-deep:#bf4a40;
+    --violet:#8d7fd4;
+    --violet-deep:#6c5fc0;
+    --sky:#3aa6c6;
+    --sky-deep:#2b7f99;
+    --green:#4fb37a;
+    --text:#23302f;
+    --muted:#62716f;
+    --line:#e3dccd;
+    --display:'Fraunces',Georgia,serif;
+    --body:'Mulish',-apple-system,sans-serif;
+    --mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:var(--body);
+    color:var(--text);
+    line-height:1.7;
+    background:
+        radial-gradient(circle at 12% 14%, rgba(22,182,166,0.16) 0%, transparent 42%),
+        radial-gradient(circle at 88% 12%, rgba(224,162,60,0.12) 0%, transparent 40%),
+        radial-gradient(circle at 50% 120%, rgba(141,127,212,0.12) 0%, transparent 50%),
+        linear-gradient(160deg, #0b1619 0%, #102a30 55%, #0c1d21 100%);
+    background-attachment:fixed;
+    min-height:100vh;
+    padding:30px 18px 48px;
+}
+
+/* ─── SHELL ─── */
+.shell{
+    max-width:1160px;
+    margin:0 auto;
+    background:var(--paper);
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 40px 90px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+/* ─── HEADER ─── */
+.hd{
+    position:relative;
+    background:linear-gradient(135deg, #0b181b 0%, #143338 58%, #0d2226 100%);
+    color:var(--paper);
+    padding:0;
+    overflow:hidden;
+}
+.hd-bar{height:5px;background:linear-gradient(90deg,var(--teal) 0%, var(--amber) 60%, var(--coral) 100%);}
+.hd-grid{
+    position:absolute;inset:0;
+    background-image:
+        radial-gradient(circle at 85% 25%, rgba(22,182,166,0.14) 0%, transparent 45%),
+        repeating-linear-gradient(0deg, transparent, transparent 38px, rgba(255,255,255,0.018) 38px, rgba(255,255,255,0.018) 39px),
+        repeating-linear-gradient(90deg, transparent, transparent 38px, rgba(255,255,255,0.018) 38px, rgba(255,255,255,0.018) 39px);
+    pointer-events:none;
+}
+.hd-inner{position:relative;z-index:1;padding:42px 46px 38px;display:flex;gap:30px;align-items:center;}
+
+.pulse{flex-shrink:0;position:relative;width:74px;height:74px;display:flex;align-items:center;justify-content:center;}
+.pulse-core{
+    width:74px;height:74px;border-radius:20px;
+    background:linear-gradient(135deg,var(--teal) 0%, var(--teal-deep) 100%);
+    display:flex;align-items:center;justify-content:center;font-size:2em;
+    box-shadow:0 10px 28px rgba(22,182,166,0.4);
+    position:relative;z-index:2;
+}
+.pulse-ring{position:absolute;inset:0;border-radius:20px;border:2px solid var(--teal);opacity:0;animation:ping 2.8s ease-out infinite;}
+.pulse-ring:nth-child(2){animation-delay:1.4s;}
+@keyframes ping{0%{transform:scale(0.85);opacity:0.7;}80%{transform:scale(1.6);opacity:0;}100%{opacity:0;}}
+
+.hd-eyebrow{font-family:var(--mono);font-size:0.7rem;letter-spacing:3.5px;text-transform:uppercase;color:var(--teal);opacity:0.95;margin-bottom:8px;}
+.hd h1{font-family:var(--display);font-weight:700;font-size:2.35rem;line-height:1.12;letter-spacing:-0.5px;margin-bottom:8px;}
+.hd h1 .lnum{color:var(--amber);}
+.hd h1 .accent{font-style:italic;color:var(--teal);}
+.hd-sub{font-size:1rem;color:rgba(247,243,236,0.7);font-weight:300;max-width:640px;}
+.hd-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;}
+.badge{display:inline-flex;align-items:center;gap:7px;padding:7px 15px;border-radius:50px;font-size:0.76rem;font-weight:700;letter-spacing:0.4px;}
+.b-learner{background:rgba(79,179,122,0.16);color:#7fd6a3;border:1px solid rgba(79,179,122,0.4);}
+.b-cert{background:rgba(224,162,60,0.14);color:#f1c87f;border:1px solid rgba(224,162,60,0.34);}
+.b-credit{background:rgba(255,255,255,0.05);color:rgba(247,243,236,0.6);border:1px solid rgba(255,255,255,0.12);font-weight:400;}
+
+/* ─── NAV ─── */
+.nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(28,52,58,0.96);
+    backdrop-filter:blur(8px);
+    display:flex;flex-wrap:wrap;
+    border-bottom:2px solid rgba(22,182,166,0.4);
+}
+.tab{
+    flex:1;min-width:150px;
+    padding:15px 16px;border:none;background:transparent;cursor:pointer;
+    font-family:var(--body);font-weight:600;font-size:0.84rem;letter-spacing:0.2px;
+    color:rgba(247,243,236,0.55);transition:all 0.25s ease;
+    border-right:1px solid rgba(255,255,255,0.05);position:relative;text-align:left;
+}
+.tab .tnum{display:block;font-family:var(--mono);font-size:0.66rem;color:rgba(22,182,166,0.55);margin-bottom:4px;letter-spacing:1px;}
+.tab::after{content:'';position:absolute;left:50%;right:50%;bottom:0;height:3px;background:var(--teal);transition:all 0.3s ease;}
+.tab:hover{color:var(--paper);background:rgba(255,255,255,0.04);}
+.tab.active{color:var(--teal);background:rgba(22,182,166,0.08);}
+.tab.active .tnum{color:var(--teal);}
+.tab.active::after{left:0;right:0;}
+
+/* ─── SECTIONS ─── */
+.section{display:none;padding:46px 48px;}
+.section.active{display:block;}
+.section.active>*{opacity:0;animation:rise 0.55s cubic-bezier(0.2,0.7,0.2,1) forwards;}
+.section.active>*:nth-child(1){animation-delay:0.02s;}
+.section.active>*:nth-child(2){animation-delay:0.08s;}
+.section.active>*:nth-child(3){animation-delay:0.14s;}
+.section.active>*:nth-child(4){animation-delay:0.20s;}
+.section.active>*:nth-child(5){animation-delay:0.26s;}
+.section.active>*:nth-child(n+6){animation-delay:0.32s;}
+@keyframes rise{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* ─── SECTION HEAD ─── */
+.shead{display:flex;align-items:center;gap:16px;margin-bottom:26px;}
+.shead-ic{
+    width:52px;height:52px;border-radius:14px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-size:1.5em;
+    background:var(--ink-2);color:var(--paper);box-shadow:0 8px 20px rgba(12,24,27,0.22);
+}
+.ic-teal{background:linear-gradient(135deg,var(--teal),var(--teal-deep));}
+.ic-coral{background:linear-gradient(135deg,var(--coral),var(--coral-deep));}
+.ic-violet{background:linear-gradient(135deg,var(--violet),var(--violet-deep));}
+.ic-amber{background:linear-gradient(135deg,var(--amber),var(--amber-deep));}
+.ic-sky{background:linear-gradient(135deg,var(--sky),var(--sky-deep));}
+.shead-tx h2{font-family:var(--display);font-weight:700;font-size:1.7rem;color:var(--ink);line-height:1.15;letter-spacing:-0.3px;}
+.shead-tx p{font-size:0.88rem;color:var(--muted);margin-top:2px;}
+
+.section p{font-size:0.99rem;color:var(--text);margin-bottom:14px;}
+.section h3{font-family:var(--display);font-weight:600;font-size:1.28rem;color:var(--ink);margin:34px 0 12px;letter-spacing:-0.2px;}
+.section h4{font-size:1rem;font-weight:700;color:var(--ink-3);margin:20px 0 8px;}
+.section ul,.section ol{margin:10px 0 16px;padding-left:24px;}
+.section li{font-size:0.97rem;margin:6px 0;}
+.section strong{color:var(--ink);}
+
+.rule{height:2px;border-radius:2px;background:linear-gradient(90deg,var(--teal) 0%, rgba(22,182,166,0.08) 60%, transparent 100%);margin:34px 0;}
+
+/* ─── PANELS ─── */
+.panel{border-radius:0 14px 14px 0;padding:22px 26px;margin:22px 0;border-left:5px solid var(--teal);background:linear-gradient(135deg,rgba(22,182,166,0.08),rgba(22,182,166,0.03));}
+.panel .ph{font-family:var(--mono);font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:9px;display:flex;align-items:center;gap:8px;}
+.panel p:last-child,.panel ul:last-child{margin-bottom:0;}
+
+.p-key{border-left-color:var(--teal);background:linear-gradient(135deg,rgba(22,182,166,0.10),rgba(22,182,166,0.03));}
+.p-key .ph{color:var(--teal-deep);}
+.p-insight{border-left-color:var(--amber);background:linear-gradient(135deg,rgba(224,162,60,0.13),rgba(224,162,60,0.04));}
+.p-insight .ph{color:var(--amber-deep);}
+.p-example{border-left-color:var(--sky);background:linear-gradient(135deg,rgba(58,166,198,0.11),rgba(58,166,198,0.03));}
+.p-example .ph{color:var(--sky-deep);}
+.p-warn{border-left-color:var(--coral);background:linear-gradient(135deg,rgba(224,101,90,0.12),rgba(224,101,90,0.04));}
+.p-warn .ph{color:var(--coral-deep);}
+.p-def{border-left-color:var(--violet);background:linear-gradient(135deg,rgba(141,127,212,0.13),rgba(141,127,212,0.04));}
+.p-def .ph{color:var(--violet-deep);}
+.p-def .pc{font-style:italic;}
+
+/* ─── SUMMARY (ink) ─── */
+.summary{background:linear-gradient(135deg,var(--ink) 0%, var(--ink-2) 100%);border-radius:16px;padding:28px 32px;margin:28px 0;box-shadow:0 14px 34px rgba(12,24,27,0.28);}
+.summary .ph{font-family:var(--mono);font-size:0.7rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber);margin-bottom:12px;font-weight:700;}
+.summary .pc{color:rgba(247,243,236,0.88);font-size:0.99rem;line-height:1.85;}
+.summary .pc strong{color:var(--teal);}
+.summary .pc em{color:var(--amber);font-style:normal;}
+
+/* ─── CARDS ─── */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:16px;margin:22px 0;}
+.cards-3{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));}
+.mc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;position:relative;overflow:hidden;transition:transform 0.25s ease, box-shadow 0.25s ease;}
+.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--teal);}
+.mc.c-teal::before{background:var(--teal);} .mc.c-amber::before{background:var(--amber);}
+.mc.c-coral::before{background:var(--coral);} .mc.c-violet::before{background:var(--violet);}
+.mc.c-sky::before{background:var(--sky);} .mc.c-green::before{background:var(--green);}
+.mc:hover{transform:translateY(-5px);box-shadow:0 16px 34px rgba(12,24,27,0.12);}
+.mc .mc-ic{font-size:1.55em;margin-bottom:10px;}
+.mc h4{font-family:var(--display);font-weight:600;font-size:1.02rem;color:var(--ink);margin:0 0 8px;}
+.mc p{font-size:0.87rem;color:var(--muted);line-height:1.65;margin:0;}
+
+/* ─── TIMELINE / STEP FLOW ─── */
+.flow{position:relative;margin:24px 0;}
+.flow::before{content:'';position:absolute;left:23px;top:24px;bottom:24px;width:2px;background:linear-gradient(180deg,var(--teal),var(--coral));}
+.fitem{display:flex;gap:20px;align-items:flex-start;padding-bottom:18px;position:relative;}
+.fitem:last-child{padding-bottom:0;}
+.fnum{width:48px;height:48px;border-radius:50%;flex-shrink:0;z-index:1;display:flex;align-items:center;justify-content:center;
+    font-family:var(--display);font-weight:700;font-size:1.05rem;background:var(--paper);color:var(--ink);border:2px solid var(--teal);box-shadow:0 6px 16px rgba(12,24,27,0.16);}
+.fbody{flex:1;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 20px;margin-top:2px;}
+.fbody h4{margin:0 0 4px;font-size:0.98rem;color:var(--ink);}
+.fbody p{font-size:0.89rem;color:var(--muted);margin:0;}
+
+/* ─── TABLE ─── */
+.tbl{width:100%;border-collapse:collapse;margin:22px 0;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(12,24,27,0.1);font-size:0.92rem;background:#fff;}
+.tbl thead tr{background:var(--ink);}
+.tbl th{padding:13px 18px;text-align:left;font-family:var(--mono);font-size:0.7rem;letter-spacing:1.4px;text-transform:uppercase;color:var(--amber);font-weight:600;}
+.tbl td{padding:12px 18px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.6;}
+.tbl tbody tr:nth-child(even){background:#faf7f0;}
+.tbl tbody tr:hover{background:#f1ede2;}
+.tbl tbody tr:last-child td{border-bottom:none;}
+.tbl .lbl{font-weight:700;color:var(--ink);}
+
+/* ─── ORDER-OF-VOLATILITY CHIPS ─── */
+.chiprow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0;}
+.chip{background:#fff;border:1px solid var(--line);border-left:4px solid var(--coral);border-radius:8px;padding:10px 14px;font-size:0.85rem;font-weight:600;color:var(--ink);box-shadow:0 4px 12px rgba(12,24,27,0.06);}
+.chip .ci{display:block;font-family:var(--mono);font-size:0.62rem;letter-spacing:1px;color:var(--coral-deep);text-transform:uppercase;font-weight:700;margin-bottom:2px;}
+.arrow{color:var(--muted);font-weight:700;font-size:1.1rem;}
+
+/* ─── PILLS ─── */
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0;}
+.pill{padding:5px 14px;border-radius:50px;font-family:var(--mono);font-size:0.73rem;font-weight:500;}
+.pl-teal{background:rgba(22,182,166,0.12);color:var(--teal-deep);border:1px solid rgba(22,182,166,0.3);}
+.pl-amber{background:rgba(224,162,60,0.14);color:var(--amber-deep);border:1px solid rgba(224,162,60,0.32);}
+.pl-coral{background:rgba(224,101,90,0.12);color:var(--coral-deep);border:1px solid rgba(224,101,90,0.3);}
+.pl-violet{background:rgba(141,127,212,0.14);color:var(--violet-deep);border:1px solid rgba(141,127,212,0.3);}
+.pl-ink{background:var(--paper-2);color:var(--ink-3);border:1px solid var(--line);}
+
+/* ─── OBJECTIVES ─── */
+.objnum{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--ink-3);color:var(--amber);font-family:var(--mono);font-size:0.78rem;font-weight:600;flex-shrink:0;}
+
+/* ─── FOOTER ─── */
+.ft{background:var(--ink);padding:26px 48px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
+.ft-brand p{font-family:var(--mono);font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:4px;}
+.ft-brand span{font-size:0.78rem;color:rgba(247,243,236,0.4);}
+.ft-nav{display:flex;gap:10px;flex-wrap:wrap;}
+.ft-nav button{font-family:var(--body);font-weight:600;font-size:0.82rem;padding:9px 18px;border-radius:9px;cursor:pointer;
+    background:transparent;color:rgba(247,243,236,0.6);border:1px solid rgba(22,182,166,0.3);transition:all 0.2s;}
+.ft-nav button:hover{border-color:var(--teal);color:var(--teal);background:rgba(22,182,166,0.1);}
+
+@media(max-width:760px){
+    body{padding:14px 8px 30px;}
+    .hd-inner{flex-direction:column;text-align:center;padding:30px 22px;gap:18px;}
+    .hd-meta{justify-content:center;}
+    .hd h1{font-size:1.7rem;}
+    .section{padding:28px 22px;}
+    .tab{min-width:46%;text-align:center;}
+    .tab .tnum{text-align:center;}
+    .flow::before{display:none;}
+    .ft{flex-direction:column;text-align:center;padding:22px;}
+}
+@media print{
+    body{background:#fff;padding:0;}
+    .shell{box-shadow:none;}
+    .nav,.ft-nav{display:none;}
+    .section{display:block!important;page-break-after:always;}
+    .section.active>*{opacity:1;animation:none;}
+}
+
+  /* ===== REVIEW ACTIVITY (integrated) ===== */
+  .rv-intro{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-left:4px solid var(--amber);
+    border-radius:14px;
+    padding:20px 24px;
+    margin-bottom:24px;
+  }
+  .rv-intro p{margin:0;color:var(--text);font-size:15.5px;line-height:1.7;}
+  .rv-intro strong{color:var(--ink-2);}
+
+  .rv-progress-wrap{
+    position:sticky;
+    top:10px;
+    z-index:40;
+    background:rgba(247,243,236,0.94);
+    backdrop-filter:blur(10px);
+    padding:15px 18px;
+    margin-bottom:16px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow:0 6px 22px -12px rgba(12,24,27,0.35);
+  }
+  .rv-stat{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:12px;}
+  .rv-stat .count{font-family:var(--mono);font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--teal-deep);font-weight:600;}
+  .rv-controls{display:flex;gap:10px;flex-wrap:wrap;}
+  .rv-btn{
+    font-family:var(--body);font-weight:700;font-size:13px;
+    padding:10px 20px;border-radius:9px;border:none;cursor:pointer;transition:all .2s;
+    background:var(--ink-2);color:var(--paper);
+  }
+  .rv-btn:hover{background:var(--teal-deep);transform:translateY(-1px);}
+  .rv-btn.ghost{background:transparent;color:var(--teal-deep);border:1px solid var(--line);}
+  .rv-btn.ghost:hover{background:rgba(22,182,166,0.1);border-color:var(--teal);}
+  .rv-btn:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+  .rv-bar{height:10px;background:var(--paper-2);border-radius:999px;overflow:hidden;border:1px solid var(--line);}
+  .rv-bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--teal));transition:width .45s cubic-bezier(.4,0,.2,1);}
+
+  .rv-section-label{
+    font-family:var(--display);font-size:23px;font-weight:600;color:var(--ink);
+    margin:34px 0 6px;display:flex;align-items:center;gap:12px;letter-spacing:-0.01em;
+  }
+  .rv-section-label .badge-ra{
+    font-family:var(--mono);font-size:10.5px;background:var(--ink-2);color:var(--amber);
+    padding:5px 12px;border-radius:20px;letter-spacing:1px;font-weight:500;text-transform:uppercase;
+  }
+  .rv-section-rule{height:2px;background:linear-gradient(90deg,var(--amber),transparent);border:none;margin:0 0 6px;border-radius:2px;}
+  .rv-cat-label{
+    font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--teal-deep);text-transform:uppercase;
+    letter-spacing:1.5px;margin:22px 0 4px;
+  }
+
+  .rv-q{
+    background:#fff;border:1px solid var(--line);border-radius:14px;
+    padding:22px 26px;margin:15px 0;box-shadow:0 1px 2px rgba(12,24,27,0.04);transition:box-shadow .2s;
+  }
+  .rv-q:hover{box-shadow:0 6px 22px -16px rgba(12,24,27,0.4);}
+  .rv-q .qhead{display:flex;align-items:flex-start;gap:13px;margin-bottom:15px;}
+  .rv-q .qnum{
+    font-family:var(--mono);font-size:12.5px;font-weight:600;background:var(--paper-2);color:var(--ink-3);
+    padding:6px 11px;border-radius:8px;flex:0 0 auto;margin-top:1px;
+  }
+  .rv-q .qtext{font-size:16.5px;font-weight:600;color:var(--text);line-height:1.55;}
+  .rv-q .qchips{margin-bottom:13px;display:flex;gap:7px;flex-wrap:wrap;}
+  .rv-chip{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;padding:4px 11px;border-radius:20px;font-weight:500;}
+  .rv-chip.topic{background:rgba(22,182,166,0.12);color:var(--teal-deep);}
+  .rv-chip.scn{background:rgba(224,162,60,0.16);color:var(--amber-deep);}
+
+  .rv-opt{
+    display:flex;align-items:flex-start;gap:13px;width:100%;text-align:left;
+    background:var(--paper);border:1.5px solid var(--line);border-radius:10px;
+    padding:13px 16px;margin:9px 0;cursor:pointer;
+    font-family:var(--body);font-size:15px;color:var(--text);transition:all .18s;
+  }
+  .rv-opt:hover:not(:disabled){border-color:var(--amber);background:rgba(224,162,60,0.08);}
+  .rv-opt .ltr{
+    font-family:var(--mono);font-size:12.5px;font-weight:600;min-width:26px;height:26px;display:inline-flex;
+    align-items:center;justify-content:center;border:1px solid var(--line);border-radius:7px;
+    color:var(--amber-deep);flex:0 0 auto;background:#fff;
+  }
+  .rv-opt:disabled{cursor:default;}
+  .rv-opt.correct{border-color:var(--green);background:rgba(79,179,122,0.13);color:#1f6a44;}
+  .rv-opt.correct .ltr{background:var(--green);border-color:var(--green);color:#fff;}
+  .rv-opt.wrong{border-color:var(--coral);background:rgba(224,101,90,0.12);color:#8a3127;}
+  .rv-opt.wrong .ltr{background:var(--coral);border-color:var(--coral);color:#fff;}
+  .rv-opt.dim{opacity:.5;}
+
+  .rv-fb{display:none;margin-top:14px;padding:14px 18px;border-radius:10px;font-size:14px;line-height:1.6;}
+  .rv-fb.show{display:block;}
+  .rv-fb.good{background:rgba(79,179,122,0.1);border-left:3px solid var(--green);color:#1f6a44;}
+  .rv-fb.bad{background:rgba(224,101,90,0.1);border-left:3px solid var(--coral);color:#8a3127;}
+  .rv-fb b{font-weight:700;}
+
+  .rv-results{
+    display:none;margin:28px 0 8px;border-radius:18px;padding:32px;text-align:center;color:var(--paper);
+    background:linear-gradient(135deg,var(--ink) 0%,var(--ink-3) 65%,var(--teal-deep) 135%);
+    box-shadow:0 16px 40px -18px rgba(12,24,27,0.6);
+  }
+  .rv-results.show{display:block;}
+  .rv-results h3{font-family:var(--display);font-size:25px;font-weight:600;color:var(--amber);margin-bottom:6px;}
+  .rv-score-num{font-family:var(--display);font-size:44px;font-weight:600;margin:8px 0;letter-spacing:-0.01em;}
+  .rv-score-pct{font-size:15.5px;color:var(--paper-2);}
+  .rv-verdict{display:inline-block;margin-top:16px;font-weight:700;font-size:14.5px;padding:9px 26px;border-radius:999px;}
+  .rv-verdict.pass{background:var(--green);color:#fff;}
+  .rv-verdict.fail{background:var(--amber);color:var(--ink);}
+  .rv-results p.note{margin-top:16px;color:var(--paper-2);font-size:13px;}
+
+</style>
+  <link rel="stylesheet" href="../shared/mobile-responsive.css">
+</head>
+<body>
+<div class="shell">
+
+    <!-- HEADER -->
+    <div class="hd">
+        <div class="hd-bar"></div>
+        <div class="hd-grid"></div>
+        <div class="hd-inner">
+            <div class="pulse">
+                <span class="pulse-ring"></span>
+                <span class="pulse-ring"></span>
+                <span class="pulse-core">📡</span>
+            </div>
+            <div>
+                <div class="hd-eyebrow">CyberEdge · Security+</div>
+                <h1><span class="lnum">Lesson 12:</span> Explain <span class="accent">Incident Response</span><br>and Monitoring Concepts</h1>
+                <div class="hd-sub">How security teams prepare for, respond to, and learn from incidents — and the data, forensics, and tools that make detection possible.</div>
+                <div class="hd-meta">
+                    <span class="badge b-learner">📖 Learner Portal</span>
+                    <span class="badge b-cert">⚡ CompTIA Security+</span>
+                    <span class="badge b-credit">Dr. Solomon Seifu (Lead Technical Instructor &amp; Author)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAV -->
+    <div class="nav">
+        <button class="tab active" onclick="showSection('overview',this)"><span class="tnum">01</span>Overview</button>
+        <button class="tab" onclick="showSection('response',this)"><span class="tnum">02</span>Incident Response</button>
+        <button class="tab" onclick="showSection('forensics',this)"><span class="tnum">03</span>Digital Forensics</button>
+        <button class="tab" onclick="showSection('data',this)"><span class="tnum">04</span>Data Sources</button>
+        <button class="tab" onclick="showSection('tools',this)"><span class="tnum">05</span>Alerting &amp; Monitoring</button>
+        <button class="tab" onclick="showSection('review',this)"><span class="tnum">06</span>🎯 Review Activity</button>
+    </div>
+
+    <!-- ═══ 01 OVERVIEW ═══ -->
+    <div id="overview" class="section active">
+        <div class="shead">
+            <div class="shead-ic ic-teal">🗺️</div>
+            <div class="shead-tx"><h2>Lesson Overview</h2><p>What happens when prevention is not enough</p></div>
+        </div>
+
+        <p>Earlier lessons focused on building and evaluating defenses. This lesson assumes that, sooner or later, something will get through. When it does, an organization needs a disciplined way to <strong>respond</strong>, and continuous <strong>monitoring</strong> that surfaces the problem in the first place.</p>
+        <p>Lesson 12 brings four connected ideas together: how incidents are handled end to end, how digital evidence is preserved, where the data that reveals an attack comes from, and which tools turn that data into timely alerts.</p>
+
+        <div class="panel p-key">
+            <div class="ph">💡 Key Idea</div>
+            <div class="pc">Detection and response are two halves of one capability. Monitoring without a response plan produces alerts no one acts on; a response plan without monitoring never gets triggered. A mature security operation connects <strong>data → alert → response → lessons learned</strong> into a single continuous loop.</div>
+        </div>
+
+        <h3>Lesson Objectives</h3>
+        <table class="tbl">
+            <thead><tr><th>#</th><th>Objective</th><th>What You Will Understand</th></tr></thead>
+            <tbody>
+                <tr><td><span class="objnum">1</span></td><td><strong>Run the incident response lifecycle</strong></td><td>Move an incident through preparation, detection, analysis, containment, eradication, recovery, and lessons learned.</td></tr>
+                <tr><td><span class="objnum">2</span></td><td><strong>Preserve digital evidence</strong></td><td>Acquire and protect evidence in a legally defensible way, following order of volatility and chain of custody.</td></tr>
+                <tr><td><span class="objnum">3</span></td><td><strong>Identify data sources</strong></td><td>Know which logs, network records, captures, and metadata reveal malicious activity.</td></tr>
+                <tr><td><span class="objnum">4</span></td><td><strong>Apply alerting and monitoring tools</strong></td><td>Use SIEM, alert tuning, infrastructure monitoring, and benchmarks to detect threats and reduce noise.</td></tr>
+            </tbody>
+        </table>
+
+        <div class="rule"></div>
+        <h3>The Four Topics at a Glance</h3>
+        <div class="cards">
+            <div class="mc c-coral"><div class="mc-ic">🚨</div><h4>Incident Response</h4><p>A repeatable lifecycle for handling an incident from first signal to final review, supported by a plan and a trained team.</p></div>
+            <div class="mc c-violet"><div class="mc-ic">🔬</div><h4>Digital Forensics</h4><p>Collecting and preserving evidence so it stands up to investigation and, if needed, a court of law.</p></div>
+            <div class="mc c-teal"><div class="mc-ic">🗂️</div><h4>Data Sources</h4><p>The logs, network records, packet captures, and metadata that make an attack visible.</p></div>
+            <div class="mc c-amber"><div class="mc-ic">📟</div><h4>Alerting &amp; Monitoring</h4><p>The tools — led by SIEM — that aggregate data, correlate events, and raise the alerts that start a response.</p></div>
+        </div>
+
+        <div class="rule"></div>
+        <h3>How to Use This Portal</h3>
+        <ul>
+            <li>Use the <strong>tabs</strong> above, the <strong>← →</strong> arrow keys, or the footer buttons to move between topics.</li>
+            <li>Each topic opens with a <strong>Key Idea</strong> — read it first to anchor what follows.</li>
+            <li>Watch for <strong>Example</strong> panels; they connect each concept to a realistic scenario like those on the Security+ exam.</li>
+            <li>Before class, be ready to answer: <em>Why is the lessons-learned step as important as containment?</em></li>
+        </ul>
+
+        <div class="summary">
+            <div class="ph">📝 Big Picture Takeaway</div>
+            <div class="pc">Incident response is a <strong>loop, not a line</strong>. You prepare, you watch, you act, and you feed what you learned back into preparation. Forensics protects the truth of what happened, data sources supply the evidence, and monitoring tools are the eyes that never blink. Together they let an organization face an incident with a plan instead of panic.</div>
+        </div>
+    </div>
+
+    <!-- ═══ 02 INCIDENT RESPONSE ═══ -->
+    <div id="response" class="section">
+        <div class="shead">
+            <div class="shead-ic ic-coral">🚨</div>
+            <div class="shead-tx"><h2>Topic 12A · Incident Response</h2><p>Handling an incident from first signal to final review</p></div>
+        </div>
+
+        <div class="panel p-def">
+            <div class="ph">📖 Definition</div>
+            <div class="pc">An <strong>event</strong> is any observable occurrence on a system or network. An <strong>incident</strong> is an event that actually threatens the confidentiality, integrity, or availability of information. Incident response is the organized process of detecting, managing, and recovering from incidents.</div>
+        </div>
+
+        <h3>The Incident Response Lifecycle</h3>
+        <p>Incident response follows a repeatable lifecycle. It is drawn as a loop because the final step feeds straight back into the first.</p>
+        <div class="flow">
+            <div class="fitem"><div class="fnum">1</div><div class="fbody"><h4>Preparation</h4><p>Build the plan, the team, the tools, and the communication paths before anything happens.</p></div></div>
+            <div class="fitem"><div class="fnum">2</div><div class="fbody"><h4>Detection</h4><p>Recognize that something is wrong, from monitoring tools or from people reporting it.</p></div></div>
+            <div class="fitem"><div class="fnum">3</div><div class="fbody"><h4>Analysis</h4><p>Confirm the incident, determine its scope and severity, and prioritize the response.</p></div></div>
+            <div class="fitem"><div class="fnum">4</div><div class="fbody"><h4>Containment</h4><p>Limit the spread and stop the damage from growing, often by isolating affected systems.</p></div></div>
+            <div class="fitem"><div class="fnum">5</div><div class="fbody"><h4>Eradication</h4><p>Remove the threat itself — malware, accounts, footholds — from the environment.</p></div></div>
+            <div class="fitem"><div class="fnum">6</div><div class="fbody"><h4>Recovery</h4><p>Restore systems to normal operation and verify they are clean before returning them to service.</p></div></div>
+            <div class="fitem"><div class="fnum">7</div><div class="fbody"><h4>Lessons Learned</h4><p>Review what happened, fix the gaps, and feed improvements back into preparation.</p></div></div>
+        </div>
+
+        <h3>Preparation in Depth</h3>
+        <div class="panel p-key">
+            <div class="ph">💡 Key Idea</div>
+            <div class="pc">The best response work is done before the incident. Preparation means having the people, paperwork, and tooling ready so the team is following a plan, not inventing one under pressure.</div>
+        </div>
+        <ul>
+            <li><strong>Incident Response Plan (IRP)</strong> — the documented procedures the team follows, defining roles, steps, and decision authority.</li>
+            <li><strong>Response team (CSIRT/CIRT)</strong> — the named people responsible for handling incidents, with clear roles.</li>
+            <li><strong>Communication plan</strong> — who is notified, how, and in what order, including out-of-band channels in case normal systems are down.</li>
+            <li><strong>Tools and infrastructure</strong> — forensic kit, secure evidence storage, and isolated environments ready in advance.</li>
+        </ul>
+
+        <h3>Detection and Analysis</h3>
+        <p>Detection sources range from automated tools to alert users. Many attacks — phishing, social engineering, odd system behavior — are first noticed by people, which is why awareness training treats every user as a sensor.</p>
+        <div class="panel p-insight">
+            <div class="ph">🔎 Analysis Tools</div>
+            <div class="pc"><strong>The cyber kill chain</strong> maps an attack into stages, helping responders understand how far an attacker progressed. <strong>Playbooks</strong> give step-by-step response procedures for specific incident types, so the team responds consistently. Analysis also includes <strong>triage</strong> — ranking incidents by functional impact, information impact, recoverability, and scope.</div>
+        </div>
+
+        <h3>Containment, Eradication, and Recovery</h3>
+        <div class="cards cards-3">
+            <div class="mc c-coral"><div class="mc-ic">🛑</div><h4>Containment</h4><p>Stop the bleeding. Short-term isolation limits spread; long-term containment keeps operations running while a permanent fix is built.</p></div>
+            <div class="mc c-amber"><div class="mc-ic">🧹</div><h4>Eradication</h4><p>Remove the root cause — malware, malicious accounts, and persistence — so the threat cannot simply return.</p></div>
+            <div class="mc c-teal"><div class="mc-ic">♻️</div><h4>Recovery</h4><p>Restore from clean backups, validate integrity, and monitor closely as systems return to production.</p></div>
+        </div>
+
+        <h3>Lessons Learned</h3>
+        <div class="panel p-key">
+            <div class="ph">💡 Why It Matters</div>
+            <div class="pc">After the incident is over, the team holds a post-incident review. A common technique is the <strong>Five Whys</strong> — asking "why" repeatedly to move past the symptom and reach the true root cause. The output is concrete improvements that flow back into the preparation step, closing the loop.</div>
+        </div>
+
+        <h3>Beyond the Reactive Loop</h3>
+        <ul>
+            <li><strong>Testing and training</strong> — tabletop exercises and simulations rehearse the plan so the team is ready before a real incident.</li>
+            <li><strong>Threat hunting</strong> — proactively searching the environment for hidden threats, rather than waiting for an alert.</li>
+        </ul>
+
+        <div class="panel p-example">
+            <div class="ph">📌 Example</div>
+            <div class="pc">A SIEM alert flags ransomware encrypting files on one server (detection). The team confirms it and finds three affected hosts (analysis), isolates them from the network (containment), wipes and rebuilds them (eradication), restores data from clean backups (recovery), and then runs a Five Whys review that reveals an unpatched VPN appliance as the entry point — which becomes a new preparation task (lessons learned).</div>
+        </div>
+    </div>
+
+    <!-- ═══ 03 DIGITAL FORENSICS ═══ -->
+    <div id="forensics" class="section">
+        <div class="shead">
+            <div class="shead-ic ic-violet">🔬</div>
+            <div class="shead-tx"><h2>Topic 12B · Digital Forensics</h2><p>Preserving evidence that holds up under scrutiny</p></div>
+        </div>
+
+        <div class="panel p-def">
+            <div class="ph">📖 Definition</div>
+            <div class="pc"><strong>Digital forensics</strong> is the discipline of identifying, collecting, preserving, analyzing, and presenting digital evidence in a way that is both analytically reliable and legally defensible.</div>
+        </div>
+
+        <div class="panel p-key">
+            <div class="ph">💡 Key Idea</div>
+            <div class="pc">Forensics serves two goals at once: understanding what happened, and producing evidence that could stand up in court or a regulatory investigation. These goals create tension — the fastest way to fix a system (wiping and reimaging it) can destroy the very evidence you need. Good responders document every action and protect evidence even under pressure.</div>
+        </div>
+
+        <h3>Legal Foundations</h3>
+        <ul>
+            <li><strong>Due process</strong> — evidence must be handled fairly and lawfully to be usable.</li>
+            <li><strong>Legal hold</strong> — once litigation is anticipated, relevant data must be preserved and not deleted.</li>
+            <li><strong>E-discovery</strong> — the formal process of identifying and producing electronic evidence for legal proceedings.</li>
+        </ul>
+
+        <h3>Acquisition and the Order of Volatility</h3>
+        <p>When collecting evidence, capture the most fragile data first. Anything in memory disappears when power is lost, so it is collected before data that persists on disk.</p>
+        <div class="chiprow">
+            <div class="chip"><span class="ci">Most volatile</span>CPU cache &amp; registers</div>
+            <span class="arrow">→</span>
+            <div class="chip"><span class="ci">Then</span>System memory (RAM)</div>
+            <span class="arrow">→</span>
+            <div class="chip"><span class="ci">Then</span>Network state &amp; connections</div>
+            <span class="arrow">→</span>
+            <div class="chip"><span class="ci">Then</span>Disk &amp; storage</div>
+            <span class="arrow">→</span>
+            <div class="chip"><span class="ci">Least volatile</span>Backups &amp; archives</div>
+        </div>
+
+        <div class="cards">
+            <div class="mc c-violet"><div class="mc-ic">🧠</div><h4>System Memory Acquisition</h4><p>Capture a live image of RAM to preserve running processes, open connections, encryption keys, and malware that never touches the disk.</p></div>
+            <div class="mc c-teal"><div class="mc-ic">💽</div><h4>Disk Image Acquisition</h4><p>Make a bit-for-bit copy of storage using a write blocker, then hash it so any later change to the original or copy is detectable.</p></div>
+        </div>
+
+        <h3>Preservation and Chain of Custody</h3>
+        <div class="panel p-warn">
+            <div class="ph">⚠ Chain of Custody</div>
+            <div class="pc">Chain of custody is the documented record of <strong>who handled the evidence, when, and why</strong>, from collection to courtroom. A broken chain can make valid evidence inadmissible — cases have been dismissed not because the evidence was wrong, but because no one documented who accessed it. Hashing the evidence proves it was not altered.</div>
+        </div>
+
+        <h3>Reporting and E-Discovery</h3>
+        <p>The investigation ends with a clear, factual report of what was found, how, and what it means. That report, together with the preserved evidence, supports e-discovery if the incident moves into legal or regulatory proceedings.</p>
+
+        <div class="panel p-example">
+            <div class="ph">📌 Example</div>
+            <div class="pc">Responders arrive at a compromised workstation that is still powered on. They first capture a memory image (preserving the active malware and its network connections), then attach a write blocker and image the disk, hashing both. Every transfer of the drive is logged and signed. Months later in court, the matching hashes and complete custody log prove the evidence is exactly as collected.</div>
+        </div>
+    </div>
+
+    <!-- ═══ 04 DATA SOURCES ═══ -->
+    <div id="data" class="section">
+        <div class="shead">
+            <div class="shead-ic ic-teal">🗂️</div>
+            <div class="shead-tx"><h2>Topic 12C · Data Sources</h2><p>Where the evidence of an attack actually lives</p></div>
+        </div>
+
+        <div class="panel p-key">
+            <div class="ph">💡 Key Idea</div>
+            <div class="pc">You can only detect what you can see. Monitoring and investigation both depend on rich data sources — and a single source rarely tells the whole story. The skill is knowing which source answers which question, and correlating across them.</div>
+        </div>
+
+        <h3>Dashboards and Reports</h3>
+        <p>Dashboards turn streams of raw data into a visual summary of security posture at a glance, while scheduled reports communicate trends and compliance status to leadership over time.</p>
+
+        <h3>Log Data</h3>
+        <p>Logs are the foundation of detection. Different logs answer different questions:</p>
+        <table class="tbl">
+            <thead><tr><th>Log Source</th><th>What It Reveals</th></tr></thead>
+            <tbody>
+                <tr><td class="lbl">Host / OS logs</td><td>Logons, privilege use, account changes, and system events on a machine.</td></tr>
+                <tr><td class="lbl">Application logs</td><td>What an application did — errors, transactions, and user actions inside it.</td></tr>
+                <tr><td class="lbl">Endpoint logs</td><td>Process activity, file changes, and behavior captured by endpoint protection.</td></tr>
+                <tr><td class="lbl">Network logs</td><td>Firewall, IDS/IPS, and device logs showing what traffic crossed the network.</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Network Data Sources</h3>
+        <div class="cards cards-3">
+            <div class="mc c-teal"><div class="mc-ic">🌊</div><h4>NetFlow</h4><p>Summarizes who talked to whom, how much, and for how long — without storing the full content of the traffic.</p></div>
+            <div class="mc c-sky"><div class="mc-ic">📦</div><h4>Packet Captures</h4><p>Record the full contents of network traffic for deep analysis, the most detailed and most storage-heavy source.</p></div>
+            <div class="mc c-amber"><div class="mc-ic">🏷️</div><h4>Metadata</h4><p>Data about data — timestamps, file origins, email headers, and senders that reveal context an attacker may overlook.</p></div>
+        </div>
+
+        <div class="panel p-insight">
+            <div class="ph">🔎 Flow vs Capture</div>
+            <div class="pc">NetFlow is like a phone bill: it shows the calls, durations, and numbers, but not the conversation. A packet capture is the recording of the call itself. Flow data is cheap to keep at scale for spotting patterns; full captures are reserved for the moments that need deep inspection.</div>
+        </div>
+
+        <div class="panel p-example">
+            <div class="ph">📌 Example</div>
+            <div class="pc">An analyst notices in NetFlow that one workstation is sending large, regular bursts of data to an unfamiliar overseas address every hour — a possible beacon. The flow record raised the flag cheaply; a targeted packet capture then confirms command-and-control traffic hidden inside the connection.</div>
+        </div>
+    </div>
+
+    <!-- ═══ 05 ALERTING & MONITORING ═══ -->
+    <div id="tools" class="section">
+        <div class="shead">
+            <div class="shead-ic ic-amber">📟</div>
+            <div class="shead-tx"><h2>Topic 12D · Alerting and Monitoring Tools</h2><p>Turning oceans of data into timely, trustworthy alerts</p></div>
+        </div>
+
+        <div class="panel p-key">
+            <div class="ph">💡 Key Idea</div>
+            <div class="pc">Enterprises generate far more log data than any human can read. Monitoring tools exist to do the data reduction and pattern recognition that make analysis possible — and to raise an alert at the right moment without burying the team in noise.</div>
+        </div>
+
+        <h3>SIEM — The Command Center</h3>
+        <div class="panel p-def">
+            <div class="ph">📖 Definition</div>
+            <div class="pc"><strong>Security Information and Event Management (SIEM)</strong> aggregates log data from across the enterprise into one place, then correlates events from many sources to reveal attack sequences that are invisible in any single log.</div>
+        </div>
+        <p>SIEM's core value is <strong>correlation</strong>: linking a failed-login spike on one system to a firewall log on another to flag a brute-force attempt that neither source would show alone.</p>
+        <div class="pills">
+            <span class="pill pl-ink">Splunk</span>
+            <span class="pill pl-ink">IBM QRadar</span>
+            <span class="pill pl-ink">Microsoft Sentinel</span>
+        </div>
+
+        <h3>Core Monitoring Activities</h3>
+        <div class="cards cards-3">
+            <div class="mc c-amber"><div class="mc-ic">🔔</div><h4>Alerting</h4><p>Generating notifications when activity matches a rule or crosses a threshold, so analysts can act.</p></div>
+            <div class="mc c-teal"><div class="mc-ic">📊</div><h4>Reporting</h4><p>Summarizing security activity over time for trends, audits, and compliance evidence.</p></div>
+            <div class="mc c-violet"><div class="mc-ic">🗄️</div><h4>Archiving</h4><p>Retaining log data securely for the period required by policy and regulation, for later investigation.</p></div>
+        </div>
+
+        <h3>Alert Tuning</h3>
+        <div class="panel p-warn">
+            <div class="ph">⚠ Alert Fatigue</div>
+            <div class="pc">An untuned system floods analysts with <strong>false positives</strong> — alerts that are not real threats. Over time the team stops trusting alerts, and a real one slips past. <strong>Alert tuning</strong> refines rules and priority values for the specific environment, cutting noise so that the alerts that fire actually matter.</div>
+        </div>
+
+        <h3>Monitoring Infrastructure, Systems, and Applications</h3>
+        <ul>
+            <li><strong>Infrastructure</strong> — protocols like SNMP and flow data like NetFlow watch the health and traffic of network devices.</li>
+            <li><strong>Systems</strong> — monitoring agents track the performance and security state of servers and endpoints.</li>
+            <li><strong>Applications</strong> — application monitoring watches for errors, abuse, and anomalies inside software.</li>
+        </ul>
+
+        <h3>Benchmarks and SCAP</h3>
+        <div class="panel p-insight">
+            <div class="ph">🔎 Measuring Against a Standard</div>
+            <div class="pc">Monitoring is not only about live activity — it also checks systems against a known-good baseline. The <strong>Security Content Automation Protocol (SCAP)</strong> lets tools automatically test configurations against benchmarks, so drift away from the secure standard is detected continuously rather than during an audit.</div>
+        </div>
+
+        <h3>The Supporting Tool Stack</h3>
+        <div class="cards cards-3">
+            <div class="mc c-coral"><div class="mc-ic">🛰️</div><h4>IDS / IPS</h4><p>Detect (IDS) or block (IPS) malicious traffic by signature and behavior. Snort and Suricata are common.</p></div>
+            <div class="mc c-teal"><div class="mc-ic">💻</div><h4>EDR</h4><p>Endpoint Detection and Response watches process behavior to catch threats with no known signature, and can isolate a host remotely.</p></div>
+            <div class="mc c-amber"><div class="mc-ic">⚙️</div><h4>SOAR &amp; Automation</h4><p>Orchestrates and automates response with playbooks, so well-understood actions happen at machine speed.</p></div>
+        </div>
+
+        <div class="summary">
+            <div class="ph">📝 Final Lesson Takeaway</div>
+            <div class="pc">Monitoring tools are the eyes of the security operation, and SIEM is where those eyes come together. But tools only matter if their alerts are <strong>tuned to be trustworthy</strong> and connected to a <strong>response process</strong> that acts on them. Data sources supply the evidence, forensics preserves its integrity, and incident response turns all of it into action — and then into a stronger defense the next time. <em>Next, in Lesson 13, we analyze the specific indicators of malicious activity these tools surface.</em></div>
+        </div>
+    </div>
+
+
+    <!-- ═══ 06 REVIEW ACTIVITY ═══ -->
+    <div id="review" class="section">
+        <div class="shead">
+            <div class="shead-ic ic-amber">🎯</div>
+            <div class="shead-tx"><h2>Review Activity</h2><p>Eighty-four exam-style questions across every topic in this lesson</p></div>
+        </div>
+
+        <div class="rv-intro">
+            <p>Four question sets, one for each major topic: <strong>Incident Response</strong>, <strong>Digital Forensics</strong>, and two complementary sets on <strong>Data Sources</strong>. Answer choices are shuffled on every load, and each option gives immediate feedback. Your score out of 84 appears once you have answered them all, with <strong>70% to pass</strong>. Use <strong>Reshuffle &amp; reset</strong> to start over with a fresh order.</p>
+        </div>
+
+        <div class="rv-progress-wrap">
+            <div class="rv-stat">
+                <span class="count" id="rvCount">Answered 0 / 84</span>
+                <div class="rv-controls">
+                    <button class="rv-btn ghost" id="rvResults" disabled>See my score</button>
+                    <button class="rv-btn" id="rvReset">Reshuffle &amp; reset</button>
+                </div>
+            </div>
+            <div class="rv-bar"><div class="rv-bar-fill" id="rvFill"></div></div>
+        </div>
+
+        <div class="rv-results" id="rvResultsPanel">
+            <h3>Your Result</h3>
+            <div class="rv-score-num" id="rvScoreNum">0 / 84</div>
+            <div class="rv-score-pct" id="rvScorePct">0%</div>
+            <div class="rv-verdict" id="rvVerdict">&nbsp;</div>
+            <p class="note">Pass line is 70% (59 / 84). Review any questions you missed, then reshuffle and try again.</p>
+        </div>
+
+        <div id="rvQuiz"></div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="ft">
+        <div class="ft-brand">
+            <p>CyberEdge</p>
+            <span>CompTIA Security+ · Lesson 12: Explain Incident Response and Monitoring Concepts · Learner Portal</span>
+        </div>
+        <div class="ft-nav">
+            <button onclick="prevSection()">← Previous</button>
+            <button onclick="nextSection()">Next →</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const ids=['overview','response','forensics','data','tools','review'];
+    let cur=0;
+    function showSection(id,el){
+        document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+        const sec=document.getElementById(id);
+        sec.classList.add('active');
+        // re-trigger entrance animation
+        sec.querySelectorAll('*').forEach(()=>{});
+        const idx=ids.indexOf(id);
+        const tabs=document.querySelectorAll('.tab');
+        if(el){el.classList.add('active');}
+        else if(idx>=0&&tabs[idx]){tabs[idx].classList.add('active');}
+        cur=idx>=0?idx:0;
+        window.scrollTo({top:0,behavior:'smooth'});
+    }
+    function nextSection(){if(cur<ids.length-1){cur++;showSection(ids[cur]);}}
+    function prevSection(){if(cur>0){cur--;showSection(ids[cur]);}}
+    document.addEventListener('keydown',e=>{
+        if(e.key==='ArrowRight')nextSection();
+        if(e.key==='ArrowLeft')prevSection();
+    });
+
+    /* ===================== REVIEW ACTIVITY ENGINE ===================== */
+    (function(){
+      var RV_TOTAL=84, RV_PASS=0.70;
+      var RV_QUESTIONS=[
+    /* ===== SECTION 1: INCIDENT RESPONSE ===== */
+    {s:1,cat:"Incident Response Processes",scn:false,q:"According to the CompTIA incident response lifecycle, which phase happens before any incident occurs and makes systems resilient in the first place?",o:[
+      {t:"Preparation, where policies, hardening, and response resources are put in place",c:true,f:"Correct. Preparation is the up-front investment, hardening, plans, playbooks, and communication channels, that determines how well every later phase runs."},
+      {t:"Detection, where the first indicators of threat actor activity are discovered",c:false,f:"Detection comes after an incident has begun. It is about noticing activity, not preventing it ahead of time."},
+      {t:"Containment, where the spread of an active incident is limited quickly",c:false,f:"Containment happens during a live incident to stop it spreading, not before one occurs."},
+      {t:"Recovery, where affected systems are returned to normal business operation",c:false,f:"Recovery is near the end of the cycle, restoring systems after the threat is removed."}
+    ]},
+    {s:1,cat:"Incident Response Processes",scn:false,q:"In incident response terms, a cybersecurity incident is best defined as:",o:[
+      {t:"A successful or attempted violation of an asset's security posture",c:true,f:"Correct. An incident is any successful or attempted breach of confidentiality, integrity, or availability for an asset."},
+      {t:"A planned maintenance window scheduled well ahead of any work",c:false,f:"Planned maintenance is an authorized, expected activity, not a security incident."},
+      {t:"A routine software update pushed out to endpoints each month",c:false,f:"A normal patch deployment is routine operations, not a violation of security."},
+      {t:"A standard help-desk request to reset a forgotten user password",c:false,f:"A password reset request is ordinary support work, not an incident."}
+    ]},
+    {s:1,cat:"Incident Response Processes",scn:false,q:"A help-desk technician notices several users reporting that their files suddenly have strange extensions and will not open. Which incident response phase does noticing this represent?",o:[
+      {t:"Detection, the point at which signs of an incident are first identified",c:true,f:"Correct. Spotting indicators like unusual file changes is the detection phase, where the team realizes something is wrong."},
+      {t:"Eradication, the removal of the root cause from the affected systems",c:false,f:"Eradication comes later, after the incident is understood and contained. Here the team is only just noticing it."},
+      {t:"Preparation, the readiness work completed before any incident occurs",c:false,f:"Preparation happens ahead of time. This activity is already underway, so it cannot be preparation."},
+      {t:"Recovery, the restoration of systems back to normal operation",c:false,f:"Recovery happens after the threat is removed. The team has not even confirmed scope yet."}
+    ]},
+    {s:1,cat:"Incident Response Processes",scn:true,q:"After confirming an incident, a SOC team ranks it by functional impact, information impact, recoverability, and scope. This ranking activity is known as:",o:[
+      {t:"Triage, which prioritizes incidents so the team responds in the right order",c:true,f:"Correct. Triage uses impact and scope to decide how urgently and in what order incidents get attention."},
+      {t:"Eradication, which strips the malicious cause out of the environment",c:false,f:"Eradication removes the threat; it does not rank or prioritize incidents."},
+      {t:"Preparation, which builds the response capability before incidents occur",c:false,f:"Preparation is the readiness phase. Ranking a confirmed incident happens during analysis."},
+      {t:"Containment, which isolates affected hosts to stop an incident spreading",c:false,f:"Containment limits spread. Prioritizing by impact and scope is triage within analysis."}
+    ]},
+    {s:1,cat:"Incident Response Processes",scn:false,q:"Which statement best describes the difference between short-term and long-term containment?",o:[
+      {t:"Short-term isolates quickly to stop spread; long-term keeps operations running during the fix",c:true,f:"Correct. Short-term containment stops the bleeding fast, while long-term measures sustain the business until a permanent fix lands."},
+      {t:"Short-term removes the malware fully; long-term restores all data from clean backups",c:false,f:"Those describe eradication and recovery, not the two styles of containment."},
+      {t:"Short-term documents the incident; long-term trains the staff on new procedures",c:false,f:"Documentation and training belong to lessons learned, not containment."},
+      {t:"Short-term patches the systems; long-term rebuilds the network from the ground up",c:false,f:"Patching and rebuilding are eradication and recovery tasks, not containment definitions."}
+    ]},
+    {s:1,cat:"Incident Response Processes",scn:true,q:"An analyst finds ransomware encrypting a critical server and must decide whether to immediately pull the network cable. What is the key trade-off in this containment decision?",o:[
+      {t:"Cutting the connection stops the spread but can destroy volatile memory evidence",c:true,f:"Correct. Disconnecting halts the attack but wipes RAM-based evidence, the classic containment versus forensics tension."},
+      {t:"Cutting the connection patches the vulnerability but slows the entire network",c:false,f:"Disconnecting one host does not patch anything, and network speed is not the trade-off here."},
+      {t:"Cutting the connection erases the malware but also reimages the whole server",c:false,f:"Pulling the cable neither removes malware nor reimages the system. It only isolates it."},
+      {t:"Cutting the connection notifies the attacker but improves the backup integrity",c:false,f:"Isolation does not improve backups, and that is not the decision's real trade-off."}
+    ]},
+    {s:1,cat:"Incident Response Processes",scn:false,q:"The eradication phase of incident response focuses on:",o:[
+      {t:"Removing the root cause and returning systems to a secure, hardened state",c:true,f:"Correct. Eradication strips out malware, malicious accounts, and persistence, then applies secure configs and patches."},
+      {t:"Ranking the incident by its overall impact on the business operations",c:false,f:"That is triage during analysis, not eradication."},
+      {t:"Setting up communication channels before any incident takes place",c:false,f:"Establishing channels is a preparation task done ahead of time."},
+      {t:"Restoring data from backups and reintegrating systems into production",c:false,f:"That describes recovery, which follows eradication."}
+    ]},
+    {s:1,cat:"Incident Response Processes",scn:true,q:"A company restores a server from backup after a ransomware attack and is reinfected within hours. What recovery principle did they overlook?",o:[
+      {t:"Backups must be verified as clean, since a backup can carry the same infection",c:true,f:"Correct. A backup taken after the initial compromise can restore the malware along with the data, so cleanliness must be validated first."},
+      {t:"Backups must be encrypted, since attackers can read unprotected backup files",c:false,f:"Encryption protects confidentiality but would not have prevented reinfection from an already-infected backup."},
+      {t:"Backups must be deleted, since old copies waste valuable storage capacity",c:false,f:"Deleting backups removes your recovery option entirely and does not address reinfection."},
+      {t:"Backups must be public, since shared copies recover faster than private ones",c:false,f:"Making backups public is a serious exposure and has nothing to do with the reinfection cause."}
+    ]},
+    {s:1,cat:"Incident Response Processes",scn:true,q:"During lessons learned, a team repeatedly asks \"why\" to move past the symptom and reach the underlying cause. This technique is called:",o:[
+      {t:"The Five Whys, a method for drilling down to an incident's root cause",c:true,f:"Correct. The Five Whys keeps asking why until the team passes the visible symptom and reaches the true root cause."},
+      {t:"The kill chain, a model for mapping the stages of an attacker's actions",c:false,f:"The kill chain maps attack stages during analysis. It is not a root-cause questioning method."},
+      {t:"The triage matrix, a tool for ranking incidents by their relative impact",c:false,f:"Triage ranks incidents by impact. It does not dig into root cause through repeated questioning."},
+      {t:"The playbook, a guide listing step-by-step responses for an incident type",c:false,f:"A playbook prescribes response steps. It is not the root-cause technique described here."}
+    ]},
+    {s:1,cat:"Incident Response Processes",scn:false,q:"Why is the lessons learned phase considered the part that closes the incident response loop?",o:[
+      {t:"Its findings feed back into preparation so the next response is stronger",c:true,f:"Correct. Documenting what happened and improving the plan flows back into preparation, turning every incident into readiness for the next."},
+      {t:"It is the only phase in which the affected systems are finally isolated",c:false,f:"Isolation is containment. Lessons learned is about review and improvement, not isolating systems."},
+      {t:"It replaces the need for detection tools during the following incident",c:false,f:"Detection tools are still essential. Lessons learned improves the process, it does not replace tooling."},
+      {t:"It guarantees that the same type of incident can never occur again",c:false,f:"No phase guarantees prevention. It reduces the chance by improving the plan, not eliminates it."}
+    ]},
+    {s:1,cat:"Incident Response Processes",scn:true,q:"A security manager schedules tabletop exercises, writes incident playbooks, and sets up an out-of-band communication channel. These actions all belong to which phase?",o:[
+      {t:"Preparation, the readiness work done before any incident occurs",c:true,f:"Correct. Playbooks, exercises, and backup communication channels are all classic preparation activities."},
+      {t:"Analysis, the investigation that confirms and scopes an incident",c:false,f:"Analysis happens during a live incident. These are tasks completed beforehand."},
+      {t:"Recovery, the restoration of systems after the threat is removed",c:false,f:"Recovery restores systems post-incident. None of these activities respond to an active event."},
+      {t:"Detection, the discovery of indicators that an incident is underway",c:false,f:"Detection is about noticing an incident. These are readiness tasks done in advance."}
+    ]},
+    {s:1,cat:"Incident Response Processes",scn:true,q:"How does an incident response playbook differ from an incident response policy?",o:[
+      {t:"A playbook gives step-by-step actions for a specific incident type, while a policy sets the overall rules",c:true,f:"Correct. Policy sets high-level governance and authority; a playbook spells out the concrete steps for a given scenario."},
+      {t:"A playbook sets the overall governing rules, while a policy lists the detailed step-by-step actions",c:false,f:"This reverses the two. The policy governs; the playbook details the steps."},
+      {t:"A playbook and a policy are identical documents stored in two separate locations",c:false,f:"They are distinct document types at different levels of abstraction, not duplicates."},
+      {t:"A playbook applies only to hardware, while a policy applies only to the software",c:false,f:"Neither is limited to hardware or software. The difference is level of detail, not asset type."}
+    ]},
+    {s:1,cat:"Incident Response Processes",scn:false,q:"A cybersecurity incident grows until it threatens company-wide operations and is escalated beyond the normal IR process. What is it most likely handled as at that point?",o:[
+      {t:"A major incident managed through disaster recovery processes",c:true,f:"Correct. When an incident poses an existential threat to operations, it is escalated to a major incident handled by disaster recovery."},
+      {t:"A routine event closed out by the standard help-desk queue",c:false,f:"An existential, company-wide threat is the opposite of a routine help-desk ticket."},
+      {t:"A false positive dismissed after a quick analyst review",c:false,f:"It is a confirmed, escalating incident, not a false alarm."},
+      {t:"A scheduled change approved through the normal change board",c:false,f:"A change request is planned work, not an escalating live incident."}
+    ]},
+    {s:1,cat:"Testing and Training",scn:false,q:"What is the main purpose of a tabletop exercise in incident response?",o:[
+      {t:"Walking through a simulated incident on paper to rehearse the plan",c:true,f:"Correct. A tabletop is a discussion-based walkthrough that rehearses roles and decisions without touching live systems."},
+      {t:"Restoring production servers from backup after a real outage occurs",c:false,f:"That is an actual recovery operation, not a rehearsal exercise."},
+      {t:"Scanning the network for vulnerabilities on a fixed weekly schedule",c:false,f:"Vulnerability scanning is a technical assessment, not a response rehearsal."},
+      {t:"Encrypting all stored data so that attackers cannot read the files",c:false,f:"Encryption is a protective control, unrelated to exercising the response plan."}
+    ]},
+    {s:1,cat:"Testing and Training",scn:true,q:"An organization runs regular phishing simulations and security awareness sessions for all staff. What incident response benefit does this provide?",o:[
+      {t:"Users become better at recognizing and reporting threats early",c:true,f:"Correct. Training turns every user into a sensor, so phishing and odd behavior get reported sooner."},
+      {t:"Backups complete faster because fewer files need to be copied",c:false,f:"Awareness training has no effect on backup speed."},
+      {t:"Firewalls require fewer rule updates throughout the year",c:false,f:"Firewall maintenance is unrelated to staff awareness training."},
+      {t:"Encryption keys rotate automatically without any admin effort",c:false,f:"Key rotation is a separate technical process, not a training outcome."}
+    ]},
+    {s:1,cat:"Testing and Training",scn:false,q:"How does a full incident simulation differ from a tabletop exercise?",o:[
+      {t:"A simulation actively exercises real systems and tools, while a tabletop is a discussion-based walkthrough",c:true,f:"Correct. Simulations put hands on real tools and systems; tabletops talk through decisions around a table."},
+      {t:"A simulation is purely a paper discussion, while a tabletop fully takes down the production environment",c:false,f:"This reverses the two. Tabletops are the paper-based ones, not the live exercise."},
+      {t:"A simulation and a tabletop are two names for the exact same drill",c:false,f:"They are different in how hands-on they are, not interchangeable terms."},
+      {t:"A simulation only tests backups, while a tabletop only tests the firewalls",c:false,f:"Neither is limited to a single control like backups or firewalls."}
+    ]},
+    {s:1,cat:"Testing and Training",scn:true,q:"During a tabletop exercise, a team discovers their contact list for the legal department is out of date. What does this outcome best demonstrate?",o:[
+      {t:"Testing surfaces gaps in the plan before a real incident exposes them",c:true,f:"Correct. The value of exercises is exactly this, finding and fixing weak spots while the stakes are low."},
+      {t:"Testing replaces the need to maintain any written response documentation",c:false,f:"Testing supports the documentation; it never removes the need to keep it current."},
+      {t:"Testing guarantees that no real incident will occur in the coming year",c:false,f:"Exercises improve readiness but cannot prevent incidents from happening."},
+      {t:"Testing is only useful once an actual breach has already taken place",c:false,f:"The point of testing is to prepare before a breach, not only after one."}
+    ]},
+    {s:1,cat:"Threat Hunting",scn:false,q:"Threat hunting is best described as:",o:[
+      {t:"Proactively searching the environment for hidden threats before an alert fires",c:true,f:"Correct. Hunting actively looks for adversaries that automated tools have not flagged, rather than waiting for an alert."},
+      {t:"Waiting for an automated alert and then responding to it after the fact",c:false,f:"That is reactive, alert-driven detection, the opposite of proactive hunting."},
+      {t:"Restoring systems from backup once an incident has been fully contained",c:false,f:"That is recovery. Hunting is about searching for threats, not restoring systems."},
+      {t:"Writing the response policies that govern how the team handles incidents",c:false,f:"Policy writing is a preparation task, not active threat hunting."}
+    ]},
+    {s:1,cat:"Threat Hunting",scn:false,q:"How does threat hunting differ from traditional alert-based detection?",o:[
+      {t:"Hunting actively looks for threats that tools may have missed, rather than waiting on alerts",c:true,f:"Correct. Detection reacts to alerts; hunting goes looking for what slipped past the alerts."},
+      {t:"Hunting only runs after a confirmed breach, while detection runs before any incident",c:false,f:"Hunting is proactive and ongoing, not limited to post-breach, and detection is not purely preventive."},
+      {t:"Hunting and alert-based detection are identical approaches with different names",c:false,f:"They are genuinely different, one proactive and one reactive."},
+      {t:"Hunting relies solely on antivirus signatures, while detection uses no tools at all",c:false,f:"Hunting uses far more than signatures, and detection certainly uses tools."}
+    ]},
+    {s:1,cat:"Threat Hunting",scn:false,q:"A hunter assumes attackers may already be inside the network and searches logs for signs of unusual lateral movement. This assume-breach mindset reflects:",o:[
+      {t:"A proactive hypothesis that drives the hunt toward hidden adversary activity",c:true,f:"Correct. Assuming compromise and forming a hypothesis is exactly how hunters direct their search."},
+      {t:"A reactive process that begins only after a SIEM alert has been raised",c:false,f:"Hunting starts without an alert. That is what makes it proactive."},
+      {t:"A recovery step that restores systems once the threat has been removed",c:false,f:"Recovery restores systems. This activity is searching for an active threat."},
+      {t:"A preparation task that hardens systems long before any incident starts",c:false,f:"Hardening is preparation. Searching live logs for adversary activity is hunting."}
+    ]},
+    {s:1,cat:"Threat Hunting",scn:false,q:"A threat hunt uncovers a pattern of beaconing traffic that no existing alert caught. What is the most valuable next step?",o:[
+      {t:"Turn the finding into a new detection rule so the activity is caught automatically",c:true,f:"Correct. Feeding hunt findings back into detection means the gap is closed and future occurrences alert on their own."},
+      {t:"Delete the related logs so the storage system has more free space available",c:false,f:"Deleting evidence destroys the very data needed to investigate and improve detection."},
+      {t:"Ignore the finding because no alert was triggered by the monitoring tools",c:false,f:"The whole point of hunting is to act on what the tools missed, not dismiss it."},
+      {t:"Wait until the same pattern appears again before taking any further action",c:false,f:"Waiting lets a confirmed threat persist. The finding should be acted on now."}
+    ]},
+    /* ===== SECTION 2: DIGITAL FORENSICS ===== */
+    {s:2,cat:"Due Process and Legal Hold",scn:true,q:"An organization's legal team instructs IT to preserve every email and file connected to a pending lawsuit. This instruction is best described as a:",o:[
+      {t:"Legal hold that requires relevant data to be preserved from deletion",c:true,f:"Best answer. A legal hold is the formal instruction to preserve potentially relevant data once litigation is anticipated."},
+      {t:"Chain of custody that records each person who handles the evidence",c:false,f:"Plausible, but chain of custody documents handling after evidence is collected. It is not the instruction to preserve data."},
+      {t:"E-discovery process that produces stored data for the opposing party",c:false,f:"Close, but e-discovery is the later identification and production of data. The hold comes first and only preserves it."},
+      {t:"Forensic acquisition that creates a working copy of the source media",c:false,f:"Acquisition is the technical copying of media, not the legal instruction to preserve data from deletion."}
+    ]},
+    {s:2,cat:"Due Process and Legal Hold",scn:false,q:"Why is following due process essential when collecting digital evidence?",o:[
+      {t:"It preserves admissibility by ensuring evidence is collected lawfully and documented",c:true,f:"Best answer. Lawful, well-documented handling is what keeps evidence admissible and defensible in court."},
+      {t:"It accelerates the analysis by allowing work directly on the original media",c:false,f:"Tempting, but working on the original is bad practice. Speed never justifies risking the evidence."},
+      {t:"It assures attribution by tying every action to a single named suspect",c:false,f:"Due process does not guarantee attribution. It governs how evidence is handled, not who is identified."},
+      {t:"It satisfies retention rules by setting how long the evidence is stored",c:false,f:"Retention is a separate policy concern. Due process is about lawful, documented handling."}
+    ]},
+    {s:2,cat:"Due Process and Legal Hold",scn:false,q:"What is the relationship between a legal hold and e-discovery?",o:[
+      {t:"A legal hold preserves the data, and e-discovery later identifies and produces it",c:true,f:"Best answer. The hold freezes relevant data in place; e-discovery then finds and delivers it for the case."},
+      {t:"A legal hold produces the data, and e-discovery preserves it for later use",c:false,f:"This reverses the order. Preservation comes from the hold; production comes from e-discovery."},
+      {t:"A legal hold and e-discovery are the same step run by the same team",c:false,f:"They are distinct stages. One preserves, the other produces, and they often involve different roles."},
+      {t:"A legal hold encrypts the data, and e-discovery decrypts it at trial",c:false,f:"Neither step is about encryption. The hold preserves and e-discovery produces."}
+    ]},
+    {s:2,cat:"Due Process and Legal Hold",scn:false,q:"An employee deletes files that were already subject to a legal hold. What is the most likely consequence?",o:[
+      {t:"The organization may face penalties for failing to preserve required evidence",c:true,f:"Best answer. Destroying data under a hold is spoliation and can bring sanctions or adverse rulings."},
+      {t:"The deleted files are automatically restored from the legal hold archive",c:false,f:"A hold is an instruction to preserve, not a guaranteed automatic backup. Recovery is not assured."},
+      {t:"The legal hold immediately expands to cover the entire company network",c:false,f:"A hold does not auto-expand because of a deletion. Its scope is defined by the matter."},
+      {t:"The investigation continues smoothly using a forensic image of the files",c:false,f:"Only if an image already existed, which is not stated. The real consequence is exposure for spoliation."}
+    ]},
+    {s:2,cat:"Acquisition and Order of Volatility",scn:false,q:"The order of volatility directs investigators to:",o:[
+      {t:"Collect the most volatile, easily lost evidence before more stable evidence",c:true,f:"Best answer. Volatile data vanishes quickly, so it must be captured before stable sources like disks."},
+      {t:"Collect the largest sources of evidence before the smaller ones",c:false,f:"Size is not the ordering principle. Volatility, how fast data disappears, is."},
+      {t:"Collect evidence from remote systems before any local systems",c:false,f:"Location is not the ordering principle either. It is how volatile each source is."},
+      {t:"Collect the least important evidence first to refine the process",c:false,f:"Importance does not set the order. The most volatile evidence goes first regardless of priority."}
+    ]},
+    {s:2,cat:"Acquisition and Order of Volatility",scn:false,q:"Following the order of volatility, which source should be captured first?",o:[
+      {t:"The contents of system RAM and the active running processes",c:true,f:"Best answer. Memory is the most volatile common source and is lost the moment power is cut."},
+      {t:"The files stored on the system's primary hard disk",c:false,f:"Disk data is relatively stable and survives a shutdown, so it is captured later, not first."},
+      {t:"The logs archived on a remote backup server",c:false,f:"Archived remote logs are among the most stable sources and come near the end of the order."},
+      {t:"The data written to an offline backup tape",c:false,f:"Offline tape is highly stable and is one of the last sources in the order of volatility."}
+    ]},
+    {s:2,cat:"Acquisition and Order of Volatility",scn:false,q:"A responder arrives at a running, compromised machine. To follow the order of volatility, the responder should first:",o:[
+      {t:"Capture the live system memory before the machine is powered down",c:true,f:"Best answer. RAM is the most volatile source, so it must be captured while the system is still running."},
+      {t:"Shut the system down cleanly to protect the contents of the disk",c:false,f:"A clean shutdown discards volatile memory, the most perishable evidence on the system."},
+      {t:"Pull the drive and image it on a separate forensic workstation",c:false,f:"Removing the drive means powering off first, which destroys the memory you needed to capture."},
+      {t:"Disconnect the network and reboot into a forensic environment",c:false,f:"Rebooting wipes RAM. Memory must be acquired before any restart."}
+    ]},
+    {s:2,cat:"Acquisition and Order of Volatility",scn:false,q:"Why does acquisition follow the order of volatility rather than a more convenient order?",o:[
+      {t:"Volatile data such as memory disappears the moment a system loses power",c:true,f:"Best answer. The order exists because the most perishable evidence must be captured before it is gone."},
+      {t:"Stable data such as disks is the most likely to be altered by attackers",c:false,f:"Disks are comparatively stable, not the most perishable. Volatility, not tampering risk, sets the order."},
+      {t:"Remote evidence is always more relevant to a case than local evidence",c:false,f:"Relevance varies by case and is not what determines acquisition order."},
+      {t:"Larger evidence sources always contain more useful information",c:false,f:"Size does not equal value, and it is not the basis for the order of volatility."}
+    ]},
+    {s:2,cat:"Memory and Disk Image Acquisition",scn:false,q:"System memory acquisition is especially valuable because it can capture:",o:[
+      {t:"Running processes, encryption keys, and malware that lives only in memory",c:true,f:"Best answer. RAM holds live artifacts, including fileless malware and keys, that never touch the disk."},
+      {t:"The complete file system structure of every attached storage device",c:false,f:"That is what a disk image provides. Memory captures live state, not the full file system."},
+      {t:"The full archive of every email the user has ever sent or received",c:false,f:"Email archives live on mail servers and disks, not in volatile memory."},
+      {t:"A permanent record that stays intact after the system is shut down",c:false,f:"Memory is the opposite of permanent. Its contents are lost when power is removed."}
+    ]},
+    {s:2,cat:"Memory and Disk Image Acquisition",scn:true,q:"A forensic disk image is best described as:",o:[
+      {t:"A bit-for-bit copy of the drive, including unallocated and slack space",c:true,f:"Best answer. A true forensic image captures every sector, not just the visible, active files."},
+      {t:"A copy of only the active files the user has most recently opened",c:false,f:"That misses deleted data and slack space, which a real forensic image preserves."},
+      {t:"A compressed archive of only the most important folders on the drive",c:false,f:"Selecting folders is not forensic imaging. An image copies the entire drive faithfully."},
+      {t:"A live snapshot of the processes currently running in memory",c:false,f:"That describes a memory capture, not a disk image."}
+    ]},
+    {s:2,cat:"Memory and Disk Image Acquisition",scn:false,q:"Why do investigators use a write blocker when imaging a suspect drive?",o:[
+      {t:"It prevents any change to the original drive during the acquisition",c:true,f:"Best answer. A write blocker ensures the source is read-only, preserving its integrity for court."},
+      {t:"It speeds up the imaging so that large drives copy in less time",c:false,f:"Write blockers do not exist to improve speed. Their job is protecting the original."},
+      {t:"It encrypts the resulting image so others cannot read the contents",c:false,f:"Encryption is a separate concern. A write blocker controls writes to the source."},
+      {t:"It compresses the image to reduce the storage the copy requires",c:false,f:"Compression is unrelated. The write blocker simply prevents writes to the original."}
+    ]},
+    {s:2,cat:"Memory and Disk Image Acquisition",scn:true,q:"After creating a verified forensic image, an analyst is ready to examine the evidence. The analyst should:",o:[
+      {t:"Analyze the working copy and leave the original media untouched",c:true,f:"Best answer. Examination is always done on a copy so the original stays pristine and defensible."},
+      {t:"Analyze the original media directly to ensure the most accurate results",c:false,f:"Working on the original risks altering it. The verified copy is just as accurate and far safer."},
+      {t:"Delete the original media now that a verified image exists",c:false,f:"The original must be retained as the source of truth, never deleted."},
+      {t:"Share the original media so several team members can examine it",c:false,f:"Passing the original around invites changes and custody problems. Analysts use copies."}
+    ]},
+    {s:2,cat:"Memory and Disk Image Acquisition",scn:false,q:"A live system is likely infected by fileless malware. Which acquisition is most critical to perform first?",o:[
+      {t:"System memory acquisition, since the malware may exist only in RAM",c:true,f:"Best answer. Fileless malware often resides solely in memory, which is lost the instant power is cut."},
+      {t:"Disk image acquisition, since the disk holds the most total data",c:false,f:"Volume of data is not the priority. Fileless malware may leave nothing on disk."},
+      {t:"Backup tape acquisition, since archives preserve the historical state",c:false,f:"Old archives will not contain live, in-memory malware. Memory must come first."},
+      {t:"Cloud log acquisition, since remote logs are the hardest to alter",c:false,f:"Remote logs are stable and can wait. The volatile memory is what is about to disappear."}
+    ]},
+    {s:2,cat:"Preservation and Integrity",scn:false,q:"Why is a hash value calculated at the moment evidence is acquired?",o:[
+      {t:"It creates a reference fingerprint to later prove the evidence is unchanged",c:true,f:"Best answer. The acquisition hash is the baseline that a later hash is checked against to prove integrity."},
+      {t:"It encrypts the evidence so that unauthorized people cannot open it",c:false,f:"Hashing is not encryption. A hash verifies integrity but does not conceal the data."},
+      {t:"It compresses the evidence so the resulting image consumes less storage",c:false,f:"Hashing does not change the size of the evidence. It produces a verification value."},
+      {t:"It indexes the evidence so investigators can search it more quickly",c:false,f:"A hash is not a search index. Its purpose is proving the evidence has not changed."}
+    ]},
+    {s:2,cat:"Preservation and Integrity",scn:true,q:"An analyst re-hashes a disk image and the value no longer matches the reference hash from acquisition. This most likely means:",o:[
+      {t:"The image has been altered and its integrity can no longer be trusted",c:true,f:"Best answer. A hash mismatch is direct evidence the data changed since acquisition, breaking integrity."},
+      {t:"The image was compressed and simply needs to be expanded again",c:false,f:"Compression does not explain a mismatch on a proper hash. A change in content does."},
+      {t:"The hashing tool used a different algorithm and should be rerun",c:false,f:"Possible to check, but the default and serious reading of a mismatch is altered data."},
+      {t:"The image is fine because hash values naturally change over time",c:false,f:"Hashes of unchanged data never change. That is the entire point of using them."}
+    ]},
+    {s:2,cat:"Preservation and Integrity",scn:false,q:"What is the primary purpose of maintaining a chain of custody?",o:[
+      {t:"To document who handled the evidence and when, preserving its admissibility",c:true,f:"Best answer. An unbroken custody record shows the evidence was controlled and unaltered throughout."},
+      {t:"To encrypt the evidence so only authorized analysts can access it",c:false,f:"Access control is useful but separate. Chain of custody is a documentation trail, not encryption."},
+      {t:"To create multiple backup copies of the evidence in separate places",c:false,f:"Backups support availability, not the handling record that custody provides."},
+      {t:"To rank the evidence items by how relevant each is to the case",c:false,f:"Ranking relevance is analysis, not the purpose of a custody log."}
+    ]},
+    {s:2,cat:"Preservation and Integrity",scn:false,q:"At trial, the defense shows a gap in the evidence log where no custodian is recorded. What is the most likely impact?",o:[
+      {t:"The evidence may be ruled inadmissible because its integrity is in doubt",c:true,f:"Best answer. A break in the custody chain raises doubt about handling and can disqualify the evidence."},
+      {t:"The evidence is automatically accepted once a hash value is shown",c:false,f:"A hash proves the file is unchanged, but it cannot fill a documented gap in who held it."},
+      {t:"The gap is overlooked as long as the original investigator testifies",c:false,f:"Testimony cannot reliably paper over an undocumented custody period."},
+      {t:"The evidence is resubmitted after the missing entry is added later",c:false,f:"Custody records cannot be backfilled after the fact. The gap remains a credibility problem."}
+    ]},
+    {s:2,cat:"Preservation and Integrity",scn:false,q:"Which combination best preserves the integrity of seized digital evidence?",o:[
+      {t:"Hashing the evidence, using write blockers, and logging the chain of custody",c:true,f:"Best answer. Together these prove the evidence is unchanged, protected from writes, and properly handled."},
+      {t:"Encrypting the evidence, compressing the image, and limiting access by role",c:false,f:"Useful security practices, but they do not establish forensic integrity the way the correct trio does."},
+      {t:"Backing up the evidence, indexing the files, and tagging them by priority",c:false,f:"These help manage evidence but do not prove it is unaltered or properly handled."},
+      {t:"Scanning the evidence for malware, patching it, and updating its software",c:false,f:"Patching or changing evidence destroys its integrity. Evidence is never modified."}
+    ]},
+    {s:2,cat:"Reporting and E-Discovery",scn:false,q:"e-Discovery is best defined as the process of:",o:[
+      {t:"Identifying, collecting, and producing stored electronic data for legal proceedings",c:true,f:"Best answer. e-Discovery delivers preserved electronically stored information for a legal matter."},
+      {t:"Searching a network for hidden threats that no alert has yet detected",c:false,f:"That describes threat hunting, not the legal production of stored data."},
+      {t:"Recovering deleted files from a drive after an accidental deletion",c:false,f:"That is data recovery. e-Discovery is about producing relevant data for a case."},
+      {t:"Encrypting electronic records so they meet regulatory requirements",c:false,f:"Encryption for compliance is unrelated to the e-discovery production process."}
+    ]},
+    {s:2,cat:"Reporting and E-Discovery",scn:true,q:"A forensic report should primarily present:",o:[
+      {t:"The methods used and the findings reached, in a clear and defensible way",c:true,f:"Best answer. A sound report documents how the work was done and what was found, so it withstands scrutiny."},
+      {t:"The analyst's personal opinion on who is guilty in the case",c:false,f:"Reports state findings, not verdicts of guilt. That judgment belongs to the court."},
+      {t:"Only the final conclusion, without the steps taken to reach it",c:false,f:"Conclusions without methodology are not defensible. The steps must be shown."},
+      {t:"A list of every tool on the market that might have been used",c:false,f:"A report covers what was actually done, not a catalog of available tools."}
+    ]},
+    {s:2,cat:"Reporting and E-Discovery",scn:true,q:"A forensic report will be read by attorneys and a jury with limited technical background. The report should therefore:",o:[
+      {t:"Explain the technical findings in clear language while staying accurate",c:true,f:"Best answer. A report must be understandable to its audience without sacrificing technical correctness."},
+      {t:"Use as much technical jargon as possible to appear authoritative",c:false,f:"Dense jargon obscures the findings for a non-technical audience and weakens the report."},
+      {t:"Omit the methodology so the audience is not overwhelmed by the detail",c:false,f:"Dropping methodology makes the report indefensible. Clarity is achieved by explaining, not hiding it."},
+      {t:"Replace the findings with a simple statement of guilt or innocence",c:false,f:"That oversteps the analyst's role. The report presents findings, not a verdict."}
+    ]},
+    /* ===== SECTION 3: DATA SOURCES (SET I) ===== */
+    {s:3,cat:"Dashboards and Reports",scn:true,q:"What is the main purpose of a security dashboard?",o:[
+      {t:"To present a real-time, consolidated view of key security data at a glance",c:true,f:"Best answer. Dashboards exist to surface the most important live metrics in one place for quick monitoring."},
+      {t:"To store the raw event logs collected from across the environment",c:false,f:"Plausible, but storing raw logs is the job of a log repository or SIEM back end, not the dashboard view."},
+      {t:"To generate a detailed historical summary for a monthly review",c:false,f:"That describes a report. Dashboards focus on the current, live picture rather than a past period."},
+      {t:"To capture the full packet contents of suspicious network traffic",c:false,f:"That is packet capture. A dashboard visualizes metrics, it does not record raw traffic."}
+    ]},
+    {s:3,cat:"Dashboards and Reports",scn:false,q:"How does a dashboard differ from a report?",o:[
+      {t:"A dashboard shows current status live, while a report summarizes a period after the fact",c:true,f:"Best answer. Dashboards are continuous and real-time; reports look back over a defined window."},
+      {t:"A dashboard summarizes a past period, while a report shows the live current status",c:false,f:"This reverses the two. The live view is the dashboard; the look-back is the report."},
+      {t:"A dashboard and a report present the exact same information the same way",c:false,f:"They serve different needs, immediate monitoring versus periodic review, and are not interchangeable."},
+      {t:"A dashboard stores raw logs, while a report deletes them once reviewed",c:false,f:"Neither one is about storing or deleting raw logs. The difference is live versus historical."}
+    ]},
+    {s:3,cat:"Dashboards and Reports",scn:true,q:"A SOC manager wants the team to spot spikes in failed logins the moment they happen. Which tool best supports this?",o:[
+      {t:"A live dashboard that visualizes the failed-login metric in real time",c:true,f:"Best answer. Real-time visibility into a metric is exactly what a dashboard is built for."},
+      {t:"A scheduled monthly report emailed to the team for review",c:false,f:"A monthly report arrives far too late to catch a spike as it happens."},
+      {t:"A raw archive of every log file collected across the hosts",c:false,f:"Raw archives hold the data but offer no at-a-glance, real-time view of the spike."},
+      {t:"A full packet capture of all authentication traffic on the network",c:false,f:"Packet capture is heavy and detailed, not a live metric view for spotting trends quickly."}
+    ]},
+    {s:3,cat:"Dashboards and Reports",scn:true,q:"A security report is most useful for:",o:[
+      {t:"Summarizing trends and incidents over a defined period for review",c:true,f:"Best answer. Reports compile activity across a window so stakeholders can review what happened."},
+      {t:"Alerting analysts to an attack within seconds of it starting",c:false,f:"Real-time alerting is a dashboard or detection function, not the purpose of a periodic report."},
+      {t:"Replaying the exact payload of a captured network session",c:false,f:"Replaying payloads is packet capture work, not reporting."},
+      {t:"Aggregating raw logs from every host into one central store",c:false,f:"Aggregation is a SIEM function. A report draws on that data but is not the collection mechanism."}
+    ]},
+    {s:3,cat:"Log Data and Host OS Logs",scn:false,q:"In security monitoring, log data primarily provides:",o:[
+      {t:"A record of events that occurred on a system or device",c:true,f:"Best answer. Logs are time-stamped records of what happened, the backbone of monitoring and investigation."},
+      {t:"A live capture of every packet crossing the network",c:false,f:"That is packet capture. Logs record events, not raw traffic on the wire."},
+      {t:"A visual summary of metrics shown on a single screen",c:false,f:"That is a dashboard. Logs are the underlying event records, not the summary view."},
+      {t:"A measure of how much storage each system is currently using",c:false,f:"Capacity metrics are a narrow operational stat, not what log data fundamentally provides."}
+    ]},
+    {s:3,cat:"Log Data and Host OS Logs",scn:false,q:"Why do organizations forward logs to a central system such as a SIEM?",o:[
+      {t:"To correlate events from many sources and detect patterns across them",c:true,f:"Best answer. Centralizing logs lets the team connect activity that would be invisible on any single host."},
+      {t:"To reduce the total number of events each system has to record",c:false,f:"Forwarding does not reduce events. Each system still logs the same activity."},
+      {t:"To replace the need to capture any network packets at all",c:false,f:"Logs and packet captures serve different purposes. One does not eliminate the other."},
+      {t:"To encrypt every log entry the moment it is first written",c:false,f:"Encryption is a separate protection. Centralization is about correlation, not encryption."}
+    ]},
+    {s:3,cat:"Log Data and Host OS Logs",scn:false,q:"Host operating system logs are the best source for investigating:",o:[
+      {t:"Local logons, privilege use, and process activity on that system",c:true,f:"Best answer. OS logs record exactly this kind of local account and process activity."},
+      {t:"The full payload of an encrypted file transfer over the network",c:false,f:"Payloads come from packet capture, not host OS logs."},
+      {t:"The real-time dashboard metrics across the whole organization",c:false,f:"Dashboards aggregate metrics. A single host's OS log covers only that host."},
+      {t:"The header metadata attached to an external email message",c:false,f:"Email header metadata lives in mail systems, not in the host OS log."}
+    ]},
+    {s:3,cat:"Log Data and Host OS Logs",scn:true,q:"An analyst needs to find which account logged into a Windows server at a specific time. Which source should they check first?",o:[
+      {t:"The host's security event log on that Windows server",c:true,f:"Best answer. Windows security event logs record logon events with account and timestamp detail."},
+      {t:"The organization's firewall connection logs",c:false,f:"Firewall logs show network connections, not which local account authenticated to the server."},
+      {t:"A full packet capture taken at the network perimeter",c:false,f:"A perimeter capture may never see an internal logon and is far more than is needed here."},
+      {t:"The monthly executive security summary report",c:false,f:"A high-level report will not contain a specific logon event for one account at one time."}
+    ]},
+    {s:3,cat:"Log Data and Host OS Logs",scn:false,q:"Why is accurate time synchronization across systems important for log analysis?",o:[
+      {t:"It lets events from different sources be correlated in the right sequence",c:true,f:"Best answer. Without synced clocks, events cannot be reliably ordered across systems during an investigation."},
+      {t:"It reduces the size each individual log file takes up on disk",c:false,f:"Time sync has no effect on log file size."},
+      {t:"It encrypts the timestamps so an attacker cannot alter them",c:false,f:"Synchronization sets accurate time; it does not encrypt or protect the timestamps."},
+      {t:"It removes the need to forward logs to a central collection point",c:false,f:"Central collection is still needed. Time sync makes that collected data correlatable."}
+    ]},
+    {s:3,cat:"Application and Endpoint Logs",scn:false,q:"Application logs are most valuable for investigating:",o:[
+      {t:"Events specific to a program, such as errors and user actions within it",c:true,f:"Best answer. Application logs capture what happens inside that program, which other sources do not see."},
+      {t:"The routing decisions made by the core network switches",c:false,f:"Routing is recorded by network devices, not the application's own log."},
+      {t:"The physical access events recorded at the building entrance",c:false,f:"Physical access is logged by badge systems, unrelated to application logs."},
+      {t:"The raw bytes of traffic captured on the network segment",c:false,f:"Raw traffic is packet capture, not application logging."}
+    ]},
+    {s:3,cat:"Application and Endpoint Logs",scn:false,q:"Endpoint detection and response (EDR) logs are especially useful because they record:",o:[
+      {t:"Detailed process, file, and behavior activity on the endpoint itself",c:true,f:"Best answer. EDR provides deep visibility into what runs and changes on the endpoint."},
+      {t:"The full content of every email leaving the organization",c:false,f:"Email content is handled by mail security tools, not EDR."},
+      {t:"The high-level metrics displayed on the SOC dashboard",c:false,f:"Dashboards summarize metrics. EDR logs are the detailed endpoint records behind them."},
+      {t:"The firewall rules applied at the network perimeter",c:false,f:"Firewall configuration is a network control, not what EDR records."}
+    ]},
+    {s:3,cat:"Application and Endpoint Logs",scn:true,q:"A web application was attacked through a malicious URL request. Which log is most likely to show the exact request?",o:[
+      {t:"The web server's application log, which records incoming requests",c:true,f:"Best answer. Web server logs capture the requested URLs, including the malicious one."},
+      {t:"The host operating system's security log on that server",c:false,f:"The OS security log tracks logons and privileges, not individual HTTP requests."},
+      {t:"The intrusion detection dashboard's summary view",c:false,f:"A dashboard summarizes alerts; it will not hold the exact request string."},
+      {t:"The monthly vulnerability scan report for the application",c:false,f:"A scan report lists weaknesses, not the live request used in the attack."}
+    ]},
+    {s:3,cat:"Application and Endpoint Logs",scn:false,q:"Why do investigators often review host logs and application logs together?",o:[
+      {t:"Each shows a different layer, and together they give a fuller picture",c:true,f:"Best answer. Combining the system view and the application view fills gaps neither covers alone."},
+      {t:"They contain identical entries, so one simply confirms the other",c:false,f:"They are not duplicates. They capture different layers of activity."},
+      {t:"Application logs replace host logs once an incident is confirmed",c:false,f:"Neither replaces the other. Both remain useful throughout an investigation."},
+      {t:"Host logs are only readable after the application logs are deleted",c:false,f:"There is no such dependency. Both are read together, and evidence is not deleted."}
+    ]},
+    {s:3,cat:"Network Data Sources",scn:false,q:"Firewall logs are the best source for determining:",o:[
+      {t:"Which connections were allowed or blocked between hosts",c:true,f:"Best answer. Firewall logs record the allow and deny decisions for traffic passing through."},
+      {t:"Which processes were launched on an individual endpoint",c:false,f:"Process activity is captured by host or EDR logs, not the firewall."},
+      {t:"Which user logged into a specific application screen",c:false,f:"Application-level logons appear in the application's own log, not the firewall."},
+      {t:"Which files were modified on a local file server",c:false,f:"File changes are recorded by host logs, not by the firewall."}
+    ]},
+    {s:3,cat:"Network Data Sources",scn:false,q:"Intrusion detection and prevention system logs primarily record:",o:[
+      {t:"Alerts triggered when traffic matches a known attack signature",c:true,f:"Best answer. IDS and IPS logs flag traffic that matches signatures or anomaly rules."},
+      {t:"The complete list of every connection the firewall permitted",c:false,f:"That is firewall logging. IDS and IPS focus on suspicious or malicious patterns."},
+      {t:"The local process activity occurring on each monitored host",c:false,f:"Host process activity comes from endpoint logs, not network IDS and IPS."},
+      {t:"The high-level trends compiled for a quarterly report",c:false,f:"Trend compilation is reporting. IDS and IPS produce the underlying alerts."}
+    ]},
+    {s:3,cat:"Network Data Sources",scn:true,q:"An analyst wants to know whether a connection the firewall allowed actually contained a known exploit. Which source should they consult?",o:[
+      {t:"The IPS/IDS logs, which flag traffic matching known attack signatures",c:true,f:"Best answer. Even allowed traffic is inspected by IDS and IPS, which would flag a known exploit."},
+      {t:"The firewall logs, which record only allow and deny decisions",c:false,f:"The firewall already allowed it and only logs that decision, not the exploit content."},
+      {t:"The host operating system logs on the destination server",c:false,f:"Host logs may show an effect but not that the connection itself carried a signatured exploit."},
+      {t:"The executive dashboard showing overall alert counts",c:false,f:"A dashboard shows totals, not whether this specific connection contained the exploit."}
+    ]},
+    {s:3,cat:"Network Data Sources",scn:false,q:"Network flow data such as NetFlow is most useful for showing:",o:[
+      {t:"Which hosts communicated, how much, and for how long",c:true,f:"Best answer. Flow data summarizes who talked to whom and how much, without the full payload."},
+      {t:"The exact payload contents of each captured packet",c:false,f:"Payloads require full packet capture. Flow data is summary metadata, not content."},
+      {t:"The internal process tree running on a single workstation",c:false,f:"Process trees come from host or EDR logs, not network flow data."},
+      {t:"The signatures of malware found by the endpoint scanner",c:false,f:"Malware signatures are an endpoint antivirus output, unrelated to flow data."}
+    ]},
+    {s:3,cat:"Packet Captures and Metadata",scn:true,q:"A full packet capture is the best data source when an investigator needs:",o:[
+      {t:"The exact contents and payload of the network traffic",c:true,f:"Best answer. Packet capture preserves the raw bytes, giving the deepest possible view of traffic."},
+      {t:"A quick at-a-glance summary of overall network health",c:false,f:"That is a dashboard view. Packet capture is detailed, not a quick summary."},
+      {t:"A long-term, low-storage record of historical activity",c:false,f:"Packet capture is the opposite of low-storage. It consumes space very quickly."},
+      {t:"A list of which user accounts logged into each server",c:false,f:"Logon records come from host logs, not from raw packet capture."}
+    ]},
+    {s:3,cat:"Packet Captures and Metadata",scn:false,q:"What is a key trade-off of relying on full packet capture?",o:[
+      {t:"It is highly detailed but consumes large amounts of storage quickly",c:true,f:"Best answer. Full fidelity comes at the cost of heavy storage, which limits how long it can be kept."},
+      {t:"It is easy to store but reveals very little about the traffic",c:false,f:"The reverse is true. It reveals a great deal but is expensive to store."},
+      {t:"It shows only metadata and never the actual packet contents",c:false,f:"Packet capture shows the actual contents. Metadata-only is flow data."},
+      {t:"It captures host process activity but ignores network traffic",c:false,f:"Packet capture is entirely about network traffic, not host processes."}
+    ]},
+    {s:3,cat:"Packet Captures and Metadata",scn:true,q:"In a security investigation, metadata is best described as:",o:[
+      {t:"Data about data, such as timestamps, senders, and file properties",c:true,f:"Best answer. Metadata describes the data, who, when, and how, without being the content itself."},
+      {t:"The full body content of an email or document under review",c:false,f:"The body is the content. Metadata is the surrounding descriptive information."},
+      {t:"The raw packet payloads captured from the network wire",c:false,f:"Raw payloads are packet capture. Metadata is descriptive, not the traffic itself."},
+      {t:"The live dashboard view of the current security metrics",c:false,f:"A dashboard is a presentation layer, not the definition of metadata."}
+    ]},
+    {s:3,cat:"Packet Captures and Metadata",scn:false,q:"Investigators analyze email headers to trace a phishing campaign's origin without reading the message bodies. This is an example of using:",o:[
+      {t:"Metadata to reveal patterns of communication and origin",c:true,f:"Best answer. Header fields are metadata that expose routing and origin without the message content."},
+      {t:"Packet captures to reconstruct the full message payload",c:false,f:"They are deliberately not reading content, so this is metadata work, not payload reconstruction."},
+      {t:"Host logs to track local process execution on the mail server",c:false,f:"Header analysis is not about local processes on the mail server."},
+      {t:"Dashboards to display the campaign's overall alert volume",c:false,f:"Counting alerts on a dashboard is not the same as tracing origin through headers."}
+    ]},
+    /* ===== SECTION 4: DATA SOURCES (SET II) ===== */
+    {s:4,cat:"Dashboards & Reports",scn:true,q:"A SOC manager wants one screen that pulls live data from the firewall, the IDS, and the endpoint tools so analysts can spot trouble at a glance. Which data source best fits this need?",o:[
+      {t:"A dashboard",c:true,f:"A dashboard gives the real time, consolidated, at a glance view across many sources, exactly what is described."},
+      {t:"An automated report",c:false,f:"Reports are useful, but they run on a schedule and summarize past activity, they are not the live surface analysts watch."},
+      {t:"A packet capture",c:false,f:"A packet capture is raw traffic for deep analysis, not a consolidated overview of multiple tools."},
+      {t:"A SIEM correlation rule",c:false,f:"A correlation rule is the logic that decides what becomes an alert, not the screen analysts watch."}
+    ]},
+    {s:4,cat:"Dashboards & Reports",scn:true,q:"Leadership wants a monthly document summarizing incident counts, mean time to respond, and trends for the board. Which output best fits?",o:[
+      {t:"A report",c:true,f:"A report is the scheduled, summarized output suited to periodic leadership review."},
+      {t:"A dashboard",c:false,f:"A dashboard is live and continuous, great for analysts but not the polished periodic board summary."},
+      {t:"An alert",c:false,f:"An alert flags a single event in the moment, it is not a trend summary."},
+      {t:"A raw log file",c:false,f:"Raw logs hold the underlying data, but they are not a digestible summarized document on their own."}
+    ]},
+    {s:4,cat:"Dashboards & Reports",scn:false,q:"The dashboard shows a sudden spike in failed logins, but it does not tell you which accounts are affected. What is the best next source to drill into?",o:[
+      {t:"The host authentication logs",c:true,f:"Dashboards summarize, so to see the specific accounts you drill into the underlying authentication logs."},
+      {t:"The executive summary report",c:false,f:"An executive report is even more summarized than the dashboard, it will not surface individual accounts."},
+      {t:"A system performance dashboard",c:false,f:"A performance dashboard tracks system health metrics, not authentication detail."},
+      {t:"The asset inventory",c:false,f:"The asset inventory tells you what devices exist, not who tried to log in."}
+    ]},
+    {s:4,cat:"Dashboards & Reports",scn:false,q:"What is the main reason a dashboard by itself is not enough for a thorough investigation?",o:[
+      {t:"It presents summarized data and hides the underlying detail",c:true,f:"Dashboards aggregate and visualize, so a deep investigation still needs the raw logs behind them."},
+      {t:"It cannot display data from more than one source",c:false,f:"Dashboards are built specifically to combine many sources, so this is not the limitation."},
+      {t:"It only updates once per month",c:false,f:"Dashboards update in or near real time, the monthly cadence describes a report."},
+      {t:"It stores no historical data at all",c:false,f:"Dashboards can show historical trends, the real gap is depth of detail, not lack of history."}
+    ]},
+    {s:4,cat:"Log Data & OS Logs",scn:true,q:"On a Windows server you need records of successful and failed logons. Which log is the best source?",o:[
+      {t:"The Security log",c:true,f:"Windows logon successes (4624) and failures (4625) are written to the Security log."},
+      {t:"The System log",c:false,f:"The System log holds operating system component events like drivers and services, not logon auditing."},
+      {t:"The Application log",c:false,f:"The Application log records events raised by installed applications, not authentication."},
+      {t:"The Setup log",c:false,f:"The Setup log covers installation and update activity, not logon events."}
+    ]},
+    {s:4,cat:"Log Data & OS Logs",scn:true,q:"A Linux administrator is investigating authentication attempts. Which location is the best place to look?",o:[
+      {t:"/var/log (auth.log or secure)",c:true,f:"Linux writes log data under /var/log, with authentication events in auth.log or secure depending on the distribution."},
+      {t:"/etc/passwd",c:false,f:"/etc/passwd lists user accounts, it does not record login attempts."},
+      {t:"/proc",c:false,f:"/proc exposes live process and kernel information, it is not where logs are stored."},
+      {t:"/home",c:false,f:"/home holds users' personal files, not system logs."}
+    ]},
+    {s:4,cat:"Log Data & OS Logs",scn:true,q:"A Windows event with ID 4625 most likely indicates which of the following?",o:[
+      {t:"A failed logon attempt",c:true,f:"4625 records a failed logon, which is useful for spotting brute force activity."},
+      {t:"A successful logon",c:false,f:"A successful logon is event ID 4624, not 4625."},
+      {t:"A new service was installed",c:false,f:"A new service installation is event ID 7045."},
+      {t:"A user account was created",c:false,f:"Account creation is event ID 4720."}
+    ]},
+    {s:4,cat:"Log Data & OS Logs",scn:false,q:"Why is forwarding host logs to a central syslog or SIEM server considered a best practice for investigations?",o:[
+      {t:"It keeps a copy of the logs off the host, where it survives tampering or wiping",c:true,f:"Shipping logs to a central server preserves a copy beyond the reach of an attacker who compromises or wipes the host."},
+      {t:"It makes the log contents unreadable to attackers",c:false,f:"Centralizing does not obscure the contents, the benefit is preservation and correlation."},
+      {t:"It removes the need to keep any logs on the host",c:false,f:"Hosts can still keep local logs, centralizing adds a protected copy rather than replacing local logging."},
+      {t:"It automatically encrypts every endpoint",c:false,f:"Endpoint encryption is a separate control, unrelated to centralizing logs."}
+    ]},
+    {s:4,cat:"Log Data & OS Logs",scn:false,q:"An OS log shows a service repeatedly starting and stopping. On Windows, which log best confirms this service behavior?",o:[
+      {t:"The System log",c:true,f:"Service start and stop events from the operating system are recorded in the System log."},
+      {t:"The Security log",c:false,f:"The Security log focuses on audit and logon events, not service state changes."},
+      {t:"The Application log",c:false,f:"The Application log captures events from installed software, not core OS services."},
+      {t:"The Forwarded Events log",c:false,f:"Forwarded Events holds events collected from other machines, not necessarily this host's service activity."}
+    ]},
+    {s:4,cat:"Application & Endpoint Logs",scn:true,q:"A web application is throwing errors for some users. Which data source is the best first stop to see the application's own error detail?",o:[
+      {t:"The application log",c:true,f:"The application's own log records its internal errors and events, the most direct detail here."},
+      {t:"The Windows Security log",c:false,f:"The Security log captures OS auditing, not an application's internal errors."},
+      {t:"The firewall log",c:false,f:"Firewall logs show allowed and blocked traffic, not application error detail."},
+      {t:"The DNS server log",c:false,f:"DNS logs record name resolution, not application level errors."}
+    ]},
+    {s:4,cat:"Application & Endpoint Logs",scn:false,q:"An EDR (endpoint detection and response) tool is most valuable as a data source because it does what?",o:[
+      {t:"Records detailed process, file, and behavior activity on the endpoint",c:true,f:"EDR continuously records endpoint activity such as process creation, file changes, and behaviors for detection and investigation."},
+      {t:"Captures every raw packet crossing the network",c:false,f:"Capturing raw packets is the job of a network tap or sniffer, not endpoint EDR."},
+      {t:"Summarizes board level security metrics",c:false,f:"Board level summaries come from reports, not the granular endpoint telemetry EDR provides."},
+      {t:"Stores the organization's backup images",c:false,f:"Backups are a separate system, EDR records activity rather than storing recovery images."}
+    ]},
+    {s:4,cat:"Application & Endpoint Logs",scn:true,q:"Antivirus logs on an endpoint would best help you answer which question?",o:[
+      {t:"Which malware was detected and what action was taken",c:true,f:"Antivirus logs record detections, the threat names, and whether files were quarantined, cleaned, or allowed."},
+      {t:"Which websites a user visited all day",c:false,f:"Browsing history comes from proxy or browser logs, not antivirus."},
+      {t:"How much bandwidth the host consumed",c:false,f:"Bandwidth usage is a network metric, not something antivirus logs."},
+      {t:"Which firewall rule blocked a connection",c:false,f:"Firewall decisions live in firewall logs, not antivirus logs."}
+    ]},
+    {s:4,cat:"Application & Endpoint Logs",scn:false,q:"Why are endpoint logs especially important when investigating an attack that slipped past the network defenses?",o:[
+      {t:"They capture activity that happened locally on the device, where network sensors have no visibility",c:true,f:"Once activity is local to the host, endpoint logs may be the only record of it, since network sensors only see traffic on the wire."},
+      {t:"They are always larger than network logs",c:false,f:"Size varies and is not the reason endpoint logs matter here."},
+      {t:"They never need to be correlated with other sources",c:false,f:"Strong investigations still correlate endpoint logs with network and other sources."},
+      {t:"They cannot be altered by an attacker",c:false,f:"An attacker with enough access can tamper with local logs, which is exactly why centralizing them matters."}
+    ]},
+    {s:4,cat:"Network Data Sources",scn:true,q:"You want a lightweight, ongoing record of which hosts talked to which, on what ports and how much data, without storing the full payloads. Which source best fits?",o:[
+      {t:"Flow data (NetFlow or IPFIX)",c:true,f:"Flow data summarizes conversations, source, destination, ports, and volume, without the storage cost of full payloads."},
+      {t:"Full packet capture",c:false,f:"Full packet capture records entire payloads, far heavier than the summary described."},
+      {t:"The firewall rule base",c:false,f:"The firewall rule base defines policy, it is not a record of the actual conversations."},
+      {t:"A DNS zone file",c:false,f:"A DNS zone file holds name records, not traffic conversation data."}
+    ]},
+    {s:4,cat:"Network Data Sources",scn:false,q:"An IDS or IPS as a data source is best described as providing which of the following?",o:[
+      {t:"Alerts about traffic that matches known attack signatures or anomalies",c:true,f:"An IDS or IPS inspects traffic and raises alerts when it matches a signature or behaves anomalously."},
+      {t:"A full archive of every packet for later replay",c:false,f:"Full packet replay is the role of a capture or RNA solution, not the IDS alert stream itself."},
+      {t:"A visual board built for executives",c:false,f:"Executive boards are dashboards or reports, not IDS output."},
+      {t:"The authoritative list of company assets",c:false,f:"Asset lists come from inventory systems, not the IDS."}
+    ]},
+    {s:4,cat:"Network Data Sources",scn:false,q:"DNS logs are a valuable data source mainly because they can reveal what?",o:[
+      {t:"Hosts resolving suspicious or known malicious domain names",c:true,f:"DNS logs show what names hosts looked up, which can expose beaconing to malicious domains."},
+      {t:"The exact files downloaded over HTTPS",c:false,f:"The contents of HTTPS downloads are encrypted, DNS logs only show the names resolved."},
+      {t:"Which firewall rule allowed a flow",c:false,f:"Firewall decisions are in firewall logs, not DNS logs."},
+      {t:"CPU usage on the endpoint",c:false,f:"Endpoint CPU usage is host telemetry, unrelated to DNS resolution."}
+    ]},
+    {s:4,cat:"Network Data Sources",scn:true,q:"A firewall log is the best source to answer which question?",o:[
+      {t:"Was a connection between two addresses allowed or denied, and on what port",c:true,f:"Firewall logs record the allow or deny decision along with addresses, ports, and protocol."},
+      {t:"What malware family infected the host",c:false,f:"Identifying a malware family is the work of antivirus or EDR, not the firewall."},
+      {t:"What a user typed into a web form",c:false,f:"Form contents would require application or packet level data, not firewall logs."},
+      {t:"Which DLL a process loaded",c:false,f:"Loaded DLLs are endpoint process detail captured by EDR, not the firewall."}
+    ]},
+    {s:4,cat:"Packet Captures & Metadata",scn:false,q:"What is the defining advantage of a full packet capture over flow data?",o:[
+      {t:"It records the complete contents, the payloads, of the traffic",c:true,f:"A full packet capture preserves entire payloads, letting you reconstruct exactly what was sent."},
+      {t:"It uses far less storage",c:false,f:"Full captures use much more storage than flow summaries, not less."},
+      {t:"It works without any sensor on the network",c:false,f:"Captures still need a tap, a span port, or a sniffer to collect the traffic."},
+      {t:"It automatically blocks malicious traffic",c:false,f:"Capturing is passive recording, blocking is the job of a firewall or IPS."}
+    ]},
+    {s:4,cat:"Packet Captures & Metadata",scn:false,q:"In a packet capture of HTTPS traffic, what can you typically still learn even though the payload is encrypted?",o:[
+      {t:"Metadata such as source and destination IPs, ports, timing, and volume",c:true,f:"Even when payloads are encrypted, metadata like addresses, ports, timing, and size stays visible and revealing."},
+      {t:"The plaintext of the messages exchanged",c:false,f:"The message plaintext is protected by encryption and is not readable from the capture."},
+      {t:"The user's saved password",c:false,f:"A password inside an encrypted session is not exposed in the capture."},
+      {t:"The contents of the downloaded files",c:false,f:"Encrypted file contents cannot be read directly from the captured packets."}
+    ]},
+    {s:4,cat:"Packet Captures & Metadata",scn:false,q:"Metadata is often described as evidence because it does what?",o:[
+      {t:"Describes the who, when, and how of data without the content itself",c:true,f:"Metadata is data about data, the surrounding details like sender, timestamps, and sizes, which is often very revealing on its own."},
+      {t:"Always contains the full message body",c:false,f:"Metadata describes the content, it does not necessarily include the full body."},
+      {t:"Is only found in email systems",c:false,f:"Metadata exists across files, network traffic, photos, and more, not just email."},
+      {t:"Cannot be used in legal proceedings",c:false,f:"Metadata is frequently used as evidence, provided it is handled properly."}
+    ]},
+    {s:4,cat:"Packet Captures & Metadata",scn:true,q:"An analyst wants to reconstruct exactly what was transferred during a suspected data exfiltration over an unencrypted protocol. Which source is best?",o:[
+      {t:"Full packet capture",c:true,f:"Only a full packet capture preserves the actual payloads needed to reconstruct what was transferred."},
+      {t:"A flow data summary",c:false,f:"Flow data shows that a conversation happened and its volume, but not the contents."},
+      {t:"The monthly executive report",c:false,f:"An executive report summarizes trends, it cannot reconstruct a specific transfer."},
+      {t:"The asset inventory",c:false,f:"The asset inventory lists devices, it holds no traffic content."}
+    ]}
+  ];
+      var SECTION_META={
+        1:{label:"Incident Response"},
+        2:{label:"Digital Forensics"},
+        3:{label:"Data Sources \u00b7 Set I"},
+        4:{label:"Data Sources \u00b7 Set II"}
+      };
+      var LETTERS=['A','B','C','D','E'];
+      var rvAnswered={}, rvCorrectCount=0;
+      function shuffle(a){ for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
+
+      function build(){
+        rvAnswered={}; rvCorrectCount=0;
+        var order=RV_QUESTIONS.map(function(_,i){return i;});
+        function sec(n){ return order.filter(function(i){return RV_QUESTIONS[i].s===n;}); }
+        function groupShuffle(idxs){
+          var seen=[], groups={};
+          idxs.forEach(function(i){ var c=RV_QUESTIONS[i].cat; if(!groups[c]){groups[c]=[];seen.push(c);} groups[c].push(i); });
+          var out=[]; seen.forEach(function(c){ out=out.concat(shuffle(groups[c])); }); return out;
+        }
+        var finalOrder=groupShuffle(sec(1)).concat(groupShuffle(sec(2))).concat(groupShuffle(sec(3))).concat(groupShuffle(sec(4)));
+        var host=document.getElementById('rvQuiz');
+        host.innerHTML=''; var displayNum=0, lastSection=null, lastCat=null;
+        finalOrder.forEach(function(qi){
+          var Q=RV_QUESTIONS[qi];
+          if(Q.s!==lastSection){
+            lastSection=Q.s; lastCat=null;
+            var lab=document.createElement('div'); lab.className='rv-section-label';
+            lab.innerHTML='<span class="badge-ra">Part '+Q.s+'</span> '+SECTION_META[Q.s].label;
+            host.appendChild(lab);
+            var rule=document.createElement('div'); rule.className='rv-section-rule'; host.appendChild(rule);
+          }
+          if(Q.cat!==lastCat){
+            lastCat=Q.cat;
+            var cl=document.createElement('div'); cl.className='rv-cat-label'; cl.textContent=Q.cat; host.appendChild(cl);
+          }
+          displayNum++;
+          var card=document.createElement('div'); card.className='rv-q'; card.setAttribute('data-qi',qi);
+          var chips='<div class="qchips"><span class="rv-chip topic">'+Q.cat+'</span>'+(Q.scn?'<span class="rv-chip scn">Scenario</span>':'')+'</div>';
+          var head='<div class="qhead"><span class="qnum">Q'+displayNum+'</span><span class="qtext">'+Q.q+'</span></div>';
+          card.innerHTML=chips+head;
+          var optOrder=shuffle(Q.o.map(function(_,i){return i;}));
+          optOrder.forEach(function(oi,pos){
+            var O=Q.o[oi];
+            var btn=document.createElement('button'); btn.className='rv-opt';
+            btn.innerHTML='<span class="ltr">'+LETTERS[pos]+'</span><span>'+O.t+'</span>';
+            btn.addEventListener('click',function(){ answer(card,qi,O,btn); });
+            card.appendChild(btn);
+          });
+          var fb=document.createElement('div'); fb.className='rv-fb'; card.appendChild(fb);
+          host.appendChild(card);
+        });
+        document.getElementById('rvResultsPanel').classList.remove('show');
+        document.getElementById('rvResults').disabled=true;
+        updateRv();
+      }
+
+      function answer(card,qi,O,btn){
+        if(rvAnswered[qi]) return; rvAnswered[qi]=true; if(O.c) rvCorrectCount++;
+        var opts=card.querySelectorAll('.rv-opt');
+        opts.forEach(function(b){ b.disabled=true; });
+        btn.classList.add(O.c?'correct':'wrong');
+        if(!O.c){
+          var Q=RV_QUESTIONS[qi]; var ct=Q.o.filter(function(x){return x.c;})[0].t;
+          opts.forEach(function(b){ if(b.querySelector('span:last-child').innerHTML===ct){ b.classList.add('correct'); } else if(b!==btn){ b.classList.add('dim'); } });
+        } else { opts.forEach(function(b){ if(b!==btn) b.classList.add('dim'); }); }
+        var fb=card.querySelector('.rv-fb'); fb.className='rv-fb show '+(O.c?'good':'bad');
+        fb.innerHTML='<b>'+(O.c?'Correct.':'Not the best answer.')+'</b> '+O.f;
+        updateRv();
+      }
+
+      function updateRv(){
+        var n=Object.keys(rvAnswered).length;
+        document.getElementById('rvCount').textContent='Answered '+n+' / '+RV_TOTAL;
+        document.getElementById('rvFill').style.width=(n/RV_TOTAL*100)+'%';
+        document.getElementById('rvResults').disabled = n<RV_TOTAL;
+        if(n>=RV_TOTAL) showRv(false);
+      }
+
+      function showRv(scroll){
+        var pct=Math.round(rvCorrectCount/RV_TOTAL*100), pass=(rvCorrectCount/RV_TOTAL)>=RV_PASS;
+        document.getElementById('rvScoreNum').textContent=rvCorrectCount+' / '+RV_TOTAL;
+        document.getElementById('rvScorePct').textContent=pct+'% correct';
+        var v=document.getElementById('rvVerdict'); v.textContent=pass?'PASS \u2713':'Keep studying';
+        v.className='rv-verdict '+(pass?'pass':'fail');
+        document.getElementById('rvResultsPanel').classList.add('show');
+        if(scroll){ var r=document.getElementById('rvResultsPanel'); if(r.scrollIntoView) r.scrollIntoView({behavior:'smooth',block:'center'}); }
+      }
+
+      document.getElementById('rvResults').addEventListener('click',function(){ showRv(true); });
+      document.getElementById('rvReset').addEventListener('click',function(){ build(); window.scrollTo({top:0,behavior:'smooth'}); });
+      build();
+    })();
+
+</script>
+  <script src="../shared/lesson-bridge.js"></script>
+</body>
+</html>

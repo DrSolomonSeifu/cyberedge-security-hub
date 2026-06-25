@@ -1,0 +1,2216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 9: Evaluate Network Security Capabilities — Learner Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy:      #0d1b2a;
+            --navy-mid:  #162438;
+            --navy-light:#1e3554;
+            --gold:      #e8b94a;
+            --gold-light:#f5d27a;
+            --gold-dim:  #c49a30;
+            --teal:      #2ec4b6;
+            --teal-dim:  #1a9e92;
+            --coral:     #e8604a;
+            --violet:    #8b6fcb;
+            --green:     #3dba7a;
+            --white:     #f8f5ef;
+            --off-white: #eee8da;
+            --text:      #2c3e50;
+            --text-light:#566573;
+            --border:    #dde3ed;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(145deg, var(--navy) 0%, #1a3050 50%, #0f2235 100%);
+            min-height: 100vh;
+            padding: 24px 16px;
+            color: var(--text);
+        }
+
+        /* ─── OUTER CONTAINER ─── */
+        .container {
+            max-width: 1220px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 32px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(232,185,74,0.15);
+            overflow: hidden;
+        }
+
+        /* ─── HEADER ─── */
+        .header {
+            background: var(--navy);
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-bg-pattern {
+            position: absolute; inset: 0;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(232,185,74,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(46,196,182,0.06) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.01) 40px, rgba(255,255,255,0.01) 80px);
+            pointer-events: none;
+        }
+
+        .header-accent-bar {
+            height: 5px;
+            background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 40%, var(--teal) 100%);
+        }
+
+        .header-inner {
+            padding: 44px 48px 40px;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .header-icon-wrap {
+            flex-shrink: 0;
+            width: 72px; height: 72px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 100%);
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2em;
+            box-shadow: 0 8px 24px rgba(232,185,74,0.35);
+        }
+
+        .header-text { flex: 1; }
+
+        .header-eyebrow {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72em;
+            letter-spacing: 3px;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            opacity: 0.9;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.1em;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.2;
+            margin-bottom: 6px;
+            letter-spacing: -0.3px;
+        }
+
+        .header h1 span { color: var(--gold); }
+
+        .header-subtitle {
+            font-size: 0.95em;
+            color: rgba(248,245,239,0.65);
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
+
+        .header-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 22px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 16px;
+            border-radius: 50px;
+            font-size: 0.78em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-learner {
+            background: rgba(61,186,122,0.18);
+            color: var(--green);
+            border: 1px solid rgba(61,186,122,0.35);
+        }
+
+        .badge-level {
+            background: rgba(232,185,74,0.15);
+            color: var(--gold-light);
+            border: 1px solid rgba(232,185,74,0.3);
+        }
+
+        .badge-credit {
+            background: rgba(255,255,255,0.06);
+            color: rgba(248,245,239,0.55);
+            border: 1px solid rgba(255,255,255,0.1);
+            font-weight: 400;
+            font-size: 0.76em;
+        }
+
+        /* ─── NAVIGATION ─── */
+        .nav-tabs {
+            background: var(--navy-mid);
+            display: flex;
+            flex-wrap: wrap;
+            border-bottom: 2px solid rgba(232,185,74,0.25);
+            position: sticky;
+            top: 0;
+            z-index: 200;
+        }
+
+        .nav-tab {
+            flex: 1;
+            min-width: 130px;
+            padding: 16px 14px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.82em;
+            font-weight: 500;
+            color: rgba(248,245,239,0.5);
+            transition: all 0.25s ease;
+            border-right: 1px solid rgba(255,255,255,0.06);
+            letter-spacing: 0.2px;
+            position: relative;
+        }
+
+        .nav-tab::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 50%; right: 50%;
+            height: 2px;
+            background: var(--gold);
+            transition: all 0.3s ease;
+        }
+
+        .nav-tab:hover { color: var(--gold-light); background: rgba(255,255,255,0.04); }
+
+        .nav-tab.active {
+            color: var(--gold);
+            background: rgba(232,185,74,0.08);
+        }
+
+        .nav-tab.active::after { left: 0; right: 0; }
+
+        .nav-tab .tab-num {
+            display: block;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7em;
+            color: rgba(232,185,74,0.4);
+            margin-bottom: 3px;
+        }
+
+        .nav-tab.active .tab-num { color: rgba(232,185,74,0.7); }
+
+        /* ─── CONTENT SECTIONS ─── */
+        .content-section {
+            display: none;
+            padding: 44px 48px;
+            animation: fadeSlideIn 0.4s ease;
+        }
+
+        .content-section.active { display: block; }
+
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ─── SECTION HEADING ─── */
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+        .section-title-icon {
+            width: 46px; height: 46px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3em;
+            flex-shrink: 0;
+        }
+
+        .icon-gold  { background: linear-gradient(135deg, #f5d27a22, #e8b94a33); border: 1px solid rgba(232,185,74,0.3); }
+        .icon-teal  { background: linear-gradient(135deg, #2ec4b622, #2ec4b633); border: 1px solid rgba(46,196,182,0.3); }
+        .icon-coral { background: linear-gradient(135deg, #e8604a22, #e8604a33); border: 1px solid rgba(232,96,74,0.3); }
+        .icon-violet{ background: linear-gradient(135deg, #8b6fcb22, #8b6fcb33); border: 1px solid rgba(139,111,203,0.3); }
+        .icon-green { background: linear-gradient(135deg, #3dba7a22, #3dba7a33); border: 1px solid rgba(61,186,122,0.3); }
+        .icon-navy  { background: linear-gradient(135deg, #1e355422, #1e355433); border: 1px solid rgba(30,53,84,0.3); }
+
+        .section-title-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.55em;
+            color: var(--navy);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .section-title-text p {
+            font-size: 0.85em;
+            color: var(--text-light);
+            margin-top: 3px;
+        }
+
+        /* ─── CONTENT DIVIDER ─── */
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold) 0%, rgba(232,185,74,0.1) 60%, transparent 100%);
+            margin: 32px 0;
+            border-radius: 1px;
+        }
+
+        .sub-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 24px 0;
+        }
+
+        /* ─── TYPOGRAPHY ─── */
+        .content-section p {
+            font-size: 0.97em;
+            line-height: 1.85;
+            color: var(--text);
+            margin-bottom: 14px;
+            font-weight: 400;
+        }
+
+        .content-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2em;
+            color: var(--navy);
+            margin-top: 32px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .content-section h4 {
+            font-size: 0.96em;
+            color: var(--navy-light);
+            font-weight: 600;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            letter-spacing: 0.2px;
+        }
+
+        .content-section ul, .content-section ol {
+            margin-left: 24px;
+            margin-bottom: 14px;
+        }
+
+        .content-section li {
+            font-size: 0.96em;
+            line-height: 1.8;
+            color: var(--text);
+            margin: 7px 0;
+        }
+
+        /* ─── KEY IDEA BOX ─── */
+        .key-idea {
+            background: linear-gradient(135deg, #0d1b2a08, #1e355410);
+            border: 1px solid rgba(30,53,84,0.15);
+            border-left: 5px solid var(--navy-light);
+            padding: 24px 28px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+
+        .key-idea-header {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72em;
+            letter-spacing: 2.5px;
+            color: var(--navy-light);
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .key-idea-content {
+            font-size: 0.97em;
+            color: var(--text);
+            line-height: 1.85;
+        }
+
+        /* ─── INSIGHT BOX (gold) ─── */
+        .insight-box {
+            background: linear-gradient(135deg, #fdf5e4, #faf0d7);
+            border: 1px solid rgba(232,185,74,0.35);
+            border-left: 5px solid var(--gold);
+            padding: 22px 26px;
+            border-radius: 0 12px 12px 0;
+            margin: 22px 0;
+        }
+
+        .insight-box-header {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7em;
+            letter-spacing: 2px;
+            color: var(--gold-dim);
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .insight-box-content {
+            font-size: 0.96em;
+            color: #5a4010;
+            line-height: 1.85;
+        }
+
+        /* ─── EXAMPLE BOX ─── */
+        .example-box {
+            background: #f4f7fb;
+            border: 1px solid var(--border);
+            border-left: 5px solid var(--teal);
+            padding: 22px 26px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0;
+        }
+
+        .example-box-header {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7em;
+            letter-spacing: 2px;
+            color: var(--teal-dim);
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .example-box-content {
+            font-size: 0.95em;
+            color: #1a3a3a;
+            line-height: 1.85;
+        }
+
+        /* ─── WARNING BOX ─── */
+        .warning-box {
+            background: linear-gradient(135deg, #fff5f4, #ffe8e6);
+            border: 1px solid rgba(232,96,74,0.3);
+            border-left: 5px solid var(--coral);
+            padding: 22px 26px;
+            border-radius: 0 12px 12px 0;
+            margin: 22px 0;
+        }
+
+        .warning-box-header {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7em;
+            letter-spacing: 2px;
+            color: #b84030;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .warning-box-content {
+            font-size: 0.95em;
+            color: #6b2010;
+            line-height: 1.85;
+        }
+
+        /* ─── SUMMARY BOX ─── */
+        .summary-box {
+            background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+            border-radius: 14px;
+            padding: 28px 32px;
+            margin: 28px 0;
+            box-shadow: 0 8px 24px rgba(13,27,42,0.18);
+        }
+
+        .summary-box-header {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72em;
+            letter-spacing: 3px;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .summary-box-content {
+            font-size: 0.97em;
+            color: rgba(248,245,239,0.88);
+            line-height: 1.9;
+        }
+
+        .summary-box-content ul { margin-left: 20px; margin-top: 8px; }
+        .summary-box-content li { color: rgba(248,245,239,0.82); }
+        .summary-box-content strong { color: var(--gold-light); }
+
+        /* ─── DEFINITION BOX ─── */
+        .definition-box {
+            background: linear-gradient(135deg, #f3f0ff, #ebe6ff);
+            border: 1px solid rgba(139,111,203,0.3);
+            border-left: 5px solid var(--violet);
+            padding: 22px 26px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0;
+        }
+
+        .definition-box-header {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7em;
+            letter-spacing: 2px;
+            color: #6040a8;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .definition-box-content {
+            font-size: 0.96em;
+            color: #3a2070;
+            line-height: 1.85;
+            font-style: italic;
+        }
+
+        /* ─── CARD GRID ─── */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+            margin: 22px 0;
+        }
+
+        .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+        .info-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px 20px;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+        }
+
+        .info-card.card-gold::before   { background: var(--gold); }
+        .info-card.card-teal::before   { background: var(--teal); }
+        .info-card.card-coral::before  { background: var(--coral); }
+        .info-card.card-violet::before { background: var(--violet); }
+        .info-card.card-green::before  { background: var(--green); }
+        .info-card.card-navy::before   { background: var(--navy-light); }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+            border-color: rgba(30,53,84,0.25);
+        }
+
+        .info-card-icon {
+            font-size: 1.6em;
+            margin-bottom: 12px;
+        }
+
+        .info-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.0em;
+            color: var(--navy);
+            margin: 0 0 10px 0;
+            font-weight: 600;
+        }
+
+        .info-card p, .info-card li {
+            font-size: 0.88em;
+            color: var(--text-light);
+            line-height: 1.75;
+            margin: 0;
+        }
+
+        .info-card ul { margin-left: 16px; margin-bottom: 0; }
+
+        /* ─── COMPARISON TABLE ─── */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            margin: 22px 0;
+            font-size: 0.9em;
+        }
+
+        .data-table thead tr {
+            background: var(--navy);
+        }
+
+        .data-table th {
+            padding: 14px 18px;
+            text-align: left;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75em;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--gold-light);
+        }
+
+        .data-table td {
+            padding: 13px 18px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+            line-height: 1.65;
+            vertical-align: top;
+        }
+
+        .data-table tbody tr:nth-child(even) { background: #f8f9fc; }
+        .data-table tbody tr:hover { background: #f0f4ff; }
+        .data-table tbody tr:last-child td { border-bottom: none; }
+
+        .data-table .cell-label {
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .data-table .cell-tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.78em;
+            font-weight: 600;
+        }
+
+        .tag-high   { background: #fde8e5; color: var(--coral); border: 1px solid rgba(232,96,74,0.25); }
+        .tag-medium { background: #fff3e0; color: #e07b20; border: 1px solid rgba(224,123,32,0.25); }
+        .tag-low    { background: #e8f7f0; color: var(--green); border: 1px solid rgba(61,186,122,0.25); }
+        .tag-good   { background: #e8f7f0; color: var(--green); border: 1px solid rgba(61,186,122,0.25); }
+        .tag-bad    { background: #fde8e5; color: var(--coral); border: 1px solid rgba(232,96,74,0.25); }
+
+        /* ─── STEP FLOW ─── */
+        .step-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin: 22px 0;
+            position: relative;
+        }
+
+        .step-flow::before {
+            content: '';
+            position: absolute;
+            left: 22px; top: 46px; bottom: 46px;
+            width: 2px;
+            background: linear-gradient(180deg, var(--gold) 0%, var(--teal) 100%);
+        }
+
+        .step-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            padding: 0 0 20px 0;
+            position: relative;
+        }
+
+        .step-item:last-child { padding-bottom: 0; }
+
+        .step-num {
+            width: 46px; height: 46px;
+            border-radius: 50%;
+            background: var(--navy);
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1em;
+            font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            z-index: 1;
+            border: 2px solid var(--gold);
+            box-shadow: 0 4px 12px rgba(13,27,42,0.2);
+        }
+
+        .step-body {
+            flex: 1;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-top: 6px;
+        }
+
+        .step-body h4 { margin-top: 0; font-size: 0.97em; color: var(--navy); }
+        .step-body p, .step-body li { font-size: 0.9em; color: var(--text-light); }
+
+        /* ─── TECH PILL TAGS ─── */
+        .pill-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+
+        .pill {
+            padding: 5px 14px;
+            border-radius: 50px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.76em;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .pill-navy   { background: #e8edf5; color: var(--navy-light); border: 1px solid rgba(30,53,84,0.2); }
+        .pill-gold   { background: #fdf5e4; color: var(--gold-dim); border: 1px solid rgba(232,185,74,0.3); }
+        .pill-teal   { background: #e6faf8; color: var(--teal-dim); border: 1px solid rgba(46,196,182,0.3); }
+        .pill-coral  { background: #fdf0ee; color: #c0402a; border: 1px solid rgba(232,96,74,0.25); }
+        .pill-green  { background: #e8f7f0; color: #2a8a56; border: 1px solid rgba(61,186,122,0.3); }
+        .pill-violet { background: #f0ecff; color: #6040a8; border: 1px solid rgba(139,111,203,0.3); }
+
+        /* ─── HIGHLIGHT STRIP ─── */
+        .highlight-strip {
+            background: linear-gradient(135deg, #fffbf0, #fff8e6);
+            border: 1px solid rgba(232,185,74,0.25);
+            border-radius: 10px;
+            padding: 16px 22px;
+            margin: 16px 0;
+            font-size: 0.94em;
+            color: #5a4010;
+            line-height: 1.8;
+        }
+
+        .highlight-strip strong { color: var(--gold-dim); }
+
+        /* ─── OVERVIEW OBJECTIVES TABLE ─── */
+        .objectives-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+            margin: 22px 0;
+        }
+
+        .objectives-table thead tr { background: var(--navy); }
+
+        .objectives-table th {
+            padding: 14px 20px;
+            text-align: left;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75em;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--gold-light);
+        }
+
+        .objectives-table td {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.93em;
+            line-height: 1.7;
+            color: var(--text);
+            vertical-align: top;
+        }
+
+        .objectives-table tbody tr:nth-child(even) { background: #f8f9fc; }
+        .objectives-table tbody tr:hover { background: #f0f4ff; }
+        .objectives-table tbody tr:last-child td { border-bottom: none; }
+
+        .obj-num {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            background: var(--navy-light);
+            color: var(--gold);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.8em;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        /* ─── FOOTER ─── */
+        .footer {
+            background: var(--navy);
+            padding: 32px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-brand { }
+
+        .footer-brand p {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72em;
+            letter-spacing: 2px;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .footer-brand span {
+            font-size: 0.8em;
+            color: rgba(248,245,239,0.4);
+        }
+
+        .footer-nav {
+            display: flex; gap: 8px; flex-wrap: wrap;
+        }
+
+        .footer-nav button {
+            padding: 6px 14px;
+            border-radius: 6px;
+            border: 1px solid rgba(232,185,74,0.2);
+            background: transparent;
+            color: rgba(248,245,239,0.45);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.78em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .footer-nav button:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(232,185,74,0.08);
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            .header-inner { flex-direction: column; gap: 16px; padding: 28px 20px; }
+            .header-icon-wrap { width: 54px; height: 54px; font-size: 1.5em; }
+            .header h1 { font-size: 1.5em; }
+            .content-section { padding: 24px 20px; }
+            .nav-tab { min-width: 45%; font-size: 0.75em; padding: 13px 10px; }
+            .card-grid, .card-grid-2, .card-grid-3 { grid-template-columns: 1fr; }
+            .step-flow::before { display: none; }
+            .footer { flex-direction: column; padding: 24px 20px; }
+        }
+
+        @media print {
+            body { background: white; }
+            .container { box-shadow: none; }
+            .nav-tabs, .footer-nav { display: none; }
+            .content-section { display: block !important; page-break-after: always; padding: 20px; }
+        }
+    
+        /* ===== REVIEW ACTIVITY (integrated) ===== */
+        .rv-intro {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-left: 5px solid var(--gold);
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin-bottom: 22px;
+        }
+        .rv-intro p { margin: 0; color: var(--text-light); font-size: 0.98em; line-height: 1.6; }
+        .rv-intro strong { color: var(--navy); }
+
+        .rv-progress-wrap {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            background: rgba(248,245,239,0.96);
+            backdrop-filter: blur(8px);
+            padding: 14px 16px;
+            margin-bottom: 14px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 4px 16px -8px rgba(13,27,42,0.25);
+        }
+        .rv-stat { display: flex; justify-content: space-between; align-items: center; margin-bottom: 9px; flex-wrap: wrap; gap: 10px; }
+        .rv-stat .count { font-size: 0.78em; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal-dim); font-weight: 700; }
+        .rv-controls { display: flex; gap: 10px; flex-wrap: wrap; }
+        .rv-btn {
+            font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.85em;
+            padding: 9px 18px; border-radius: 8px; border: none; cursor: pointer; transition: all 0.2s;
+            background: var(--navy); color: var(--gold-light);
+        }
+        .rv-btn:hover { background: var(--navy-light); transform: translateY(-1px); }
+        .rv-btn.ghost { background: transparent; color: var(--teal-dim); border: 1px solid var(--border); }
+        .rv-btn.ghost:hover { background: rgba(46,196,182,0.08); border-color: var(--teal); }
+        .rv-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+        .rv-bar { height: 10px; background: var(--off-white); border-radius: 999px; overflow: hidden; border: 1px solid var(--border); }
+        .rv-bar-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--gold), var(--teal)); transition: width 0.4s ease; }
+
+        .rv-section-label {
+            font-size: 1.15em; font-weight: 700; color: var(--navy);
+            margin: 28px 0 4px; display: flex; align-items: center; gap: 10px;
+            border-bottom: 2px solid var(--gold); padding-bottom: 8px;
+        }
+        .rv-section-label .badge-ra {
+            font-size: 0.6em; background: var(--navy); color: var(--gold-light);
+            padding: 4px 11px; border-radius: 20px; letter-spacing: 1px; font-weight: 700; text-transform: uppercase;
+        }
+        .rv-cat-label {
+            font-size: 0.78em; font-weight: 700; color: var(--teal-dim); text-transform: uppercase;
+            letter-spacing: 1.5px; margin: 20px 0 2px;
+        }
+
+        .rv-q {
+            background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+            padding: 20px 24px; margin: 14px 0; box-shadow: 0 1px 3px rgba(13,27,42,0.04);
+        }
+        .rv-q .qhead { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+        .rv-q .qnum {
+            font-size: 0.78em; font-weight: 700; background: var(--navy); color: var(--gold-light);
+            padding: 5px 10px; border-radius: 6px; flex: 0 0 auto; margin-top: 1px;
+        }
+        .rv-q .qtext { font-size: 1.02em; font-weight: 600; color: var(--navy); line-height: 1.5; }
+        .rv-q .qchips { margin-bottom: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
+        .rv-chip { font-size: 0.68em; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; font-weight: 700; }
+        .rv-chip.topic { background: rgba(46,196,182,0.12); color: var(--teal-dim); }
+        .rv-chip.scn { background: rgba(139,111,203,0.14); color: var(--violet); }
+
+        .rv-opt {
+            display: flex; align-items: flex-start; gap: 12px; width: 100%; text-align: left;
+            background: var(--off-white); border: 1.5px solid var(--border); border-radius: 9px;
+            padding: 12px 15px; margin: 8px 0; cursor: pointer;
+            font-family: 'DM Sans', sans-serif; font-size: 0.97em; color: var(--text); transition: all 0.18s;
+        }
+        .rv-opt:hover:not(:disabled) { border-color: var(--gold); background: rgba(232,185,74,0.08); }
+        .rv-opt .ltr {
+            font-size: 0.82em; font-weight: 700; min-width: 24px; height: 24px; display: inline-flex;
+            align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: 6px;
+            color: var(--gold-dim); flex: 0 0 auto; background: var(--white);
+        }
+        .rv-opt:disabled { cursor: default; }
+        .rv-opt.correct { border-color: var(--green); background: rgba(61,186,122,0.1); color: #1d6b40; }
+        .rv-opt.correct .ltr { background: var(--green); border-color: var(--green); color: #fff; }
+        .rv-opt.wrong { border-color: var(--coral); background: rgba(232,96,74,0.1); color: #9e3422; }
+        .rv-opt.wrong .ltr { background: var(--coral); border-color: var(--coral); color: #fff; }
+        .rv-opt.dim { opacity: 0.5; }
+
+        .rv-fb { display: none; margin-top: 14px; padding: 13px 16px; border-radius: 8px; font-size: 0.92em; line-height: 1.55; }
+        .rv-fb.show { display: block; }
+        .rv-fb.good { background: rgba(61,186,122,0.1); border-left: 3px solid var(--green); color: #1d6b40; }
+        .rv-fb.bad { background: rgba(232,96,74,0.1); border-left: 3px solid var(--coral); color: #9e3422; }
+        .rv-fb b { font-weight: 700; }
+
+        .rv-results {
+            display: none; margin: 24px 0 8px; border-radius: 14px; padding: 28px; text-align: center;
+            color: var(--white); background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, var(--teal-dim) 130%);
+            box-shadow: 0 10px 30px -12px rgba(13,27,42,0.5);
+        }
+        .rv-results.show { display: block; }
+        .rv-results h3 { font-size: 1.4em; color: var(--gold-light); margin-bottom: 6px; }
+        .rv-score-num { font-size: 2.6em; font-weight: 700; margin: 6px 0; letter-spacing: 1px; }
+        .rv-score-pct { font-size: 1.05em; color: var(--off-white); }
+        .rv-verdict { display: inline-block; margin-top: 14px; font-weight: 700; font-size: 0.95em; padding: 8px 22px; border-radius: 999px; }
+        .rv-verdict.pass { background: var(--green); color: #fff; }
+        .rv-verdict.fail { background: var(--gold); color: var(--navy); }
+        .rv-results p.note { margin-top: 14px; color: var(--off-white); font-size: 0.82em; }
+
+</style>
+  <link rel="stylesheet" href="../shared/mobile-responsive.css">
+</head>
+<body>
+<div class="container">
+
+    <!-- ═══ HEADER ═══ -->
+    <div class="header">
+        <div class="header-accent-bar"></div>
+        <div class="header-bg-pattern"></div>
+        <div class="header-inner">
+            <div class="header-icon-wrap">🛡️</div>
+            <div class="header-text">
+                <div class="header-eyebrow">CyberEdge · Security+</div>
+                <h1>Lesson 9: <span>Evaluate Network</span><br>Security Capabilities</h1>
+                <div class="header-subtitle">From designing secure networks to measuring whether the controls protecting them actually work</div>
+                <div class="header-meta">
+                    <span class="badge badge-learner">📖 Learner Portal</span>
+                    <span class="badge badge-level">⚡ CompTIA Security+</span>
+                    <span class="badge badge-credit">Dr. Solomon Seifu (Lead Technical Instructor &amp; Author)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ NAVIGATION ═══ -->
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showSection('overview', this)">
+            <span class="tab-num">01</span>Overview
+        </button>
+        <button class="nav-tab" onclick="showSection('baselines', this)">
+            <span class="tab-num">02</span>Security Baselines
+        </button>
+        <button class="nav-tab" onclick="showSection('automation', this)">
+            <span class="tab-num">03</span>Config &amp; Automation
+        </button>
+        <button class="nav-tab" onclick="showSection('wireless', this)">
+            <span class="tab-num">04</span>Wireless Security
+        </button>
+        <button class="nav-tab" onclick="showSection('authentication', this)">
+            <span class="tab-num">05</span>Network Authentication
+        </button>
+        <button class="nav-tab" onclick="showSection('nac', this)">
+            <span class="tab-num">06</span>Network Access Control
+        </button>
+        <button class="nav-tab" onclick="showSection('firewalls', this)">
+            <span class="tab-num">07</span>Firewalls &amp; IDS/IPS
+        </button>
+        <button class="nav-tab" onclick="showSection('synthesis', this)">
+            <span class="tab-num">08</span>Bringing It Together
+        </button>
+        <button class="nav-tab" onclick="showSection('review', this)">
+            <span class="tab-num">09</span>Review Activity
+        </button>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 01 — OVERVIEW
+    ═══════════════════════════════════════════════════ -->
+    <div id="overview" class="content-section active">
+
+        <div class="section-title">
+            <div class="section-title-icon icon-gold">🗺️</div>
+            <div class="section-title-text">
+                <h2>Lesson Overview</h2>
+                <p>From designing security to evaluating whether it actually works</p>
+            </div>
+        </div>
+
+        <p>In the previous lesson, you learned how secure networks and cloud environments are <strong>designed</strong> — the architecture, segmentation, and controls that go into building a defensible network.</p>
+
+        <p>This lesson makes a pivot from <strong>design</strong> to <strong>evaluation</strong>. Designing a network to be secure and knowing that it is secure are two very different things. Evaluating network security capabilities means being able to assess whether the protections you put in place are present, configured correctly, and actually doing their job.</p>
+
+        <div class="key-idea">
+            <div class="key-idea-header">💡 Key Idea</div>
+            <div class="key-idea-content">
+                A control that exists on paper is not the same as a control that works. Evaluation is the discipline of asking three questions about every protection: <strong>Is it present? Is it configured correctly? Is it being monitored?</strong> A security professional who can answer those questions can find gaps, recommend fixes, and defend the network with confidence rather than assumption.
+            </div>
+        </div>
+
+        <h3>Lesson Objectives</h3>
+        <p>By the end of this lesson, you should be able to:</p>
+
+        <table class="objectives-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Objective</th>
+                    <th>What You Will Understand</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="obj-num">1</span></td>
+                    <td><strong>Establish a security baseline</strong></td>
+                    <td>Define a known-good standard for secure configuration, using sources such as CIS Benchmarks matched to regulatory needs.</td>
+                </tr>
+                <tr>
+                    <td><span class="obj-num">2</span></td>
+                    <td><strong>Enforce configuration at scale</strong></td>
+                    <td>Deploy and measure that baseline consistently across many systems using automation and SCAP tools.</td>
+                </tr>
+                <tr>
+                    <td><span class="obj-num">3</span></td>
+                    <td><strong>Evaluate wireless security</strong></td>
+                    <td>Audit the wireless airspace with site surveys, signal/heat mapping, and rogue access point scanning.</td>
+                </tr>
+                <tr>
+                    <td><span class="obj-num">4</span></td>
+                    <td><strong>Control network authentication</strong></td>
+                    <td>Decide who is allowed to connect using RADIUS with MFA and the 802.1X port-based access model.</td>
+                </tr>
+                <tr>
+                    <td><span class="obj-num">5</span></td>
+                    <td><strong>Apply Network Access Control (NAC)</strong></td>
+                    <td>Check each device's posture — patch level and antivirus status — before granting it access.</td>
+                </tr>
+                <tr>
+                    <td><span class="obj-num">6</span></td>
+                    <td><strong>Layer firewalls, IDS/IPS, and web filtering</strong></td>
+                    <td>Combine active monitoring and control tools into overlapping layers of defense.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="divider"></div>
+        <h3>Key Topics at a Glance</h3>
+
+        <div class="card-grid">
+            <div class="info-card card-navy">
+                <div class="info-card-icon">📋</div>
+                <h4>Security Baselines</h4>
+                <p>A known-good standard of secure configuration, drawn from sources like CIS Benchmarks and STIGs and matched to the organization's regulatory needs.</p>
+            </div>
+            <div class="info-card card-teal">
+                <div class="info-card-icon">⚙️</div>
+                <h4>Config &amp; Automation</h4>
+                <p>Deploying the baseline consistently at scale with tools like Ansible, Puppet, and Chef, and measuring compliance with SCAP.</p>
+            </div>
+            <div class="info-card card-violet">
+                <div class="info-card-icon">📶</div>
+                <h4>Wireless Security</h4>
+                <p>Site surveys, signal and heat mapping, and scanning for rogue access points to audit the invisible wireless attack surface.</p>
+            </div>
+            <div class="info-card card-coral">
+                <div class="info-card-icon">🔐</div>
+                <h4>Network Authentication</h4>
+                <p>RADIUS with multi-factor authentication and the 802.1X model to control exactly who is allowed onto the network.</p>
+            </div>
+            <div class="info-card card-green">
+                <div class="info-card-icon">🚦</div>
+                <h4>Network Access Control</h4>
+                <p>Posture checks — patch level, antivirus, configuration — that decide whether a connecting device is healthy enough to admit.</p>
+            </div>
+            <div class="info-card card-gold">
+                <div class="info-card-icon">🔥</div>
+                <h4>Firewalls &amp; IDS/IPS</h4>
+                <p>Firewalls, intrusion detection and prevention, and web filtering working together as overlapping layers of active defense.</p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h3>How to Use This Portal</h3>
+        <ul>
+            <li>Use the <strong>navigation tabs</strong> at the top to move between topics.</li>
+            <li>Use the <strong>← → arrow keys</strong> to flip between sections without a mouse.</li>
+            <li>Each section opens with a <strong>Key Idea</strong> — read that first to anchor your understanding.</li>
+            <li>Pay attention to the <strong>Example boxes</strong> — they tie each concept to a real-world scenario like the ones on the Security+ exam.</li>
+            <li>Before class, be ready to answer: <em>What does it actually mean to say a network control is "working"?</em></li>
+        </ul>
+
+        <div class="summary-box">
+            <div class="summary-box-header">📝 Big Picture Takeaway</div>
+            <div class="summary-box-content">
+                Network security is built in <strong>layers</strong>, and no single control protects everything. Evaluating it means checking each layer against three tests: Is it <strong>present</strong>? Is it <strong>configured correctly</strong>? Is it <strong>monitored</strong>? When the answer is yes across every layer, the network is not just assumed to be secure — it is demonstrably defensible.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 02 — SECURITY BASELINES
+    ═══════════════════════════════════════════════════ -->
+    <div id="baselines" class="content-section">
+
+        <div class="section-title">
+            <div class="section-title-icon icon-navy">📋</div>
+            <div class="section-title-text">
+                <h2>Security Baselines</h2>
+                <p>Establishing a known-good standard to measure everything else against</p>
+            </div>
+        </div>
+
+        <div class="key-idea">
+            <div class="key-idea-header">💡 Key Idea</div>
+            <div class="key-idea-content">
+                You cannot evaluate whether something is secure without a standard to compare it to. A <strong>security baseline</strong> is that standard — a documented, known-good set of configurations. Once you have a baseline, "secure" stops being a matter of opinion and becomes something you can measure.
+            </div>
+        </div>
+
+        <div class="definition-box">
+            <div class="definition-box-header">📖 Definition</div>
+            <div class="definition-box-content">
+                A secure baseline is a collection of standard configurations and settings that covers every major area of an IT environment, applied consistently and centrally across the organization.
+            </div>
+        </div>
+
+        <h3>What a Baseline Covers</h3>
+        <p>A baseline is not about a single device. It defines the secure configuration for the whole environment:</p>
+        <ul>
+            <li>Operating systems, network devices, and applications</li>
+            <li>Cloud instances and the patching and update process</li>
+            <li>Access controls, password policies, and encryption</li>
+            <li>Logging, monitoring, and endpoint protection</li>
+        </ul>
+
+        <h4>Why Baselines Matter</h4>
+        <p>A good baseline delivers three things at once:</p>
+        <div class="card-grid card-grid-3">
+            <div class="info-card card-navy">
+                <div class="info-card-icon">🛡️</div>
+                <h4>Security</h4>
+                <p>Enforces consistent, hardened configurations so systems are not left in weak default states.</p>
+            </div>
+            <div class="info-card card-teal">
+                <div class="info-card-icon">🧭</div>
+                <h4>Manageability</h4>
+                <p>Gives administrators one clear standard to build and maintain systems against.</p>
+            </div>
+            <div class="info-card card-gold">
+                <div class="info-card-icon">⚡</div>
+                <h4>Efficiency</h4>
+                <p>Removes guesswork from configuration decisions, so teams move faster with fewer mistakes.</p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+        <h3>Where Baselines Come From</h3>
+        <p>Organizations do not build baselines from scratch. Trusted industry bodies and vendors have already done that work.</p>
+
+        <h4>CIS Benchmarks</h4>
+        <p>Published by the Center for Internet Security, CIS Benchmarks are among the most widely used baseline resources in the industry. They cover networks, operating systems, and applications, are updated continuously as new threats emerge, and align with major compliance frameworks.</p>
+        <div class="pill-group">
+            <span class="pill pill-gold">PCI DSS</span>
+            <span class="pill pill-gold">NIST 800-53</span>
+            <span class="pill pill-gold">SOX</span>
+            <span class="pill pill-gold">ISO 27000</span>
+        </div>
+        <p>They also include product-specific guidance for Windows desktop and server, macOS and Linux, Cisco network devices, web browsers and web servers, database and email servers, and VMware ESXi. If you need to securely configure one of those systems, CIS has a documented benchmark for it.</p>
+
+        <div class="highlight-strip">
+            <strong>Two levels of CIS Benchmarks:</strong> Level 1 applies basic security that does not impact usability. Level 2 applies maximum security and may impact functionality. A payment-processing server handling credit cards would use Level 2.
+        </div>
+
+        <h4>STIGs (Security Technical Implementation Guides)</h4>
+        <p>STIGs are a specific type of secure baseline developed by the Defense Information Systems Agency (DISA) for U.S. Department of Defense IT infrastructure. They define standardized configurations much like CIS Benchmarks, but they are written for federal and DoD environments, where they are mandatory.</p>
+
+        <h4>Vendor Guidance</h4>
+        <p>Device manufacturers and software vendors also publish secure configuration guides for their own products, which complement CIS and STIG sources.</p>
+
+        <div class="example-box">
+            <div class="example-box-header">Example</div>
+            <div class="example-box-content">
+                A hospital and a retail company face different threats, so they need different baselines. The hospital selects a baseline tuned to HIPAA obligations and patient-data protection, while a defense contractor is required to apply DISA STIGs. The baseline is chosen to match the organization's specific risk profile and regulatory needs — not picked off the shelf.
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <div class="warning-box-header">⚠ Watch For: Configuration Drift</div>
+            <div class="warning-box-content">
+                Without a baseline to measure against, systems "drift" over time. Someone disables a firewall rule for testing and forgets to re-enable it. Someone grants temporary admin access that is never revoked. A baseline is what lets you detect that drift and correct it.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 03 — CONFIGURATION ENFORCEMENT & AUTOMATION
+    ═══════════════════════════════════════════════════ -->
+    <div id="automation" class="content-section">
+
+        <div class="section-title">
+            <div class="section-title-icon icon-teal">⚙️</div>
+            <div class="section-title-text">
+                <h2>Configuration Enforcement &amp; Automation</h2>
+                <p>Deploying the baseline consistently at scale, and measuring compliance</p>
+            </div>
+        </div>
+
+        <div class="key-idea">
+            <div class="key-idea-header">💡 Key Idea</div>
+            <div class="key-idea-content">
+                A baseline only protects you if every system actually follows it. Configuring hundreds or thousands of machines by hand is slow and error-prone, and every missed setting is a gap. <strong>Automation</strong> enforces the baseline everywhere, every time — and catches systems that drift away from it.
+            </div>
+        </div>
+
+        <h3>Configuration Management Tools</h3>
+        <p>These tools push baseline configurations automatically across many systems at once, and detect and correct deviations from the baseline as they happen. Three are widely used:</p>
+
+        <div class="card-grid card-grid-3">
+            <div class="info-card card-navy">
+                <div class="info-card-icon">🟧</div>
+                <h4>Puppet</h4>
+                <p>Uses a declarative language — you define the desired state, and Puppet ensures it is maintained across large, diverse environments.</p>
+            </div>
+            <div class="info-card card-coral">
+                <div class="info-card-icon">🍳</div>
+                <h4>Chef</h4>
+                <p>Uses a Ruby-based scripting approach, treating infrastructure as code so configuration is version-controlled and auditable.</p>
+            </div>
+            <div class="info-card card-teal">
+                <div class="info-card-icon">🅰️</div>
+                <h4>Ansible</h4>
+                <p>Agentless — no software is installed on managed systems. Uses simple YAML playbooks, which is why it is popular for low-overhead automation.</p>
+            </div>
+        </div>
+
+        <p>In Windows environments, <strong>Active Directory Group Policy</strong> plays the same role, pushing standardized settings out to domain-joined machines.</p>
+
+        <div class="divider"></div>
+        <h3>Measuring Compliance with SCAP</h3>
+        <p>Deploying a baseline is only half the job. You also need to verify that systems still comply with it. That is the role of the Security Content Automation Protocol.</p>
+
+        <div class="definition-box">
+            <div class="definition-box-header">📖 Definition</div>
+            <div class="definition-box-content">
+                SCAP is a framework of standards that lets tools automatically assess and verify whether systems comply with a defined baseline.
+            </div>
+        </div>
+
+        <h4>SCAP-Compliant Tools</h4>
+        <div class="card-grid card-grid-2">
+            <div class="info-card card-green">
+                <div class="info-card-icon">🐧</div>
+                <h4>OpenSCAP</h4>
+                <p>An open-source SCAP tool that assesses system configurations and generates compliance reports against a defined baseline. Widely used in Linux environments.</p>
+            </div>
+            <div class="info-card card-gold">
+                <div class="info-card-icon">📊</div>
+                <h4>CIS-CAT Pro</h4>
+                <p>Developed by the Center for Internet Security to assess systems specifically against CIS Benchmarks, producing detailed reports of exactly where a system meets or deviates from the benchmark.</p>
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-box-header">Example</div>
+            <div class="example-box-content">
+                A team uses Ansible playbooks to deploy a CIS baseline across 500 servers and workstations in a single run. They then schedule CIS-CAT Pro scans that report which machines have drifted out of compliance — so the gaps are found and fixed automatically rather than discovered during an incident.
+            </div>
+        </div>
+
+        <div class="pill-group">
+            <span class="pill pill-teal">Ansible</span>
+            <span class="pill pill-navy">Puppet</span>
+            <span class="pill pill-coral">Chef</span>
+            <span class="pill pill-navy">AD Group Policy</span>
+            <span class="pill pill-green">OpenSCAP</span>
+            <span class="pill pill-gold">CIS-CAT Pro</span>
+            <span class="pill pill-violet">SCAP</span>
+        </div>
+
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 04 — WIRELESS SECURITY EVALUATION
+    ═══════════════════════════════════════════════════ -->
+    <div id="wireless" class="content-section">
+
+        <div class="section-title">
+            <div class="section-title-icon icon-violet">📶</div>
+            <div class="section-title-text">
+                <h2>Wireless Security Evaluation</h2>
+                <p>Auditing the airspace: site surveys, heat maps, and rogue AP detection</p>
+            </div>
+        </div>
+
+        <div class="key-idea">
+            <div class="key-idea-header">💡 Key Idea</div>
+            <div class="key-idea-content">
+                Wired networks stop at the wall. Wireless networks extend into the air, where signals travel beyond the building and anyone in range can listen or try to connect. Evaluating wireless security means continuously auditing that invisible attack surface, because it changes every time furniture moves, a new device appears, or an attacker sets up shop nearby.
+            </div>
+        </div>
+
+        <h3>The Three Core Evaluation Techniques</h3>
+
+        <div class="step-flow">
+            <div class="step-item">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                    <h4>Site Survey</h4>
+                    <p>Walk the facility measuring signal coverage, interference, and dead zones. The survey informs where access points should be placed and at what power level.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                    <h4>Signal / Heat Mapping</h4>
+                    <p>Turn the survey data into a visual heat map of coverage strength. This reveals gaps in coverage and, just as important, signal "bleeding" outside the building where an attacker could pick it up.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">3</div>
+                <div class="step-body">
+                    <h4>Rogue AP Scanning</h4>
+                    <p>Scan for unauthorized access points. A rogue AP — including an evil twin that imitates a legitimate network name — creates a backdoor onto the network or lures users into connecting to an attacker.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">4</div>
+                <div class="step-body">
+                    <h4>Validate &amp; Remediate</h4>
+                    <p>Confirm that every detected access point is authorized and correctly configured, and remove or reposition anything that is not. Then repeat the cycle on a regular schedule.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-box-header">Example</div>
+            <div class="example-box-content">
+                A monthly site survey produces a heat map showing the office Wi-Fi signal reaching well into the parking lot — a clear exposure. The same scan flags an unknown access point broadcasting the company's network name from a nearby desk: a rogue AP planted to harvest credentials. Both findings come from routine evaluation, not from waiting for an incident.
+            </div>
+        </div>
+
+        <div class="pill-group">
+            <span class="pill pill-violet">Site Survey</span>
+            <span class="pill pill-violet">Heat Map</span>
+            <span class="pill pill-coral">Rogue AP</span>
+            <span class="pill pill-coral">Evil Twin</span>
+        </div>
+
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 05 — NETWORK AUTHENTICATION
+    ═══════════════════════════════════════════════════ -->
+    <div id="authentication" class="content-section">
+
+        <div class="section-title">
+            <div class="section-title-icon icon-coral">🔐</div>
+            <div class="section-title-text">
+                <h2>Network Authentication</h2>
+                <p>Controlling who is allowed to connect in the first place</p>
+            </div>
+        </div>
+
+        <div class="key-idea">
+            <div class="key-idea-header">💡 Key Idea</div>
+            <div class="key-idea-content">
+                Before a device is allowed to send traffic on the network, the user behind it should have to prove who they are. Enterprise authentication does more than say yes or no — it enriches your logs, strengthens data protection, and gives you granular control over exactly who can reach what.
+            </div>
+        </div>
+
+        <h3>RADIUS and MFA</h3>
+        <p><strong>RADIUS</strong> provides centralized authentication, authorization, and accounting — often called AAA. Instead of each device or service checking credentials on its own, RADIUS gives the organization one central place to authenticate users across the whole network, which also means one consistent log of who connected and when.</p>
+        <p>Pairing RADIUS with <strong>multi-factor authentication (MFA)</strong> raises the bar further: a stolen password alone is no longer enough to get onto the network.</p>
+
+        <h3>The 802.1X Model</h3>
+        <div class="definition-box">
+            <div class="definition-box-header">📖 Definition</div>
+            <div class="definition-box-content">
+                802.1X is the IEEE standard for port-based network access control. A device connected to a switch port or wireless network cannot pass any traffic until it has been authenticated.
+            </div>
+        </div>
+        <p>802.1X works through three roles:</p>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Role</th>
+                    <th>Who It Is</th>
+                    <th>Function</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="cell-label">Supplicant</td>
+                    <td>The connecting device (laptop, phone)</td>
+                    <td>Requests access and supplies credentials to get onto the network.</td>
+                </tr>
+                <tr>
+                    <td class="cell-label">Authenticator</td>
+                    <td>The switch or wireless access point</td>
+                    <td>Acts as the gatekeeper for the port, holding traffic until authentication succeeds.</td>
+                </tr>
+                <tr>
+                    <td class="cell-label">Authentication Server</td>
+                    <td>The RADIUS server</td>
+                    <td>Verifies the credentials and tells the authenticator whether to open the port.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="example-box">
+            <div class="example-box-header">Example</div>
+            <div class="example-box-content">
+                An employee plugs a laptop into a conference-room network jack. The switch (authenticator) blocks all traffic on that port and forwards the login to the RADIUS server. Only after the employee passes RADIUS with MFA does the switch open the port and allow the laptop onto the network.
+            </div>
+        </div>
+
+        <div class="pill-group">
+            <span class="pill pill-coral">RADIUS</span>
+            <span class="pill pill-coral">MFA</span>
+            <span class="pill pill-navy">802.1X</span>
+            <span class="pill pill-navy">AAA</span>
+        </div>
+
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 06 — NETWORK ACCESS CONTROL (NAC)
+    ═══════════════════════════════════════════════════ -->
+    <div id="nac" class="content-section">
+
+        <div class="section-title">
+            <div class="section-title-icon icon-green">🚦</div>
+            <div class="section-title-text">
+                <h2>Network Access Control (NAC)</h2>
+                <p>Checking each device's health before it is let in</p>
+            </div>
+        </div>
+
+        <div class="key-idea">
+            <div class="key-idea-header">💡 Key Idea</div>
+            <div class="key-idea-content">
+                Authentication proves <em>who</em> you are. NAC asks a different question: is your <em>device</em> safe to admit? NAC is the gate-keeper that inspects each device's posture — its security health — and decides whether to grant access, block it, or send it somewhere to be fixed first.
+            </div>
+        </div>
+
+        <h3>What NAC Checks (Device Posture)</h3>
+        <p>Before granting access, NAC evaluates whether the connecting device meets the organization's requirements:</p>
+        <ul>
+            <li><strong>Patch level</strong> — is the operating system up to date?</li>
+            <li><strong>Antivirus</strong> — is endpoint protection installed and current?</li>
+            <li><strong>Host firewall</strong> — is it enabled?</li>
+            <li><strong>Configuration compliance</strong> — does the device match the security baseline?</li>
+        </ul>
+
+        <h3>How NAC Responds</h3>
+        <div class="step-flow">
+            <div class="step-item">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                    <h4>Device Connects</h4>
+                    <p>A device requests access to the network.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                    <h4>Posture Check</h4>
+                    <p>NAC inspects patch level, antivirus status, and configuration against policy.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">3</div>
+                <div class="step-body">
+                    <h4>Decision</h4>
+                    <p>Compliant devices are granted access. Non-compliant devices are denied or placed in a quarantine network.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">4</div>
+                <div class="step-body">
+                    <h4>Remediate &amp; Re-check</h4>
+                    <p>A quarantined device updates its patches or antivirus, then is re-evaluated before being admitted.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-box-header">Example</div>
+            <div class="example-box-content">
+                A contractor connects a personal laptop with antivirus definitions three months out of date. NAC detects the outdated posture and drops the laptop into a quarantine VLAN with access only to the update server. Once the antivirus is current, NAC re-checks the device and grants it normal access.
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <div class="warning-box-header">⚠ Why It Matters</div>
+            <div class="warning-box-content">
+                Without NAC, a single non-compliant or already-infected device can connect freely and become the foothold an attacker uses for lateral movement across the network. NAC enforces the security baseline at the moment of connection — the "gate-keeper" for the whole network.
+            </div>
+        </div>
+
+        <div class="pill-group">
+            <span class="pill pill-green">Posture Check</span>
+            <span class="pill pill-green">Patch Level</span>
+            <span class="pill pill-green">Antivirus Status</span>
+            <span class="pill pill-coral">Quarantine VLAN</span>
+        </div>
+
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 07 — FIREWALLS, IDS/IPS & WEB FILTERING
+    ═══════════════════════════════════════════════════ -->
+    <div id="firewalls" class="content-section">
+
+        <div class="section-title">
+            <div class="section-title-icon icon-coral">🔥</div>
+            <div class="section-title-text">
+                <h2>Firewalls, IDS/IPS &amp; Web Filtering</h2>
+                <p>The active monitoring and control layer of network security</p>
+            </div>
+        </div>
+
+        <div class="key-idea">
+            <div class="key-idea-header">💡 Key Idea</div>
+            <div class="key-idea-content">
+                These three tool categories actively monitor and control traffic as it moves through the network. The crucial point is that no single one is sufficient on its own — each covers different threats. Used together, they form <strong>overlapping layers</strong>, so that if one layer is bypassed, another is still in place to catch what was missed.
+            </div>
+        </div>
+
+        <h3>The Three Tool Categories</h3>
+        <div class="card-grid card-grid-3">
+            <div class="info-card card-coral">
+                <div class="info-card-icon">🔥</div>
+                <h4>Firewalls</h4>
+                <p>Control what traffic is allowed to enter and leave the network, based on defined rules covering source, destination, port, and protocol.</p>
+            </div>
+            <div class="info-card card-navy">
+                <div class="info-card-icon">🛰️</div>
+                <h4>IDS / IPS</h4>
+                <p>Monitor network and host activity for threats. An IDS detects and alerts; an IPS detects and actively blocks the malicious traffic.</p>
+            </div>
+            <div class="info-card card-teal">
+                <div class="info-card-icon">🌐</div>
+                <h4>Web Filtering</h4>
+                <p>Blocks access to malicious and inappropriate content at the application layer, stopping users from reaching dangerous sites.</p>
+            </div>
+        </div>
+
+        <h3>IDS vs IPS</h3>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Aspect</th>
+                    <th>IDS (Detection)</th>
+                    <th>IPS (Prevention)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="cell-label">Action on a threat</td>
+                    <td>Detects and raises an alert</td>
+                    <td>Detects and actively blocks it</td>
+                </tr>
+                <tr>
+                    <td class="cell-label">Placement</td>
+                    <td>Out of band, watching a copy of traffic</td>
+                    <td>In line, traffic passes through it</td>
+                </tr>
+                <tr>
+                    <td class="cell-label">Risk</td>
+                    <td><span class="cell-tag tag-medium">Threat may proceed before response</span></td>
+                    <td><span class="cell-tag tag-low">Threat stopped automatically</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="insight-box">
+            <div class="insight-box-header">Defense in Depth</div>
+            <div class="insight-box-content">
+                Layering these controls is the principle of defense in depth. The firewall sets the rules at the border, the IPS inspects what gets through for known attack patterns, and the web filter blocks dangerous destinations. An attack would have to defeat all three to succeed.
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-box-header">Example</div>
+            <div class="example-box-content">
+                A user clicks a link in a phishing email. The web filter blocks the known-malicious site outright. On a different, not-yet-categorized site, the IPS recognizes the exploit pattern in the payload and drops the connection. Even if malware did install, the firewall's outbound rules block its attempt to call home to a command-and-control server. Three layers, three chances to catch it.
+            </div>
+        </div>
+
+        <div class="pill-group">
+            <span class="pill pill-coral">Firewall</span>
+            <span class="pill pill-navy">IDS</span>
+            <span class="pill pill-navy">IPS</span>
+            <span class="pill pill-teal">Web Filter</span>
+            <span class="pill pill-gold">Defense in Depth</span>
+        </div>
+
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 08 — BRINGING IT TOGETHER (SYNTHESIS)
+    ═══════════════════════════════════════════════════ -->
+    <div id="synthesis" class="content-section">
+
+        <div class="section-title">
+            <div class="section-title-icon icon-gold">🎯</div>
+            <div class="section-title-text">
+                <h2>Bringing It Together</h2>
+                <p>Six operational guidelines working as one layered posture</p>
+            </div>
+        </div>
+
+        <div class="key-idea">
+            <div class="key-idea-header">💡 Key Idea</div>
+            <div class="key-idea-content">
+                Everything in this lesson connects. These are not six separate security programs — they are one integrated, layered security posture. Evaluating network security means confirming that all six of these guidelines are present and working together.
+            </div>
+        </div>
+
+        <h3>The Six Operational Guidelines</h3>
+        <table class="objectives-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Guideline</th>
+                    <th>What It Means in Practice</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="obj-num">1</span></td>
+                    <td><strong>Select a baseline based on risk</strong></td>
+                    <td>Choose CIS Benchmarks, STIGs, or vendor guidance that fit the organization's environment, regulations, and threat landscape — not a one-size-fits-all standard.</td>
+                </tr>
+                <tr>
+                    <td><span class="obj-num">2</span></td>
+                    <td><strong>Automate baseline rollout</strong></td>
+                    <td>Deploy and enforce the baseline with Active Directory Group Policy or Ansible, Puppet, and Chef, so every system is configured correctly every time.</td>
+                </tr>
+                <tr>
+                    <td><span class="obj-num">3</span></td>
+                    <td><strong>Continuously audit wireless</strong></td>
+                    <td>Run regular site surveys and validate access points, scanning for rogue APs in the airspace.</td>
+                </tr>
+                <tr>
+                    <td><span class="obj-num">4</span></td>
+                    <td><strong>Use enterprise authentication</strong></td>
+                    <td>Authenticate users with RADIUS and MFA to enrich logging, protect data, and gain granular control.</td>
+                </tr>
+                <tr>
+                    <td><span class="obj-num">5</span></td>
+                    <td><strong>Enforce access with NAC</strong></td>
+                    <td>Use NAC gate-keepers to check device posture before any device is admitted.</td>
+                </tr>
+                <tr>
+                    <td><span class="obj-num">6</span></td>
+                    <td><strong>Monitor with firewalls, IDS/IPS, web filtering</strong></td>
+                    <td>Control and inspect traffic continuously, blocking malicious or inappropriate content as overlapping layers.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="divider"></div>
+        <h3>One Scenario, All Six Guidelines</h3>
+        <p>Here is how the guidelines come together for a single financial-services company — one integrated posture rather than six isolated efforts:</p>
+
+        <div class="step-flow">
+            <div class="step-item">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                    <h4>Baseline tailored to regulation</h4>
+                    <p>The company selects a CIS Benchmark baseline tuned to its regulatory requirements.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                    <h4>Automated at scale</h4>
+                    <p>It uses Ansible to deploy that baseline automatically across 500 servers and workstations.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">3</div>
+                <div class="step-body">
+                    <h4>Wireless audited monthly</h4>
+                    <p>The wireless team runs monthly site surveys and scans for rogue access points.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">4</div>
+                <div class="step-body">
+                    <h4>Authenticated access</h4>
+                    <p>All users authenticate to the network using RADIUS with MFA.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">5</div>
+                <div class="step-body">
+                    <h4>Posture enforced</h4>
+                    <p>NAC checks every connecting device for patch compliance and antivirus status before granting access.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">6</div>
+                <div class="step-body">
+                    <h4>Continuous monitoring</h4>
+                    <p>Firewalls, IPS, and web filters monitor all traffic continuously, catching and blocking threats in real time.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="summary-box">
+            <div class="summary-box-header">📝 Final Lesson Takeaway</div>
+            <div class="summary-box-content">
+                Evaluating network security capabilities is a <strong>continuous process</strong>, not a one-time audit. It needs a <strong>baseline</strong> chosen for real risk, <strong>automation</strong> that enforces it everywhere, <strong>wireless auditing</strong> of the airspace, <strong>authentication</strong> that controls who connects, <strong>NAC</strong> that checks device health, and <strong>firewalls, IDS/IPS, and web filtering</strong> that watch all traffic.<br><br>
+                A network that is deployed but not evaluated is only <em>assumed</em> to be secure. <strong>Real security is measurable, visible, and continuously improving.</strong><br><br>
+                Next, in Lesson 10, we move from the network to the devices on it, and assess endpoint security capabilities.
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 09 — REVIEW ACTIVITY
+    ═══════════════════════════════════════════════════ -->
+    <div id="review" class="content-section">
+        <div class="section-title">
+            <div class="section-title-icon icon-gold">🎯</div>
+            <div class="section-title-text">
+                <h2>Review Activity</h2>
+                <p>Two question sets covering everything in this lesson — answer, get instant feedback, and check your score.</p>
+            </div>
+        </div>
+
+        <div class="rv-intro">
+            <p>Fifty CompTIA Security+ style questions drawn from both Lesson 9 review activities: <strong>Network Security Baselines</strong> (benchmarks and secure configuration, wireless installation, encryption, Wi-Fi authentication, and network access control) and <strong>Capability Enhancement</strong> (access control lists, intrusion detection and prevention, IDS/IPS detection methods, and web filtering). Each question has one best answer; answer choices are shuffled on every load. Pick an option to see immediate feedback. Your score out of 50 appears once all questions are answered, with <strong>70% to pass</strong>. Use <strong>Reshuffle &amp; reset</strong> to start over with a fresh order.</p>
+        </div>
+
+        <div class="rv-progress-wrap">
+            <div class="rv-stat">
+                <span class="count" id="rvCount">Answered 0 / 50</span>
+                <div class="rv-controls">
+                    <button class="rv-btn ghost" id="rvResults" disabled>See my score</button>
+                    <button class="rv-btn" id="rvReset">🔄 Reshuffle &amp; reset</button>
+                </div>
+            </div>
+            <div class="rv-bar"><div class="rv-bar-fill" id="rvFill"></div></div>
+        </div>
+
+        <div class="rv-results" id="rvResultsPanel">
+            <h3>Your Result</h3>
+            <div class="rv-score-num" id="rvScoreNum">0 / 50</div>
+            <div class="rv-score-pct" id="rvScorePct">0%</div>
+            <div class="rv-verdict" id="rvVerdict">&nbsp;</div>
+            <p class="note">Pass line is 70% (35 / 50). Review any questions you missed, then reshuffle and try again.</p>
+        </div>
+
+        <div id="rvQuiz"></div>
+    </div>
+
+    <!-- ═══ FOOTER ═══ -->
+    <div class="footer">
+        <div class="footer-brand">
+            <p>CyberEdge</p>
+            <span>CompTIA Security+ · Lesson 9: Evaluate Network Security Capabilities · Learner Portal</span>
+        </div>
+        <div class="footer-nav">
+            <button onclick="showSection('overview', document.querySelector('.nav-tab'))">Overview</button>
+            <button onclick="prevSection()">← Previous</button>
+            <button onclick="nextSection()">Next →</button>
+        </div>
+    </div>
+
+</div><!-- end .container -->
+
+<script>
+    const sectionIds = ['overview','baselines','automation','wireless','authentication','nac','firewalls','synthesis','review'];
+    let currentIndex = 0;
+
+    function showSection(id, el) {
+        // hide all
+        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        // show target
+        document.getElementById(id).classList.add('active');
+        // activate correct tab
+        const tabs = document.querySelectorAll('.nav-tab');
+        const idx = sectionIds.indexOf(id);
+        if (idx >= 0 && tabs[idx]) tabs[idx].classList.add('active');
+        currentIndex = idx >= 0 ? idx : 0;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function nextSection() {
+        if (currentIndex < sectionIds.length - 1) {
+            currentIndex++;
+            showSection(sectionIds[currentIndex]);
+        }
+    }
+
+    function prevSection() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            showSection(sectionIds[currentIndex]);
+        }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight') nextSection();
+        if (e.key === 'ArrowLeft')  prevSection();
+    });
+
+/* ===================== REVIEW ACTIVITY ENGINE ===================== */
+(function(){
+  var RV_TOTAL=50, RV_PASS=0.70;
+  var RV_QUESTIONS=[
+    /* ===== SECTION 1: NETWORK SECURITY BASELINES ===== */
+    {s:1,cat:"Benchmarks & Secure Config",scn:true,q:"What is the primary purpose of a security benchmark such as a CIS Benchmark?",o:[
+      {t:"A consensus set of recommended secure configuration settings.",c:true,f:"Benchmarks publish agreed-upon secure settings that organizations apply as a hardening target."},
+      {t:"A ranking of the fastest hardware setups for a system.",c:false,f:"Not the best answer. The correct choice is: A consensus set of recommended secure configuration settings."},
+      {t:"A schedule defining when devices must be physically replaced.",c:false,f:"Not the best answer. The correct choice is: A consensus set of recommended secure configuration settings."},
+      {t:"A record of every account that has ever logged in.",c:false,f:"Not the best answer. The correct choice is: A consensus set of recommended secure configuration settings."}
+    ]},
+    {s:1,cat:"Benchmarks & Secure Config",scn:true,q:"A Department of Defense agency must harden its systems to a mandated standard. Which guide applies?",o:[
+      {t:"DISA Security Technical Implementation Guides (STIGs).",c:true,f:"STIGs are the mandatory configuration standard for U.S. Department of Defense systems; CIS is the general, vendor-neutral option."},
+      {t:"Center for Internet Security (CIS) Benchmarks.",c:false,f:"Not the best answer. The correct choice is: DISA Security Technical Implementation Guides (STIGs)."},
+      {t:"ISO 9001 quality management guidelines.",c:false,f:"Not the best answer. The correct choice is: DISA Security Technical Implementation Guides (STIGs)."},
+      {t:"The OWASP Top Ten web risks list.",c:false,f:"Not the best answer. The correct choice is: DISA Security Technical Implementation Guides (STIGs)."}
+    ]},
+    {s:1,cat:"Benchmarks & Secure Config",scn:true,q:"Why are secure configuration baselines important for an organization?",o:[
+      {t:"They define a known-good standard to measure systems against.",c:true,f:"A baseline is the reference point that lets you tell whether a system is still configured securely."},
+      {t:"They guarantee no system will ever be attacked again.",c:false,f:"Not the best answer. The correct choice is: They define a known-good standard to measure systems against."},
+      {t:"They remove the need to apply any security patches.",c:false,f:"Not the best answer. The correct choice is: They define a known-good standard to measure systems against."},
+      {t:"They raise the processing speed of every configured host.",c:false,f:"Not the best answer. The correct choice is: They define a known-good standard to measure systems against."}
+    ]},
+    {s:1,cat:"Benchmarks & Secure Config",scn:false,q:"What problem does measuring systems against a baseline help detect?",o:[
+      {t:"Configuration drift away from the approved secure standard.",c:true,f:"Over time systems drift from their secure settings; comparing against the baseline surfaces that drift."},
+      {t:"Physical damage to the system's internal hardware.",c:false,f:"Not the best answer. The correct choice is: Configuration drift away from the approved secure standard."},
+      {t:"The total number of users assigned to the system.",c:false,f:"Not the best answer. The correct choice is: Configuration drift away from the approved secure standard."},
+      {t:"The current resale value of the system hardware.",c:false,f:"Not the best answer. The correct choice is: Configuration drift away from the approved secure standard."}
+    ]},
+    {s:1,cat:"Benchmarks & Secure Config",scn:false,q:"Which source is best for vendor-neutral, regularly updated hardening guidance?",o:[
+      {t:"Center for Internet Security (CIS) Benchmarks.",c:true,f:"CIS Benchmarks are vendor-neutral, peer-reviewed, and updated regularly, unlike ad-hoc or marketing sources."},
+      {t:"A vendor product advertising brochure.",c:false,f:"Not the best answer. The correct choice is: Center for Internet Security (CIS) Benchmarks."},
+      {t:"An anonymously edited public wiki page.",c:false,f:"Not the best answer. The correct choice is: Center for Internet Security (CIS) Benchmarks."},
+      {t:"A single administrator's personal notes.",c:false,f:"Not the best answer. The correct choice is: Center for Internet Security (CIS) Benchmarks."}
+    ]},
+    {s:1,cat:"Wireless Installation",scn:false,q:"What is the main goal of a wireless site survey before installation?",o:[
+      {t:"To map signal coverage and locate sources of interference.",c:true,f:"A site survey plans coverage and finds interference so access points are placed effectively."},
+      {t:"To count the number of employees in each department.",c:false,f:"Not the best answer. The correct choice is: To map signal coverage and locate sources of interference."},
+      {t:"To choose the internet service provider for the site.",c:false,f:"Not the best answer. The correct choice is: To map signal coverage and locate sources of interference."},
+      {t:"To schedule the maintenance window for the servers.",c:false,f:"Not the best answer. The correct choice is: To map signal coverage and locate sources of interference."}
+    ]},
+    {s:1,cat:"Wireless Installation",scn:false,q:"Improper access point placement most directly causes which problem?",o:[
+      {t:"Coverage gaps or signal bleed beyond the intended area.",c:true,f:"Poor placement leaves dead zones or leaks signal outside the building, both of which weaken security and usability."},
+      {t:"Higher electricity costs across the entire building.",c:false,f:"Not the best answer. The correct choice is: Coverage gaps or signal bleed beyond the intended area."},
+      {t:"Slower performance of wired desktop computers.",c:false,f:"Not the best answer. The correct choice is: Coverage gaps or signal bleed beyond the intended area."},
+      {t:"Increased physical wear on the network cabling.",c:false,f:"Not the best answer. The correct choice is: Coverage gaps or signal bleed beyond the intended area."}
+    ]},
+    {s:1,cat:"Wireless Installation",scn:false,q:"Overlapping channels on nearby access points typically result in:",o:[
+      {t:"Co-channel interference that degrades wireless performance.",c:true,f:"Access points sharing or overlapping channels interfere with each other, lowering throughput."},
+      {t:"Stronger encryption applied to the wireless traffic.",c:false,f:"Not the best answer. The correct choice is: Co-channel interference that degrades wireless performance."},
+      {t:"Automatic blocking of all nearby rogue devices.",c:false,f:"Not the best answer. The correct choice is: Co-channel interference that degrades wireless performance."},
+      {t:"Longer battery life on the connected client devices.",c:false,f:"Not the best answer. The correct choice is: Co-channel interference that degrades wireless performance."}
+    ]},
+    {s:1,cat:"Wireless Installation",scn:false,q:"Reducing transmit power or adjusting antennas at the perimeter helps to:",o:[
+      {t:"Limit signal leakage outside the building footprint.",c:true,f:"Controlling signal strength and direction keeps the usable network inside the intended area."},
+      {t:"Encrypt the data carried over the wireless link.",c:false,f:"Not the best answer. The correct choice is: Limit signal leakage outside the building footprint."},
+      {t:"Authenticate the users joining the wireless network.",c:false,f:"Not the best answer. The correct choice is: Limit signal leakage outside the building footprint."},
+      {t:"Increase the number of access points supported.",c:false,f:"Not the best answer. The correct choice is: Limit signal leakage outside the building footprint."}
+    ]},
+    {s:1,cat:"Wireless Installation",scn:true,q:"During installation planning, why document all authorized access points?",o:[
+      {t:"To make unauthorized or rogue access points easier to spot.",c:true,f:"A known list of legitimate access points lets staff recognize a rogue one that does not belong."},
+      {t:"To calculate the warranty period of each device.",c:false,f:"Not the best answer. The correct choice is: To make unauthorized or rogue access points easier to spot."},
+      {t:"To assign desk locations to network administrators.",c:false,f:"Not the best answer. The correct choice is: To make unauthorized or rogue access points easier to spot."},
+      {t:"To determine the resale price of older equipment.",c:false,f:"Not the best answer. The correct choice is: To make unauthorized or rogue access points easier to spot."}
+    ]},
+    {s:1,cat:"Wireless Encryption",scn:false,q:"Which wireless security protocol is currently the strongest for enterprise use?",o:[
+      {t:"WPA3",c:true,f:"WPA3 is the most current and secure wireless protocol; WPA, WEP, and TKIP are older and weaker."},
+      {t:"WPA",c:false,f:"Not the best answer. The correct choice is: WPA3"},
+      {t:"WEP",c:false,f:"Not the best answer. The correct choice is: WPA3"},
+      {t:"TKIP",c:false,f:"Not the best answer. The correct choice is: WPA3"}
+    ]},
+    {s:1,cat:"Wireless Encryption",scn:false,q:"Why should WEP never be used to secure a modern wireless network?",o:[
+      {t:"Its encryption is easily broken with widely available tools.",c:true,f:"WEP uses flawed encryption that can be cracked in minutes, so it offers little real protection."},
+      {t:"It requires special hardware that most devices lack.",c:false,f:"Not the best answer. The correct choice is: Its encryption is easily broken with widely available tools."},
+      {t:"It encrypts traffic so strongly that it slows networks.",c:false,f:"Not the best answer. The correct choice is: Its encryption is easily broken with widely available tools."},
+      {t:"It works only with the very newest access points.",c:false,f:"Not the best answer. The correct choice is: Its encryption is easily broken with widely available tools."}
+    ]},
+    {s:1,cat:"Wireless Encryption",scn:false,q:"WPA2 relies primarily on which encryption standard?",o:[
+      {t:"AES (Advanced Encryption Standard).",c:true,f:"WPA2 uses AES with CCMP; RC4 was used by older protocols, DES is outdated, and MD5 is a hash, not a cipher."},
+      {t:"RC4 (Rivest Cipher 4).",c:false,f:"Not the best answer. The correct choice is: AES (Advanced Encryption Standard)."},
+      {t:"DES (Data Encryption Standard).",c:false,f:"Not the best answer. The correct choice is: AES (Advanced Encryption Standard)."},
+      {t:"MD5 (Message Digest 5).",c:false,f:"Not the best answer. The correct choice is: AES (Advanced Encryption Standard)."}
+    ]},
+    {s:1,cat:"Wireless Encryption",scn:false,q:"What improvement does WPA3 introduce over WPA2 for the handshake?",o:[
+      {t:"Simultaneous Authentication of Equals to resist offline attacks.",c:true,f:"WPA3 replaces the WPA2 handshake with SAE, which resists offline password-guessing attacks."},
+      {t:"A pre-shared key that is shared openly with all clients.",c:false,f:"Not the best answer. The correct choice is: Simultaneous Authentication of Equals to resist offline attacks."},
+      {t:"A return to the older WEP-style key exchange method.",c:false,f:"Not the best answer. The correct choice is: Simultaneous Authentication of Equals to resist offline attacks."},
+      {t:"Removal of all encryption to improve connection speed.",c:false,f:"Not the best answer. The correct choice is: Simultaneous Authentication of Equals to resist offline attacks."}
+    ]},
+    {s:1,cat:"Wireless Encryption",scn:false,q:"Wireless encryption such as WPA3 primarily protects against:",o:[
+      {t:"Eavesdropping on data as it travels over the air.",c:true,f:"Encryption keeps over-the-air traffic confidential so it cannot be read if intercepted."},
+      {t:"Power outages that affect the wireless access points.",c:false,f:"Not the best answer. The correct choice is: Eavesdropping on data as it travels over the air."},
+      {t:"Physical theft of the wireless router hardware.",c:false,f:"Not the best answer. The correct choice is: Eavesdropping on data as it travels over the air."},
+      {t:"Overheating of client devices during heavy use.",c:false,f:"Not the best answer. The correct choice is: Eavesdropping on data as it travels over the air."}
+    ]},
+    {s:1,cat:"Wi-Fi Authentication",scn:false,q:"How does WPA Enterprise mode differ from WPA Personal mode?",o:[
+      {t:"It authenticates each user individually through a RADIUS server.",c:true,f:"Enterprise mode authenticates users individually via 802.1X and RADIUS, rather than a single shared key."},
+      {t:"It uses one shared password for every device on the network.",c:false,f:"Not the best answer. The correct choice is: It authenticates each user individually through a RADIUS server."},
+      {t:"It disables encryption to allow faster guest connections.",c:false,f:"Not the best answer. The correct choice is: It authenticates each user individually through a RADIUS server."},
+      {t:"It limits the network to a single connected device.",c:false,f:"Not the best answer. The correct choice is: It authenticates each user individually through a RADIUS server."}
+    ]},
+    {s:1,cat:"Wi-Fi Authentication",scn:false,q:"In an 802.1X deployment, what role does the RADIUS server play?",o:[
+      {t:"It acts as the authentication server that validates credentials.",c:true,f:"In 802.1X the RADIUS server is the authentication server; the client is the supplicant and the switch or AP is the authenticator."},
+      {t:"It serves as the access point that clients connect to.",c:false,f:"Not the best answer. The correct choice is: It acts as the authentication server that validates credentials."},
+      {t:"It functions as the client device requesting access.",c:false,f:"Not the best answer. The correct choice is: It acts as the authentication server that validates credentials."},
+      {t:"It operates as the switch forwarding all the frames.",c:false,f:"Not the best answer. The correct choice is: It acts as the authentication server that validates credentials."}
+    ]},
+    {s:1,cat:"Wi-Fi Authentication",scn:false,q:"What is the function of EAP in wireless authentication?",o:[
+      {t:"It provides a framework supporting several authentication methods.",c:true,f:"EAP is an extensible framework that allows different authentication methods to be used within 802.1X."},
+      {t:"It encrypts every file stored on the client device.",c:false,f:"Not the best answer. The correct choice is: It provides a framework supporting several authentication methods."},
+      {t:"It assigns IP addresses to newly connected clients.",c:false,f:"Not the best answer. The correct choice is: It provides a framework supporting several authentication methods."},
+      {t:"It measures the signal strength of the connection.",c:false,f:"Not the best answer. The correct choice is: It provides a framework supporting several authentication methods."}
+    ]},
+    {s:1,cat:"Wi-Fi Authentication",scn:false,q:"A key risk of WPA2 Personal (pre-shared key) in a large organization is that:",o:[
+      {t:"One shared key is hard to rotate and easy to leak.",c:true,f:"A single shared password across many users is difficult to change and exposed if any one person leaks it."},
+      {t:"Each user must memorize a unique server certificate.",c:false,f:"Not the best answer. The correct choice is: One shared key is hard to rotate and easy to leak."},
+      {t:"The network can support only a handful of devices.",c:false,f:"Not the best answer. The correct choice is: One shared key is hard to rotate and easy to leak."},
+      {t:"Encryption is automatically disabled after each login.",c:false,f:"Not the best answer. The correct choice is: One shared key is hard to rotate and easy to leak."}
+    ]},
+    {s:1,cat:"Wi-Fi Authentication",scn:false,q:"Which set correctly names the three roles in 802.1X authentication?",o:[
+      {t:"Supplicant, authenticator, and authentication server.",c:true,f:"802.1X defines the supplicant (client), the authenticator (switch or AP), and the authentication server (RADIUS)."},
+      {t:"Client, repeater, and proxy server.",c:false,f:"Not the best answer. The correct choice is: Supplicant, authenticator, and authentication server."},
+      {t:"Sender, receiver, and relay agent.",c:false,f:"Not the best answer. The correct choice is: Supplicant, authenticator, and authentication server."},
+      {t:"Host, gateway, and domain controller.",c:false,f:"Not the best answer. The correct choice is: Supplicant, authenticator, and authentication server."}
+    ]},
+    {s:1,cat:"Network Access Control",scn:false,q:"What is the primary purpose of Network Access Control (NAC)?",o:[
+      {t:"To check device posture before granting network access.",c:true,f:"NAC evaluates a device's security state and decides whether, and how, it may connect."},
+      {t:"To encrypt all the files stored on the local server.",c:false,f:"Not the best answer. The correct choice is: To check device posture before granting network access."},
+      {t:"To assign desk phones to each new employee.",c:false,f:"Not the best answer. The correct choice is: To check device posture before granting network access."},
+      {t:"To measure the bandwidth used by each website.",c:false,f:"Not the best answer. The correct choice is: To check device posture before granting network access."}
+    ]},
+    {s:1,cat:"Network Access Control",scn:false,q:"A NAC health check would most likely verify that a device has:",o:[
+      {t:"Current patches and antivirus before joining the network.",c:true,f:"Posture checks confirm security requirements such as patch level and antivirus status before admission."},
+      {t:"A specific brand of monitor attached to it.",c:false,f:"Not the best answer. The correct choice is: Current patches and antivirus before joining the network."},
+      {t:"The maximum amount of installed memory available.",c:false,f:"Not the best answer. The correct choice is: Current patches and antivirus before joining the network."},
+      {t:"A particular color assigned in the asset database.",c:false,f:"Not the best answer. The correct choice is: Current patches and antivirus before joining the network."}
+    ]},
+    {s:1,cat:"Network Access Control",scn:false,q:"When a device fails a NAC posture check, it is typically:",o:[
+      {t:"Placed on a restricted network for remediation.",c:true,f:"Noncompliant devices are usually quarantined to a limited network until they meet policy."},
+      {t:"Granted full access to speed up its repair.",c:false,f:"Not the best answer. The correct choice is: Placed on a restricted network for remediation."},
+      {t:"Permanently removed from the asset inventory.",c:false,f:"Not the best answer. The correct choice is: Placed on a restricted network for remediation."},
+      {t:"Reassigned to a different employee at once.",c:false,f:"Not the best answer. The correct choice is: Placed on a restricted network for remediation."}
+    ]},
+    {s:1,cat:"Network Access Control",scn:false,q:"NAC is often enforced at the network edge in combination with:",o:[
+      {t:"802.1X authentication on switches and access points.",c:true,f:"802.1X provides the port-based authentication that NAC uses to control access at the edge."},
+      {t:"WEP encryption applied to all the wired ports.",c:false,f:"Not the best answer. The correct choice is: 802.1X authentication on switches and access points."},
+      {t:"A single shared password used for every endpoint.",c:false,f:"Not the best answer. The correct choice is: 802.1X authentication on switches and access points."},
+      {t:"Disabling logging to reduce administrative overhead.",c:false,f:"Not the best answer. The correct choice is: 802.1X authentication on switches and access points."}
+    ]},
+    {s:1,cat:"Network Access Control",scn:false,q:"What distinguishes agent-based NAC from agentless NAC?",o:[
+      {t:"Agent-based uses installed software; agentless scans without it.",c:true,f:"Agent-based NAC relies on software on the device, while agentless NAC assesses devices without a resident agent."},
+      {t:"Agent-based works on wired only; agentless on wireless only.",c:false,f:"Not the best answer. The correct choice is: Agent-based uses installed software; agentless scans without it."},
+      {t:"Agent-based encrypts traffic; agentless authenticates the users.",c:false,f:"Not the best answer. The correct choice is: Agent-based uses installed software; agentless scans without it."},
+      {t:"Agent-based is for servers only; agentless for printers only.",c:false,f:"Not the best answer. The correct choice is: Agent-based uses installed software; agentless scans without it."}
+    ]},
+    /* ===== SECTION 2: CAPABILITY ENHANCEMENT ===== */
+    {s:2,cat:"Access Control Lists",scn:false,q:"What is the primary function of an access control list on a router or firewall?",o:[
+      {t:"To permit or deny traffic based on defined rule criteria.",c:true,f:"An ACL is an ordered set of rules that allows or blocks traffic according to defined criteria."},
+      {t:"To encrypt all of the packets passing through the device.",c:false,f:"Not the best answer. The correct choice is: To permit or deny traffic based on defined rule criteria."},
+      {t:"To assign IP addresses to hosts across the network.",c:false,f:"Not the best answer. The correct choice is: To permit or deny traffic based on defined rule criteria."},
+      {t:"To measure the operating temperature of the hardware.",c:false,f:"Not the best answer. The correct choice is: To permit or deny traffic based on defined rule criteria."}
+    ]},
+    {s:2,cat:"Access Control Lists",scn:false,q:"Why does the order of entries in an ACL matter?",o:[
+      {t:"Rules are processed top down and the first match applies.",c:true,f:"ACLs evaluate top to bottom and act on the first matching rule, so ordering changes the outcome."},
+      {t:"Rules are sorted alphabetically before they are applied.",c:false,f:"Not the best answer. The correct choice is: Rules are processed top down and the first match applies."},
+      {t:"Rules at the bottom always override those above them.",c:false,f:"Not the best answer. The correct choice is: Rules are processed top down and the first match applies."},
+      {t:"Rules are chosen at random each time traffic arrives.",c:false,f:"Not the best answer. The correct choice is: Rules are processed top down and the first match applies."}
+    ]},
+    {s:2,cat:"Access Control Lists",scn:false,q:"What does the implicit deny at the end of an ACL do?",o:[
+      {t:"Blocks any traffic not explicitly permitted by a rule.",c:true,f:"Anything not matched by an explicit permit rule is dropped by the implicit deny at the end."},
+      {t:"Allows any traffic that was not explicitly blocked.",c:false,f:"Not the best answer. The correct choice is: Blocks any traffic not explicitly permitted by a rule."},
+      {t:"Logs every single packet the device has processed.",c:false,f:"Not the best answer. The correct choice is: Blocks any traffic not explicitly permitted by a rule."},
+      {t:"Encrypts the remaining traffic before forwarding it.",c:false,f:"Not the best answer. The correct choice is: Blocks any traffic not explicitly permitted by a rule."}
+    ]},
+    {s:2,cat:"Access Control Lists",scn:false,q:"A standard ACL typically filters traffic based on:",o:[
+      {t:"The source IP address of the packet.",c:true,f:"Standard ACLs filter only on source IP address; extended ACLs add more criteria."},
+      {t:"The physical color of the network cable.",c:false,f:"Not the best answer. The correct choice is: The source IP address of the packet."},
+      {t:"The brand of the sending application.",c:false,f:"Not the best answer. The correct choice is: The source IP address of the packet."},
+      {t:"The time zone configured on the host.",c:false,f:"Not the best answer. The correct choice is: The source IP address of the packet."}
+    ]},
+    {s:2,cat:"Access Control Lists",scn:false,q:"An extended ACL can filter traffic using:",o:[
+      {t:"Source, destination, protocol, and port together.",c:true,f:"Extended ACLs match on multiple fields, including source, destination, protocol, and port."},
+      {t:"Only the destination MAC address value.",c:false,f:"Not the best answer. The correct choice is: Source, destination, protocol, and port together."},
+      {t:"Only the user's chosen password length.",c:false,f:"Not the best answer. The correct choice is: Source, destination, protocol, and port together."},
+      {t:"Only the day of the week of the request.",c:false,f:"Not the best answer. The correct choice is: Source, destination, protocol, and port together."}
+    ]},
+    {s:2,cat:"Access Control Lists",scn:false,q:"For efficiency, where is an extended ACL generally placed?",o:[
+      {t:"Close to the source of the traffic being filtered.",c:true,f:"Placing extended ACLs near the source drops unwanted traffic early, saving bandwidth downstream."},
+      {t:"Close to the destination of the traffic instead.",c:false,f:"Not the best answer. The correct choice is: Close to the source of the traffic being filtered."},
+      {t:"On every device across the entire network.",c:false,f:"Not the best answer. The correct choice is: Close to the source of the traffic being filtered."},
+      {t:"On a device that carries no traffic at all.",c:false,f:"Not the best answer. The correct choice is: Close to the source of the traffic being filtered."}
+    ]},
+    {s:2,cat:"Intrusion Detection & Prevention",scn:false,q:"What is the core difference between an IDS and an IPS?",o:[
+      {t:"An IDS detects and alerts, while an IPS detects and blocks.",c:true,f:"An IDS is passive (alert only); an IPS is active and can block the offending traffic."},
+      {t:"An IDS blocks traffic, while an IPS only records it.",c:false,f:"Not the best answer. The correct choice is: An IDS detects and alerts, while an IPS detects and blocks."},
+      {t:"An IDS encrypts traffic, while an IPS decrypts it.",c:false,f:"Not the best answer. The correct choice is: An IDS detects and alerts, while an IPS detects and blocks."},
+      {t:"An IDS assigns addresses, while an IPS removes them.",c:false,f:"Not the best answer. The correct choice is: An IDS detects and alerts, while an IPS detects and blocks."}
+    ]},
+    {s:2,cat:"Intrusion Detection & Prevention",scn:false,q:"To actively block malicious traffic, an IPS must be deployed:",o:[
+      {t:"Inline, so that all traffic passes through it.",c:true,f:"An IPS must sit inline in the traffic path so it can drop packets before they reach the target."},
+      {t:"Out of band, receiving only copied traffic.",c:false,f:"Not the best answer. The correct choice is: Inline, so that all traffic passes through it."},
+      {t:"On a disconnected, standalone test machine.",c:false,f:"Not the best answer. The correct choice is: Inline, so that all traffic passes through it."},
+      {t:"Only on endpoints and never on the network.",c:false,f:"Not the best answer. The correct choice is: Inline, so that all traffic passes through it."}
+    ]},
+    {s:2,cat:"Intrusion Detection & Prevention",scn:false,q:"A passive IDS commonly receives traffic through:",o:[
+      {t:"A mirrored switch port or a network tap.",c:true,f:"A passive IDS sees copied traffic from a SPAN/mirror port or a tap, so it does not sit inline."},
+      {t:"A direct inline break placed in the cable.",c:false,f:"Not the best answer. The correct choice is: A mirrored switch port or a network tap."},
+      {t:"An encrypted tunnel built to the firewall.",c:false,f:"Not the best answer. The correct choice is: A mirrored switch port or a network tap."},
+      {t:"A removable USB storage device attached locally.",c:false,f:"Not the best answer. The correct choice is: A mirrored switch port or a network tap."}
+    ]},
+    {s:2,cat:"Intrusion Detection & Prevention",scn:true,q:"How does a network-based IDS differ from a host-based IDS?",o:[
+      {t:"A NIDS monitors network traffic; a HIDS monitors one host.",c:true,f:"A NIDS watches traffic on the network, while a HIDS watches activity on the individual host."},
+      {t:"A NIDS monitors one host; a HIDS monitors the network.",c:false,f:"Not the best answer. The correct choice is: A NIDS monitors network traffic; a HIDS monitors one host."},
+      {t:"A NIDS encrypts traffic; a HIDS authenticates the users.",c:false,f:"Not the best answer. The correct choice is: A NIDS monitors network traffic; a HIDS monitors one host."},
+      {t:"A NIDS blocks attacks; a HIDS only sends email alerts.",c:false,f:"Not the best answer. The correct choice is: A NIDS monitors network traffic; a HIDS monitors one host."}
+    ]},
+    {s:2,cat:"Intrusion Detection & Prevention",scn:false,q:"In intrusion detection, a false positive is best described as:",o:[
+      {t:"A benign event wrongly flagged as malicious activity.",c:true,f:"A false positive is a harmless event mistakenly identified as an attack; a missed attack is a false negative."},
+      {t:"A real attack that the system completely misses.",c:false,f:"Not the best answer. The correct choice is: A benign event wrongly flagged as malicious activity."},
+      {t:"A system that has been correctly tuned and configured.",c:false,f:"Not the best answer. The correct choice is: A benign event wrongly flagged as malicious activity."},
+      {t:"A device that has lost power and stopped logging.",c:false,f:"Not the best answer. The correct choice is: A benign event wrongly flagged as malicious activity."}
+    ]},
+    {s:2,cat:"Intrusion Detection & Prevention",scn:false,q:"When an inline IPS identifies an attack, it can:",o:[
+      {t:"Drop the malicious packets before they reach the target.",c:true,f:"Because it is inline, an IPS can actively discard the malicious traffic in real time."},
+      {t:"Forward the malicious packets and only log them.",c:false,f:"Not the best answer. The correct choice is: Drop the malicious packets before they reach the target."},
+      {t:"Encrypt the malicious packets and store them safely.",c:false,f:"Not the best answer. The correct choice is: Drop the malicious packets before they reach the target."},
+      {t:"Reassign the malicious packets to another network.",c:false,f:"Not the best answer. The correct choice is: Drop the malicious packets before they reach the target."}
+    ]},
+    {s:2,cat:"IDS & IPS Detection Methods",scn:false,q:"Signature-based detection identifies threats by:",o:[
+      {t:"Matching traffic against known attack patterns.",c:true,f:"Signature-based detection compares traffic to a database of known attack signatures."},
+      {t:"Comparing traffic to a learned normal baseline.",c:false,f:"Not the best answer. The correct choice is: Matching traffic against known attack patterns."},
+      {t:"Guessing which packets are likely malicious.",c:false,f:"Not the best answer. The correct choice is: Matching traffic against known attack patterns."},
+      {t:"Encrypting traffic before it is inspected.",c:false,f:"Not the best answer. The correct choice is: Matching traffic against known attack patterns."}
+    ]},
+    {s:2,cat:"IDS & IPS Detection Methods",scn:false,q:"Anomaly-based detection identifies threats by:",o:[
+      {t:"Flagging deviations from an established normal baseline.",c:true,f:"Anomaly-based detection learns normal behavior and alerts on activity that departs from it."},
+      {t:"Matching traffic against a list of known signatures.",c:false,f:"Not the best answer. The correct choice is: Flagging deviations from an established normal baseline."},
+      {t:"Blocking every packet that happens to be encrypted.",c:false,f:"Not the best answer. The correct choice is: Flagging deviations from an established normal baseline."},
+      {t:"Allowing all traffic that comes from internal addresses.",c:false,f:"Not the best answer. The correct choice is: Flagging deviations from an established normal baseline."}
+    ]},
+    {s:2,cat:"IDS & IPS Detection Methods",scn:false,q:"A key limitation of signature-based detection is that it:",o:[
+      {t:"Cannot detect new attacks that have no signature yet.",c:true,f:"Signature-based detection misses novel (zero-day) attacks because no matching signature exists."},
+      {t:"Generates far too many false positives by design.",c:false,f:"Not the best answer. The correct choice is: Cannot detect new attacks that have no signature yet."},
+      {t:"Requires the entire network to be taken offline.",c:false,f:"Not the best answer. The correct choice is: Cannot detect new attacks that have no signature yet."},
+      {t:"Works only on encrypted wireless connections.",c:false,f:"Not the best answer. The correct choice is: Cannot detect new attacks that have no signature yet."}
+    ]},
+    {s:2,cat:"IDS & IPS Detection Methods",scn:false,q:"A common drawback of anomaly-based detection is that it:",o:[
+      {t:"Can produce false positives from unusual but legitimate use.",c:true,f:"Legitimate but atypical activity can trip anomaly detection, leading to false positives."},
+      {t:"Can never identify any previously unknown attack.",c:false,f:"Not the best answer. The correct choice is: Can produce false positives from unusual but legitimate use."},
+      {t:"Relies entirely on a signature database to function.",c:false,f:"Not the best answer. The correct choice is: Can produce false positives from unusual but legitimate use."},
+      {t:"Inspects only traffic that is already encrypted.",c:false,f:"Not the best answer. The correct choice is: Can produce false positives from unusual but legitimate use."}
+    ]},
+    {s:2,cat:"IDS & IPS Detection Methods",scn:false,q:"Heuristic or behavioral detection works mainly by:",o:[
+      {t:"Evaluating how traffic or programs actually behave.",c:true,f:"Behavioral and heuristic methods judge activity by what it does, helping catch unknown threats."},
+      {t:"Reading the manufacturer label on each device.",c:false,f:"Not the best answer. The correct choice is: Evaluating how traffic or programs actually behave."},
+      {t:"Counting the number of cables in the rack.",c:false,f:"Not the best answer. The correct choice is: Evaluating how traffic or programs actually behave."},
+      {t:"Checking the warranty status of the hardware.",c:false,f:"Not the best answer. The correct choice is: Evaluating how traffic or programs actually behave."}
+    ]},
+    {s:2,cat:"IDS & IPS Detection Methods",scn:false,q:"Before anomaly-based detection can work, the system must first:",o:[
+      {t:"Learn a baseline of normal network behavior.",c:true,f:"Anomaly detection needs a baseline of normal activity to compare future traffic against."},
+      {t:"Delete all of the previous logs from the device.",c:false,f:"Not the best answer. The correct choice is: Learn a baseline of normal network behavior."},
+      {t:"Disable encryption across the entire network.",c:false,f:"Not the best answer. The correct choice is: Learn a baseline of normal network behavior."},
+      {t:"Block every connection coming from internal hosts.",c:false,f:"Not the best answer. The correct choice is: Learn a baseline of normal network behavior."}
+    ]},
+    {s:2,cat:"Web Filtering",scn:false,q:"What is the primary purpose of a web content filter?",o:[
+      {t:"To control which websites users are allowed to reach.",c:true,f:"A web filter enforces policy on which sites or categories users may access."},
+      {t:"To increase the raw speed of the internet connection.",c:false,f:"Not the best answer. The correct choice is: To control which websites users are allowed to reach."},
+      {t:"To assign passwords to each internal web server.",c:false,f:"Not the best answer. The correct choice is: To control which websites users are allowed to reach."},
+      {t:"To encrypt every file stored on the user devices.",c:false,f:"Not the best answer. The correct choice is: To control which websites users are allowed to reach."}
+    ]},
+    {s:2,cat:"Web Filtering",scn:false,q:"URL filtering blocks or allows traffic based on:",o:[
+      {t:"The web address the user is trying to visit.",c:true,f:"URL filtering makes allow or block decisions using the requested web address."},
+      {t:"The brand of browser installed on the device.",c:false,f:"Not the best answer. The correct choice is: The web address the user is trying to visit."},
+      {t:"The physical location of the office building.",c:false,f:"Not the best answer. The correct choice is: The web address the user is trying to visit."},
+      {t:"The amount of memory in the user's computer.",c:false,f:"Not the best answer. The correct choice is: The web address the user is trying to visit."}
+    ]},
+    {s:2,cat:"Web Filtering",scn:false,q:"Content categorization in a web filter works by:",o:[
+      {t:"Grouping sites into categories that policy can allow or block.",c:true,f:"Categorization assigns sites to groups (such as gambling or social media) so policy can act on the category."},
+      {t:"Sorting sites by the date that they were first created.",c:false,f:"Not the best answer. The correct choice is: Grouping sites into categories that policy can allow or block."},
+      {t:"Ranking sites by the size of the company behind them.",c:false,f:"Not the best answer. The correct choice is: Grouping sites into categories that policy can allow or block."},
+      {t:"Listing sites in the order users first happened to visit.",c:false,f:"Not the best answer. The correct choice is: Grouping sites into categories that policy can allow or block."}
+    ]},
+    {s:2,cat:"Web Filtering",scn:false,q:"How does a forward proxy support web filtering?",o:[
+      {t:"Client requests pass through it so policy can be applied.",c:true,f:"A forward proxy intercepts client web requests, letting it inspect and enforce filtering policy."},
+      {t:"It stores full backups of every file on the network.",c:false,f:"Not the best answer. The correct choice is: Client requests pass through it so policy can be applied."},
+      {t:"It assigns IP addresses to every connecting client.",c:false,f:"Not the best answer. The correct choice is: Client requests pass through it so policy can be applied."},
+      {t:"It removes the need for any firewall on the network.",c:false,f:"Not the best answer. The correct choice is: Client requests pass through it so policy can be applied."}
+    ]},
+    {s:2,cat:"Web Filtering",scn:false,q:"A web filter block list is used to:",o:[
+      {t:"Deny access to a set of specific disallowed sites.",c:true,f:"A block list names sites to deny; an allow list, by contrast, permits only approved sites."},
+      {t:"Permit access only to a few approved sites.",c:false,f:"Not the best answer. The correct choice is: Deny access to a set of specific disallowed sites."},
+      {t:"Record the bandwidth used by each site.",c:false,f:"Not the best answer. The correct choice is: Deny access to a set of specific disallowed sites."},
+      {t:"Translate site names into IP addresses.",c:false,f:"Not the best answer. The correct choice is: Deny access to a set of specific disallowed sites."}
+    ]},
+    {s:2,cat:"Web Filtering",scn:false,q:"DNS-based web filtering blocks unwanted sites by:",o:[
+      {t:"Refusing to resolve the names of blocked domains.",c:true,f:"DNS filtering simply does not return an address for blocked domains, so the site never loads."},
+      {t:"Encrypting the content of every web page served.",c:false,f:"Not the best answer. The correct choice is: Refusing to resolve the names of blocked domains."},
+      {t:"Increasing the loading speed of approved pages.",c:false,f:"Not the best answer. The correct choice is: Refusing to resolve the names of blocked domains."},
+      {t:"Removing the cookies stored by visited websites.",c:false,f:"Not the best answer. The correct choice is: Refusing to resolve the names of blocked domains."}
+    ]},
+    {s:2,cat:"Web Filtering",scn:false,q:"To filter encrypted HTTPS traffic, a web filter often performs:",o:[
+      {t:"TLS inspection by decrypting and re-encrypting traffic.",c:true,f:"TLS (SSL) inspection decrypts traffic for inspection, then re-encrypts it, so policy can apply to HTTPS."},
+      {t:"A blanket block of all encrypted traffic by default.",c:false,f:"Not the best answer. The correct choice is: TLS inspection by decrypting and re-encrypting traffic."},
+      {t:"A simple speed test on each encrypted connection.",c:false,f:"Not the best answer. The correct choice is: TLS inspection by decrypting and re-encrypting traffic."},
+      {t:"A full backup of each encrypted page to disk.",c:false,f:"Not the best answer. The correct choice is: TLS inspection by decrypting and re-encrypting traffic."}
+    ]}
+  ];
+  var SECTION_META={
+    1:{label:"Review Activity 1 \u00b7 Network Security Baselines"},
+    2:{label:"Review Activity 2 \u00b7 Capability Enhancement"}
+  };
+  var LETTERS=['A','B','C','D','E'];
+  var rvAnswered={}, rvCorrectCount=0;
+
+  function shuffle(a){ for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
+
+  function build(){
+    rvAnswered={}; rvCorrectCount=0;
+    var order=RV_QUESTIONS.map(function(_,i){return i;});
+    var s1=order.filter(function(i){return RV_QUESTIONS[i].s===1;});
+    var s2=order.filter(function(i){return RV_QUESTIONS[i].s===2;});
+    function groupShuffle(idxs){
+      var seen=[], groups={};
+      idxs.forEach(function(i){ var c=RV_QUESTIONS[i].cat; if(!groups[c]){groups[c]=[];seen.push(c);} groups[c].push(i); });
+      var out=[]; seen.forEach(function(c){ out=out.concat(shuffle(groups[c])); }); return out;
+    }
+    var finalOrder=groupShuffle(s1).concat(groupShuffle(s2));
+
+    var host=document.getElementById('rvQuiz');
+    host.innerHTML=''; var displayNum=0, lastSection=null, lastCat=null;
+    finalOrder.forEach(function(qi){
+      var Q=RV_QUESTIONS[qi];
+      if(Q.s!==lastSection){
+        lastSection=Q.s; lastCat=null;
+        var lab=document.createElement('div'); lab.className='rv-section-label';
+        lab.innerHTML='<span class="badge-ra">'+(Q.s===1?'RA1':'RA2')+'</span> '+SECTION_META[Q.s].label;
+        host.appendChild(lab);
+      }
+      if(Q.cat!==lastCat){
+        lastCat=Q.cat;
+        var cl=document.createElement('div'); cl.className='rv-cat-label'; cl.textContent=Q.cat; host.appendChild(cl);
+      }
+      displayNum++;
+      var card=document.createElement('div'); card.className='rv-q'; card.setAttribute('data-qi',qi);
+      var chips='<div class="qchips"><span class="rv-chip topic">'+Q.cat+'</span>'+(Q.scn?'<span class="rv-chip scn">Scenario</span>':'')+'</div>';
+      var head='<div class="qhead"><span class="qnum">Q'+displayNum+'</span><span class="qtext">'+Q.q+'</span></div>';
+      card.innerHTML=chips+head;
+      var optOrder=shuffle(Q.o.map(function(_,i){return i;}));
+      optOrder.forEach(function(oi,pos){
+        var O=Q.o[oi];
+        var btn=document.createElement('button'); btn.className='rv-opt';
+        btn.innerHTML='<span class="ltr">'+LETTERS[pos]+'</span><span>'+O.t+'</span>';
+        btn.addEventListener('click',function(){ answer(card,qi,O,btn); });
+        card.appendChild(btn);
+      });
+      var fb=document.createElement('div'); fb.className='rv-fb'; card.appendChild(fb);
+      host.appendChild(card);
+    });
+    document.getElementById('rvResultsPanel').classList.remove('show');
+    document.getElementById('rvResults').disabled=true;
+    updateRv();
+  }
+
+  function answer(card,qi,O,btn){
+    if(rvAnswered[qi]) return; rvAnswered[qi]=true; if(O.c) rvCorrectCount++;
+    var opts=card.querySelectorAll('.rv-opt');
+    opts.forEach(function(b){ b.disabled=true; });
+    btn.classList.add(O.c?'correct':'wrong');
+    if(!O.c){
+      var Q=RV_QUESTIONS[qi]; var ct=Q.o.filter(function(x){return x.c;})[0].t;
+      opts.forEach(function(b){ if(b.querySelector('span:last-child').innerHTML===ct){ b.classList.add('correct'); } else if(b!==btn){ b.classList.add('dim'); } });
+    } else { opts.forEach(function(b){ if(b!==btn) b.classList.add('dim'); }); }
+    var fb=card.querySelector('.rv-fb'); fb.className='rv-fb show '+(O.c?'good':'bad');
+    fb.innerHTML='<b>'+(O.c?'Correct.':'Not the best answer.')+'</b> '+O.f;
+    updateRv();
+  }
+
+  function updateRv(){
+    var n=Object.keys(rvAnswered).length;
+    document.getElementById('rvCount').textContent='Answered '+n+' / '+RV_TOTAL;
+    document.getElementById('rvFill').style.width=(n/RV_TOTAL*100)+'%';
+    document.getElementById('rvResults').disabled = n<RV_TOTAL;
+    if(n>=RV_TOTAL) showRv(false);
+  }
+
+  function showRv(scroll){
+    var pct=Math.round(rvCorrectCount/RV_TOTAL*100), pass=(rvCorrectCount/RV_TOTAL)>=RV_PASS;
+    document.getElementById('rvScoreNum').textContent=rvCorrectCount+' / '+RV_TOTAL;
+    document.getElementById('rvScorePct').textContent=pct+'% correct';
+    var v=document.getElementById('rvVerdict'); v.textContent=pass?'PASS \u2713':'Keep studying';
+    v.className='rv-verdict '+(pass?'pass':'fail');
+    document.getElementById('rvResultsPanel').classList.add('show');
+    if(scroll) document.getElementById('rvResultsPanel').scrollIntoView({behavior:'smooth',block:'center'});
+  }
+
+  document.getElementById('rvResults').addEventListener('click',function(){ showRv(true); });
+  document.getElementById('rvReset').addEventListener('click',function(){ build(); window.scrollTo({top:document.getElementById('review').offsetTop-20,behavior:'smooth'}); });
+  build();
+})();
+
+</script>
+  <script src="../shared/lesson-bridge.js"></script>
+</body>
+</html>

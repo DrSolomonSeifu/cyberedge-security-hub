@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 13: Analyze Indicators of Malicious Activity — Learner Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=Archivo:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+    --stone:#e7e0d4;
+    --stone-2:#ded5c5;
+    --surface:#fbfaf6;
+    --surface-2:#f2ede2;
+    --crimson:#a8323f;
+    --crimson-deep:#7f2530;
+    --slate:#3c5563;
+    --slate-deep:#24373f;
+    --ochre:#c0892e;
+    --ochre-deep:#956619;
+    --sage:#5d8a6b;
+    --sage-deep:#436b50;
+    --violet:#7a6ba6;
+    --violet-deep:#5e5189;
+    --ink:#2a2620;
+    --muted:#6d6357;
+    --line:#ded6c6;
+    --display:'Zilla Slab',Georgia,serif;
+    --body:'Archivo',-apple-system,sans-serif;
+    --mono:'Space Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:var(--body);
+    color:var(--ink);
+    line-height:1.7;
+    background:
+        radial-gradient(circle at 15% 10%, rgba(168,50,63,0.07) 0%, transparent 40%),
+        radial-gradient(circle at 85% 90%, rgba(60,85,99,0.08) 0%, transparent 45%),
+        linear-gradient(160deg, #eae3d7 0%, #e2dac9 100%);
+    background-attachment:fixed;
+    min-height:100vh;
+    padding:30px 18px 48px;
+}
+
+/* dossier shell */
+.shell{
+    max-width:1160px;margin:0 auto;background:var(--surface);
+    border-radius:6px;overflow:hidden;
+    box-shadow:0 30px 70px rgba(36,55,63,0.32), 0 0 0 1px rgba(42,38,32,0.06);
+}
+
+/* ─── HEADER (report cover) ─── */
+.hd{position:relative;background:linear-gradient(135deg,#2c424c 0%, #1f2f37 100%);color:#f3eee2;overflow:hidden;}
+.hd-bar{height:6px;background:linear-gradient(90deg,var(--crimson) 0%, var(--ochre) 70%, var(--sage) 100%);}
+.hd-tex{position:absolute;inset:0;pointer-events:none;
+    background-image:
+        radial-gradient(circle at 90% 15%, rgba(168,50,63,0.18) 0%, transparent 40%),
+        repeating-linear-gradient(0deg, transparent, transparent 33px, rgba(255,255,255,0.02) 33px, rgba(255,255,255,0.02) 34px);}
+.hd-inner{position:relative;z-index:1;padding:40px 46px 36px;}
+.hd-eyebrow{font-family:var(--mono);font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--ochre);margin-bottom:14px;}
+.hd h1{font-family:var(--display);font-weight:700;font-size:2.5rem;line-height:1.1;letter-spacing:0.2px;margin-bottom:10px;}
+.hd h1 .n{color:var(--crimson);}
+.hd h1 .u{color:var(--ochre);}
+.hd-sub{font-size:1rem;color:rgba(243,238,226,0.72);font-weight:300;max-width:640px;}
+.hd-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;}
+.badge{display:inline-flex;align-items:center;gap:7px;padding:7px 15px;border-radius:4px;font-size:0.75rem;font-weight:600;letter-spacing:0.4px;font-family:var(--mono);}
+.b-learner{background:rgba(93,138,107,0.2);color:#9ccfa9;border:1px solid rgba(93,138,107,0.45);}
+.b-cert{background:rgba(192,137,46,0.16);color:#e3b86b;border:1px solid rgba(192,137,46,0.4);}
+.b-credit{background:rgba(255,255,255,0.05);color:rgba(243,238,226,0.6);border:1px solid rgba(255,255,255,0.12);font-weight:400;}
+.stamp{position:absolute;top:30px;right:38px;z-index:1;transform:rotate(8deg);
+    border:2.5px solid rgba(168,50,63,0.7);color:rgba(168,50,63,0.82);border-radius:6px;
+    padding:8px 14px;font-family:var(--mono);font-weight:700;font-size:0.78rem;letter-spacing:2px;text-transform:uppercase;
+    text-align:center;line-height:1.3;}
+.stamp small{display:block;font-size:0.6rem;letter-spacing:1px;opacity:0.85;font-weight:400;}
+
+/* ─── NAV ─── */
+.nav{position:sticky;top:0;z-index:50;background:#33474f;display:flex;flex-wrap:wrap;border-bottom:3px solid var(--crimson);}
+.tab{flex:1;min-width:150px;padding:15px 18px;border:none;background:transparent;cursor:pointer;text-align:left;
+    font-family:var(--body);font-weight:600;font-size:0.85rem;color:rgba(243,238,226,0.55);transition:all 0.22s ease;
+    border-right:1px solid rgba(255,255,255,0.06);position:relative;}
+.tab .tnum{display:block;font-family:var(--mono);font-size:0.64rem;color:rgba(192,137,46,0.7);margin-bottom:4px;letter-spacing:1px;}
+.tab::after{content:'';position:absolute;left:50%;right:50%;bottom:0;height:3px;background:var(--crimson);transition:all 0.3s ease;}
+.tab:hover{color:#f3eee2;background:rgba(255,255,255,0.04);}
+.tab.active{color:#f3eee2;background:rgba(168,50,63,0.16);}
+.tab.active .tnum{color:var(--ochre);}
+.tab.active::after{left:0;right:0;}
+
+/* ─── SECTIONS ─── */
+.section{display:none;padding:44px 48px;}
+.section.active{display:block;}
+.section.active>*{opacity:0;animation:rise 0.5s cubic-bezier(0.2,0.7,0.2,1) forwards;}
+.section.active>*:nth-child(1){animation-delay:0.02s;}
+.section.active>*:nth-child(2){animation-delay:0.07s;}
+.section.active>*:nth-child(3){animation-delay:0.12s;}
+.section.active>*:nth-child(4){animation-delay:0.17s;}
+.section.active>*:nth-child(5){animation-delay:0.22s;}
+.section.active>*:nth-child(n+6){animation-delay:0.27s;}
+@keyframes rise{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+.shead{display:flex;align-items:center;gap:16px;margin-bottom:24px;}
+.shead-ic{width:54px;height:54px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.5em;color:#f3eee2;box-shadow:0 8px 18px rgba(36,55,63,0.22);}
+.ic-crimson{background:linear-gradient(135deg,var(--crimson),var(--crimson-deep));}
+.ic-slate{background:linear-gradient(135deg,var(--slate),var(--slate-deep));}
+.ic-ochre{background:linear-gradient(135deg,var(--ochre),var(--ochre-deep));}
+.ic-violet{background:linear-gradient(135deg,var(--violet),var(--violet-deep));}
+.shead-tx h2{font-family:var(--display);font-weight:700;font-size:1.7rem;color:var(--ink);line-height:1.12;}
+.shead-tx p{font-size:0.86rem;color:var(--muted);margin-top:2px;font-family:var(--mono);letter-spacing:0.3px;}
+
+.section p{font-size:0.99rem;margin-bottom:14px;}
+.section h3{font-family:var(--display);font-weight:600;font-size:1.32rem;color:var(--slate-deep);margin:34px 0 12px;}
+.section h4{font-size:1rem;font-weight:700;color:var(--ink);margin:20px 0 8px;}
+.section ul,.section ol{margin:10px 0 16px;padding-left:24px;}
+.section li{font-size:0.97rem;margin:6px 0;}
+.section strong{color:var(--ink);}
+
+.rule{height:2px;background:repeating-linear-gradient(90deg,var(--crimson) 0 18px, transparent 18px 28px);opacity:0.4;margin:34px 0;border-radius:1px;}
+
+/* ─── PANELS ─── */
+.panel{border-radius:0 8px 8px 0;padding:22px 26px;margin:22px 0;border-left:5px solid var(--slate);background:var(--surface-2);}
+.panel .ph{font-family:var(--mono);font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:9px;display:flex;align-items:center;gap:8px;}
+.panel p:last-child,.panel ul:last-child{margin-bottom:0;}
+.p-key{border-left-color:var(--slate);background:linear-gradient(135deg,rgba(60,85,99,0.09),rgba(60,85,99,0.03));}
+.p-key .ph{color:var(--slate-deep);}
+.p-def{border-left-color:var(--violet);background:linear-gradient(135deg,rgba(122,107,166,0.11),rgba(122,107,166,0.03));}
+.p-def .ph{color:var(--violet-deep);}.p-def .pc{font-style:italic;}
+.p-insight{border-left-color:var(--ochre);background:linear-gradient(135deg,rgba(192,137,46,0.12),rgba(192,137,46,0.03));}
+.p-insight .ph{color:var(--ochre-deep);}
+.p-example{border-left-color:var(--sage);background:linear-gradient(135deg,rgba(93,138,107,0.12),rgba(93,138,107,0.03));}
+.p-example .ph{color:var(--sage-deep);}
+.p-warn{border-left-color:var(--crimson);background:linear-gradient(135deg,rgba(168,50,63,0.10),rgba(168,50,63,0.03));}
+.p-warn .ph{color:var(--crimson-deep);}
+
+/* ─── IOC NOTE (signature evidence callout) ─── */
+.ioc{border:2px dashed rgba(168,50,63,0.5);border-radius:8px;background:rgba(168,50,63,0.04);padding:16px 20px;margin:16px 0;}
+.ioc .ih{font-family:var(--mono);font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--crimson-deep);font-weight:700;margin-bottom:7px;display:flex;align-items:center;gap:7px;}
+.ioc p{font-size:0.92rem;margin:0;color:var(--ink);}
+.ioc ul{margin:6px 0 0;}.ioc li{font-size:0.92rem;}
+
+/* ─── SUMMARY ─── */
+.summary{background:linear-gradient(135deg,#2c424c,#1f2f37);border-radius:10px;padding:28px 32px;margin:28px 0;box-shadow:0 14px 30px rgba(36,55,63,0.28);}
+.summary .ph{font-family:var(--mono);font-size:0.7rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--ochre);margin-bottom:12px;font-weight:700;}
+.summary .pc{color:rgba(243,238,226,0.88);font-size:0.99rem;line-height:1.85;}
+.summary .pc strong{color:#e89aa2;}.summary .pc em{color:var(--ochre);font-style:normal;}
+
+/* ─── CARDS ─── */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:15px;margin:22px 0;}
+.cards-3{grid-template-columns:repeat(auto-fit,minmax(188px,1fr));}
+.mc{background:#fff;border:1px solid var(--line);border-radius:8px;padding:18px 20px;position:relative;overflow:hidden;transition:transform 0.22s ease,box-shadow 0.22s ease;}
+.mc::before{content:'';position:absolute;top:0;left:0;bottom:0;width:4px;background:var(--crimson);}
+.mc.c-crimson::before{background:var(--crimson);}.mc.c-slate::before{background:var(--slate);}
+.mc.c-ochre::before{background:var(--ochre);}.mc.c-violet::before{background:var(--violet);}
+.mc.c-sage::before{background:var(--sage);}
+.mc:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(36,55,63,0.14);}
+.mc .mc-ic{font-size:1.5em;margin-bottom:8px;}
+.mc h4{font-family:var(--display);font-weight:600;font-size:1.04rem;color:var(--ink);margin:0 0 6px;}
+.mc p{font-size:0.86rem;color:var(--muted);line-height:1.6;margin:0;}
+.mc .tell{display:block;margin-top:8px;font-family:var(--mono);font-size:0.7rem;color:var(--crimson-deep);letter-spacing:0.3px;}
+
+/* ─── FLOW ─── */
+.flow{position:relative;margin:24px 0;}
+.flow::before{content:'';position:absolute;left:22px;top:22px;bottom:22px;width:2px;background:linear-gradient(180deg,var(--crimson),var(--slate));}
+.fitem{display:flex;gap:18px;align-items:flex-start;padding-bottom:16px;position:relative;}
+.fitem:last-child{padding-bottom:0;}
+.fnum{width:46px;height:46px;border-radius:50%;flex-shrink:0;z-index:1;display:flex;align-items:center;justify-content:center;
+    font-family:var(--display);font-weight:700;font-size:1rem;background:var(--surface);color:var(--ink);border:2px solid var(--crimson);box-shadow:0 5px 14px rgba(36,55,63,0.16);}
+.fbody{flex:1;background:#fff;border:1px solid var(--line);border-radius:8px;padding:13px 18px;}
+.fbody h4{margin:0 0 3px;font-size:0.96rem;color:var(--ink);}
+.fbody p{font-size:0.88rem;color:var(--muted);margin:0;}
+
+/* ─── TABLE ─── */
+.tbl{width:100%;border-collapse:collapse;margin:22px 0;border-radius:8px;overflow:hidden;box-shadow:0 6px 18px rgba(36,55,63,0.1);font-size:0.92rem;background:#fff;}
+.tbl thead tr{background:var(--slate-deep);}
+.tbl th{padding:13px 18px;text-align:left;font-family:var(--mono);font-size:0.68rem;letter-spacing:1.3px;text-transform:uppercase;color:var(--ochre);font-weight:700;}
+.tbl td{padding:12px 18px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.6;}
+.tbl tbody tr:nth-child(even){background:#faf7f0;}
+.tbl tbody tr:hover{background:#f1ece1;}
+.tbl tbody tr:last-child td{border-bottom:none;}
+.tbl .lbl{font-weight:700;color:var(--slate-deep);}
+
+/* ─── CHIPS / PILLS ─── */
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0;}
+.pill{padding:5px 13px;border-radius:4px;font-family:var(--mono);font-size:0.72rem;font-weight:400;}
+.pl-crimson{background:rgba(168,50,63,0.1);color:var(--crimson-deep);border:1px solid rgba(168,50,63,0.28);}
+.pl-slate{background:rgba(60,85,99,0.1);color:var(--slate-deep);border:1px solid rgba(60,85,99,0.26);}
+.pl-ochre{background:rgba(192,137,46,0.12);color:var(--ochre-deep);border:1px solid rgba(192,137,46,0.3);}
+.pl-violet{background:rgba(122,107,166,0.12);color:var(--violet-deep);border:1px solid rgba(122,107,166,0.3);}
+
+.objnum{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;background:var(--slate-deep);color:var(--ochre);font-family:var(--mono);font-size:0.75rem;font-weight:700;flex-shrink:0;}
+
+/* ─── FOOTER ─── */
+.ft{background:var(--slate-deep);padding:26px 48px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
+.ft-brand p{font-family:var(--mono);font-size:0.66rem;letter-spacing:2px;text-transform:uppercase;color:var(--ochre);margin-bottom:4px;}
+.ft-brand span{font-size:0.78rem;color:rgba(243,238,226,0.42);}
+.ft-nav{display:flex;gap:10px;flex-wrap:wrap;}
+.ft-nav button{font-family:var(--body);font-weight:600;font-size:0.82rem;padding:9px 18px;border-radius:6px;cursor:pointer;background:transparent;color:rgba(243,238,226,0.62);border:1px solid rgba(192,137,46,0.35);transition:all 0.2s;}
+.ft-nav button:hover{border-color:var(--ochre);color:var(--ochre);background:rgba(192,137,46,0.1);}
+
+@media(max-width:760px){
+    body{padding:14px 8px 30px;}
+    .hd-inner{padding:30px 22px;}
+    .hd h1{font-size:1.75rem;}.stamp{display:none;}
+    .section{padding:28px 22px;}
+    .tab{min-width:46%;}
+    .flow::before{display:none;}
+    .ft{flex-direction:column;text-align:center;padding:22px;}
+}
+@media print{
+    body{background:#fff;padding:0;}.shell{box-shadow:none;}
+    .nav,.ft-nav{display:none;}
+    .section{display:block!important;page-break-after:always;}
+    .section.active>*{opacity:1;animation:none;}
+}
+
+/* ─── REVIEW ACTIVITY QUIZ ─── */
+.rv-intro{font-size:0.99rem;margin-bottom:6px;}
+.rv-progwrap{background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:14px 18px;margin:18px 0 26px;box-shadow:0 6px 16px rgba(36,55,63,0.08);}
+.rv-progtop{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:9px;flex-wrap:wrap;}
+.rv-progtop .rv-count{font-family:var(--mono);font-size:0.78rem;letter-spacing:0.5px;color:var(--slate-deep);font-weight:700;}
+.rv-bar{height:9px;background:var(--stone-2);border-radius:6px;overflow:hidden;}
+.rv-fill{height:100%;width:0;background:linear-gradient(90deg,var(--crimson),var(--ochre));transition:width 0.35s ease;border-radius:6px;}
+
+.rv-grouph{display:flex;align-items:center;gap:12px;margin:32px 0 4px;}
+.rv-gtag{font-family:var(--mono);font-size:0.66rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#f3eee2;background:var(--slate-deep);padding:5px 11px;border-radius:5px;flex-shrink:0;}
+.rv-grouph h3{font-family:var(--display);font-weight:700;font-size:1.3rem;color:var(--slate-deep);margin:0;border:none;}
+.rv-groupsub{font-size:0.82rem;color:var(--muted);font-family:var(--mono);letter-spacing:0.3px;margin:0 0 6px;}
+
+.rv-q{background:#fff;border:1px solid var(--line);border-left:5px solid var(--slate);border-radius:0 8px 8px 0;padding:20px 22px;margin:16px 0;}
+.rv-qnum{font-family:var(--mono);font-size:0.7rem;letter-spacing:1px;color:var(--muted);font-weight:700;margin-bottom:7px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;}
+.rv-scn{background:rgba(192,137,46,0.14);color:var(--ochre-deep);border:1px solid rgba(192,137,46,0.34);padding:2px 8px;border-radius:4px;font-size:0.6rem;letter-spacing:0.6px;text-transform:uppercase;}
+.rv-qtext{font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:14px;line-height:1.55;}
+.rv-opts{display:flex;flex-direction:column;gap:9px;}
+.rv-opt{text-align:left;width:100%;background:var(--surface);border:1.5px solid var(--line);border-radius:7px;padding:12px 15px;cursor:pointer;font-family:var(--body);font-size:0.92rem;color:var(--ink);line-height:1.5;transition:border-color 0.16s ease,background 0.16s ease;display:flex;gap:11px;align-items:flex-start;}
+.rv-opt .rv-key{font-family:var(--mono);font-weight:700;font-size:0.8rem;color:var(--slate);flex-shrink:0;margin-top:1px;}
+.rv-opt:hover:not(:disabled){border-color:var(--slate);background:#fff;}
+.rv-opt:disabled{cursor:default;}
+.rv-opt.correct{border-color:var(--sage);background:rgba(93,138,107,0.13);}
+.rv-opt.correct .rv-key{color:var(--sage-deep);}
+.rv-opt.wrong{border-color:var(--crimson);background:rgba(168,50,63,0.09);}
+.rv-opt.wrong .rv-key{color:var(--crimson-deep);}
+.rv-opt.dim{opacity:0.5;}
+.rv-fb{font-size:0.86rem;line-height:1.55;margin-top:11px;padding:10px 13px;border-radius:6px;display:none;}
+.rv-fb.show{display:block;}
+.rv-fb.good{background:rgba(93,138,107,0.12);border:1px solid rgba(93,138,107,0.4);color:var(--sage-deep);}
+.rv-fb.bad{background:rgba(168,50,63,0.08);border:1px solid rgba(168,50,63,0.34);color:var(--crimson-deep);}
+
+.rv-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px;}
+.rv-btn{font-family:var(--body);font-weight:600;font-size:0.9rem;padding:12px 22px;border-radius:7px;cursor:pointer;border:none;transition:all 0.2s;}
+.rv-btn-score{background:linear-gradient(135deg,var(--crimson),var(--crimson-deep));color:#f3eee2;}
+.rv-btn-score:not(:disabled):hover{filter:brightness(1.08);}
+.rv-btn-score:disabled{background:var(--stone-2);color:var(--muted);cursor:not-allowed;}
+.rv-btn-reset{background:transparent;color:var(--slate-deep);border:1.5px solid var(--slate);}
+.rv-btn-reset:hover{background:rgba(60,85,99,0.08);}
+
+.rv-result{display:none;margin-top:26px;border-radius:10px;padding:30px;text-align:center;background:linear-gradient(135deg,#2c424c,#1f2f37);box-shadow:0 14px 30px rgba(36,55,63,0.28);}
+.rv-result.show{display:block;}
+.rv-result .rv-score{font-family:var(--display);font-weight:700;font-size:2.6rem;line-height:1;margin-bottom:6px;color:#f3eee2;}
+.rv-result .rv-pct{font-family:var(--mono);font-size:1rem;color:var(--ochre);margin-bottom:16px;}
+.rv-verdict{display:inline-block;font-family:var(--mono);font-size:0.8rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:7px 16px;border-radius:5px;}
+.rv-verdict.pass{background:rgba(93,138,107,0.22);color:#9ccfa9;border:1px solid rgba(93,138,107,0.5);}
+.rv-verdict.fail{background:rgba(168,50,63,0.2);color:#e89aa2;border:1px solid rgba(168,50,63,0.5);}
+.rv-result p{color:rgba(243,238,226,0.82);font-size:0.92rem;margin-top:16px;max-width:560px;margin-left:auto;margin-right:auto;}
+
+</style>
+  <link rel="stylesheet" href="../shared/mobile-responsive.css">
+</head>
+<body>
+<div class="shell">
+
+    <!-- HEADER -->
+    <div class="hd">
+        <div class="hd-bar"></div>
+        <div class="hd-tex"></div>
+        <div class="stamp">Indicators<br>of Compromise<small>Case File · L13</small></div>
+        <div class="hd-inner">
+            <div class="hd-eyebrow">CyberEdge · Security+</div>
+            <h1><span class="n">Lesson 13:</span> Analyze Indicators<br>of <span class="u">Malicious Activity</span></h1>
+            <div class="hd-sub">Reading the clues an attacker leaves behind — across malware, network and physical attacks, and application attacks — and knowing how to spot each one.</div>
+            <div class="hd-meta">
+                <span class="badge b-learner">📖 Learner Portal</span>
+                <span class="badge b-cert">⚡ CompTIA Security+</span>
+                <span class="badge b-credit">Dr. Solomon Seifu (Lead Technical Instructor &amp; Author)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAV -->
+    <div class="nav">
+        <button class="tab active" onclick="showSection('overview',this)"><span class="tnum">01</span>Overview</button>
+        <button class="tab" onclick="showSection('malware',this)"><span class="tnum">13A</span>Malware</button>
+        <button class="tab" onclick="showSection('network',this)"><span class="tnum">13B</span>Physical &amp; Network</button>
+        <button class="tab" onclick="showSection('application',this)"><span class="tnum">13C</span>Application</button>
+        <button class="tab" onclick="showSection('review',this)"><span class="tnum">RA</span>Review Activity</button>
+    </div>
+
+    <!-- ═══ OVERVIEW ═══ -->
+    <div id="overview" class="section active">
+        <div class="shead">
+            <div class="shead-ic ic-slate">🗺️</div>
+            <div class="shead-tx"><h2>Lesson Overview</h2><p>Learning to read the evidence</p></div>
+        </div>
+
+        <p>The previous lesson gave you the tools and data sources that surface suspicious activity. This lesson is the analyst's core skill: taking that raw evidence and recognizing it for what it is — an <strong>indicator of malicious activity</strong>.</p>
+        <p>An indicator rarely arrives labeled. A single odd log line could be nothing. The analyst's job is to know the patterns each kind of attack leaves behind, and to correlate weak signals into a confident finding. This lesson walks through three families of attack and, for each, the indicators that give it away.</p>
+
+        <div class="panel p-key">
+            <div class="ph">🔑 Key Idea</div>
+            <div class="pc">An <strong>Indicator of Compromise (IoC)</strong> is observable evidence that an attack has occurred or is underway. No single indicator is proof — analysts build confidence by correlating many of them. Knowing the expected indicators for each attack type is what turns raw data into detection.</div>
+        </div>
+
+        <h3>Lesson Objectives</h3>
+        <table class="tbl">
+            <thead><tr><th>#</th><th>Objective</th><th>What You Will Recognize</th></tr></thead>
+            <tbody>
+                <tr><td><span class="objnum">1</span></td><td><strong>Analyze malware indicators</strong></td><td>Classify malware types and identify the behaviors and IoCs each one produces.</td></tr>
+                <tr><td><span class="objnum">2</span></td><td><strong>Analyze physical and network attack indicators</strong></td><td>Recognize physical, denial-of-service, interception, wireless, credential, and cryptographic attacks by their signs.</td></tr>
+                <tr><td><span class="objnum">3</span></td><td><strong>Analyze application attack indicators</strong></td><td>Detect injection, forgery, and session attacks through URL analysis and web server logs.</td></tr>
+            </tbody>
+        </table>
+
+        <div class="rule"></div>
+        <h3>Three Indicator Categories</h3>
+        <p>Whatever the attack, its indicators tend to fall into three buckets. Keeping these in mind helps you organize what you see.</p>
+        <div class="cards cards-3">
+            <div class="mc c-slate"><div class="mc-ic">🌐</div><h4>Network Indicators</h4><p>Traffic spikes, connections to suspicious addresses, unusual ports, beaconing, large transfers.</p></div>
+            <div class="mc c-crimson"><div class="mc-ic">💻</div><h4>Host Indicators</h4><p>New processes, unauthorized startup items, file and registry changes, malware artifacts, missing logs.</p></div>
+            <div class="mc c-ochre"><div class="mc-ic">👤</div><h4>Behavioral Indicators</h4><p>Impossible travel, concurrent sessions, off-hours activity, privilege use that does not fit the account.</p></div>
+        </div>
+
+        <div class="rule"></div>
+        <h3>How to Use This Portal</h3>
+        <ul>
+            <li>Use the <strong>tabs</strong> above, the <strong>← →</strong> arrow keys, or the footer buttons to move between topics.</li>
+            <li>Look for the dashed <strong>Indicators to Watch</strong> boxes — they list exactly what gives each attack away.</li>
+            <li>Each topic opens with a <strong>Key Idea</strong>; read it first to frame what follows.</li>
+            <li>Before class, be ready to answer: <em>Why is one suspicious log entry rarely enough to declare an incident?</em></li>
+        </ul>
+
+        <div class="summary">
+            <div class="ph">📝 Big Picture Takeaway</div>
+            <div class="pc">Attackers cannot act without leaving traces. Malware spawns processes and phones home, network attacks distort traffic, credential attacks bend login patterns, and application attacks show up in logs and URLs. <strong>Detection is pattern recognition.</strong> Learn the patterns here, and the alerts from Lesson 12 stop being noise and start telling a story.</div>
+        </div>
+    </div>
+
+    <!-- ═══ 13A MALWARE ═══ -->
+    <div id="malware" class="section">
+        <div class="shead">
+            <div class="shead-ic ic-crimson">🦠</div>
+            <div class="shead-tx"><h2>Topic 13A · Malware Attack Indicators</h2><p>Classifying hostile code and the traces it leaves</p></div>
+        </div>
+
+        <div class="panel p-def">
+            <div class="ph">📖 Definition</div>
+            <div class="pc"><strong>Malware</strong> is any software written to cause harm or give an attacker unauthorized control. Types are classified two ways: by <strong>how they spread</strong> and by <strong>what they do</strong> once active.</div>
+        </div>
+
+        <h3>The Malware Families</h3>
+        <div class="cards">
+            <div class="mc c-crimson"><div class="mc-ic">🧬</div><h4>Virus</h4><p>Attaches to a file or program and spreads when that host is run by a user.</p><span class="tell">Tell: corrupted or modified files</span></div>
+            <div class="mc c-crimson"><div class="mc-ic">🪱</div><h4>Worm</h4><p>Self-replicating; spreads across networks on its own, with no user action needed.</p><span class="tell">Tell: rapid network spread, bandwidth spikes</span></div>
+            <div class="mc c-ochre"><div class="mc-ic">👻</div><h4>Fileless Malware</h4><p>Runs in memory using built-in tools like PowerShell, leaving little on disk.</p><span class="tell">Tell: suspicious script/process activity</span></div>
+            <div class="mc c-slate"><div class="mc-ic">🐴</div><h4>Trojan</h4><p>Disguised as something legitimate to trick the user into running it.</p><span class="tell">Tell: unexpected behavior from a "safe" app</span></div>
+            <div class="mc c-slate"><div class="mc-ic">🚪</div><h4>Backdoor / RAT</h4><p>Gives an attacker remote control of the host and persistent re-entry.</p><span class="tell">Tell: outbound C2 connections</span></div>
+            <div class="mc c-violet"><div class="mc-ic">🕵️</div><h4>Spyware / Keylogger</h4><p>Secretly collects activity, keystrokes, or credentials. Adware injects unwanted ads.</p><span class="tell">Tell: stolen credentials, odd processes</span></div>
+            <div class="mc c-crimson"><div class="mc-ic">🥷</div><h4>Rootkit</h4><p>Hides deep in the OS (even kernel level) to conceal other malware from tools.</p><span class="tell">Tell: tools report inconsistent results</span></div>
+            <div class="mc c-crimson"><div class="mc-ic">🔒</div><h4>Ransomware</h4><p>Encrypts files and demands payment. Related: cryptojacking (steals compute to mine) and logic bombs (trigger on a condition).</p><span class="tell">Tell: mass rapid file encryption</span></div>
+        </div>
+
+        <h3>TTPs and IoCs</h3>
+        <div class="panel p-insight">
+            <div class="ph">🔎 Two Lenses on an Attack</div>
+            <div class="pc"><strong>TTPs (Tactics, Techniques, and Procedures)</strong> describe <em>how</em> a threat actor operates — their playbook. <strong>IoCs (Indicators of Compromise)</strong> are the concrete artifacts that prove the activity happened — a file hash, a malicious domain, a registry key. TTPs help you anticipate; IoCs help you confirm.</div>
+        </div>
+
+        <h3>Malicious Activity Indicators</h3>
+        <p>Beyond malware-specific signs, certain account and resource indicators point to compromise regardless of the tool used:</p>
+        <div class="ioc">
+            <div class="ih">🔍 Indicators to Watch</div>
+            <ul>
+                <li><strong>Account anomalies</strong> — lockouts, concurrent sessions, and impossible travel (logins from two distant places too close in time).</li>
+                <li><strong>Resource consumption</strong> — abnormal CPU, memory, or bandwidth use, or resources suddenly inaccessible.</li>
+                <li><strong>Out-of-cycle or missing logging</strong> — activity at odd hours, or logs that have been cleared to hide tracks.</li>
+                <li><strong>Blocked content and published data</strong> — repeated policy blocks, or your data appearing on a leak site.</li>
+            </ul>
+        </div>
+
+        <div class="panel p-example">
+            <div class="ph">📌 Example</div>
+            <div class="pc">An endpoint suddenly maxes its CPU and begins encrypting files across a share at high speed, while its logs for the prior hour are missing. Individually, high CPU is normal and a log gap is suspicious — together, they are a confident ransomware indicator, and the EDR isolates the host.</div>
+        </div>
+    </div>
+
+    <!-- ═══ 13B PHYSICAL & NETWORK ═══ -->
+    <div id="network" class="section">
+        <div class="shead">
+            <div class="shead-ic ic-slate">🌐</div>
+            <div class="shead-tx"><h2>Topic 13B · Physical and Network Attack Indicators</h2><p>From the cabling to the wire to the air</p></div>
+        </div>
+
+        <div class="panel p-key">
+            <div class="ph">🔑 Key Idea</div>
+            <div class="pc">Not every attack is software. This topic spans the physical layer, the network, and the wireless airspace — and the network attacks usually unfold as a <strong>lifecycle</strong>, where each stage leaves its own indicators.</div>
+        </div>
+
+        <h3>Physical Attacks</h3>
+        <p>Directed at cabling, hardware, or the facility itself: brute-force damage and lock forcing (theft or tampering), environmental attacks (cutting power, network, or cooling), and RFID cloning or skimming of access badges. NFC is a short-range relative of RFID.</p>
+        <div class="ioc">
+            <div class="ih">🔍 Indicators to Watch</div>
+            <p>Signs of forced entry on tamper-evident seals, rogue devices added to the premises, and — for cloned badges — the same card used in impossible-travel or concurrent locations.</p>
+        </div>
+
+        <h3>The Network Attack Lifecycle</h3>
+        <div class="flow">
+            <div class="fitem"><div class="fnum">1</div><div class="fbody"><h4>Reconnaissance</h4><p>Scanning for hosts, open ports, and software versions. Noisy, but hard to tell from benign scanning.</p></div></div>
+            <div class="fitem"><div class="fnum">2</div><div class="fbody"><h4>Credential Harvesting</h4><p>Stealing passwords or secrets to gain authenticated access.</p></div></div>
+            <div class="fitem"><div class="fnum">3</div><div class="fbody"><h4>Weaponization &amp; Breach</h4><p>Delivering malicious code to gain a foothold without authenticating.</p></div></div>
+            <div class="fitem"><div class="fnum">4</div><div class="fbody"><h4>Command &amp; Control</h4><p>Beaconing out to operate the host remotely, disguised as normal HTTPS.</p></div></div>
+            <div class="fitem"><div class="fnum">5</div><div class="fbody"><h4>Lateral Movement</h4><p>Spreading host to host and escalating privileges across the network.</p></div></div>
+            <div class="fitem"><div class="fnum">6</div><div class="fbody"><h4>Exfiltration</h4><p>Copying data out — sometimes in small amounts to stay under the radar.</p></div></div>
+        </div>
+
+        <h3>Denial of Service</h3>
+        <p>A <strong>DDoS</strong> uses a botnet to overwhelm a target by consuming bandwidth or exhausting resources (for example, a SYN flood). <strong>Reflected and amplified</strong> attacks spoof the victim's address so third-party servers (DNS, NTP, CLDAP, memcached) flood it with large responses.</p>
+        <div class="ioc"><div class="ih">🔍 Indicators to Watch</div><p>Traffic spikes with no legitimate explanation, and services unresponsive or facing abnormally high request volumes. Mitigation relies on high-availability services more than blocking spoofed sources.</p></div>
+
+        <h3>Interception: On-Path and DNS Attacks</h3>
+        <div class="cards">
+            <div class="mc c-slate"><div class="mc-ic">🕴️</div><h4>On-Path (AitM)</h4><p>The attacker sits between two hosts, relaying and possibly altering traffic. ARP poisoning is the classic local-network method.</p><span class="tell">Tell: floods of gratuitous ARP replies</span></div>
+            <div class="mc c-slate"><div class="mc-ic">🧭</div><h4>DNS Attacks</h4><p>Poisoning the name-to-IP lookup — via the HOSTS file, server cache, or a local on-path attack — to redirect victims.</p><span class="tell">Tell: suspect HOSTS entries, DNS log anomalies</span></div>
+        </div>
+
+        <h3>Wireless Attacks</h3>
+        <p>Rogue access points and <strong>evil twins</strong> imitate legitimate networks; wireless DoS jams signals or sends spoofed <strong>disassociation</strong> frames; <strong>KRACK</strong> replays the WPA/WPA2 handshake to recover keys.</p>
+        <div class="ioc"><div class="ih">🔍 Indicators to Watch</div><p>Unknown or duplicate access point MAC addresses, typosquatted SSIDs, and APs not connected through expected switches.</p></div>
+
+        <h3>Credential Attacks</h3>
+        <table class="tbl">
+            <thead><tr><th>Attack</th><th>How It Works</th><th>Indicator</th></tr></thead>
+            <tbody>
+                <tr><td class="lbl">Online password</td><td>Guessing against a live login service.</td><td>Repeated failed logins, then a success.</td></tr>
+                <tr><td class="lbl">Offline / brute force</td><td>Cracking a stolen hash database away from the system.</td><td>Audit log of access to SAM, NTDS.DIT, or /etc/shadow.</td></tr>
+                <tr><td class="lbl">Password spraying</td><td>A few common passwords tried against many accounts.</td><td>One or two failures spread across many users.</td></tr>
+                <tr><td class="lbl">Credential replay (PtH / PtT)</td><td>Reusing stolen hashes or forged Kerberos tickets (golden/silver).</td><td>Anomalous logons; LSASS access; tools on host.</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Cryptographic Attacks</h3>
+        <p>These prey on weak cryptography: <strong>downgrade</strong> attacks force weaker protocols (and Kerberoasting forces weak RC4 tickets), while <strong>collision</strong> and <strong>birthday</strong> attacks exploit weak hashes to forge signatures.</p>
+        <div class="ioc"><div class="ih">🔍 Indicators to Watch</div><p>Evidence of protocol downgrades in server logs and IDS alerts; unexpected use of deprecated ciphers.</p></div>
+
+        <h3>Malicious Code Indicators</h3>
+        <div class="panel p-warn">
+            <div class="ph">⚠ On the Compromised Host</div>
+            <div class="pc">Once code is running, watch for <strong>shellcode</strong> downloading more tools, <strong>credential dumping</strong> (SAM, lsass.exe, DCSync), <strong>lateral movement</strong> via PsExec or PowerShell, and <strong>persistence</strong> through AutoRun registry keys, scheduled tasks, or WMI event subscriptions.</div>
+        </div>
+    </div>
+
+    <!-- ═══ 13C APPLICATION ═══ -->
+    <div id="application" class="section">
+        <div class="shead">
+            <div class="shead-ic ic-ochre">🧩</div>
+            <div class="shead-tx"><h2>Topic 13C · Application Attack Indicators</h2><p>Where the web meets the user — and the logs that catch it</p></div>
+        </div>
+
+        <div class="panel p-key">
+            <div class="ph">🔑 Key Idea</div>
+            <div class="pc">Web applications expose many interfaces to the public. Attackers exploit the server (injection) and the browser session (hijacking and forgery). These attacks are hard to see in the moment, so detection starts with <strong>URL analysis</strong> and the <strong>web server access log</strong>.</div>
+        </div>
+
+        <h3>Attacks Against the Application</h3>
+        <div class="cards">
+            <div class="mc c-crimson"><div class="mc-ic">⬆️</div><h4>Privilege Escalation</h4><p>Running code at a higher level (vertical) or as another user (horizontal). The clearest indicator of an application attack.</p><span class="tell">Tell: privilege-use entries in audit logs</span></div>
+            <div class="mc c-crimson"><div class="mc-ic">💥</div><h4>Buffer Overflow</h4><p>Overfilling a memory buffer to overwrite a return address and run attacker code. ASLR and DEP defend against it.</p><span class="tell">Tell: frequent process crashes</span></div>
+            <div class="mc c-violet"><div class="mc-ic">🍪</div><h4>Replay (Session)</h4><p>Stealing or guessing a session cookie to hijack an authenticated session.</p><span class="tell">Tell: same session token from two sources</span></div>
+            <div class="mc c-violet"><div class="mc-ic">🎭</div><h4>Forgery (CSRF / SSRF)</h4><p>CSRF rides a user's session to act in their name; SSRF makes the server itself issue attacker requests with its own privilege.</p><span class="tell">Tell: unexpected internal requests</span></div>
+        </div>
+
+        <h3>Injection Attacks</h3>
+        <p>All share one flaw — the application trusting unsanitized input. <strong>SQL injection</strong> and <strong>XSS</strong> were covered earlier; this lesson adds <strong>XML/XXE</strong> (reading server files) and <strong>LDAP injection</strong> (bypassing authentication with a crafted filter). <strong>Directory traversal</strong> climbs out of the web root with <code style="font-family:var(--mono);font-size:0.85em;">../</code> sequences, often hidden with percent encoding, and <strong>command injection</strong> runs OS shell commands.</p>
+        <div class="ioc"><div class="ih">🔍 Indicators to Watch</div><p>Input containing SQL or script syntax, traversal sequences or percent-encoded paths in URLs, and application errors or crashes that spike when an endpoint is probed.</p></div>
+
+        <h3>URL Analysis</h3>
+        <p>A URL is both a destination and a payload. Data is passed after a <code style="font-family:var(--mono);font-size:0.85em;">?</code> as name-value pairs, and <strong>percent encoding</strong> — its legitimate job is encoding reserved characters — can be abused to disguise malicious input. Reading the URL is the first detection step.</p>
+
+        <h3>Web Server Logs</h3>
+        <p>The access log turns a stream of requests into a record you can read. Status codes tell much of the story:</p>
+        <table class="tbl">
+            <thead><tr><th>Code</th><th>Meaning</th><th>What It May Indicate</th></tr></thead>
+            <tbody>
+                <tr><td class="lbl">4xx</td><td>Client-side errors</td><td>Probing and malformed requests.</td></tr>
+                <tr><td class="lbl">403</td><td>Forbidden</td><td>Repeated attempts to reach unauthorized resources.</td></tr>
+                <tr><td class="lbl">404 (many)</td><td>Not Found</td><td>A scanner enumerating directories to map the attack surface.</td></tr>
+                <tr><td class="lbl">5xx / 502</td><td>Server-side errors</td><td>Attacks causing faults, or a blocked upstream server.</td></tr>
+            </tbody>
+        </table>
+        <div class="panel p-example">
+            <div class="ph">📌 Example</div>
+            <div class="pc">An access log shows one client requesting a normal page, then the same source generating dozens of 404s in seconds as it tries common directory and file names. That burst of 404s is the signature of a tool like Nikto mapping the application — reconnaissance, caught in the log.</div>
+        </div>
+
+        <div class="summary">
+            <div class="ph">📝 Final Lesson Takeaway</div>
+            <div class="pc">Every attack in this lesson — from a virus to a buffer overflow — leaves <strong>indicators</strong>. The analyst's craft is knowing which traces belong to which attack and <em>correlating</em> them, because one signal is rarely proof. Malware shows on the host, network attacks distort the traffic, credential attacks bend the login patterns, and application attacks surface in the URL and the access log. Put it all together, and you can name the threat with confidence.</div>
+        </div>
+    </div>
+
+
+    <!-- ═══ RA · REVIEW ACTIVITY ═══ -->
+    <div id="review" class="section">
+        <div class="shead">
+            <div class="shead-ic ic-violet">🎯</div>
+            <div class="shead-tx"><h2>Review Activity · Indicators of Malicious Activity</h2><p>30 best-answer questions · CompTIA Security+ format</p></div>
+        </div>
+
+        <p class="rv-intro">Work through all three sets below. Each question has a single <strong>best</strong> answer, and every wrong choice explains why it falls short. The questions and the answer choices are reshuffled every time you load or reset the activity.</p>
+
+        <div class="ioc">
+            <div class="ih">📋 How scoring works</div>
+            <p>Answer all 30 questions to unlock <strong>See my score</strong>. You need <strong>70% (21 of 30)</strong> to pass. Use <strong>Reshuffle &amp; reset</strong> to run it again with a fresh order.</p>
+        </div>
+
+        <div class="rv-progwrap">
+            <div class="rv-progtop">
+                <span class="rv-count" id="rv-count">Answered 0 / 30</span>
+                <span class="rv-count" id="rv-running" style="color:var(--muted);font-weight:400;"></span>
+            </div>
+            <div class="rv-bar"><div class="rv-fill" id="rv-fill"></div></div>
+        </div>
+
+        <div id="rv-quiz"></div>
+
+        <div class="rv-actions">
+            <button class="rv-btn rv-btn-score" id="rv-scorebtn" onclick="rvScore()" disabled>See my score</button>
+            <button class="rv-btn rv-btn-reset" onclick="rvReset()">↻ Reshuffle &amp; reset</button>
+        </div>
+
+        <div class="rv-result" id="rv-result">
+            <div class="rv-score" id="rv-scoreval">0 / 30</div>
+            <div class="rv-pct" id="rv-pctval">0%</div>
+            <div class="rv-verdict" id="rv-verdict"></div>
+            <p id="rv-resultmsg"></p>
+        </div>
+    </div>
+
+
+    <!-- FOOTER -->
+    <div class="ft">
+        <div class="ft-brand">
+            <p>CyberEdge</p>
+            <span>CompTIA Security+ · Lesson 13: Analyze Indicators of Malicious Activity · Learner Portal</span>
+        </div>
+        <div class="ft-nav">
+            <button onclick="prevSection()">← Previous</button>
+            <button onclick="nextSection()">Next →</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const ids=['overview','malware','network','application','review'];
+    let cur=0;
+    function showSection(id,el){
+        document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        const idx=ids.indexOf(id);const tabs=document.querySelectorAll('.tab');
+        if(el){el.classList.add('active');}else if(idx>=0&&tabs[idx]){tabs[idx].classList.add('active');}
+        cur=idx>=0?idx:0;
+        window.scrollTo({top:0,behavior:'smooth'});
+    }
+    function nextSection(){if(cur<ids.length-1){cur++;showSection(ids[cur]);}}
+    function prevSection(){if(cur>0){cur--;showSection(ids[cur]);}}
+    document.addEventListener('keydown',e=>{
+        if(e.key==='ArrowRight')nextSection();
+        if(e.key==='ArrowLeft')prevSection();
+    });
+</script>
+
+<script>
+/* ===== Review Activity quiz (namespaced rv*) ===== */
+const RV_SECTIONS={
+    1:{tag:"RA1",title:"Malware Attack Indicators",sub:"Topic 13A"},
+    2:{tag:"RA2",title:"Physical & Network Attack Indicators",sub:"Topic 13B"},
+    3:{tag:"RA3",title:"Application Attack Indicators",sub:"Topic 13C"}
+};
+const RV_QUESTIONS=[
+/* ---------- RA1 · MALWARE ---------- */
+{s:1,scn:false,q:"An analyst documents how a malware sample first reached a host separately from what it does once it runs. Which pair correctly distinguishes these two properties?",o:[
+ {t:"The vector is how the malware gains access; the payload is the malicious action it carries out.",c:true,f:"Correct. The vector is the method of entry, and the payload is the action the malware performs once active."},
+ {t:"The vector is the malicious action; the payload is the delivery method.",c:false,f:"This reverses the terms. The vector is the entry method; the payload is the action."},
+ {t:"The vector is the encryption routine; the payload is the file it infects.",c:false,f:"Neither term refers to encryption or a specific infected file. Vector = entry method, payload = action."},
+ {t:"The vector and the payload both describe how the malware spreads to other hosts.",c:false,f:"Spreading is propagation. Only the vector concerns entry, and the payload is the action performed."}
+]},
+{s:1,scn:false,q:"Which characteristic most reliably distinguishes a computer virus from a worm?",o:[
+ {t:"A virus needs a host file or user action to execute and spread.",c:true,f:"Correct. Reliance on a host file or user action is the defining trait of a virus."},
+ {t:"A virus spreads across the network on its own with no user interaction.",c:false,f:"That describes a worm. A virus depends on a host file or a user action."},
+ {t:"A virus resides only in memory and never writes to disk.",c:false,f:"That describes fileless malware, not a defining trait of a virus."},
+ {t:"A virus always encrypts files and demands payment.",c:false,f:"That describes ransomware. Encryption for ransom is not what defines a virus."}
+]},
+{s:1,scn:true,q:"Malware propagated to dozens of hosts overnight with no one clicking anything, exploiting a vulnerable network service. Which classification best fits?",o:[
+ {t:"Worm",c:true,f:"Correct. Self-propagation across the network with no user action is the hallmark of a worm."},
+ {t:"Virus",c:false,f:"A virus needs a host file or user action to spread, so self-propagation points to a worm."},
+ {t:"Trojan",c:false,f:"A trojan relies on tricking a user into running it, not on autonomous spread."},
+ {t:"Logic bomb",c:false,f:"A logic bomb waits for a trigger condition; it does not self-propagate across hosts."}
+]},
+{s:1,scn:false,q:"Which indicator most strongly suggests fileless malware rather than a traditional file-based infection?",o:[
+ {t:"Malicious activity running from memory through legitimate tools such as PowerShell, with few or no new files on disk.",c:true,f:"Correct. Living off the land in memory with minimal disk artifacts is characteristic of fileless malware."},
+ {t:"A new executable dropped into a startup folder.",c:false,f:"A dropped executable is a file-based artifact; fileless malware avoids writing files."},
+ {t:"A flood of encrypted files accompanied by a ransom note.",c:false,f:"That points to ransomware, identified by encryption and a note, not memory-resident execution."},
+ {t:"A changed browser homepage and frequent pop-up ads.",c:false,f:"That suggests adware, not the memory-resident behavior of fileless malware."}
+]},
+{s:1,scn:true,q:"Credentials are being stolen, and investigators find a program silently recording every keystroke and sending it to a remote server. What is it?",o:[
+ {t:"Keylogger",c:true,f:"Correct. Capturing and exfiltrating keystrokes is exactly what a keylogger does."},
+ {t:"Adware",c:false,f:"Adware displays unwanted ads; it does not capture and exfiltrate keystrokes."},
+ {t:"Rootkit",c:false,f:"A rootkit hides presence and keeps privileged access; recording keystrokes specifically is a keylogger."},
+ {t:"Logic bomb",c:false,f:"A logic bomb executes on a trigger; it is not defined by recording keystrokes."}
+]},
+{s:1,scn:true,q:"An attacker keeps hidden, ongoing remote control of a compromised host, issuing commands as though sitting at the keyboard. Which tool best enables this?",o:[
+ {t:"Remote access trojan (RAT)",c:true,f:"Correct. A RAT provides covert, interactive remote control of the host."},
+ {t:"Worm",c:false,f:"A worm spreads automatically; by itself it does not provide interactive remote control."},
+ {t:"Spyware",c:false,f:"Spyware covertly gathers information but is not primarily about full interactive control."},
+ {t:"Adware",c:false,f:"Adware serves ads and provides no remote-control capability."}
+]},
+{s:1,scn:false,q:"Why are rootkits especially hard to detect with ordinary host tools?",o:[
+ {t:"They run with high privilege and hook system functions to hide their own files, processes, and activity.",c:true,f:"Correct. Privileged hooking of the OS lets a rootkit conceal itself from normal tools."},
+ {t:"They encrypt the entire disk so nothing can be read.",c:false,f:"That describes ransomware or crypto-malware, not how a rootkit evades detection."},
+ {t:"They only run inside a sandbox isolated from the OS.",c:false,f:"Rootkits embed deeply in the OS rather than isolating themselves away from it."},
+ {t:"They display obvious warning banners to the user.",c:false,f:"Rootkits hide; they do not announce themselves."}
+]},
+{s:1,scn:true,q:"A finance system runs normally for months, then on a former admin's birthday it suddenly deletes records. No ransom is demanded. What is the most likely cause?",o:[
+ {t:"Logic bomb",c:true,f:"Correct. Dormant code triggered by a date or condition is a logic bomb."},
+ {t:"Ransomware",c:false,f:"Ransomware encrypts and demands payment; here there is destruction with no ransom."},
+ {t:"Worm",c:false,f:"A worm spreads across hosts; this is a single triggered destructive action."},
+ {t:"Spyware",c:false,f:"Spyware quietly collects data; it does not lie dormant to destroy records on a date."}
+]},
+{s:1,scn:false,q:"Which symptom best indicates crypto-malware (cryptojacking) rather than ransomware?",o:[
+ {t:"Sustained near-maximum CPU or GPU usage and sluggish performance, while files stay accessible.",c:true,f:"Correct. Cryptojacking steals compute power, so resources spike but files remain usable."},
+ {t:"Files renamed with a new extension and a ransom note on the desktop.",c:false,f:"That is ransomware; cryptojacking does not lock files for ransom."},
+ {t:"The mouse cursor moving on its own.",c:false,f:"That suggests interactive remote control by a RAT, not coin mining."},
+ {t:"Browser pop-ups advertising products.",c:false,f:"That is adware; cryptojacking is marked by heavy resource use, not ads."}
+]},
+{s:1,scn:false,q:"An analyst separates an adversary's behaviors from the forensic artifacts they leave behind. Which statement pairs the terms correctly?",o:[
+ {t:"TTPs describe how the adversary operates; IoCs are the observable artifacts of that activity.",c:true,f:"Correct. TTPs are behaviors; IoCs are the evidence those behaviors leave."},
+ {t:"TTPs are the file hashes and IP addresses; IoCs are the attacker's overall strategy.",c:false,f:"This reverses them. IoCs are the artifacts; TTPs are the behaviors and strategy."},
+ {t:"TTPs and IoCs both refer only to malware signatures.",c:false,f:"Neither is limited to signatures. TTPs are behaviors; IoCs are observable evidence."},
+ {t:"TTPs are legal terms and IoCs are marketing terms.",c:false,f:"Both are technical threat-intelligence concepts, not legal or marketing terms."}
+]},
+{s:1,scn:true,q:"A host shows abnormal resource consumption, files that suddenly cannot be opened, an account logging in at impossible hours, and gaps where log entries were deleted. These are best described as:",o:[
+ {t:"Indicators of malicious activity that should be correlated, since no single one is conclusive.",c:true,f:"Correct. Each is an IoC; confidence comes from correlating several, not from one alone."},
+ {t:"Proof, by themselves, of a confirmed ransomware infection.",c:false,f:"Indicators must be correlated; individually they are not proof of a specific malware."},
+ {t:"Normal performance fluctuations that need no investigation.",c:false,f:"Resource spikes, inaccessible files, odd logins, and missing logs are classic IoCs, not normal noise."},
+ {t:"Evidence that only the network, not the host, was attacked.",c:false,f:"These are host-side indicators; they point to activity on the host itself."}
+]},
+/* ---------- RA2 · PHYSICAL & NETWORK ---------- */
+{s:2,scn:true,q:"A badge reader logs an employee entering the data center while that same employee badged in at a remote office minutes earlier. Which physical attack does this most suggest?",o:[
+ {t:"Card cloning",c:true,f:"Correct. A duplicated credential appearing in two places at once points to a cloned card."},
+ {t:"Environmental attack",c:false,f:"Environmental attacks target power, cooling, or HVAC; they do not produce duplicate badge events."},
+ {t:"Physical brute force",c:false,f:"Brute force is forced entry; here a valid badge appears in two places, which indicates cloning."},
+ {t:"Shoulder surfing",c:false,f:"Shoulder surfing is observing credentials; the dual badge-in events specifically indicate a cloned card."}
+]},
+{s:2,scn:true,q:"A web service becomes unreachable while traffic graphs show a massive flood of requests from thousands of distributed sources saturating bandwidth. Which attack is indicated?",o:[
+ {t:"Distributed denial-of-service (DDoS)",c:true,f:"Correct. A bandwidth-saturating flood from many distributed sources is a DDoS."},
+ {t:"On-path attack",c:false,f:"An on-path attack intercepts and relays traffic between two parties; it does not flood a service offline."},
+ {t:"Reconnaissance",c:false,f:"Reconnaissance quietly maps targets; a saturating flood from many sources is a DDoS."},
+ {t:"Data exfiltration",c:false,f:"Exfiltration moves data out; the indicator here is inbound flooding that denies service."}
+]},
+{s:2,scn:true,q:"In the network attack lifecycle, an analyst sees a host beaconing at regular intervals to an external server that issues it commands. Which stage is this?",o:[
+ {t:"Command and control",c:true,f:"Correct. Regular check-ins to receive instructions are the command-and-control stage."},
+ {t:"Reconnaissance",c:false,f:"Reconnaissance gathers information before access; periodic command check-ins are command and control."},
+ {t:"Weaponization",c:false,f:"Weaponization prepares the exploit or payload; the recurring command check-in is command and control."},
+ {t:"Data exfiltration",c:false,f:"Exfiltration is the bulk outbound transfer of data; short periodic command check-ins are command and control."}
+]},
+{s:2,scn:false,q:"Which indicator most strongly suggests data exfiltration rather than ordinary traffic?",o:[
+ {t:"A large, unusual outbound transfer to an unfamiliar external host, often at odd hours.",c:true,f:"Correct. Bulk data leaving to an unfamiliar destination is the signature of exfiltration."},
+ {t:"A brief inbound spike of requests from many sources.",c:false,f:"That pattern points to a DDoS, not data leaving the network."},
+ {t:"A host repeatedly checking in to an external server for short commands.",c:false,f:"Short periodic check-ins describe command and control; exfiltration is the bulk outbound movement."},
+ {t:"Many failed login attempts against one account.",c:false,f:"That indicates a password attack, not data being transferred out."}
+]},
+{s:2,scn:true,q:"An attacker secretly positions between a user and a server, relaying and possibly altering messages while both sides believe they communicate directly. Which attack is this?",o:[
+ {t:"On-path (man-in-the-middle) attack",c:true,f:"Correct. Live interception and relay between two parties is an on-path attack."},
+ {t:"DNS attack",c:false,f:"A DNS attack manipulates name resolution; on-path is active interception of the session itself."},
+ {t:"Replay attack",c:false,f:"A replay reuses captured valid data later; on-path is live interception between two parties."},
+ {t:"Wireless deauthentication attack",c:false,f:"A deauth forces clients off a Wi-Fi network; on-path is the interception and relay of communications."}
+]},
+{s:2,scn:true,q:"Users are sent to a fraudulent site even though they typed the correct domain, and the resolver returned a wrong IP address. Which attack does this indicate?",o:[
+ {t:"DNS poisoning or spoofing",c:true,f:"Correct. A wrong IP returned for a correct domain points to manipulated name resolution."},
+ {t:"Card cloning",c:false,f:"Card cloning is a physical badge attack, unrelated to domain resolution."},
+ {t:"Cryptographic downgrade",c:false,f:"A downgrade weakens encryption; here the problem is name resolution returning the wrong address."},
+ {t:"Credential replay",c:false,f:"Replay reuses captured credentials; this is manipulation of DNS resolution, not credential reuse."}
+]},
+{s:2,scn:true,q:"An attacker captures an authentication token and later resubmits it to gain access without knowing the password. Which attack is this?",o:[
+ {t:"Replay attack",c:true,f:"Correct. Reusing a captured valid token at a later time is a replay attack."},
+ {t:"Brute force",c:false,f:"Brute force guesses credentials repeatedly; replay reuses a captured valid token without guessing."},
+ {t:"On-path attack",c:false,f:"On-path is live interception; replay specifically reuses captured data at a later time."},
+ {t:"Password spraying",c:false,f:"Spraying tries a few common passwords across many accounts; replay reuses an already-valid token."}
+]},
+{s:2,scn:false,q:"Which scenario best indicates a cryptographic attack?",o:[
+ {t:"An adversary forces a connection down to a weak, deprecated cipher to make the session easier to break.",c:true,f:"Correct. Coercing a weaker cipher to undermine encryption is a cryptographic (downgrade) attack."},
+ {t:"An adversary floods a server with SYN packets.",c:false,f:"SYN flooding is a denial-of-service technique, not an attack on cryptography."},
+ {t:"An adversary clones an employee's access badge.",c:false,f:"That is a physical card-cloning attack, unrelated to cryptography."},
+ {t:"An adversary maps the open ports on a host.",c:false,f:"Port mapping is reconnaissance, not an attack against cryptographic protections."}
+]},
+{s:2,scn:true,q:"After gaining a foothold, an attacker uses stolen credentials to reach additional internal systems, expanding their access across the network. Which indicator is this?",o:[
+ {t:"Lateral movement (pivoting)",c:true,f:"Correct. Spreading to new internal systems from a foothold is lateral movement."},
+ {t:"Persistence",c:false,f:"Persistence is maintaining access across reboots; moving to new hosts is lateral movement."},
+ {t:"Reconnaissance",c:false,f:"Reconnaissance gathers information; actively reaching more systems with credentials is lateral movement."},
+ {t:"Shellcode injection",c:false,f:"Shellcode is the small payload run after an exploit; spreading to other hosts is lateral movement."}
+]},
+{s:2,scn:true,q:"An investigator finds a tool that extracted password hashes from memory, plus a new scheduled task that re-launches the malware after every reboot. Which two indicators are present?",o:[
+ {t:"Credential dumping and persistence",c:true,f:"Correct. Hash extraction is credential dumping, and the reboot-survival task is persistence."},
+ {t:"Shellcode and reconnaissance",c:false,f:"No exploit payload or information gathering is described; the artifacts are credential dumping and persistence."},
+ {t:"Data exfiltration and weaponization",c:false,f:"Nothing shows bulk data leaving or payload preparation; it is credential dumping plus persistence."},
+ {t:"Card cloning and tailgating",c:false,f:"Those are physical attacks; the evidence here is host-based credential dumping and persistence."}
+]},
+/* ---------- RA3 · APPLICATION ---------- */
+{s:3,scn:true,q:"An application crashes when fed input longer than its buffer, and a crafted oversized input lets an attacker run their own code. Which vulnerability is exploited?",o:[
+ {t:"Buffer overflow",c:true,f:"Correct. Overrunning a fixed-size buffer to execute attacker code is a buffer overflow."},
+ {t:"SQL injection",c:false,f:"SQL injection manipulates database queries through input; the crash-and-execute pattern is a buffer overflow."},
+ {t:"Cross-site scripting",c:false,f:"XSS injects scripts into pages viewed by others; overrunning a memory buffer is a buffer overflow."},
+ {t:"Privilege escalation",c:false,f:"Privilege escalation raises rights; here the root cause is overflowing a fixed-size buffer."}
+]},
+{s:3,scn:true,q:"A standard user account is observed performing administrative actions it was never granted. Which indicator best fits?",o:[
+ {t:"Privilege escalation",c:true,f:"Correct. A low-rights account acting with admin rights is privilege escalation."},
+ {t:"Buffer overflow",c:false,f:"An overflow is a memory-corruption flaw; the indicator here is the elevated account rights."},
+ {t:"Directory traversal",c:false,f:"Traversal reaches files outside the web root; the indicator described is elevated privileges."},
+ {t:"Replay",c:false,f:"A replay reuses captured data; here a low-rights account is acting with high rights."}
+]},
+{s:3,scn:true,q:"A web form field, when given a crafted string with quotes and database keywords, returns other users' records. Which attack is this?",o:[
+ {t:"SQL injection",c:true,f:"Correct. Manipulating a database query through input to return records is SQL injection."},
+ {t:"LDAP injection",c:false,f:"LDAP injection targets directory queries; returning database records via crafted SQL is SQL injection."},
+ {t:"Cross-site scripting",c:false,f:"XSS runs script in a victim's browser; pulling database records through input is SQL injection."},
+ {t:"Command injection",c:false,f:"Command injection runs OS commands; manipulating a database query is SQL injection."}
+]},
+{s:3,scn:true,q:"Web server logs show input to a form containing shell metacharacters followed by operating-system commands, which the server then executed. Which attack is indicated?",o:[
+ {t:"Command injection",c:true,f:"Correct. Abusing input to run OS shell commands is command injection."},
+ {t:"SQL injection",c:false,f:"SQL injection targets the database query; executing OS commands through input is command injection."},
+ {t:"Directory traversal",c:false,f:"Traversal uses path sequences to reach files; running shell commands is command injection."},
+ {t:"Buffer overflow",c:false,f:"An overflow corrupts memory; here valid input is abused to run OS commands."}
+]},
+{s:3,scn:true,q:"An access log contains a request such as GET /download?file=../../../../etc/passwd. Which attack does this URL indicate?",o:[
+ {t:"Directory traversal",c:true,f:"Correct. The repeated ../ sequences climbing to system files indicate directory traversal."},
+ {t:"SQL injection",c:false,f:"There is no SQL here; the path-climbing sequences indicate directory traversal."},
+ {t:"Cross-site request forgery",c:false,f:"CSRF abuses a user's authenticated session; this URL traverses the filesystem."},
+ {t:"Cross-site scripting",c:false,f:"XSS injects script; the path-climbing pattern to read files is directory traversal."}
+]},
+{s:3,scn:true,q:"An attacker stores a script in a comment field so that it runs in the browser of every user who later views the page. Which attack is this?",o:[
+ {t:"Cross-site scripting (XSS)",c:true,f:"Correct. A stored script that executes in viewers' browsers is cross-site scripting."},
+ {t:"Cross-site request forgery (CSRF)",c:false,f:"CSRF tricks a browser into sending an unwanted authenticated request; a script running for viewers is XSS."},
+ {t:"Server-side request forgery (SSRF)",c:false,f:"SSRF makes the server send requests to unintended targets; script running in browsers is XSS."},
+ {t:"SQL injection",c:false,f:"SQL injection targets the database; injecting a script that runs in browsers is XSS."}
+]},
+{s:3,scn:true,q:"An attacker crafts a link that, when clicked by a logged-in admin, makes the admin's browser submit a state-changing request to an app they are authenticated to. Which attack is this?",o:[
+ {t:"Cross-site request forgery (CSRF)",c:true,f:"Correct. Riding the victim's authenticated session to force a request is CSRF."},
+ {t:"Server-side request forgery (SSRF)",c:false,f:"SSRF abuses the server to make requests; CSRF abuses the victim's authenticated browser session."},
+ {t:"Cross-site scripting (XSS)",c:false,f:"XSS runs attacker script in the victim's browser; CSRF forces a request from an existing session."},
+ {t:"Replay",c:false,f:"Replay resubmits captured data; CSRF forces the victim's browser to issue a new forged request."}
+]},
+{s:3,scn:true,q:"A vulnerable server can be tricked into making requests to internal addresses the attacker cannot reach directly, exposing internal services. Which attack is this?",o:[
+ {t:"Server-side request forgery (SSRF)",c:true,f:"Correct. Coercing the server to issue requests to internal targets is SSRF."},
+ {t:"Cross-site request forgery (CSRF)",c:false,f:"CSRF abuses a user's browser session; SSRF abuses the server to reach internal resources."},
+ {t:"Directory traversal",c:false,f:"Traversal reads files via path sequences; SSRF makes the server issue requests to unintended targets."},
+ {t:"Command injection",c:false,f:"Command injection runs OS commands; SSRF coerces the server into making requests on the attacker's behalf."}
+]},
+{s:3,scn:true,q:"Reviewing access logs, an analyst sees one source make a normal request, then generate dozens of 404s in seconds while probing common file and directory names. What does this indicate?",o:[
+ {t:"Reconnaissance: a scanner enumerating the application's attack surface.",c:true,f:"Correct. A burst of 404s probing guessed paths is a scanner mapping the app, which is reconnaissance."},
+ {t:"A successful SQL injection in progress.",c:false,f:"SQL injection targets query parameters; a burst of 404s probing paths is enumeration."},
+ {t:"Normal user navigation.",c:false,f:"A real user does not generate dozens of rapid 404s against guessed paths; that is a scanning tool."},
+ {t:"A DDoS attack.",c:false,f:"DDoS exhausts capacity with volume; a single source mapping the app is reconnaissance."}
+]}
+];
+const RV_TOTAL=RV_QUESTIONS.length;
+let rvAnswered=0,rvCorrect=0;
+
+function rvShuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+function rvBuild(){
+    rvAnswered=0;rvCorrect=0;
+    const quiz=document.getElementById('rv-quiz');
+    quiz.innerHTML='';
+    const keys=['A','B','C','D','E'];
+    let qIndex=0;
+    [1,2,3].forEach(function(sec){
+        const meta=RV_SECTIONS[sec];
+        const gh=document.createElement('div');gh.className='rv-grouph';
+        const tag=document.createElement('span');tag.className='rv-gtag';tag.textContent=meta.tag;
+        const h=document.createElement('h3');h.textContent=meta.title;
+        gh.appendChild(tag);gh.appendChild(h);quiz.appendChild(gh);
+        const secQs=rvShuffle(RV_QUESTIONS.filter(function(q){return q.s===sec;}).slice());
+        const gs=document.createElement('p');gs.className='rv-groupsub';gs.textContent=meta.sub+' · '+secQs.length+' questions';quiz.appendChild(gs);
+        secQs.forEach(function(q){
+            qIndex++;
+            const card=document.createElement('div');card.className='rv-q';
+            const qn=document.createElement('div');qn.className='rv-qnum';qn.appendChild(document.createTextNode('Question '+qIndex));
+            if(q.scn){const sc=document.createElement('span');sc.className='rv-scn';sc.textContent='Scenario';qn.appendChild(sc);}
+            const qt=document.createElement('div');qt.className='rv-qtext';qt.textContent=q.q;
+            const ol=document.createElement('div');ol.className='rv-opts';
+            const fb=document.createElement('div');fb.className='rv-fb';
+            const opts=rvShuffle(q.o.slice());
+            opts.forEach(function(o,i){
+                const b=document.createElement('button');b.className='rv-opt';
+                const k=document.createElement('span');k.className='rv-key';k.textContent=keys[i];
+                const tx=document.createElement('span');tx.textContent=o.t;
+                b.appendChild(k);b.appendChild(tx);
+                b.addEventListener('click',function(){rvAnswer(card,b,o,opts,fb);});
+                ol.appendChild(b);
+            });
+            card.appendChild(qn);card.appendChild(qt);card.appendChild(ol);card.appendChild(fb);
+            quiz.appendChild(card);
+        });
+    });
+    document.getElementById('rv-result').classList.remove('show');
+    rvUpdate();
+}
+
+function rvAnswer(card,btn,opt,opts,fb){
+    if(card.dataset.done==='1')return;
+    card.dataset.done='1';
+    rvAnswered++;
+    if(opt.c)rvCorrect++;
+    const buttons=card.querySelectorAll('.rv-opt');
+    buttons.forEach(function(b,i){
+        b.disabled=true;b.classList.add('dim');
+        if(opts[i].c){b.classList.add('correct');b.classList.remove('dim');}
+    });
+    if(opt.c){
+        btn.classList.add('correct');btn.classList.remove('dim');
+        fb.className='rv-fb good show';fb.textContent=opt.f;
+    }else{
+        btn.classList.add('wrong');btn.classList.remove('dim');
+        fb.className='rv-fb bad show';fb.textContent=opt.f;
+    }
+    rvUpdate();
+}
+
+function rvUpdate(){
+    document.getElementById('rv-count').textContent='Answered '+rvAnswered+' / '+RV_TOTAL;
+    document.getElementById('rv-fill').style.width=Math.round(rvAnswered/RV_TOTAL*100)+'%';
+    const sb=document.getElementById('rv-scorebtn');
+    const run=document.getElementById('rv-running');
+    if(rvAnswered>=RV_TOTAL){sb.disabled=false;run.textContent='All answered — score ready';}
+    else{sb.disabled=true;run.textContent='';}
+}
+
+function rvScore(){
+    if(rvAnswered<RV_TOTAL)return;
+    const pct=Math.round(rvCorrect/RV_TOTAL*100);
+    document.getElementById('rv-scoreval').textContent=rvCorrect+' / '+RV_TOTAL;
+    document.getElementById('rv-pctval').textContent=pct+'%';
+    const v=document.getElementById('rv-verdict');
+    const msg=document.getElementById('rv-resultmsg');
+    if(pct>=70){
+        v.className='rv-verdict pass';v.textContent='Pass · 70% threshold met';
+        msg.textContent='Strong work. You can read these indicators with confidence. Reshuffle any time to keep the recall sharp.';
+    }else{
+        v.className='rv-verdict fail';v.textContent='Below 70% · keep reviewing';
+        msg.textContent='Revisit the Malware, Physical & Network, and Application tabs for the items you missed, then reshuffle and run it again.';
+    }
+    document.getElementById('rv-result').classList.add('show');
+    document.getElementById('rv-result').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function rvReset(){
+    rvBuild();
+    const sec=document.getElementById('review');
+    window.scrollTo({top:sec.offsetTop-6,behavior:'smooth'});
+}
+
+rvBuild();
+</script>
+
+  <script src="../shared/lesson-bridge.js"></script>
+</body>
+</html>

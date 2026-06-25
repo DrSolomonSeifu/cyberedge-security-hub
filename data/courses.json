@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "activeCourse": "security-plus-sy0-701",
+  "courses": [
+    {
+      "id": "security-plus-sy0-701",
+      "name": "CompTIA Security+",
+      "examCode": "SY0-701",
+      "shortName": "Security+",
+      "manifest": "data/security-plus.json",
+      "searchIndex": "data/search-index.json",
+      "status": "active"
+    }
+  ]
+}

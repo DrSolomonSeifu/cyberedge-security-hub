@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 15: Explain Risk Management Processes · Learner Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Mulish:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+    --ink:#0c181b;
+    --ink-2:#12262b;
+    --ink-3:#1b363c;
+    --paper:#f7f3ec;
+    --paper-2:#efe8da;
+    --teal:#16b6a6;
+    --teal-deep:#0c8e80;
+    --amber:#e0a23c;
+    --amber-deep:#b87d1d;
+    --coral:#e0655a;
+    --coral-deep:#bf4a40;
+    --violet:#8d7fd4;
+    --violet-deep:#6c5fc0;
+    --sky:#3aa6c6;
+    --sky-deep:#2b7f99;
+    --green:#4fb37a;
+    --green-deep:#3a8c5e;
+    --text:#23302f;
+    --muted:#62716f;
+    --line:#e3dccd;
+    --display:'Fraunces',Georgia,serif;
+    --body:'Mulish',-apple-system,sans-serif;
+    --mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:var(--body);
+    color:var(--text);
+    line-height:1.7;
+    background:
+        radial-gradient(circle at 12% 14%, rgba(22,182,166,0.16) 0%, transparent 42%),
+        radial-gradient(circle at 88% 12%, rgba(224,162,60,0.12) 0%, transparent 40%),
+        radial-gradient(circle at 50% 120%, rgba(141,127,212,0.12) 0%, transparent 50%),
+        linear-gradient(160deg, #0b1619 0%, #102a30 55%, #0c1d21 100%);
+    background-attachment:fixed;
+    min-height:100vh;
+    padding:30px 18px 48px;
+}
+
+/* ─── SHELL ─── */
+.shell{
+    max-width:1160px;
+    margin:0 auto;
+    background:var(--paper);
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 40px 90px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+/* ─── HEADER ─── */
+.hd{
+    position:relative;
+    background:linear-gradient(135deg, #0b181b 0%, #143338 58%, #0d2226 100%);
+    color:var(--paper);
+    padding:0;
+    overflow:hidden;
+}
+.hd-bar{height:5px;background:linear-gradient(90deg,var(--teal) 0%, var(--amber) 60%, var(--coral) 100%);}
+.hd-grid{
+    position:absolute;inset:0;
+    background-image:
+        radial-gradient(circle at 85% 25%, rgba(22,182,166,0.14) 0%, transparent 45%),
+        repeating-linear-gradient(0deg, transparent, transparent 38px, rgba(255,255,255,0.018) 38px, rgba(255,255,255,0.018) 39px),
+        repeating-linear-gradient(90deg, transparent, transparent 38px, rgba(255,255,255,0.018) 38px, rgba(255,255,255,0.018) 39px);
+    pointer-events:none;
+}
+.hd-inner{position:relative;z-index:1;padding:42px 46px 38px;display:flex;gap:30px;align-items:center;}
+
+.pulse{flex-shrink:0;position:relative;width:74px;height:74px;display:flex;align-items:center;justify-content:center;}
+.pulse-core{
+    width:74px;height:74px;border-radius:20px;
+    background:linear-gradient(135deg,var(--teal) 0%, var(--teal-deep) 100%);
+    display:flex;align-items:center;justify-content:center;font-size:2em;
+    box-shadow:0 10px 28px rgba(22,182,166,0.4);
+    position:relative;z-index:2;
+}
+.pulse-ring{position:absolute;inset:0;border-radius:20px;border:2px solid var(--teal);opacity:0;animation:ping 2.8s ease-out infinite;}
+.pulse-ring:nth-child(2){animation-delay:1.4s;}
+@keyframes ping{0%{transform:scale(0.85);opacity:0.7;}80%{transform:scale(1.6);opacity:0;}100%{opacity:0;}}
+
+.hd-eyebrow{font-family:var(--mono);font-size:0.7rem;letter-spacing:3.5px;text-transform:uppercase;color:var(--teal);opacity:0.95;margin-bottom:8px;}
+.hd h1{font-family:var(--display);font-weight:700;font-size:2.35rem;line-height:1.12;letter-spacing:-0.5px;margin-bottom:8px;}
+.hd h1 .lnum{color:var(--amber);}
+.hd h1 .accent{font-style:italic;color:var(--teal);}
+.hd-sub{font-size:1rem;color:rgba(247,243,236,0.7);font-weight:300;max-width:640px;}
+.hd-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;}
+.badge{display:inline-flex;align-items:center;gap:7px;padding:7px 15px;border-radius:50px;font-size:0.76rem;font-weight:700;letter-spacing:0.4px;}
+.b-learner{background:rgba(79,179,122,0.16);color:#7fd6a3;border:1px solid rgba(79,179,122,0.4);}
+.b-cert{background:rgba(224,162,60,0.14);color:#f1c87f;border:1px solid rgba(224,162,60,0.34);}
+.b-credit{background:rgba(255,255,255,0.05);color:rgba(247,243,236,0.6);border:1px solid rgba(255,255,255,0.12);font-weight:400;}
+
+/* ─── NAV ─── */
+.nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(28,52,58,0.96);
+    backdrop-filter:blur(8px);
+    display:flex;flex-wrap:wrap;
+    border-bottom:2px solid rgba(22,182,166,0.4);
+}
+.tab{
+    flex:1;min-width:150px;
+    padding:15px 16px;border:none;background:transparent;cursor:pointer;
+    font-family:var(--body);font-weight:600;font-size:0.84rem;letter-spacing:0.2px;
+    color:rgba(247,243,236,0.55);transition:all 0.25s ease;
+    border-right:1px solid rgba(255,255,255,0.05);position:relative;text-align:left;
+}
+.tab .tnum{display:block;font-family:var(--mono);font-size:0.66rem;color:rgba(22,182,166,0.55);margin-bottom:4px;letter-spacing:1px;}
+.tab::after{content:'';position:absolute;left:50%;right:50%;bottom:0;height:3px;background:var(--teal);transition:all 0.3s ease;}
+.tab:hover{color:var(--paper);background:rgba(255,255,255,0.04);}
+.tab.active{color:var(--teal);background:rgba(22,182,166,0.08);}
+.tab.active .tnum{color:var(--teal);}
+.tab.active::after{left:0;right:0;}
+
+/* ─── SECTIONS ─── */
+.section{display:none;padding:46px 48px;}
+.section.active{display:block;}
+.section.active>*{opacity:0;animation:rise 0.55s cubic-bezier(0.2,0.7,0.2,1) forwards;}
+.section.active>*:nth-child(1){animation-delay:0.02s;}
+.section.active>*:nth-child(2){animation-delay:0.08s;}
+.section.active>*:nth-child(3){animation-delay:0.14s;}
+.section.active>*:nth-child(4){animation-delay:0.20s;}
+.section.active>*:nth-child(5){animation-delay:0.26s;}
+.section.active>*:nth-child(n+6){animation-delay:0.32s;}
+@keyframes rise{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* ─── SECTION HEAD ─── */
+.shead{display:flex;align-items:center;gap:16px;margin-bottom:26px;}
+.shead-ic{
+    width:52px;height:52px;border-radius:14px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-size:1.5em;
+    background:var(--ink-2);color:var(--paper);box-shadow:0 8px 20px rgba(12,24,27,0.22);
+}
+.ic-teal{background:linear-gradient(135deg,var(--teal),var(--teal-deep));}
+.ic-coral{background:linear-gradient(135deg,var(--coral),var(--coral-deep));}
+.ic-violet{background:linear-gradient(135deg,var(--violet),var(--violet-deep));}
+.ic-amber{background:linear-gradient(135deg,var(--amber),var(--amber-deep));}
+.ic-sky{background:linear-gradient(135deg,var(--sky),var(--sky-deep));}
+.shead-tx h2{font-family:var(--display);font-weight:700;font-size:1.7rem;color:var(--ink);line-height:1.15;letter-spacing:-0.3px;}
+.shead-tx p{font-size:0.88rem;color:var(--muted);margin-top:2px;}
+
+.section p{font-size:0.99rem;color:var(--text);margin-bottom:14px;}
+.section h3{font-family:var(--display);font-weight:600;font-size:1.28rem;color:var(--ink);margin:34px 0 12px;letter-spacing:-0.2px;}
+.section h4{font-size:1rem;font-weight:700;color:var(--ink-3);margin:20px 0 8px;}
+.section ul,.section ol{margin:10px 0 16px;padding-left:24px;}
+.section li{font-size:0.97rem;margin:6px 0;}
+.section strong{color:var(--ink);}
+
+.rule{height:2px;border-radius:2px;background:linear-gradient(90deg,var(--teal) 0%, rgba(22,182,166,0.08) 60%, transparent 100%);margin:34px 0;}
+
+/* ─── PANELS ─── */
+.panel{border-radius:0 14px 14px 0;padding:22px 26px;margin:22px 0;border-left:5px solid var(--teal);background:linear-gradient(135deg,rgba(22,182,166,0.08),rgba(22,182,166,0.03));}
+.panel .ph{font-family:var(--mono);font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:9px;display:flex;align-items:center;gap:8px;}
+.panel p:last-child,.panel ul:last-child{margin-bottom:0;}
+
+.p-key{border-left-color:var(--teal);background:linear-gradient(135deg,rgba(22,182,166,0.10),rgba(22,182,166,0.03));}
+.p-key .ph{color:var(--teal-deep);}
+.p-insight{border-left-color:var(--amber);background:linear-gradient(135deg,rgba(224,162,60,0.13),rgba(224,162,60,0.04));}
+.p-insight .ph{color:var(--amber-deep);}
+.p-example{border-left-color:var(--sky);background:linear-gradient(135deg,rgba(58,166,198,0.11),rgba(58,166,198,0.03));}
+.p-example .ph{color:var(--sky-deep);}
+.p-warn{border-left-color:var(--coral);background:linear-gradient(135deg,rgba(224,101,90,0.12),rgba(224,101,90,0.04));}
+.p-warn .ph{color:var(--coral-deep);}
+.p-def{border-left-color:var(--violet);background:linear-gradient(135deg,rgba(141,127,212,0.13),rgba(141,127,212,0.04));}
+.p-def .ph{color:var(--violet-deep);}
+.p-def .pc{font-style:italic;}
+
+/* ─── SUMMARY (ink) ─── */
+.summary{background:linear-gradient(135deg,var(--ink) 0%, var(--ink-2) 100%);border-radius:16px;padding:28px 32px;margin:28px 0;box-shadow:0 14px 34px rgba(12,24,27,0.28);}
+.summary .ph{font-family:var(--mono);font-size:0.7rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber);margin-bottom:12px;font-weight:700;}
+.summary .pc{color:rgba(247,243,236,0.88);font-size:0.99rem;line-height:1.85;}
+.summary .pc strong{color:var(--teal);}
+.summary .pc em{color:var(--amber);font-style:normal;}
+
+/* ─── CARDS ─── */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:16px;margin:22px 0;}
+.cards-3{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));}
+.mc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;position:relative;overflow:hidden;transition:transform 0.25s ease, box-shadow 0.25s ease;}
+.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--teal);}
+.mc.c-teal::before{background:var(--teal);} .mc.c-amber::before{background:var(--amber);}
+.mc.c-coral::before{background:var(--coral);} .mc.c-violet::before{background:var(--violet);}
+.mc.c-sky::before{background:var(--sky);} .mc.c-green::before{background:var(--green);}
+.mc:hover{transform:translateY(-5px);box-shadow:0 16px 34px rgba(12,24,27,0.12);}
+.mc .mc-ic{font-size:1.55em;margin-bottom:10px;}
+.mc h4{font-family:var(--display);font-weight:600;font-size:1.02rem;color:var(--ink);margin:0 0 8px;}
+.mc p{font-size:0.87rem;color:var(--muted);line-height:1.65;margin:0;}
+
+/* ─── TIMELINE / STEP FLOW ─── */
+.flow{position:relative;margin:24px 0;}
+.flow::before{content:'';position:absolute;left:23px;top:24px;bottom:24px;width:2px;background:linear-gradient(180deg,var(--teal),var(--coral));}
+.fitem{display:flex;gap:20px;align-items:flex-start;padding-bottom:18px;position:relative;}
+.fitem:last-child{padding-bottom:0;}
+.fnum{width:48px;height:48px;border-radius:50%;flex-shrink:0;z-index:1;display:flex;align-items:center;justify-content:center;
+    font-family:var(--display);font-weight:700;font-size:1.05rem;background:var(--paper);color:var(--ink);border:2px solid var(--teal);box-shadow:0 6px 16px rgba(12,24,27,0.16);}
+.fbody{flex:1;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 20px;margin-top:2px;}
+.fbody h4{margin:0 0 4px;font-size:0.98rem;color:var(--ink);}
+.fbody p{font-size:0.89rem;color:var(--muted);margin:0;}
+
+/* ─── TABLE ─── */
+.tbl{width:100%;border-collapse:collapse;margin:22px 0;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(12,24,27,0.1);font-size:0.92rem;background:#fff;}
+.tbl thead tr{background:var(--ink);}
+.tbl th{padding:13px 18px;text-align:left;font-family:var(--mono);font-size:0.7rem;letter-spacing:1.4px;text-transform:uppercase;color:var(--amber);font-weight:600;}
+.tbl td{padding:12px 18px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.6;}
+.tbl tbody tr:nth-child(even){background:#faf7f0;}
+.tbl tbody tr:hover{background:#f1ede2;}
+.tbl tbody tr:last-child td{border-bottom:none;}
+.tbl .lbl{font-weight:700;color:var(--ink);}
+
+/* ─── CHIPS ─── */
+.chiprow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0;}
+.chip{background:#fff;border:1px solid var(--line);border-left:4px solid var(--coral);border-radius:8px;padding:10px 14px;font-size:0.85rem;font-weight:600;color:var(--ink);box-shadow:0 4px 12px rgba(12,24,27,0.06);}
+.chip .ci{display:block;font-family:var(--mono);font-size:0.62rem;letter-spacing:1px;color:var(--coral-deep);text-transform:uppercase;font-weight:700;margin-bottom:2px;}
+.arrow{color:var(--muted);font-weight:700;font-size:1.1rem;}
+
+/* ─── PILLS ─── */
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0;}
+.pill{padding:5px 14px;border-radius:50px;font-family:var(--mono);font-size:0.73rem;font-weight:500;}
+.pl-teal{background:rgba(22,182,166,0.12);color:var(--teal-deep);border:1px solid rgba(22,182,166,0.3);}
+.pl-amber{background:rgba(224,162,60,0.14);color:var(--amber-deep);border:1px solid rgba(224,162,60,0.32);}
+.pl-coral{background:rgba(224,101,90,0.12);color:var(--coral-deep);border:1px solid rgba(224,101,90,0.3);}
+.pl-violet{background:rgba(141,127,212,0.14);color:var(--violet-deep);border:1px solid rgba(141,127,212,0.3);}
+.pl-ink{background:var(--paper-2);color:var(--ink-3);border:1px solid var(--line);}
+
+/* ─── OBJECTIVES ─── */
+.objnum{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--ink-3);color:var(--amber);font-family:var(--mono);font-size:0.78rem;font-weight:600;flex-shrink:0;}
+
+/* ─── FOOTER ─── */
+.ft{background:var(--ink);padding:26px 48px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
+.ft-brand p{font-family:var(--mono);font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:4px;}
+.ft-brand span{font-size:0.78rem;color:rgba(247,243,236,0.4);}
+.ft-nav{display:flex;gap:10px;flex-wrap:wrap;}
+.ft-nav button{font-family:var(--body);font-weight:600;font-size:0.82rem;padding:9px 18px;border-radius:9px;cursor:pointer;
+    background:transparent;color:rgba(247,243,236,0.6);border:1px solid rgba(22,182,166,0.3);transition:all 0.2s;}
+.ft-nav button:hover{border-color:var(--teal);color:var(--teal);background:rgba(22,182,166,0.1);}
+
+/* ─── REVIEW ACTIVITY QUIZ ─── */
+.rv-prog{display:flex;align-items:center;gap:14px;margin:20px 0 6px;}
+.rv-bar{flex:1;height:9px;border-radius:99px;background:#e6dcc9;border:1px solid var(--line);overflow:hidden;}
+.rv-bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--amber));transition:width .4s ease;}
+.rv-count{font-family:var(--mono);font-size:.82rem;color:var(--teal-deep);white-space:nowrap;font-weight:700;}
+.rv-sec{display:flex;align-items:center;gap:14px;margin:38px 0 6px;}
+.rv-sec .num{font-family:var(--display);font-weight:700;font-size:1.02rem;color:var(--ink);background:var(--amber);border-radius:10px;width:38px;height:38px;display:grid;place-items:center;flex-shrink:0;}
+.rv-sec h3{font-family:var(--display);font-weight:700;font-size:1.24rem;margin:0;color:var(--ink);letter-spacing:-0.2px;}
+.qcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin:16px 0;box-shadow:0 8px 24px rgba(12,24,27,0.08);}
+.qcard .q-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:9px;}
+.qcard .q-num{font-family:var(--mono);font-size:.7rem;color:var(--amber-deep);letter-spacing:.12em;text-transform:uppercase;font-weight:700;}
+.qcard .q-tag{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sky-deep);background:rgba(58,166,198,0.12);border:1px solid rgba(58,166,198,0.34);padding:3px 9px;border-radius:50px;}
+.qcard .q-text{font-size:1.04rem;font-weight:700;margin:0 0 16px;color:var(--ink);line-height:1.5;}
+.qcard .opts{display:flex;flex-direction:column;gap:10px;}
+.qcard .opt{text-align:left;width:100%;cursor:pointer;background:var(--paper-2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:12px 15px;font-size:0.95rem;font-family:var(--body);line-height:1.45;display:flex;gap:11px;align-items:flex-start;transition:border-color .15s,background .15s;}
+.qcard .opt:hover:not(:disabled){border-color:var(--teal);background:#fff;}
+.qcard .opt:focus-visible{outline:2px solid var(--teal);outline-offset:2px;}
+.qcard .opt .letter{font-family:var(--mono);font-size:.8rem;color:var(--teal-deep);flex-shrink:0;width:16px;font-weight:700;}
+.qcard .opt:disabled{cursor:default;}
+.qcard .opt.correct{background:rgba(79,179,122,0.14);border-color:var(--green);}
+.qcard .opt.correct .letter{color:var(--green-deep);}
+.qcard .opt.wrong{background:rgba(224,101,90,0.12);border-color:var(--coral);}
+.qcard .opt.wrong .letter{color:var(--coral-deep);}
+.qcard .fb{margin-top:13px;padding:12px 15px;border-radius:10px;font-size:.9rem;display:none;border:1px solid transparent;line-height:1.6;}
+.qcard .fb.show{display:block;}
+.qcard .fb.ok{background:rgba(79,179,122,0.12);border-color:var(--green);color:var(--green-deep);}
+.qcard .fb.no{background:rgba(224,101,90,0.1);border-color:var(--coral);color:var(--coral-deep);}
+.qcard .fb b{color:var(--ink);}
+.rv-results{text-align:center;display:none;background:linear-gradient(135deg,var(--ink) 0%, var(--ink-2) 100%);border:1px solid var(--amber);border-radius:16px;padding:36px 30px;margin:34px 0 10px;box-shadow:0 16px 38px rgba(12,24,27,0.3);}
+.rv-results.show{display:block;}
+.rv-results .score{font-family:var(--display);font-weight:700;font-size:2.9rem;color:var(--amber);line-height:1;}
+.rv-results .pct{color:rgba(247,243,236,0.7);font-family:var(--mono);margin-top:6px;font-size:0.85rem;}
+.rv-results .verdict{font-size:1.22rem;font-weight:700;margin:16px 0 6px;font-family:var(--display);}
+.rv-results .verdict.pass{color:#7fd6a3;}
+.rv-results .verdict.fail{color:#f0a59d;}
+.rv-results p{color:rgba(247,243,236,0.75);margin:0 auto;max-width:470px;font-size:0.92rem;}
+.rv-btn{margin-top:20px;cursor:pointer;font-family:var(--body);font-weight:700;background:var(--teal);color:var(--ink);border:none;padding:12px 28px;border-radius:10px;font-size:0.95rem;transition:box-shadow .15s,transform .05s;}
+.rv-btn:hover{box-shadow:0 10px 24px rgba(22,182,166,0.45);}
+.rv-btn:active{transform:translateY(1px);}
+
+@media(max-width:760px){
+    body{padding:14px 8px 30px;}
+    .hd-inner{flex-direction:column;text-align:center;padding:30px 22px;gap:18px;}
+    .hd-meta{justify-content:center;}
+    .hd h1{font-size:1.7rem;}
+    .section{padding:28px 22px;}
+    .tab{min-width:46%;text-align:center;}
+    .tab .tnum{text-align:center;}
+    .flow::before{display:none;}
+    .ft{flex-direction:column;text-align:center;padding:22px;}
+}
+@media print{
+    body{background:#fff;padding:0;}
+    .shell{box-shadow:none;}
+    .nav,.ft-nav{display:none;}
+    .section{display:block!important;page-break-after:always;}
+    .section.active>*{opacity:1;animation:none;}
+}
+</style>
+  <link rel="stylesheet" href="../shared/mobile-responsive.css">
+</head>
+<body>
+<div class="shell">
+    <!-- HEADER -->
+    <div class="hd">
+        <div class="hd-bar"></div>
+        <div class="hd-grid"></div>
+        <div class="hd-inner">
+            <div class="pulse">
+                <span class="pulse-ring"></span>
+                <span class="pulse-ring"></span>
+                <span class="pulse-core">⚖️</span>
+            </div>
+            <div>
+                <div class="hd-eyebrow">CyberEdge · Security+</div>
+                <h1><span class="lnum">Lesson 15:</span> Explain <span class="accent">Risk Management</span><br>Processes</h1>
+                <div class="hd-sub">How organizations identify, measure, and respond to risk, plan for disruption, manage the risk that comes with vendors, and verify their defenses through audits and penetration testing.</div>
+                <div class="hd-meta">
+                    <span class="badge b-learner">📖 Learner Portal</span>
+                    <span class="badge b-cert">⚡ CompTIA Security+</span>
+                    <span class="badge b-credit">Dr. Solomon Seifu (Lead Technical Instructor &amp; Author)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAV -->
+    <div class="nav">
+        <button class="tab active" onclick="showSection('overview',this)"><span class="tnum">01</span>Overview</button>
+        <button class="tab" onclick="showSection('risk',this)"><span class="tnum">15A</span>Risk Management</button>
+        <button class="tab" onclick="showSection('bia',this)"><span class="tnum">BIA</span>Business Impact Analysis</button>
+        <button class="tab" onclick="showSection('vendor',this)"><span class="tnum">15B</span>Vendor Management</button>
+        <button class="tab" onclick="showSection('audits',this)"><span class="tnum">15C</span>Audits &amp; Pen Testing</button>
+        <button class="tab" onclick="showSection('review',this)"><span class="tnum">RA</span>Review Activity</button>
+    </div>
+
+    <!-- ═══ 01 OVERVIEW ═══ -->
+    <div id="overview" class="section active">
+        <div class="shead">
+            <div class="shead-ic ic-teal">🗺️</div>
+            <div class="shead-tx"><h2>Lesson Overview</h2><p>Turning uncertainty into informed decisions</p></div>
+        </div>
+
+        <p>Every organization runs on risk. You cannot remove all of it, and trying to would mean never doing anything at all. The goal instead is to <strong>manage</strong> it: understand what could go wrong, judge how badly it would hurt, and decide, on purpose, what to do about each one.</p>
+        <p>Lesson 15 walks through that discipline end to end. It starts with the core risk management cycle and how to measure risk, moves into planning for disruption with a business impact analysis, then turns outward to the risk that vendors bring, and finishes with the audits, assessments, and penetration tests that confirm your defenses actually work.</p>
+
+        <div class="panel p-key">
+            <div class="ph">💡 Key Idea</div>
+            <div class="pc"><strong>Risk</strong> is the chance that a threat exploits a vulnerability and causes an impact. <strong>Risk management</strong> is the ongoing cycle of identifying risks, assessing how serious they are, responding to each one, and monitoring the result. The work never stops, because the threats, the business, and the rules all keep changing.</div>
+        </div>
+
+        <h3>Lesson Objectives</h3>
+        <table class="tbl">
+            <thead><tr><th>#</th><th>Objective</th><th>What You Will Be Able to Do</th></tr></thead>
+            <tbody>
+                <tr><td><span class="objnum">1</span></td><td><strong>Run the risk management process</strong></td><td>Identify, assess, respond to, and monitor risk using qualitative and quantitative methods.</td></tr>
+                <tr><td><span class="objnum">2</span></td><td><strong>Choose risk responses</strong></td><td>Apply mitigation, avoidance, transference, and acceptance, and track what remains.</td></tr>
+                <tr><td><span class="objnum">3</span></td><td><strong>Perform a business impact analysis</strong></td><td>Identify critical systems and use MTD, RTO, RPO, and reliability metrics to plan recovery.</td></tr>
+                <tr><td><span class="objnum">4</span></td><td><strong>Manage vendor risk</strong></td><td>Select, assess, and contract with third parties using the right legal agreements.</td></tr>
+                <tr><td><span class="objnum">5</span></td><td><strong>Verify defenses</strong></td><td>Use internal and external audits, assessments, and penetration testing to prove controls work.</td></tr>
+            </tbody>
+        </table>
+
+        <div class="rule"></div>
+        <h3>The Topics at a Glance</h3>
+        <div class="cards">
+            <div class="mc c-coral"><div class="mc-ic">⚖️</div><h4>Risk Management</h4><p>Identify, measure, and respond to risk, then track it in a register and watch it over time.</p></div>
+            <div class="mc c-violet"><div class="mc-ic">⏱️</div><h4>Business Impact Analysis</h4><p>Find the critical systems and set the recovery targets that keep a disruption survivable.</p></div>
+            <div class="mc c-sky"><div class="mc-ic">🤝</div><h4>Vendor Management</h4><p>Govern the risk third parties bring through selection, assessment, and legal agreements.</p></div>
+            <div class="mc c-amber"><div class="mc-ic">🔍</div><h4>Audits &amp; Pen Testing</h4><p>Confirm that defenses work using audits, assessments, and authorized ethical hacking.</p></div>
+        </div>
+
+        <div class="rule"></div>
+        <h3>How to Use This Portal</h3>
+        <ul>
+            <li>Use the <strong>tabs</strong> above, the <strong>← →</strong> arrow keys, or the footer buttons to move between topics.</li>
+            <li>Each topic opens with a <strong>Key Idea</strong> or <strong>Definition</strong>, read it first to anchor what follows.</li>
+            <li>Watch for <strong>Example</strong> panels; they connect each concept to a realistic scenario like those on the Security+ exam.</li>
+            <li>The final <strong>Review Activity</strong> tab lets you test yourself with 30 exam-style questions and feedback.</li>
+        </ul>
+
+        <div class="summary">
+            <div class="ph">📝 Big Picture Takeaway</div>
+            <div class="pc">Risk management is a <strong>loop, not a one-time task</strong>. You identify and measure risk, decide how to respond, and keep watching, because the picture changes. A <strong>business impact analysis</strong> tells you what to protect first, <strong>vendor management</strong> extends that discipline to your partners, and <strong>audits and penetration testing</strong> prove the whole thing actually holds up under pressure.</div>
+        </div>
+    </div>
+
+    <!-- ═══ 15A RISK MANAGEMENT ═══ -->
+    <div id="risk" class="section">
+        <div class="shead">
+            <div class="shead-ic ic-coral">⚖️</div>
+            <div class="shead-tx"><h2>Topic 15A · Risk Management Processes &amp; Concepts</h2><p>Identifying, measuring, and responding to risk</p></div>
+        </div>
+
+        <div class="panel p-def">
+            <div class="ph">📖 Definition</div>
+            <div class="pc"><strong>Risk management</strong> is the continuous process of identifying risks, assessing how serious each one is, responding to them, and monitoring the outcome. Its purpose is to safeguard information assets, keep the organization compliant, and support its strategic goals.</div>
+        </div>
+
+        <h3>The Risk Management Cycle</h3>
+        <div class="flow">
+            <div class="fitem"><div class="fnum">1</div><div class="fbody"><h4>Identify</h4><p>Find the risks, using vulnerability assessments, penetration testing, security audits, and threat intelligence.</p></div></div>
+            <div class="fitem"><div class="fnum">2</div><div class="fbody"><h4>Assess</h4><p>Estimate how likely each risk is and how much impact it would have, then prioritize.</p></div></div>
+            <div class="fitem"><div class="fnum">3</div><div class="fbody"><h4>Respond</h4><p>Decide what to do about each risk: mitigate, avoid, transfer, or accept it.</p></div></div>
+            <div class="fitem"><div class="fnum">4</div><div class="fbody"><h4>Monitor</h4><p>Watch the risk over time, because threats, the business, and the rules keep changing.</p></div></div>
+        </div>
+
+        <h3>Risk Appetite and Risk Tolerance</h3>
+        <div class="panel p-insight">
+            <div class="ph">🔎 Two Levels of Comfort</div>
+            <div class="pc"><strong>Risk appetite</strong> is the broad level of risk an organization is willing to accept overall, often written as a formal statement and applied project-wide or institution-wide. <strong>Risk tolerance</strong> is the acceptable amount of variation for one specific risk. Appetite is set in three broad postures: <strong>expansionary</strong> (willing to take on more), <strong>conservative</strong> (minimizing risk), and <strong>neutral</strong> (balanced). Both are constrained by regulation and compliance.</div>
+        </div>
+
+        <h3>How Often You Assess</h3>
+        <p>Risk assessment is not one-size-fits-all. The cadence depends on the situation.</p>
+        <table class="tbl">
+            <thead><tr><th>Method</th><th>When It Is Used</th></tr></thead>
+            <tbody>
+                <tr><td class="lbl">Ad hoc</td><td>Triggered by an event, such as a zero-day vulnerability or a major upgrade.</td></tr>
+                <tr><td class="lbl">One-time</td><td>For a single purpose, like onboarding a new system or measuring maturity.</td></tr>
+                <tr><td class="lbl">Recurring</td><td>On a schedule, such as annual or quarterly audits and scans.</td></tr>
+                <tr><td class="lbl">Continuous</td><td>Always on, using agent-based scanners and intrusion detection systems.</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Analyzing Risk: Quantitative</h3>
+        <p>Quantitative analysis puts a dollar figure on risk using two formulas. First find the cost of one event, then annualize it.</p>
+        <div class="panel p-insight">
+            <div class="ph">🔢 The Two Formulas</div>
+            <div class="pc"><strong>SLE = Asset Value × Exposure Factor.</strong> The single loss expectancy (SLE) is the cost of one occurrence; the exposure factor (EF) is the percentage of the asset lost. <strong>ALE = SLE × ARO.</strong> The annualized loss expectancy (ALE) multiplies the SLE by the annualized rate of occurrence (ARO), how many times per year it is expected.</div>
+        </div>
+        <div class="panel p-example">
+            <div class="ph">📌 Worked Example</div>
+            <div class="pc">A building worth <strong>$200,000</strong> sits in a flood zone, and a flood is expected to destroy <strong>40%</strong> of its value. The SLE is 200,000 × 0.40 = <strong>$80,000</strong>. If a damaging flood is expected <strong>twice a year</strong> (ARO of 2), the ALE is 80,000 × 2 = <strong>$160,000</strong>. Asset value should also include downtime and reputation, not just replacement cost.</div>
+        </div>
+
+        <h3>Analyzing Risk: Qualitative</h3>
+        <p>Qualitative analysis is subjective, using words instead of numbers, such as rating likelihood and impact as low, medium, or high. A <strong>heat map</strong> or traffic-light grid plots impact against likelihood so the most serious risks stand out at a glance. <strong>Inherent risk</strong> is the risk before any controls are applied; what is left after responses is <strong>residual risk</strong>.</p>
+
+        <h3>Responding to Risk</h3>
+        <p>For every assessed risk, the organization picks one of four responses.</p>
+        <div class="cards">
+            <div class="mc c-teal"><div class="mc-ic">🛠️</div><h4>Mitigate</h4><p>Reduce the likelihood or impact with controls. A fire policy lowers likelihood; sprinklers and off-site backups lower impact.</p></div>
+            <div class="mc c-coral"><div class="mc-ic">🚫</div><h4>Avoid</h4><p>Stop the risky activity entirely. Effective but often not realistic, since it can mean giving up the benefit too.</p></div>
+            <div class="mc c-sky"><div class="mc-ic">📤</div><h4>Transfer</h4><p>Shift the financial impact to another party, usually through insurance. Reputation and legal liability still stay with you.</p></div>
+            <div class="mc c-violet"><div class="mc-ic">✅</div><h4>Accept</h4><p>Take no countermeasures when the risk is small enough to live with, as a deliberate, documented choice.</p></div>
+        </div>
+        <div class="panel p-insight">
+            <div class="ph">🔎 Exception vs Exemption</div>
+            <div class="pc">A <strong>risk exception</strong> leaves a risk unmitigated temporarily because it cannot be addressed right now; it is approved and reviewed. A <strong>risk exemption</strong> leaves a risk unmitigated as a deliberate strategic decision; it is also approved and reviewed. What counts as allowable risk varies from one organization to the next.</div>
+        </div>
+
+        <h3>The Risk Management Process</h3>
+        <p>Formally, the process runs through five phases:</p>
+        <ol>
+            <li>Identify mission essential functions.</li>
+            <li>Identify vulnerabilities.</li>
+            <li>Identify threats.</li>
+            <li>Analyze business impacts.</li>
+            <li>Identify the risk response.</li>
+        </ol>
+        <p>Three measures help describe a risk: <strong>likelihood</strong> (a qualitative rating like low to high), <strong>probability</strong> (a quantitative chance from 0 to 1 or a percentage), and <strong>impact</strong> (the severity if it happens).</p>
+
+        <h3>The Risk Register and Reporting</h3>
+        <p>A <strong>risk register</strong> records every identified risk with its description, severity, owner, and planned mitigations, often shown with heat maps and shared with stakeholders. A <strong>risk threshold</strong> marks the limit of acceptable risk. <strong>Key risk indicators (KRIs)</strong> are predictive early-warning metrics tied to the register; for example, rising system downtime trending toward a threshold warns that a risk is growing, and the assigned risk owner manages it. <strong>Risk reporting</strong> then communicates the risk profile and the program's effectiveness, with the board hearing strategic, appetite-level summaries and operational staff hearing the specific factors, always paired with a recommended response.</p>
+        <div class="panel p-example">
+            <div class="ph">📌 Example: FIPS 199</div>
+            <div class="pc">To prioritize systems, an organization can use <strong>FIPS 199</strong> security categorization, rating each system by the impact a loss of confidentiality, integrity, or availability would cause as <strong>Low, Moderate, or High</strong>. A system whose breach would be catastrophic is categorized High and protected first.</div>
+        </div>
+    </div>
+
+    <!-- ═══ BIA ═══ -->
+    <div id="bia" class="section">
+        <div class="shead">
+            <div class="shead-ic ic-violet">⏱️</div>
+            <div class="shead-tx"><h2>Topic 15A · Business Impact Analysis</h2><p>Planning for disruption before it happens</p></div>
+        </div>
+
+        <div class="panel p-key">
+            <div class="ph">💡 Key Idea</div>
+            <div class="pc">A <strong>business impact analysis (BIA)</strong> studies the effects a disruption would have on the organization, so recovery can be prioritized and the cost of controls can be justified. It answers the question: if this goes down, how badly does it hurt, and how fast must it come back?</div>
+        </div>
+
+        <h3>Identifying Critical Systems</h3>
+        <p>The BIA begins by finding what matters most. Assets fall into four types: <strong>people</strong>, <strong>tangible</strong> assets (including information and communications technology), <strong>intangible</strong> assets (such as reputation and brand), and <strong>procedures</strong>. To understand how work actually flows, a <strong>business process analysis (BPA)</strong> maps the inputs, hardware, enablers, outputs, and the process flow, which also helps reduce hidden dependencies.</p>
+        <div class="panel p-insight">
+            <div class="ph">🔎 MEF vs PBF</div>
+            <div class="pc">A <strong>mission essential function (MEF)</strong> cannot be deferred; it must be restored first after a disruption. A <strong>primary business function (PBF)</strong> supports the mission but has more flexibility. Telling them apart is what lets recovery focus on the right systems first.</div>
+        </div>
+
+        <h3>The Key BIA Metrics</h3>
+        <table class="tbl">
+            <thead><tr><th>Metric</th><th>What It Measures</th></tr></thead>
+            <tbody>
+                <tr><td class="lbl">MTD (Maximum Tolerable Downtime)</td><td>The longest a function can be down before the business is seriously harmed. For example, a medical records system might tolerate three months.</td></tr>
+                <tr><td class="lbl">RTO (Recovery Time Objective)</td><td>The target time to restore a system after a disruption.</td></tr>
+                <tr><td class="lbl">WRT (Work Recovery Time)</td><td>The time to verify and resume normal work after restoration. RTO plus WRT must not exceed the MTD.</td></tr>
+                <tr><td class="lbl">RPO (Recovery Point Objective)</td><td>The maximum amount of data, measured in time, the business can afford to lose.</td></tr>
+            </tbody>
+        </table>
+        <div class="panel p-example">
+            <div class="ph">📌 RPO in Practice</div>
+            <div class="pc">If losing a day of data is acceptable, a nightly tape backup is enough. If only minutes or seconds can be lost, a replicated cluster is required. An order-processing system usually needs a far tighter RPO than a customer-relationship system, because every lost order is lost revenue.</div>
+        </div>
+
+        <h3>Reliability Metrics</h3>
+        <p>Two key performance indicators describe how dependable a system is:</p>
+        <div class="cards cards-3">
+            <div class="mc c-teal"><div class="mc-ic">🔁</div><h4>MTBF</h4><p>Mean Time Between Failures, the average uptime between faults. Calculated as total operating time divided by the number of failures.</p></div>
+            <div class="mc c-coral"><div class="mc-ic">🔧</div><h4>MTTR</h4><p>Mean Time To Repair, the average time to fix a failure. Calculated as total unplanned maintenance time divided by the number of failures.</p></div>
+            <div class="mc c-amber"><div class="mc-ic">📈</div><h4>Why They Matter</h4><p>Together they show how often something breaks and how quickly it is restored, which feeds directly into recovery planning.</p></div>
+        </div>
+        <div class="panel p-example">
+            <div class="ph">📌 Example</div>
+            <div class="pc">A customer portal suffers a denial-of-service outage. By estimating the cost of an hour of downtime and how often such outages occur, the team annualizes the loss into a clear figure, which then justifies the spend on high-availability infrastructure to leadership.</div>
+        </div>
+    </div>
+
+    <!-- ═══ 15B VENDOR MANAGEMENT ═══ -->
+    <div id="vendor" class="section">
+        <div class="shead">
+            <div class="shead-ic ic-sky">🤝</div>
+            <div class="shead-tx"><h2>Topic 15B · Vendor Management Concepts</h2><p>Managing the risk that comes with third parties</p></div>
+        </div>
+
+        <div class="panel p-key">
+            <div class="ph">💡 Key Idea</div>
+            <div class="pc">A <strong>third-party vendor</strong> is an external, independent organization in your supply chain. Vendors bring real benefits, but they often need access to sensitive data, which extends your attack surface. Vendor management is the discipline that governs that risk, and it is a core component of <strong>governance, risk, and compliance (GRC)</strong>.</div>
+        </div>
+        <p>The exposure is not theoretical. A large share of breaches reach an organization through one of its vendors, and a typical enterprise works with a surprising number of them, so the relationships must be governed, not just signed and forgotten.</p>
+
+        <h3>Vendor Selection</h3>
+        <p>Selection starts by setting risk criteria, performing <strong>due diligence</strong> (investigating the vendor's risk before engaging), and choosing based on the resulting risk profile. The areas examined include financial stability, operational reliability, data security, compliance, and reputation.</p>
+        <div class="panel p-warn">
+            <div class="ph">⚠ Conflict of Interest</div>
+            <div class="pc">Selection must stay objective. A <strong>conflict of interest</strong> arises when a decision could be biased by financial interests, personal relationships, competitive relationships, or insider information. These must be surfaced and managed so the choice serves the organization, not an individual.</div>
+        </div>
+
+        <h3>Vendor Assessment Methods</h3>
+        <p>Once engaged, a vendor's security posture is verified continuously, using a mix of evidence:</p>
+        <div class="pills">
+            <span class="pill pl-teal">Evidence of internal audits</span>
+            <span class="pill pl-teal">Independent assessments</span>
+            <span class="pill pl-teal">Penetration testing</span>
+            <span class="pill pl-teal">Supply chain analysis</span>
+            <span class="pill pl-teal">Right-to-audit clause</span>
+            <span class="pill pl-teal">Site visits</span>
+        </div>
+        <p>Structured <strong>questionnaires</strong> gather security information directly from the vendor, and the answers are validated rather than taken on trust. Ongoing <strong>vendor monitoring</strong> keeps that oversight continuous rather than a one-time check.</p>
+
+        <h3>Legal Agreements</h3>
+        <p>The relationship is held together by contracts, each with a specific job. They group into agreements that set up the relationship, run it, and set expectations.</p>
+        <table class="tbl">
+            <thead><tr><th>Agreement</th><th>Purpose</th></tr></thead>
+            <tbody>
+                <tr><td class="lbl">MOU (Memorandum of Understanding)</td><td>A nonbinding statement of intent between parties.</td></tr>
+                <tr><td class="lbl">NDA (Non-Disclosure Agreement)</td><td>A binding promise to keep shared information confidential.</td></tr>
+                <tr><td class="lbl">MOA (Memorandum of Agreement)</td><td>A more formal, binding agreement of roles and responsibilities.</td></tr>
+                <tr><td class="lbl">BPA (Business Partnership Agreement)</td><td>Defines a long-term partnership between organizations.</td></tr>
+                <tr><td class="lbl">MSA (Master Service Agreement)</td><td>The overarching terms that govern all future work.</td></tr>
+                <tr><td class="lbl">SLA (Service Level Agreement)</td><td>The measurable service levels, such as uptime and response time, the vendor must meet.</td></tr>
+                <tr><td class="lbl">SOW / WO (Statement of Work / Work Order)</td><td>The specific tasks, deliverables, and timelines for a piece of work.</td></tr>
+                <tr><td class="lbl">RoE (Rules of Engagement)</td><td>Roles, security requirements, compliance obligations, reporting, change management, and contractual provisions for an engagement.</td></tr>
+            </tbody>
+        </table>
+        <div class="panel p-example">
+            <div class="ph">📌 Example</div>
+            <div class="pc">Before sharing data with a new analytics vendor, a company signs an <strong>NDA</strong> to protect confidentiality, an <strong>MSA</strong> for the overall terms, and an <strong>SLA</strong> promising 99.9% uptime. A <strong>right-to-audit clause</strong> lets it inspect the vendor's controls later, and a yearly questionnaire keeps the assessment current.</div>
+        </div>
+    </div>
+
+    <!-- ═══ 15C AUDITS & PEN TESTING ═══ -->
+    <div id="audits" class="section">
+        <div class="shead">
+            <div class="shead-ic ic-amber">🔍</div>
+            <div class="shead-tx"><h2>Topic 15C · Audits, Assessments &amp; Penetration Testing</h2><p>Verifying that defenses actually work</p></div>
+        </div>
+
+        <div class="panel p-key">
+            <div class="ph">💡 Key Idea</div>
+            <div class="pc">An <strong>audit</strong> checks whether the organization follows the rules, its policies, standards, and regulations. An <strong>assessment</strong> evaluates how well the defenses actually work. Audits ask "are we compliant?"; assessments ask "are we secure?" A mature program uses both.</div>
+        </div>
+
+        <h3>Attestation and Assessments</h3>
+        <p><strong>Attestation</strong> is a formal confirmation, by a qualified and independent entity, that controls are working as intended, which gives assurance to stakeholders. Assessments come in two forms depending on who runs them.</p>
+        <table class="tbl">
+            <thead><tr><th>Type</th><th>Who Runs It</th><th>Notes</th></tr></thead>
+            <tbody>
+                <tr><td class="lbl">Internal</td><td>The organization's own employees</td><td>In-depth and easy to customize; includes compliance assessments, audit committees, and self-assessments. Required by frameworks like NIST RMF and PCI-DSS.</td></tr>
+                <tr><td class="lbl">External</td><td>An independent third party</td><td>Impartial and often required for legal compliance; performed by CPAs, external auditors, consulting firms, and regulators.</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Penetration Testing</h3>
+        <p><strong>Penetration testing</strong> is authorized, ethical hacking. Unlike a passive vulnerability assessment that only identifies weaknesses, a pen test <strong>actively exploits</strong> them to prove the risk is real: the tester verifies a threat, bypasses controls, actively tests, and exploits the flaw. Testing begins with reconnaissance, which comes in two styles.</p>
+        <div class="cards">
+            <div class="mc c-coral"><div class="mc-ic">📡</div><h4>Active Reconnaissance</h4><p>Directly probes the target: port scanning, service enumeration, OS fingerprinting, DNS enumeration, and web app crawling. More information, higher chance of detection.</p></div>
+            <div class="mc c-teal"><div class="mc-ic">🕵️</div><h4>Passive Reconnaissance</h4><p>Gathers open-source intelligence (OSINT) and analyzes traffic without touching the target. Quieter, with a lower chance of detection.</p></div>
+        </div>
+        <div class="panel p-insight">
+            <div class="ph">🔎 How Much the Tester Knows</div>
+            <div class="pc">Tests are scoped by how much information the tester is given: a <strong>known environment</strong> (full documentation), a <strong>partially known environment</strong> (limited details), or an <strong>unknown environment</strong> (no inside knowledge, closest to a real attacker).</div>
+        </div>
+
+        <h3>Exercise Types</h3>
+        <div class="cards cards-3">
+            <div class="mc c-coral"><div class="mc-ic">🔴</div><h4>Red Team</h4><p>Plays offense, attacking systems to find and exploit weaknesses like a real adversary.</p></div>
+            <div class="mc c-sky"><div class="mc-ic">🔵</div><h4>Blue Team</h4><p>Plays defense, detecting and responding to the red team's activity.</p></div>
+            <div class="mc c-violet"><div class="mc-ic">🚪</div><h4>Physical</h4><p>Targets the facility itself, with tactics like tailgating through doors and picking locks.</p></div>
+            <div class="mc c-amber"><div class="mc-ic">🤝</div><h4>Integrated</h4><p>Combines offensive, defensive, and physical testing into one coordinated exercise.</p></div>
+            <div class="mc c-teal"><div class="mc-ic">♾️</div><h4>Continuous</h4><p>Ongoing penetration testing built into the CI/CD pipeline rather than run once a year.</p></div>
+        </div>
+
+        <div class="summary">
+            <div class="ph">📝 Final Lesson Takeaway</div>
+            <div class="pc">Risk management turns uncertainty into <strong>informed decisions</strong>. You identify and measure risk, respond with mitigation, avoidance, transference, or acceptance, and watch what remains. A <strong>business impact analysis</strong> sets your recovery priorities and targets, <strong>vendor management</strong> extends the discipline to your partners through assessment and the right agreements, and <strong>audits, assessments, and penetration testing</strong> prove the defenses hold. <em>Do all of it continuously, because the risk picture never stops moving.</em></div>
+        </div>
+    </div>
+
+    <!-- ═══ REVIEW ACTIVITY ═══ -->
+    <div id="review" class="section">
+        <div class="shead">
+            <div class="shead-ic ic-teal">🔁</div>
+            <div class="shead-tx"><h2>Review Activity</h2><p>Check your understanding across all of Lesson 15</p></div>
+        </div>
+
+        <div class="panel p-key">
+            <div class="ph">💡 How This Works</div>
+            <div class="pc">There are <strong>30 questions</strong> across the three review activities, blending scenario-based situations with direct concept checks. Every question has four plausible options, but only one is the best answer. Choices reshuffle each time you reset, so a fixed position never gives the answer away. Select a choice to lock it in and reveal why it is right or wrong. Your score appears at the end, with <strong>70% or higher</strong> as the passing mark.</div>
+        </div>
+
+        <div class="rv-prog">
+            <div class="rv-bar"><i id="rvBarFill"></i></div>
+            <div class="rv-count"><span id="rvAnswered">0</span> / <span id="rvTotal">30</span></div>
+        </div>
+
+        <div id="rvQuiz"></div>
+
+        <div class="rv-results" id="rvResults">
+            <div class="score"><span id="rvScoreNum">0</span> / <span id="rvScoreTotal">30</span></div>
+            <div class="pct"><span id="rvScorePct">0</span>% correct</div>
+            <div class="verdict" id="rvVerdict"></div>
+            <p id="rvVerdictMsg"></p>
+            <button class="rv-btn" id="rvRetry">Reset and try again</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="ft">
+        <div class="ft-brand">
+            <p>CyberEdge</p>
+            <span>CompTIA Security+ · Lesson 15: Explain Risk Management Processes · Learner Portal</span>
+        </div>
+        <div class="ft-nav">
+            <button onclick="prevSection()">← Previous</button>
+            <button onclick="nextSection()">Next →</button>
+        </div>
+    </div>
+
+</div>
+<script>
+    const ids=['overview','risk','bia','vendor','audits','review'];
+    let cur=0;
+    function showSection(id,el){
+        document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        const idx=ids.indexOf(id);
+        const tabs=document.querySelectorAll('.tab');
+        if(el){el.classList.add('active');}
+        else if(idx>=0&&tabs[idx]){tabs[idx].classList.add('active');}
+        cur=idx>=0?idx:0;
+        window.scrollTo({top:0,behavior:'smooth'});
+    }
+    function nextSection(){if(cur<ids.length-1){cur++;showSection(ids[cur]);}}
+    function prevSection(){if(cur>0){cur--;showSection(ids[cur]);}}
+    document.addEventListener('keydown',e=>{
+        if(e.key==='ArrowRight')nextSection();
+        if(e.key==='ArrowLeft')prevSection();
+    });
+
+    /* ===== Review Activity quiz =====
+       Options are balanced in length and parallel in structure so the
+       correct choice carries no tell. Positions shuffle (Fisher-Yates)
+       on every build. scenario:true marks situation-based items. */
+    const RV_SECTIONS=[
+      {
+        title:"Review Activity 1 · Risk Management Processes and Concepts",
+        questions:[
+          {
+            q:"Which statement best distinguishes risk appetite from risk tolerance?",
+            opts:[
+              {t:"Risk appetite is the broad level of risk an organization accepts overall, while tolerance is the acceptable variation for a specific risk",correct:true,
+               fb:"Correct. Appetite is the wide, organization-level posture; tolerance is the allowed variance on one particular risk."},
+              {t:"Risk appetite applies to a single system, while risk tolerance applies to the whole enterprise",correct:false,
+               fb:"That reverses the scope. Appetite is the broad, enterprise-level view."},
+              {t:"Risk appetite and risk tolerance are identical terms with no real difference",correct:false,
+               fb:"They are related but distinct, differing in breadth and specificity."},
+              {t:"Risk appetite measures only financial loss, while tolerance measures only downtime",correct:false,
+               fb:"Neither is limited to one metric; the difference is breadth versus a specific risk."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"A building worth $200,000 sits in a flood zone, and a flood is expected to destroy 40% of its value. What is the single loss expectancy (SLE)?",
+            opts:[
+              {t:"$80,000, found by multiplying the asset value by the exposure factor",correct:true,
+               fb:"Correct. SLE = Asset Value × Exposure Factor, so 200,000 × 0.40 = $80,000."},
+              {t:"$200,000, the full replacement value of the asset",correct:false,
+               fb:"That is the whole asset value, not the expected loss from one event."},
+              {t:"$40,000, twenty percent of the asset value",correct:false,
+               fb:"The exposure factor is 40%, not 20%, so this miscalculates the SLE."},
+              {t:"$160,000, the loss expected across a full year",correct:false,
+               fb:"That is closer to an annualized figure, not the single loss expectancy."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"Using a single loss expectancy of $80,000 and an expected two occurrences per year, what is the annualized loss expectancy (ALE)?",
+            opts:[
+              {t:"$160,000, the SLE multiplied by the annualized rate of occurrence",correct:true,
+               fb:"Correct. ALE = SLE × ARO, so 80,000 × 2 = $160,000."},
+              {t:"$80,000, the single loss expectancy on its own",correct:false,
+               fb:"That is the cost of one event; ALE accounts for how often it happens per year."},
+              {t:"$40,000, half of the single loss expectancy",correct:false,
+               fb:"ALE is larger than the SLE here because there are two events a year, not fewer."},
+              {t:"$200,000, the original asset value",correct:false,
+               fb:"Asset value is an input to the SLE, not the annualized loss."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"An organization buys cyber liability insurance to cover the cost of a potential breach. Which risk response is this?",
+            opts:[
+              {t:"Transfer, which shifts the financial impact to another party",correct:true,
+               fb:"Correct. Insurance transfers the financial impact, though reputation and legal liability still remain with you."},
+              {t:"Avoid, which stops the risky activity entirely",correct:false,
+               fb:"Avoidance means ending the activity; buying insurance keeps it going."},
+              {t:"Accept, which takes no action because the risk is small",correct:false,
+               fb:"Acceptance applies no countermeasure; insurance is an active response."},
+              {t:"Mitigate, which reduces the likelihood or impact with controls",correct:false,
+               fb:"Mitigation reduces the risk directly; insurance moves the financial impact elsewhere."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"A company installs sprinklers and keeps off-site backups to lessen the damage a fire could cause. Which risk response is this?",
+            opts:[
+              {t:"Mitigation, which reduces the likelihood or impact of the risk",correct:true,
+               fb:"Correct. Controls that lower the impact of a fire are mitigation."},
+              {t:"Avoidance, which eliminates the risk by ending the activity",correct:false,
+               fb:"They are not stopping operations, so this is not avoidance."},
+              {t:"Transference, which moves the impact to a third party",correct:false,
+               fb:"No third party is taking on the risk here; the controls reduce it directly."},
+              {t:"Acceptance, which tolerates the risk without any controls",correct:false,
+               fb:"Acceptance adds no controls, but sprinklers and backups are controls."}
+            ]
+          },
+          {
+            q:"After an organization applies controls and buys insurance, the risk that still remains is called:",
+            opts:[
+              {t:"Residual risk, the risk left over after responses are applied",correct:true,
+               fb:"Correct. Whatever remains after mitigation, transference, and acceptance is residual risk."},
+              {t:"Inherent risk, the risk present before any controls",correct:false,
+               fb:"Inherent risk is measured before controls, not after."},
+              {t:"Risk appetite, the level of risk the organization will accept",correct:false,
+               fb:"Appetite is a chosen comfort level, not the leftover risk."},
+              {t:"Risk tolerance, the acceptable variance for a specific risk",correct:false,
+               fb:"Tolerance is an allowed range, not the remaining risk itself."}
+            ]
+          },
+          {
+            q:"Which tool records each identified risk along with its severity, owner, and planned mitigations?",
+            opts:[
+              {t:"A risk register",correct:true,
+               fb:"Correct. The risk register catalogs risks with severity, owners, and mitigations, often shared with stakeholders."},
+              {t:"A business impact analysis",correct:false,
+               fb:"A BIA studies the effects of disruptions; it does not serve as the running risk catalog."},
+              {t:"A penetration test report",correct:false,
+               fb:"A pen test report documents exploited weaknesses, not the organization's full risk list."},
+              {t:"An acceptable use policy",correct:false,
+               fb:"An AUP governs how users may use systems, unrelated to tracking risks."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"A team selects a metric that gives early warning a risk is rising, such as system downtime trending toward a set limit. This metric is a:",
+            opts:[
+              {t:"Key Risk Indicator (KRI), a predictive early-warning metric",correct:true,
+               fb:"Correct. A KRI is tied to the risk register and warns that a risk is growing before it crosses the threshold."},
+              {t:"Key Performance Indicator (KPI), a measure of how well a process performs",correct:false,
+               fb:"A KPI measures performance, while a KRI specifically warns about rising risk."},
+              {t:"Single Loss Expectancy (SLE), the cost of one occurrence",correct:false,
+               fb:"SLE is a quantitative loss figure, not an early-warning indicator."},
+              {t:"Recovery Point Objective (RPO), the tolerable amount of data loss",correct:false,
+               fb:"RPO is a recovery metric, not a risk warning signal."}
+            ]
+          },
+          {
+            q:"Which statement best distinguishes qualitative from quantitative risk analysis?",
+            opts:[
+              {t:"Quantitative uses numeric values like dollar figures, while qualitative uses subjective ratings like high, medium, and low",correct:true,
+               fb:"Correct. Quantitative attaches numbers; qualitative uses descriptive, subjective ratings."},
+              {t:"Quantitative uses subjective ratings, while qualitative uses precise dollar values",correct:false,
+               fb:"That reverses the two methods."},
+              {t:"Quantitative and qualitative analysis always produce the same result",correct:false,
+               fb:"They use different inputs and often highlight risks differently."},
+              {t:"Quantitative applies only to vendors, while qualitative applies only to audits",correct:false,
+               fb:"Both methods apply across risk analysis, not to one narrow area each."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"A medical records system can be offline for at most three months before the business fails. That three-month limit is the system's:",
+            opts:[
+              {t:"Maximum Tolerable Downtime (MTD)",correct:true,
+               fb:"Correct. MTD is the longest a function can be down before the organization is seriously harmed."},
+              {t:"Recovery Time Objective (RTO), the target time to restore service",correct:false,
+               fb:"RTO is the restoration target and must fit inside the MTD, not equal this outer limit."},
+              {t:"Recovery Point Objective (RPO), the tolerable data loss",correct:false,
+               fb:"RPO measures acceptable data loss in time, not how long the system can stay down."},
+              {t:"Mean Time Between Failures (MTBF), the average uptime between faults",correct:false,
+               fb:"MTBF describes reliability over time, not a tolerable outage length."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"A team decides that losing up to fifteen minutes of order data is acceptable, so they replicate the database continuously. The fifteen-minute limit defines the:",
+            opts:[
+              {t:"Recovery Point Objective (RPO), the maximum acceptable data loss",correct:true,
+               fb:"Correct. RPO is the most data, measured in time, the business can afford to lose."},
+              {t:"Recovery Time Objective (RTO), the time allowed to restore the system",correct:false,
+               fb:"RTO is about restoration time, not the amount of lost data."},
+              {t:"Maximum Tolerable Downtime (MTD), the total outage the business can survive",correct:false,
+               fb:"MTD is the outage limit, not the tolerable data-loss window."},
+              {t:"Mean Time To Repair (MTTR), the average time to fix a failure",correct:false,
+               fb:"MTTR measures repair speed, not acceptable data loss."}
+            ]
+          },
+          {
+            q:"Which pair correctly matches the reliability metric to its meaning?",
+            opts:[
+              {t:"MTBF is the average time between failures; MTTR is the average time to repair one",correct:true,
+               fb:"Correct. MTBF measures uptime between faults; MTTR measures how long repairs take."},
+              {t:"MTBF is the time to repair a failure; MTTR is the time between failures",correct:false,
+               fb:"That swaps the two definitions."},
+              {t:"MTBF and MTTR both measure the acceptable amount of data loss",correct:false,
+               fb:"Neither measures data loss; that is the RPO."},
+              {t:"MTBF measures vendor risk; MTTR measures audit frequency",correct:false,
+               fb:"Both are reliability metrics, unrelated to vendor risk or audit cadence."}
+            ]
+          }
+        ]
+      },
+      {
+        title:"Review Activity 2 · Vendor Management Concepts",
+        questions:[
+          {
+            q:"Why is third-party vendor management a critical part of risk management?",
+            opts:[
+              {t:"Vendors often need access to sensitive data and extend the organization's attack surface",correct:true,
+               fb:"Correct. Third-party access widens exposure, which is why vendor risk must be governed."},
+              {t:"Vendors are always more secure than the organization that hires them",correct:false,
+               fb:"That cannot be assumed; many breaches arrive through vendors."},
+              {t:"Vendor relationships carry no security risk once a contract is signed",correct:false,
+               fb:"A signed contract does not remove the ongoing security risk a vendor brings."},
+              {t:"Using vendors removes the need for the organization to manage any risk",correct:false,
+               fb:"Outsourcing work does not outsource accountability for the risk."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"During selection, an organization investigates a candidate vendor's financial stability, data security, and compliance history before signing. This activity is called:",
+            opts:[
+              {t:"Due diligence, the investigation of a vendor's risk before engagement",correct:true,
+               fb:"Correct. Due diligence is the up-front investigation that informs the selection decision."},
+              {t:"Attestation, a formal confirmation that controls are effective",correct:false,
+               fb:"Attestation confirms controls work; it is not the pre-selection investigation."},
+              {t:"Remediation, the correction of identified weaknesses",correct:false,
+               fb:"Remediation fixes problems; due diligence is the investigation phase."},
+              {t:"Tokenization, the replacement of data with a random token",correct:false,
+               fb:"Tokenization is a data protection method, unrelated to vendor vetting."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"A manager choosing a vendor also holds a financial stake in that vendor's company. This situation is best described as:",
+            opts:[
+              {t:"A conflict of interest, where personal gain could bias the decision",correct:true,
+               fb:"Correct. A financial stake can bias the choice, which is a conflict of interest to manage."},
+              {t:"A right-to-audit clause, allowing inspection of the vendor",correct:false,
+               fb:"That is a contract provision, not a bias in the decision-maker."},
+              {t:"A service level agreement, defining performance expectations",correct:false,
+               fb:"An SLA sets service targets; it does not describe a biased selection."},
+              {t:"A business impact analysis, assessing disruption effects",correct:false,
+               fb:"A BIA studies disruptions, not conflicts in vendor selection."}
+            ]
+          },
+          {
+            q:"Which contractual provision lets an organization inspect a vendor's security controls directly?",
+            opts:[
+              {t:"A right-to-audit clause",correct:true,
+               fb:"Correct. The right-to-audit clause grants the ability to inspect the vendor's controls."},
+              {t:"A non-disclosure agreement, which protects confidential information",correct:false,
+               fb:"An NDA protects secrets; it does not grant inspection rights."},
+              {t:"A memorandum of understanding, a nonbinding statement of intent",correct:false,
+               fb:"An MOU expresses intent and is not the inspection mechanism."},
+              {t:"A statement of work, which defines deliverables",correct:false,
+               fb:"An SOW scopes the work; it is not what authorizes an audit."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"Two companies are about to share confidential information and sign a binding agreement promising to keep it secret. This is a(n):",
+            opts:[
+              {t:"Non-Disclosure Agreement (NDA)",correct:true,
+               fb:"Correct. An NDA is the binding agreement that protects shared confidential information."},
+              {t:"Memorandum of Understanding (MOU), a nonbinding statement of intent",correct:false,
+               fb:"An MOU is generally nonbinding and is not focused on confidentiality."},
+              {t:"Service Level Agreement (SLA), a measure of service performance",correct:false,
+               fb:"An SLA defines service levels, not confidentiality."},
+              {t:"Statement of Work (SOW), a list of tasks and deliverables",correct:false,
+               fb:"An SOW scopes deliverables, not the protection of secrets."}
+            ]
+          },
+          {
+            q:"Which agreement defines the measurable service levels, such as uptime and response time, that a vendor must meet?",
+            opts:[
+              {t:"Service Level Agreement (SLA)",correct:true,
+               fb:"Correct. The SLA sets measurable performance targets the vendor must meet."},
+              {t:"Memorandum of Agreement (MOA), a formal binding statement of roles",correct:false,
+               fb:"An MOA formalizes roles and responsibilities, not service metrics."},
+              {t:"Master Service Agreement (MSA), the overarching terms for future work",correct:false,
+               fb:"An MSA sets broad terms; specific service levels live in the SLA."},
+              {t:"Non-Disclosure Agreement (NDA), a confidentiality commitment",correct:false,
+               fb:"An NDA protects information; it does not define service performance."}
+            ]
+          },
+          {
+            q:"What is the key difference between a memorandum of understanding (MOU) and a memorandum of agreement (MOA)?",
+            opts:[
+              {t:"An MOU is typically a nonbinding statement of intent, while an MOA is a more formal, binding agreement",correct:true,
+               fb:"Correct. The MOU signals intent; the MOA is the more formal, binding commitment."},
+              {t:"An MOU is always legally binding, while an MOA is only a suggestion",correct:false,
+               fb:"That reverses their binding nature."},
+              {t:"An MOU defines service uptime, while an MOA defines confidentiality",correct:false,
+               fb:"Neither is defined by those topics; the difference is how binding each is."},
+              {t:"An MOU and an MOA are identical and fully interchangeable",correct:false,
+               fb:"They differ in formality and how binding they are."}
+            ]
+          },
+          {
+            q:"Which document specifies the exact tasks, deliverables, and timelines for a particular piece of vendor work?",
+            opts:[
+              {t:"A Statement of Work (SOW) or work order",correct:true,
+               fb:"Correct. The SOW or work order details the specific tasks, deliverables, and timelines."},
+              {t:"A non-disclosure agreement, protecting shared secrets",correct:false,
+               fb:"An NDA protects confidentiality, not the scope of a task."},
+              {t:"A business partnership agreement, defining a long-term relationship",correct:false,
+               fb:"A BPA frames a long-term partnership, not a single piece of work."},
+              {t:"A rules of engagement document, scoping a penetration test",correct:false,
+               fb:"Rules of engagement scope an engagement's conduct, not general deliverables."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"An organization wants ongoing assurance about a critical vendor, so it requests evidence of independent third-party audits and the results of recent penetration tests. This is an example of:",
+            opts:[
+              {t:"Vendor assessment, gathering evidence of the vendor's security posture",correct:true,
+               fb:"Correct. Collecting audit and pen-test evidence is how a vendor's security is assessed."},
+              {t:"Vendor provisioning, granting the vendor system access",correct:false,
+               fb:"Provisioning grants access; this is about evaluating the vendor's security."},
+              {t:"Vendor avoidance, refusing to work with any third party",correct:false,
+               fb:"The organization is engaging the vendor, not avoiding all vendors."},
+              {t:"Vendor tokenization, masking the vendor's data",correct:false,
+               fb:"Tokenization is a data protection method, not a vendor evaluation."}
+            ]
+          }
+        ]
+      },
+      {
+        title:"Review Activity 3 · Penetration Testing Concepts",
+        questions:[
+          {
+            q:"Which statement best captures the difference between an audit and an assessment?",
+            opts:[
+              {t:"An audit checks whether the organization follows the rules, while an assessment evaluates how well its defenses actually work",correct:true,
+               fb:"Correct. Audits ask whether you are compliant; assessments ask whether you are secure."},
+              {t:"An audit measures defense effectiveness, while an assessment only checks compliance",correct:false,
+               fb:"That reverses the two."},
+              {t:"An audit and an assessment are the same activity under different names",correct:false,
+               fb:"They answer different questions, compliance versus effectiveness."},
+              {t:"An audit applies only to vendors, while an assessment applies only to staff",correct:false,
+               fb:"Both apply broadly, not to one narrow group each."}
+            ]
+          },
+          {
+            q:"A qualified, independent party formally confirms that an organization's security controls are working as intended. This confirmation is called:",
+            opts:[
+              {t:"Attestation, an independent confirmation of control effectiveness",correct:true,
+               fb:"Correct. Attestation is the formal, independent assurance that controls work."},
+              {t:"Remediation, the act of fixing identified weaknesses",correct:false,
+               fb:"Remediation corrects problems; it does not confirm controls are effective."},
+              {t:"Reconnaissance, the gathering of information about a target",correct:false,
+               fb:"Reconnaissance is an early pen-test step, not a confirmation of controls."},
+              {t:"Provisioning, the granting of access and resources",correct:false,
+               fb:"Provisioning assigns access; it is unrelated to confirming control effectiveness."}
+            ]
+          },
+          {
+            q:"What distinguishes an internal assessment from an external one?",
+            opts:[
+              {t:"Internal uses the organization's own staff, while external uses an independent third party for impartiality",correct:true,
+               fb:"Correct. The difference is who performs it, in-house staff versus an impartial outside party."},
+              {t:"Internal is always required by law, while external is purely optional",correct:false,
+               fb:"External assessments are often the ones required for legal compliance."},
+              {t:"Internal uses third parties, while external uses only internal staff",correct:false,
+               fb:"That reverses who runs each."},
+              {t:"Internal and external assessments produce identical, interchangeable results",correct:false,
+               fb:"They differ in independence and purpose, so results are not interchangeable."}
+            ]
+          },
+          {
+            q:"Penetration testing is best described as:",
+            opts:[
+              {t:"Authorized, ethical hacking that actively attempts to exploit weaknesses",correct:true,
+               fb:"Correct. A pen test is sanctioned, ethical, and actively exploits flaws to prove the risk."},
+              {t:"A passive review of policies with no attempt to exploit anything",correct:false,
+               fb:"That describes a documentation review, not an active penetration test."},
+              {t:"An unauthorized attack carried out without the owner's permission",correct:false,
+               fb:"Penetration testing is always authorized; otherwise it is simply an attack."},
+              {t:"A routine software patch applied to fix known vulnerabilities",correct:false,
+               fb:"Patching remediates flaws; a pen test finds and exploits them."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"A tester not only finds an open database port but actively exploits it to extract data, proving the weakness is real. How does this differ from a vulnerability assessment?",
+            opts:[
+              {t:"A penetration test actively exploits weaknesses, while a vulnerability assessment only identifies them",correct:true,
+               fb:"Correct. The defining difference is active exploitation versus passive identification."},
+              {t:"A penetration test only lists weaknesses, while a vulnerability assessment exploits them",correct:false,
+               fb:"That reverses the two activities."},
+              {t:"A penetration test and a vulnerability assessment are the same process",correct:false,
+               fb:"They differ: one exploits, the other only identifies."},
+              {t:"A penetration test never requires authorization, unlike an assessment",correct:false,
+               fb:"Both require authorization; the difference is exploitation, not permission."}
+            ]
+          },
+          {
+            q:"Which activity is an example of passive reconnaissance?",
+            opts:[
+              {t:"Gathering open-source intelligence (OSINT) without touching the target's systems",correct:true,
+               fb:"Correct. OSINT collection avoids direct contact, which makes it passive and harder to detect."},
+              {t:"Running a port scan against the target's servers",correct:false,
+               fb:"A port scan directly probes the target, which is active reconnaissance."},
+              {t:"Performing service enumeration on a live host",correct:false,
+               fb:"Enumeration interacts with the host directly, so it is active."},
+              {t:"Fingerprinting the operating system by probing the target",correct:false,
+               fb:"Probing to fingerprint the OS touches the target, making it active."}
+            ]
+          },
+          {
+            q:"In a penetration test where the tester is given no prior information about the target, this is known as a(n):",
+            opts:[
+              {t:"Unknown environment test, where the tester starts with no inside knowledge",correct:true,
+               fb:"Correct. With no information provided, the tester works in an unknown environment, closest to a real attacker."},
+              {t:"Known environment test, where the tester has full documentation",correct:false,
+               fb:"A known environment gives the tester full details, the opposite of this."},
+              {t:"Partially known environment test, where the tester has limited details",correct:false,
+               fb:"Partial knowledge means some details are shared; here none are."},
+              {t:"Continuous environment test, run automatically in the pipeline",correct:false,
+               fb:"Continuous testing describes cadence, not how much the tester knows."}
+            ]
+          },
+          {
+            q:"Which pairing correctly describes penetration testing exercise roles?",
+            opts:[
+              {t:"The red team plays offense by attacking, while the blue team plays defense",correct:true,
+               fb:"Correct. Red attacks, blue defends, and an integrated exercise combines them."},
+              {t:"The red team plays defense, while the blue team plays offense",correct:false,
+               fb:"That reverses the roles."},
+              {t:"Both the red and blue teams only write policy and never test systems",correct:false,
+               fb:"These teams actively test and defend, not just write policy."},
+              {t:"The red team audits finances, while the blue team audits vendors",correct:false,
+               fb:"Neither team is about financial or vendor auditing; they are attack and defense."}
+            ]
+          },
+          {
+            scenario:true,
+            q:"During an engagement, testers attempt to tailgate through a secure door and pick a lock to reach a server room. This is an example of a(n):",
+            opts:[
+              {t:"Physical penetration test, targeting facility and access controls",correct:true,
+               fb:"Correct. Tailgating and lock picking target the physical security of the facility."},
+              {t:"Network penetration test, targeting only systems on the wire",correct:false,
+               fb:"This targets the building, not network systems."},
+              {t:"Vulnerability scan, which passively lists software flaws",correct:false,
+               fb:"A scan inspects software; this is a hands-on physical intrusion."},
+              {t:"Compliance audit, which checks adherence to regulations",correct:false,
+               fb:"An audit reviews rule-following; this is an active physical test."}
+            ]
+          }
+        ]
+      }
+    ];
+
+    const RV_LETTERS=["A","B","C","D"];
+    let rvTotalCount=0; RV_SECTIONS.forEach(s=>rvTotalCount+=s.questions.length);
+    let rvAnsweredCount=0, rvCorrectCount=0, rvFlags=[];
+
+    function rvShuffle(arr){
+        const a=arr.slice();
+        for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+        return a;
+    }
+    function rvBuild(){
+        rvAnsweredCount=0; rvCorrectCount=0; rvFlags=[];
+        const quiz=document.getElementById("rvQuiz");
+        quiz.innerHTML="";
+        document.getElementById("rvTotal").textContent=rvTotalCount;
+        document.getElementById("rvScoreTotal").textContent=rvTotalCount;
+        document.getElementById("rvResults").classList.remove("show");
+        let gIndex=0;
+        RV_SECTIONS.forEach((section,sIdx)=>{
+            const head=document.createElement("div");
+            head.className="rv-sec";
+            head.innerHTML=`<div class="num">${sIdx+1}</div><h3>${section.title}</h3>`;
+            quiz.appendChild(head);
+            section.questions.forEach(item=>{
+                const myIndex=gIndex++;
+                rvFlags[myIndex]=false;
+                const card=document.createElement("div");
+                card.className="qcard";
+                const shuffled=rvShuffle(item.opts);
+                let optsHtml="";
+                shuffled.forEach((o,i)=>{optsHtml+=`<button class="opt" data-correct="${o.correct}"><span class="letter">${RV_LETTERS[i]}</span><span>${o.t}</span></button>`;});
+                const tag=item.scenario?`<span class="q-tag">Scenario</span>`:"";
+                card.innerHTML=`<div class="q-head"><span class="q-num">Question ${myIndex+1}</span>${tag}</div><div class="q-text">${item.q}</div><div class="opts">${optsHtml}</div><div class="fb"></div>`;
+                const buttons=card.querySelectorAll(".opt");
+                const fb=card.querySelector(".fb");
+                buttons.forEach((btn,i)=>{
+                    btn.addEventListener("click",()=>{
+                        if(rvFlags[myIndex])return;
+                        rvFlags[myIndex]=true; rvAnsweredCount++;
+                        const isCorrect=btn.dataset.correct==="true";
+                        if(isCorrect)rvCorrectCount++;
+                        buttons.forEach(b=>{b.disabled=true;if(b.dataset.correct==="true")b.classList.add("correct");});
+                        if(!isCorrect)btn.classList.add("wrong");
+                        const chosen=shuffled[i];
+                        fb.innerHTML=(isCorrect?"":"<b>Not quite. </b>")+chosen.fb;
+                        fb.classList.add("show",isCorrect?"ok":"no");
+                        rvUpdateProgress();
+                    });
+                });
+                quiz.appendChild(card);
+            });
+        });
+        rvUpdateProgress();
+    }
+    function rvUpdateProgress(){
+        document.getElementById("rvAnswered").textContent=rvAnsweredCount;
+        document.getElementById("rvBarFill").style.width=(rvAnsweredCount/rvTotalCount*100)+"%";
+        if(rvAnsweredCount===rvTotalCount)rvShowResults();
+    }
+    function rvShowResults(){
+        const pct=Math.round(rvCorrectCount/rvTotalCount*100);
+        document.getElementById("rvScoreNum").textContent=rvCorrectCount;
+        document.getElementById("rvScorePct").textContent=pct;
+        const verdict=document.getElementById("rvVerdict");
+        const msg=document.getElementById("rvVerdictMsg");
+        const pass=pct>=70;
+        verdict.textContent=pass?"Passed":"Keep reviewing";
+        verdict.className="verdict "+(pass?"pass":"fail");
+        msg.textContent=pass
+            ?"You cleared the 70% line. Revisit any question you missed so the reasoning is solid before the exam."
+            :"You landed below the 70% line. Review the feedback above, focus on the topics that tripped you up, and run it again.";
+        const r=document.getElementById("rvResults");
+        r.classList.add("show");
+        r.scrollIntoView({behavior:"smooth",block:"center"});
+    }
+    document.getElementById("rvRetry").addEventListener("click",()=>{
+        rvBuild();
+        document.getElementById("review").scrollIntoView({behavior:"smooth",block:"start"});
+    });
+    rvBuild();
+</script>
+  <script src="../shared/lesson-bridge.js"></script>
+</body>
+</html>

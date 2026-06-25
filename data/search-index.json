@@ -1,0 +1,5363 @@
+{
+"schemaVersion": 1,
+"entries": [
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Access Control and Identity and Access Management (IAM)",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Availability",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Badges",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "CIO — Chief Information Officer",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "CIRT / CSIRT / CERT",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "CompTIA Security+ (SY0-701) — Lesson 1: Summarizing Fundamental Security Concepts",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Confidentiality",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "CSO / CISO — Chief Security Officer / Chief Information Security Officer",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Detect",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "DevSecOps",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Due Care and Liability (External)",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "External Study Resources",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Gap Analysis",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Glossary of Key Terms — Lesson 1",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Identify",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Information Security Business Units",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Information Security Competencies",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Information Security Roles and Responsibilities",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Integrity",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Internal vs. External Consultants",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "ISSO — Information Systems Security Officer",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Knowledge Check — Lesson 1",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Lesson Topics",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Managerial",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Managers",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Navigation",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Non-Repudiation — The Fourth Property",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Non-Technical Staff",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Official References",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Opening Reflection",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Operational",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Overall Lesson Progress",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "PER SCHOLAS GREATER BOSTON — CYBERSECURITY PROGRAM",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Physical",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Protect",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Question 1",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Question 10",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Question 11",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Question 12",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Question 13",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Question 14",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Question 15",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Question 16",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Question 17",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Question 18",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Question 2",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Question 3",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Question 4",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Question 5",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Question 6",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Question 7",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Question 8",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Question 9",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Recommended Study Path",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Recover",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Respond",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Review Activity — Lesson 1",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Security Control Categories",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Security Control Functional Types",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "SOC — Security Operations Center",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Study Content — Lesson 1",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Technical",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "The CIA Triad & Non-Repudiation",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "The Four IAM Processes (AAA + Identification)",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "The NIST Cybersecurity Framework — Five Core Functions",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "The Three Primary Functional Types",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Three Additional Functional Types",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Topic Completion Checklist",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "What a Gap Analysis Report Produces",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "What You Will Be Able to Do After This Lesson",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "When to Perform a Gap Analysis",
+"k": "section"
+},
+{
+"l": 1,
+"t": "Summarize Fundamental Security Concepts",
+"h": "Why This Lesson Is Your Foundation",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Achievement Badges",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Additional Tactics",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Also Known As",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Angler Phishing",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "APT — Advanced Persistent Threat",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Attack Surface Can Be Assessed At:",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Attack Surfaces",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Authorized (White Hat)",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Bluetooth Network",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Brand Impersonation and Disinformation",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Building an Effective Pretext",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Business Email Compromise (BEC)",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Capability",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "CEO Fraud",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Chaotic Motivations",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Cloud Access",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Coercion / Urgency Approach",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Competitors",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "CompTIA Security+ (SY0-701) | Lesson 2: Comparing Threat Types",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "CyberEdge Security+ Learning Hub",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Data Exfiltration",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Default Credentials",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Direct Access (Physical)",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Disinformation",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Disinformation vs. Misinformation",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Document Files",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Drive-By Download",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Email Spoofing",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Exam Prep Tips — Lesson 2",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Executable Files",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Financial Motivations",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Hacker Teams",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Hacker Types",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Hacktivists",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Hacktivists and Teams",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Hijacked Subdomains",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "How It Works",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Image Files",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Impersonation",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Insider Threats",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Key Defense",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Key Relationships in Procurement",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Knowledge Check — Lesson 2",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Location",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Minimizing the Attack Surface Means:",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Mission Brief — Who Is Attacking Us and How?",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "MITRE ATT&CK",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Motivation",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Motivations",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "MSP Risk — Managed Service Providers",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Nation-State Actors and Advanced Persistent Threats",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Open Service Ports",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Opening Reflection",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Organized Crime",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Overall Lesson 2 Progress",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Persuasive / Liking Approach",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Pharming",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Phishing",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Political Motivations",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Pretexting",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Reducing the Software Attack Surface",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Remote and Wireless Network",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Remote vs. Local Exploits",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Removable Devices",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Resources",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Review Activity — Attack Surface & Vectors",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Review Activity — Social Engineering",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Review Activity — Threat Actors",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Scanning Approaches",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Script Kiddie",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Service Disruption",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "SMiShing",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Social Engineering",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Spear Phishing",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Supply Chain",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Targeted Attack Terminology — Know These",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "The Human Vector",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Threat Actor Attributes",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Threat Actors",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Topic Completion Checklist",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Two Approaches",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Two Problems Persist",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Typosquatting",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Unauthorized (Black Hat)",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Unintentional Insiders",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Unsecure Networks — CIA Triad Failures",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Unsupported Systems",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Vishing",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Vulnerable Software",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Watering Hole Attack",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Whaling",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "What Is a Lure?",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "What Is the Attack Surface?",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "What Makes BEC Different",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "What Makes Them Unique",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "What They Target",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Why the Supply Chain Is So Dangerous",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Wired Network",
+"k": "section"
+},
+{
+"l": 2,
+"t": "Compare Threat Types",
+"h": "Zero-Click Exploits",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Asymmetric Encryption",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Blockchain",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Certificate Authorities",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Certificate Revocation",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Certificate Signing Requests (CSR)",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Core Cryptographic Concepts",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Cryptographic Algorithms",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Cryptographic Solutions",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Cryptoprocessors & Secure Enclaves",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "CSR Process",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Data States",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Database Encryption",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Digital Certificates",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Digital Signatures",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Disk and File Encryption",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Encryption Supporting Confidentiality — Data States",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Hashing",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Key Escrow",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Key Length",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Key Management",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Lesson 3: Cryptographic Solutions",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Obfuscation",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Obfuscation Techniques",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Perfect Forward Secrecy",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Perfect Forward Secrecy (PFS)",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "PKI & CAs",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Public Key Infrastructure (PKI)",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Review Activity",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Revocation",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Root of Trust & Certificate Chain",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Salting & Key Stretching",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Salting & Stretching",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Subject Name Attributes",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Symmetric Encryption",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Topic 3B — Knowledge Check",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Topic 3C — Knowledge Check",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "TPM / HSM / Enclave",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "Transport Encryption & Key Exchange",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "What You Have Learned",
+"k": "section"
+},
+{
+"l": 3,
+"t": "Explain Cryptographic Solutions",
+"h": "What You Will Learn",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Access Control Models",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Account Attributes & Access Policies",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Account Restrictions",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Asset Allocation",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Assisted Lab: Implementing Authentication Controls & Access Policies",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Attribute-Based Access Control",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Authenticate via Challenge-Response",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Authentication Design",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Authentication Design Framework",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Automatic Expiry Policy",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Biometric Authentication",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Biometrics",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Certificate-Based Auth",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Choose a Password Manager",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Choose an Authenticator",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Configure a Local Gesture",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Directory Services & LDAP",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Discretionary & Mandatory Access Control",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Discretionary Access Control",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Federated Identity Management",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Federation & OAuth",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "FIDO Universal 2nd Factor",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Generate Random Passwords",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Geographic & Network Restrictions",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Hard Authentication Tokens",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Hard Tokens",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "IAM Framework",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Identity Proofing",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "IdP issues signed claims token",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Implement Identity and Access Management",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Issue Credentials",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Kerberos & SSO",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Kerberos Ticket Granting Service Flow",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Least Privilege",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Local, Network & Remote Authentication",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Mandatory Access Control",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "MFA & Factor Types",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Multifactor Authentication — MFA",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "One-Time Password",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Open Authorization — OAuth & JSON Web Tokens",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Password Concepts & Policy",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Password Managers",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Password Policy",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Passwordless Authentication — FIDO2 / WebAuthn",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Permission Assignments",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Pre-established trust between SP and IdP",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Principle of Least Privilege",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Privileged Access Management — PAM",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Provisioning & PAM",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Register with the Relying Party",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Relying Party Verifies",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Review Activity",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Risky Login Detection",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Role-Based & Attribute-Based Access Control",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Role-Based Access Control",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Rule-Based & Conditional Access Control",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Secure the Vault with a Master Password",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Security Education",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Single Sign-On — Kerberos Authentication",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Soft Authentication Tokens",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Soft Tokens & Passwordless",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "SP redirects to IdP for authentication",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "SP validates token and grants access",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Time & Duration Restrictions",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Topic 4A — Authentication",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Topic 4A — Knowledge Check",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Topic 4B — Access Management",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Topic 4B — Knowledge Check",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Topic 4C — Identity Management",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Topic 4C — Knowledge Check",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "User Account Provisioning & Deprovisioning",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "User authenticates to IdP",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "User initiates session with SP",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "Validate & Auto-Fill",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "What You Have Learned",
+"k": "section"
+},
+{
+"l": 4,
+"t": "Implement Identity and Access Management",
+"h": "What You Will Be Able To Do",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Active Controls",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Active vs. Passive Controls",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "AH — Authentication Header",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Architecture Considerations",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "CIA Triad",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Common Network Architecture Weaknesses",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Defense in Depth",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Device Placement — Three Control Types",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Enterprise Network Architecture",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Enterprise Network Architecture · Set II",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "ESP — Encapsulating Security Payload",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Fail-Open vs. Fail-Closed",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Firewalls — Layers 3, 4, and 7",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Foundations Behind Every Decision",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Hierarchical Network Design",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "IDS and IPS",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "IKE — Internet Key Exchange",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "IPsec VPN — Internet Protocol Security",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Least Privilege",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Lesson 5 — Secure Enterprise Campus Architecture",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Lesson Objectives",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Load Balancers",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Mirror Port (SPAN)",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Network Architecture — Three Layers",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Network Infrastructure",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Network Security Appliances",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "NGFW and UTM",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Out-of-Band Management and Jump Servers",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Overview and Learning Objectives",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Passive Controls",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Physical Isolation — Air Gaps",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Port Security",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Proxy Servers",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Remote Access VPN — Client-to-Site",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Remote Desktop",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Routing and IP Addressing",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Secure Communications",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Secure Shell (SSH)",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Security Zones and Attack Surface",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Site-to-Site VPN",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Switches — Layer 2 Forwarding",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "TAP (Test Access Point)",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "TAP vs. Mirror Port (SPAN)",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "The Network Attack Surface",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "The OSI Model — Key Layers for Security",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "TLS VPN — Transport Layer Security",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Virtual Private Networks",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "VLANs — Virtual Local Area Networks",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Web Application Firewall (WAF)",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "What is a VPN?",
+"k": "section"
+},
+{
+"l": 5,
+"t": "Secure Enterprise Network Architecture",
+"h": "Zone-Based Security Model",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Application Virtualization & Containerization",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Centralized vs. Decentralized Computing",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Cloud Architecture Features & Considerations",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Cloud Deployment Models",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Cloud Platform Concepts",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Cloud Security",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Cloud Security Considerations",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Cloud Service Models — XaaS",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Cloud Service Provider Owns",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Control Plane — Decisions",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Customer Organization Owns",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Data Plane — Execution",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Decentralized Architecture",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Deperimeterization — Why the Old Model Failed",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Deployment Models",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Embedded Systems & Real-Time Operating Systems",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Embedded Systems & RTOS",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "IaC & Automation",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "ICS / SCADA",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Industrial Control Systems & SCADA",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Infrastructure as Code & Cloud Automation",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Internet of Things (IoT)",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Lesson 6 Glossary",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Management Plane — Visibility",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Review Activity",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Secure Cloud Network Architecture",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Serverless & Microservices",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Serverless Computing & Microservices",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Service Models (XaaS)",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Shared Responsibility",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Software-Defined Networking (SDN)",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "The Shared Responsibility Model",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Topic 6A — Cloud Infrastructure",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Topic 6A — Knowledge Check",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Topic 6B — Embedded Systems & Zero Trust Architecture",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Topic 6B — Knowledge Check",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Virtualization & Containers",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "What You Have Learned",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "What You Will Be Able to Do",
+"k": "section"
+},
+{
+"l": 6,
+"t": "Secure Cloud Network Architecture",
+"h": "Zero Trust Architecture",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Advanced Data Protection",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Advanced Data Protection — Snapshots, Replication & Journaling",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Alarm Systems & Sensor Types",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Asset Management",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Asset Management — Introduction",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Asset Protection Concepts",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Asset Tracking Methods",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Asset Tracking, Assignment & Enumeration",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Backup Generators",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Capacity Planning Dimensions",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "CCTV Systems",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Clustering",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Clustering & Virtual IP",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Configuration Management",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Continuity of Operations & Capacity Planning",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "COOP & Business Continuity",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "COOP vs. Business Continuity",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Data Backups",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Deception & Disruption Technologies",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Deception Technologies",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Diversity, Vendor Diversity & Defense in Depth",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Dual Power Supplies (PSUs)",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Enterprise Backup Strategy",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Explain Resiliency & Site Security Concepts",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Failover Tests",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Gateways, Locks & Access Badges",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Hard Disk Drive (HDD) Methods",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "High Availability",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "High Availability, Scalability & Site Resiliency",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Lesson 7 Glossary",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Managed PDUs (Power Distribution Units)",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Parallel Processing Tests",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Physical Security",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Physical Security Controls & Security Zones",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Power Redundancy",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Review Activity",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Scalability",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Secure Data Destruction",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Security Guards",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Security Guards & Video Surveillance",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Simple Backup Methods",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Simulations",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Site Layout, Fencing, Lighting & Bollards",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Site Resiliency Types",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Solid-State Drive (SSD) Methods",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Tabletop Exercises",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Testing Resiliency & Documentation",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Topic 7A — Asset Management",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Topic 7A — Knowledge Check",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Topic 7B — Knowledge Check",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Topic 7B — Redundancy Strategies",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Topic 7C — Knowledge Check",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "Topic 7C — Physical Security",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "UPS (Uninterruptible Power Supply)",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "What You Have Learned",
+"k": "section"
+},
+{
+"l": 7,
+"t": "Explain Resiliency and Site Security Concepts",
+"h": "What You Will Be Able to Do",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Analysis & Remediation",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Android",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "App-Level Risk",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Authenticated Deep View",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Below the OS Layer",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Both Platforms",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Breaking Virtualization Isolation",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Cloud & Dev Agencies",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Cloud Attacks & CASB",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Cloud-Based Application Attacks & CASB",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Code Without Execution",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Common Vulnerability Scoring — CVE, NVD, SCAP & CVSS",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Comprehensive Coverage",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Credentialed vs. Non-Credentialed Scans & Application Scanners",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Cryptographic Vulnerabilities",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Cryptographic Vulns",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Data Leakage Between VMs",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Deep Web, Dark Net & Dark Web",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Evaluation Scope & Seven Scope Practices",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Explain Vulnerability Management",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "False Positives, False Negatives & Log Review",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Firmware & Drivers",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Foundation-Level Attacks",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Global Community Testing",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Incorrect Finding",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Lesson 8 Glossary",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Libraries & Frameworks",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Misconfiguration",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Misconfiguration Vulnerabilities",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Missed Vulnerability",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Mobile Vulnerabilities",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "No More Patches — Ever",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Operating System Vulnerabilities",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "OS Vulnerabilities",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Outdated but Operational",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Penetration Testing, Bug Bounties & Auditing",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Previously: Black Box",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Previously: Gray Box",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Previously: White Box",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Regulatory Assessment",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Review Activity",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Scan Accuracy",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Scanning & Threat Intelligence",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Sideloading, Rooting & Jailbreaking",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Software Supply Chain Vulnerabilities & SBOM",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Supply Chain & SBOM",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Supply Chain Tracking",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Testing Live Applications",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Threat Feeds, Information Sharing & OSINT",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Topic 8A — Device & OS Vulnerabilities",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Topic 8A — Knowledge Check",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Topic 8B — Application & Cloud Vulnerabilities",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Topic 8B — Knowledge Check",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Topic 8C — Knowledge Check",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Topic 8C — Vulnerability Identification Methods",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Topic 8D — Knowledge Check",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Topic 8D — Vulnerability Analysis & Remediation",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Unauthenticated View",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "VM Lifecycle",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Vulnerability Analysis — Prioritization & Classification",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Vulnerability Management — Introduction",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Vulnerability Response, Remediation & Validation",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Vulnerability Scanning",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Vulnerability Types",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Vulnerability Types — Legacy, EOL, Firmware & Virtualization",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Web App Attacks",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Web Application Attacks — XSS & SQL Injection",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "What You Have Learned",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "What You Will Be Able to Do",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Zero-Day",
+"k": "section"
+},
+{
+"l": 8,
+"t": "Explain Vulnerability Management",
+"h": "Zero-Day Vulnerabilities",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Ansible",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Authenticated access",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Automated at scale",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Baseline tailored to regulation",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Bringing It Together",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Chef",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "CIS Benchmarks",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "CIS-CAT Pro",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Config & Automation",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Configuration Enforcement & Automation",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Configuration Management Tools",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Continuous monitoring",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Decision",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Device Connects",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Efficiency",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Firewalls",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Firewalls & IDS/IPS",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Firewalls, IDS/IPS & Web Filtering",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "How NAC Responds",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "How to Use This Portal",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "IDS / IPS",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "IDS vs IPS",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Key Topics at a Glance",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Lesson 9: Evaluate Network Security Capabilities",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Lesson Objectives",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Lesson Overview",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Manageability",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Measuring Compliance with SCAP",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Network Access Control",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Network Access Control (NAC)",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Network Authentication",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "One Scenario, All Six Guidelines",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "OpenSCAP",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Posture Check",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Posture enforced",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Puppet",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "RADIUS and MFA",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Remediate & Re-check",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Review Activity",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Rogue AP Scanning",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "SCAP-Compliant Tools",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Security",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Security Baselines",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Signal / Heat Mapping",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Site Survey",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "STIGs (Security Technical Implementation Guides)",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "The 802.1X Model",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "The Six Operational Guidelines",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "The Three Core Evaluation Techniques",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "The Three Tool Categories",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Validate & Remediate",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Vendor Guidance",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Web Filtering",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "What a Baseline Covers",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "What NAC Checks (Device Posture)",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Where Baselines Come From",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Why Baselines Matter",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Wireless audited monthly",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Wireless Security",
+"k": "section"
+},
+{
+"l": 9,
+"t": "Evaluate Network Security Capabilities",
+"h": "Wireless Security Evaluation",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "1. Continuous Telemetry Collection",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "1. Remove Unnecessary Software and Services",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "2. Account and Privilege Hardening",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "2. Behavioral Detection",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "3. Investigation and Threat Hunting",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "3. Operating System Hardening",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "4. Application Hardening",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "4. Automated Response",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Active vs. Passive Discovery",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Antivirus and Anti-Malware",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Asset Discovery Methods",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Asset Inventory Essentials",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Common Hardening Mistakes",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Configuration Baselines",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Core EDR Capabilities",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Data Loss Prevention (DLP) at the Endpoint",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Earned Badges",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Endpoint Protection Platform (EPP) vs. EDR",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Enterprise Patch Management Platforms",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Every Device Is a Doorway",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Final Lesson Review",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Final Preparation Questions",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Full-Disk Encryption (FDE)",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Group Policy and MDM for Hardening Enforcement",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Handling Patch Exceptions",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Host-Based Firewall (HBFW)",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Important: AV Is Not Enough",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Industry Baseline Standards",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Key Frameworks & Standards",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Key Hardening Actions",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Key Terms to Know for the Exam",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Learning Objectives",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Lesson 10 Key Takeaways",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Lesson Structure",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "MITRE ATT&CK Framework",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Mobile Device Security",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Patch Management",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Patch Management Tools",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Patch Prioritization: CVSS and CISA KEV",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Quest 1 Knowledge Check",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Quest 1: Endpoint Hardening",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Quest 2 Knowledge Check",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Quest 2: Endpoint Protection Platforms",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Quest 3 Knowledge Check",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Quest 3: Asset & Patch Management",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Quest 4 Knowledge Check",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Quest 4: EDR & Continuous Endpoint Monitoring",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Quest 5: Real-World Scenarios & Lesson Review",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Quiz Progress",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Real-World Impact of FDE",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Reflection",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Resources & References",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Scenario 1: The Phishing Foothold",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Scenario 2: The Lost Laptop",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Scenario 3: The Unpatched Server",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Security+ Exam Objectives — Lesson 10 Coverage",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Situation",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "The Attack Surface Mindset",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "The Cost of Slow Patching",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "The Patch Management Lifecycle",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Think About It",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "What Endpoint DLP Can Block",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "What Is EDR?",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "What Is Endpoint Hardening?",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "What Is Endpoint Security?",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Why Asset Management Matters for Endpoint Security",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Why EDR Exists",
+"k": "section"
+},
+{
+"l": 10,
+"t": "Assess Endpoint Security Capabilities",
+"h": "Why Endpoints Are the Primary Attack Target",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "A closer look at TLS, the engine underneath",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "Binding: how a client identifies itself",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "Cipher suites and forward secrecy",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "Cloud and web application hardening",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "Community strings, and why the defaults are dangerous",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "DMARC policy options",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "Email authentication: SPF, DKIM, and DMARC",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "Email data loss prevention on outbound mail",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "Enhance Application Security Capabilities",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "File transfer services: SFTP vs FTPS",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "On this page",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "One detail worth noticing: DNSSEC works differently",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "Quick reference: ports cheat sheet",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "Review Activity",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "Secure coding practices",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "Secure directory services: LDAP and LDAPS",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "Secure protocols: protecting data in motion",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "Securing email in transit",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "SNMP security",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "The email gateway and data loss prevention",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "The handshake: setting up the secure channel",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "The secure protocols and what they replace",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "What the gateway enforces on inbound mail",
+"k": "section"
+},
+{
+"l": 11,
+"t": "Enhance Application Security Capabilities",
+"h": "What this lesson is really about",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Acquisition and the Order of Volatility",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Alert Tuning",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Alerting",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Alerting & Monitoring",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Analysis",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Archiving",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Benchmarks and SCAP",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Beyond the Reactive Loop",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Containment",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Containment, Eradication, and Recovery",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Core Monitoring Activities",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Dashboards and Reports",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Data Sources",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Detection",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Detection and Analysis",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Digital Forensics",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Disk Image Acquisition",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Eradication",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "How to Use This Portal",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "IDS / IPS",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Incident Response",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Legal Foundations",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Lesson 12: Explain Incident Response and Monitoring Concepts",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Lesson Objectives",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Lesson Overview",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Lessons Learned",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Log Data",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Metadata",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Monitoring Infrastructure, Systems, and Applications",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "NetFlow",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Network Data Sources",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Packet Captures",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Preparation",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Preparation in Depth",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Preservation and Chain of Custody",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Recovery",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Reporting",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Reporting and E-Discovery",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Review Activity",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "SIEM — The Command Center",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "SOAR & Automation",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "System Memory Acquisition",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "The Four Topics at a Glance",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "The Incident Response Lifecycle",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "The Supporting Tool Stack",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Topic 12A · Incident Response",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Topic 12B · Digital Forensics",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Topic 12C · Data Sources",
+"k": "section"
+},
+{
+"l": 12,
+"t": "Explain Incident Response and Monitoring Concepts",
+"h": "Topic 12D · Alerting and Monitoring Tools",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Attacks Against the Application",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Backdoor / RAT",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Behavioral Indicators",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Buffer Overflow",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Command & Control",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Credential Attacks",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Credential Harvesting",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Cryptographic Attacks",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Denial of Service",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "DNS Attacks",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Exfiltration",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Fileless Malware",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Forgery (CSRF / SSRF)",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Host Indicators",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "How to Use This Portal",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Injection Attacks",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Interception: On-Path and DNS Attacks",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Lateral Movement",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Lesson 13: Analyze Indicators of Malicious Activity",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Lesson Objectives",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Lesson Overview",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Malicious Activity Indicators",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Malicious Code Indicators",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Network Indicators",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "On-Path (AitM)",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Physical Attacks",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Privilege Escalation",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Ransomware",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Reconnaissance",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Replay (Session)",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Review Activity · Indicators of Malicious Activity",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Rootkit",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Spyware / Keylogger",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "The Malware Families",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "The Network Attack Lifecycle",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Three Indicator Categories",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Topic 13A · Malware Attack Indicators",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Topic 13B · Physical and Network Attack Indicators",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Topic 13C · Application Attack Indicators",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Trojan",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "TTPs and IoCs",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "URL Analysis",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Virus",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Weaponization & Breach",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Web Server Logs",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Wireless Attacks",
+"k": "section"
+},
+{
+"l": 13,
+"t": "Analyze Indicators of Malicious Activity",
+"h": "Worm",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Access Control Standards",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Allowed and Blocked Changes",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "APIs",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Centralized",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Complexity",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Continuous Integration & Testing",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Cost",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Decentralized",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Documentation and Version Control",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Encryption Standards",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Governance Structures and Accountability",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Guardrails & Security Groups",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Guidelines",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "How to Use This Portal",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Hybrid",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Important Considerations",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Key Change Management Concepts",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Lesson 14: Summarize Security Governance Concepts",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Lesson Objectives",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Lesson Overview",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Ongoing Support",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Orchestration in Action",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Password Standards",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Physical Security Standards",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Policies",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Policies and Compliance",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Procedures",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Procedures and Playbooks",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Provisioning",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Restarts, Dependencies, and Downtime",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Review Activity",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Security Automation and DevOps",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Service Management",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Single Point of Failure",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Standards",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Technical Debt",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "The Document Hierarchy",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "The Four Building Blocks",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "The Legal Environment",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Ticketing",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Topic 14A · Security Governance Concepts",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Topic 14B · Change Management",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Topic 14C · Automation and Orchestration",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "What a Change Management Program Does",
+"k": "section"
+},
+{
+"l": 14,
+"t": "Summarize Security Governance Concepts",
+"h": "Where Automation Helps",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Accept",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Active Reconnaissance",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Analyzing Risk: Qualitative",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Analyzing Risk: Quantitative",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Assess",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Attestation and Assessments",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Audits & Pen Testing",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Avoid",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Blue Team",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Business Impact Analysis",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Continuous",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Exercise Types",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "How Often You Assess",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "How to Use This Portal",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Identify",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Identifying Critical Systems",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Integrated",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Legal Agreements",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Lesson 15: Explain Risk Management Processes",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Lesson Objectives",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Lesson Overview",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Mitigate",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Monitor",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "MTBF",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "MTTR",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Passive Reconnaissance",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Penetration Testing",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Physical",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Red Team",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Reliability Metrics",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Respond",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Responding to Risk",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Review Activity",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Risk Appetite and Risk Tolerance",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Risk Management",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "The Key BIA Metrics",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "The Risk Management Cycle",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "The Risk Management Process",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "The Risk Register and Reporting",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "The Topics at a Glance",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Topic 15A · Business Impact Analysis",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Topic 15A · Risk Management Processes & Concepts",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Topic 15B · Vendor Management Concepts",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Topic 15C · Audits, Assessments & Penetration Testing",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Transfer",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Vendor Assessment Methods",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Vendor Management",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Vendor Selection",
+"k": "section"
+},
+{
+"l": 15,
+"t": "Explain Risk Management Processes",
+"h": "Why They Matter",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "16A.1 Privacy vs Data Sensitivity",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "16A.2 Data Types",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "16A.3 Data Classifications",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "16A.4 Data Sovereignty & Geography",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "16A.5 Privacy Data & Roles",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "16A.6 Privacy Breaches vs Data Breaches",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "16B.1 Compliance Issues",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "16B.2 Monitoring & Reporting",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "16C.1 The Three Data States",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "16C.2 Data Protection Methods",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "16C.3 Data Loss Prevention (DLP)",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "16D.1 Conduct Policies",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "16D.2 User & Role-Based Training",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "16D.3 Training Topics & Techniques",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "16D.4 Security Awareness Training Lifecycle",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Asset-type schema",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Common training topics",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Compliance monitoring in practice",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Compliance, Monitoring & Reporting",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Components",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Confidentiality schema",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Data Classification & Privacy",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Data Protection & DLP",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Data Protection and Compliance",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Data subject rights (GDPR / CCPA)",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "MAP What this lesson covers",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Ownership, inventories, and retention",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "People, Conduct & Training",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Remediation actions",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Review Activity · Data Protection & Compliance",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Summarize Data Protection and Compliance Concepts",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Techniques",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "The three GDPR roles",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Topics to cover",
+"k": "section"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Compliance",
+"k": "term"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Confidential data",
+"k": "term"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "data loss prevention",
+"k": "term"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Data protection",
+"k": "term"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "data protection methods",
+"k": "term"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "data sensitivity",
+"k": "term"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "data states",
+"k": "term"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Microsoft Purview",
+"k": "term"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Personnel policies",
+"k": "term"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "privacy",
+"k": "term"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Privacy data",
+"k": "term"
+},
+{
+"l": 16,
+"t": "Summarize Data Protection and Compliance Concepts",
+"h": "Security compliance",
+"k": "term"
+}
+]
+}

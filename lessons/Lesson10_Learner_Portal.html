@@ -1,0 +1,2359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security+ Lesson 10: Assess Endpoint Security Capabilities — Learner Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy:        #0d1b2a;
+            --navy-mid:    #152235;
+            --navy-light:  #1e3554;
+            --accent:      #00b4d8;
+            --accent-dim:  #0096b7;
+            --accent-glow: rgba(0,180,216,0.18);
+            --gold:        #f4a261;
+            --gold-dim:    #d4824a;
+            --green:       #2ec4b6;
+            --coral:       #e76f51;
+            --violet:      #9b72cf;
+            --amber:       #e9c46a;
+            --white:       #f8f6f2;
+            --off:         #edeae4;
+            --text:        #1e293b;
+            --text-mid:    #475569;
+            --text-light:  #64748b;
+            --border:      #e2e8f0;
+            --sidebar-w:   270px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--navy);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* ══════════════════════════════
+           TOP BANNER
+        ══════════════════════════════ */
+        .top-banner {
+            background: linear-gradient(90deg, #0a1628 0%, var(--navy-mid) 50%, #0a1628 100%);
+            border-bottom: 3px solid var(--accent);
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .top-banner::before {
+            content: '';
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse at 15% 50%, rgba(0,180,216,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 85% 50%, rgba(244,162,97,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .banner-inner {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 18px 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .banner-shield {
+            width: 52px; height: 52px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dim) 100%);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5em;
+            flex-shrink: 0;
+            box-shadow: 0 0 20px rgba(0,180,216,0.4);
+        }
+
+        .banner-text { flex: 1; }
+
+        .banner-org {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65em;
+            letter-spacing: 3px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+
+        .banner-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.2;
+        }
+
+        .banner-title span { color: var(--accent); }
+
+        .banner-sub {
+            font-size: 0.78em;
+            color: rgba(248,246,242,0.5);
+            margin-top: 3px;
+            font-weight: 300;
+        }
+
+        .banner-credits {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
+        .credit-pill {
+            padding: 4px 14px;
+            border-radius: 50px;
+            font-size: 0.72em;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+
+        .credit-learner {
+            background: rgba(46,196,182,0.15);
+            color: var(--green);
+            border: 1px solid rgba(46,196,182,0.3);
+        }
+
+        .credit-author {
+            background: rgba(0,180,216,0.1);
+            color: rgba(0,180,216,0.85);
+            border: 1px solid rgba(0,180,216,0.2);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68em;
+        }
+
+        /* ══════════════════════════════
+           LAYOUT SHELL
+        ══════════════════════════════ */
+        .layout {
+            display: flex;
+            min-height: calc(100vh - 96px);
+        }
+
+        /* ══════════════════════════════
+           LEFT SIDEBAR
+        ══════════════════════════════ */
+        .sidebar {
+            width: var(--sidebar-w);
+            background: var(--navy-mid);
+            border-right: 1px solid rgba(0,180,216,0.15);
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            height: calc(100vh - 96px);
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-track { background: transparent; }
+        .sidebar::-webkit-scrollbar-thumb { background: rgba(0,180,216,0.3); border-radius: 2px; }
+
+        .sidebar-section-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65em;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            padding: 0 6px;
+            margin-bottom: 6px;
+        }
+
+        .sidebar-nav { list-style: none; }
+
+        .sidebar-nav li {
+            padding: 10px 12px;
+            margin: 3px 0;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.22s ease;
+            font-size: 0.87em;
+            color: rgba(248,246,242,0.55);
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            border: 1px solid transparent;
+        }
+
+        .sidebar-nav li:hover {
+            background: rgba(0,180,216,0.08);
+            color: rgba(248,246,242,0.85);
+            padding-left: 16px;
+        }
+
+        .sidebar-nav li.active {
+            background: rgba(0,180,216,0.14);
+            color: var(--accent);
+            border-color: rgba(0,180,216,0.25);
+            font-weight: 600;
+        }
+
+        .sidebar-nav li .nav-icon {
+            width: 24px; height: 24px;
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.85em;
+            background: rgba(255,255,255,0.06);
+            flex-shrink: 0;
+        }
+
+        .sidebar-nav li.active .nav-icon {
+            background: rgba(0,180,216,0.2);
+        }
+
+        /* Progress widget */
+        .progress-widget {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(0,180,216,0.15);
+            border-radius: 10px;
+            padding: 14px 16px;
+        }
+
+        .progress-widget h4 {
+            font-size: 0.78em;
+            color: rgba(248,246,242,0.6);
+            margin-bottom: 10px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-track {
+            background: rgba(255,255,255,0.08);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 6px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent), var(--green));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-pct {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72em;
+            color: var(--accent);
+            text-align: right;
+        }
+
+        /* Badges widget */
+        .badges-widget {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(244,162,97,0.15);
+            border-radius: 10px;
+            padding: 14px 16px;
+        }
+
+        .badges-widget h4 {
+            font-size: 0.78em;
+            color: rgba(248,246,242,0.6);
+            margin-bottom: 10px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .badge-pill {
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 0.7em;
+            font-weight: 600;
+            background: rgba(244,162,97,0.15);
+            color: var(--gold);
+            border: 1px solid rgba(244,162,97,0.25);
+        }
+
+        /* ══════════════════════════════
+           MAIN CONTENT
+        ══════════════════════════════ */
+        .main-content {
+            flex: 1;
+            background: var(--white);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Tab bar */
+        .tab-bar {
+            background: #f1f3f8;
+            border-bottom: 2px solid var(--accent);
+            padding: 0 24px;
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .tab-btn {
+            padding: 13px 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.84em;
+            font-weight: 500;
+            color: var(--text-light);
+            transition: all 0.22s ease;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover { color: var(--text); background: rgba(0,180,216,0.05); }
+
+        .tab-btn.active {
+            color: var(--accent-dim);
+            border-bottom-color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Tab content */
+        .tab-content { display: none; padding: 32px 36px; animation: fadeUp 0.35s ease; flex: 1; }
+        .tab-content.active { display: block; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(14px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ══════════════════════════════
+           CONTENT COMPONENTS
+        ══════════════════════════════ */
+
+        /* Hook box */
+        .hook-box {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            color: white;
+            padding: 28px 32px;
+            border-radius: 14px;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 30px rgba(13,27,42,0.25);
+            border: 1px solid rgba(0,180,216,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hook-box::before {
+            content: '';
+            position: absolute;
+            top: -30px; right: -30px;
+            width: 160px; height: 160px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,180,216,0.12) 0%, transparent 70%);
+        }
+
+        .hook-box h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35em;
+            margin-bottom: 12px;
+            color: var(--white);
+            position: relative;
+        }
+
+        .hook-box p { font-size: 0.95em; color: rgba(248,246,242,0.82); line-height: 1.8; position: relative; }
+        .hook-box p + p { margin-top: 10px; }
+        .hook-box strong { color: var(--accent); }
+
+        /* Scenario box */
+        .scenario-box {
+            background: #fffbf5;
+            border: 1px solid rgba(244,162,97,0.35);
+            border-left: 5px solid var(--gold);
+            padding: 22px 26px;
+            margin: 22px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .scenario-box h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--navy);
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .scenario-box p, .scenario-box li { font-size: 0.93em; color: var(--text-mid); line-height: 1.8; }
+        .scenario-box ul { margin-left: 20px; margin-top: 8px; }
+
+        /* Objective list */
+        .objective-list {
+            background: #f0fbfd;
+            border: 1px solid rgba(0,180,216,0.2);
+            padding: 22px 26px;
+            border-radius: 10px;
+            margin: 22px 0;
+        }
+
+        .objective-list h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--navy);
+            margin-bottom: 14px;
+            font-size: 1.1em;
+        }
+
+        .objective-list li {
+            font-size: 0.93em;
+            color: var(--text-mid);
+            margin: 10px 0;
+            padding-left: 6px;
+            line-height: 1.7;
+        }
+
+        /* Quest section */
+        .quest-section {
+            background: #f8f9fc;
+            padding: 28px 30px;
+            margin: 0 0 24px 0;
+            border-radius: 12px;
+            border-left: 5px solid var(--accent);
+        }
+
+        .quest-section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--navy);
+            margin-bottom: 8px;
+            font-size: 1.25em;
+        }
+
+        .quest-section h4 {
+            color: var(--navy-light);
+            margin-top: 22px;
+            margin-bottom: 10px;
+            font-size: 1.0em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quest-section h4::before {
+            content: '';
+            display: inline-block;
+            width: 4px; height: 16px;
+            background: var(--accent);
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        .quest-section p { font-size: 0.93em; color: var(--text-mid); line-height: 1.8; margin-bottom: 10px; }
+        .quest-section ul, .quest-section ol { margin-left: 22px; margin-bottom: 12px; }
+        .quest-section li { font-size: 0.93em; color: var(--text-mid); line-height: 1.8; margin: 6px 0; }
+
+        /* Info box */
+        .info-box {
+            background: #eef7fe;
+            border-left: 4px solid #3b9edd;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.92em;
+            color: #1a4a6e;
+        }
+
+        .info-box h4 { color: #1a4a6e; margin-bottom: 8px; font-size: 0.97em; }
+        .info-box ul { margin-left: 18px; margin-top: 6px; }
+        .info-box li { line-height: 1.75; margin: 5px 0; }
+
+        /* Warning box */
+        .warning-box {
+            background: #fff8f0;
+            border-left: 4px solid var(--coral);
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.92em;
+            color: #7a2e1a;
+        }
+
+        .warning-box h4 { color: #c0402a; margin-bottom: 8px; font-size: 0.97em; }
+        .warning-box ul { margin-left: 18px; margin-top: 6px; }
+        .warning-box li { line-height: 1.75; margin: 5px 0; }
+
+        /* Success box */
+        .success-box {
+            background: #f0fdf6;
+            border-left: 4px solid var(--green);
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.92em;
+            color: #134e3a;
+        }
+
+        .success-box h4 { color: #0e6e4a; margin-bottom: 8px; font-size: 0.97em; }
+        .success-box ul { margin-left: 18px; margin-top: 6px; }
+        .success-box li { line-height: 1.75; margin: 5px 0; }
+
+        /* Example box */
+        .example-box {
+            background: white;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            padding: 18px 22px;
+            margin: 16px 0;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .example-box h4 { color: var(--navy); margin-bottom: 10px; font-size: 0.97em; font-weight: 600; }
+        .example-box p, .example-box li { font-size: 0.92em; color: var(--text-mid); line-height: 1.8; }
+        .example-box ul { margin-left: 18px; margin-top: 6px; }
+
+        /* Reflection prompt */
+        .reflection-prompt {
+            background: #fefce8;
+            border: 1px solid rgba(234,179,8,0.3);
+            border-left: 5px solid #eab308;
+            padding: 18px 22px;
+            border-radius: 0 10px 10px 0;
+            margin: 20px 0;
+        }
+
+        .reflection-prompt h4 { color: #854d0e; margin-bottom: 8px; font-size: 0.97em; }
+        .reflection-prompt p { font-size: 0.92em; color: #713f12; line-height: 1.8; font-style: italic; }
+
+        /* Data table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 18px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+            font-size: 0.9em;
+        }
+
+        th {
+            background: var(--navy);
+            color: var(--accent);
+            padding: 13px 16px;
+            text-align: left;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75em;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+            vertical-align: top;
+            line-height: 1.65;
+        }
+
+        tr:last-child td { border-bottom: none; }
+        tr:nth-child(even) td { background: #f8f9fc; }
+        tr:hover td { background: #f0f7ff; }
+
+        /* Quiz */
+        .quiz-question {
+            background: white;
+            padding: 22px 24px;
+            margin: 16px 0;
+            border-radius: 10px;
+            border: 2px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: border-color 0.2s;
+        }
+
+        .quiz-question:hover { border-color: rgba(0,180,216,0.3); }
+
+        .quiz-question h4 {
+            color: var(--navy);
+            margin-bottom: 14px;
+            font-size: 0.97em;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .quiz-options { list-style: none; margin-top: 10px; }
+
+        .quiz-options li {
+            padding: 11px 16px;
+            margin: 8px 0;
+            background: #f1f5f9;
+            border-radius: 7px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.91em;
+            color: var(--text);
+            border: 1px solid transparent;
+        }
+
+        .quiz-options li:hover {
+            background: #e0f2fe;
+            border-color: rgba(0,180,216,0.3);
+            transform: translateX(4px);
+        }
+
+        .quiz-options li.correct { background: #dcfce7; border-color: #16a34a; color: #14532d; font-weight: 600; }
+        .quiz-options li.incorrect { background: #fee2e2; border-color: #dc2626; color: #7f1d1d; }
+        .quiz-options li.disabled { pointer-events: none; opacity: 0.72; }
+
+        .quiz-feedback {
+            margin-top: 14px;
+            padding: 14px 18px;
+            border-radius: 8px;
+            display: none;
+            font-size: 0.91em;
+            line-height: 1.75;
+        }
+
+        .quiz-feedback.show { display: block; animation: slideDown 0.3s ease; }
+        .quiz-feedback.correct-feedback { background: #f0fdf4; border-left: 4px solid #22c55e; color: #14532d; }
+        .quiz-feedback.incorrect-feedback { background: #fef2f2; border-left: 4px solid #ef4444; color: #7f1d1d; }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Lesson structure block */
+        .structure-block {
+            background: #f8f9fc;
+            border-radius: 10px;
+            padding: 22px 26px;
+            margin-top: 24px;
+        }
+
+        .structure-block h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--navy);
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+
+        .structure-block li { font-size: 0.92em; color: var(--text-mid); margin: 9px 0; line-height: 1.7; }
+
+        /* Code/pill tags */
+        code {
+            background: var(--navy);
+            color: var(--accent);
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.86em;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.76em;
+            font-weight: 600;
+        }
+
+        .tag-high   { background: #fee2e2; color: #b91c1c; border: 1px solid rgba(185,28,28,0.2); }
+        .tag-medium { background: #fff7ed; color: #c2410c; border: 1px solid rgba(194,65,12,0.2); }
+        .tag-low    { background: #f0fdf4; color: #15803d; border: 1px solid rgba(21,128,61,0.2); }
+        .tag-good   { background: #f0fdf4; color: #15803d; border: 1px solid rgba(21,128,61,0.2); }
+        .tag-bad    { background: #fee2e2; color: #b91c1c; border: 1px solid rgba(185,28,28,0.2); }
+
+        /* ══════════════════════════════
+           BOTTOM FOOTER
+        ══════════════════════════════ */
+        .bottom-footer {
+            background: var(--navy);
+            border-top: 2px solid rgba(0,180,216,0.2);
+            padding: 18px 36px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer-left p {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7em;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 3px;
+        }
+
+        .footer-left span {
+            font-size: 0.76em;
+            color: rgba(248,246,242,0.35);
+        }
+
+        .footer-nav { display: flex; gap: 8px; }
+
+        .footer-nav button {
+            padding: 7px 16px;
+            background: transparent;
+            border: 1px solid rgba(0,180,216,0.25);
+            border-radius: 6px;
+            color: rgba(248,246,242,0.5);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.8em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .footer-nav button:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(0,180,216,0.08);
+        }
+
+        /* ══════════════════════════════
+           RESPONSIVE
+        ══════════════════════════════ */
+        @media (max-width: 800px) {
+            .layout { flex-direction: column; }
+            .sidebar { width: 100%; height: auto; position: relative; flex-direction: row; flex-wrap: wrap; padding: 14px; gap: 10px; }
+            .sidebar-nav { display: flex; flex-wrap: wrap; }
+            .sidebar-nav li { padding: 8px 12px; }
+            .tab-content { padding: 20px; }
+            .banner-inner { flex-wrap: wrap; }
+            .banner-credits { align-items: flex-start; }
+        }
+
+        @media print {
+            body { background: white; }
+            .sidebar, .tab-bar, .footer-nav { display: none; }
+            .tab-content { display: block !important; page-break-after: always; }
+        }
+    
+        /* ===== REVIEW ACTIVITY (integrated) ===== */
+        .rv-intro {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-left: 5px solid var(--accent);
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin-bottom: 22px;
+        }
+        .rv-intro p { margin: 0; color: var(--text-mid); font-size: 0.98em; line-height: 1.6; }
+        .rv-intro strong { color: var(--navy); }
+
+        .rv-progress-wrap {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            background: rgba(248,246,242,0.96);
+            backdrop-filter: blur(8px);
+            padding: 14px 16px;
+            margin-bottom: 14px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 4px 16px -8px rgba(13,27,42,0.25);
+        }
+        .rv-stat { display: flex; justify-content: space-between; align-items: center; margin-bottom: 9px; flex-wrap: wrap; gap: 10px; }
+        .rv-stat .count { font-size: 0.78em; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent-dim); font-weight: 700; }
+        .rv-controls { display: flex; gap: 10px; flex-wrap: wrap; }
+        .rv-btn {
+            font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.85em;
+            padding: 9px 18px; border-radius: 8px; border: none; cursor: pointer; transition: all 0.2s;
+            background: var(--navy); color: var(--accent);
+        }
+        .rv-btn:hover { background: var(--navy-light); transform: translateY(-1px); }
+        .rv-btn.ghost { background: transparent; color: var(--accent-dim); border: 1px solid var(--border); }
+        .rv-btn.ghost:hover { background: var(--accent-glow); border-color: var(--accent); }
+        .rv-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+        .rv-bar { height: 10px; background: var(--off); border-radius: 999px; overflow: hidden; border: 1px solid var(--border); }
+        .rv-bar-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--green)); transition: width 0.4s ease; }
+
+        .rv-section-label {
+            font-size: 1.15em; font-weight: 700; color: var(--navy);
+            margin: 28px 0 4px; display: flex; align-items: center; gap: 10px;
+            border-bottom: 2px solid var(--accent); padding-bottom: 8px;
+        }
+        .rv-section-label .badge-ra {
+            font-size: 0.6em; background: var(--navy); color: var(--accent);
+            padding: 4px 11px; border-radius: 20px; letter-spacing: 1px; font-weight: 700; text-transform: uppercase;
+        }
+        .rv-cat-label {
+            font-size: 0.78em; font-weight: 700; color: var(--accent-dim); text-transform: uppercase;
+            letter-spacing: 1.5px; margin: 20px 0 2px;
+        }
+
+        .rv-q {
+            background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+            padding: 20px 24px; margin: 14px 0; box-shadow: 0 1px 3px rgba(13,27,42,0.04);
+        }
+        .rv-q .qhead { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+        .rv-q .qnum {
+            font-size: 0.78em; font-weight: 700; background: var(--navy); color: var(--accent);
+            padding: 5px 10px; border-radius: 6px; flex: 0 0 auto; margin-top: 1px;
+        }
+        .rv-q .qtext { font-size: 1.02em; font-weight: 600; color: var(--navy); line-height: 1.5; }
+        .rv-q .qchips { margin-bottom: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
+        .rv-chip { font-size: 0.68em; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; font-weight: 700; }
+        .rv-chip.topic { background: var(--accent-glow); color: var(--accent-dim); }
+        .rv-chip.scn { background: rgba(155,114,207,0.14); color: var(--violet); }
+
+        .rv-opt {
+            display: flex; align-items: flex-start; gap: 12px; width: 100%; text-align: left;
+            background: var(--off); border: 1.5px solid var(--border); border-radius: 9px;
+            padding: 12px 15px; margin: 8px 0; cursor: pointer;
+            font-family: 'DM Sans', sans-serif; font-size: 0.97em; color: var(--text); transition: all 0.18s;
+        }
+        .rv-opt:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-glow); }
+        .rv-opt .ltr {
+            font-size: 0.82em; font-weight: 700; min-width: 24px; height: 24px; display: inline-flex;
+            align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: 6px;
+            color: var(--accent-dim); flex: 0 0 auto; background: var(--white);
+        }
+        .rv-opt:disabled { cursor: default; }
+        .rv-opt.correct { border-color: var(--green); background: rgba(46,196,182,0.12); color: #14756c; }
+        .rv-opt.correct .ltr { background: var(--green); border-color: var(--green); color: #fff; }
+        .rv-opt.wrong { border-color: var(--coral); background: rgba(231,111,81,0.12); color: #9e3f28; }
+        .rv-opt.wrong .ltr { background: var(--coral); border-color: var(--coral); color: #fff; }
+        .rv-opt.dim { opacity: 0.5; }
+
+        .rv-fb { display: none; margin-top: 14px; padding: 13px 16px; border-radius: 8px; font-size: 0.92em; line-height: 1.55; }
+        .rv-fb.show { display: block; }
+        .rv-fb.good { background: rgba(46,196,182,0.1); border-left: 3px solid var(--green); color: #14756c; }
+        .rv-fb.bad { background: rgba(231,111,81,0.1); border-left: 3px solid var(--coral); color: #9e3f28; }
+        .rv-fb b { font-weight: 700; }
+
+        .rv-results {
+            display: none; margin: 24px 0 8px; border-radius: 14px; padding: 28px; text-align: center;
+            color: var(--white); background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, var(--accent-dim) 135%);
+            box-shadow: 0 10px 30px -12px rgba(13,27,42,0.5);
+        }
+        .rv-results.show { display: block; }
+        .rv-results h3 { font-size: 1.4em; color: var(--accent); margin-bottom: 6px; }
+        .rv-score-num { font-size: 2.6em; font-weight: 700; margin: 6px 0; letter-spacing: 1px; }
+        .rv-score-pct { font-size: 1.05em; color: var(--off); }
+        .rv-verdict { display: inline-block; margin-top: 14px; font-weight: 700; font-size: 0.95em; padding: 8px 22px; border-radius: 999px; }
+        .rv-verdict.pass { background: var(--green); color: #fff; }
+        .rv-verdict.fail { background: var(--gold); color: var(--navy); }
+        .rv-results p.note { margin-top: 14px; color: var(--off); font-size: 0.82em; }
+
+</style>
+  <link rel="stylesheet" href="../shared/mobile-responsive.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════
+     TOP BANNER
+══════════════════════════════════════════════════ -->
+<div class="top-banner">
+    <div class="banner-inner">
+        <div class="banner-shield">💻</div>
+        <div class="banner-text">
+            <div class="banner-org">CyberEdge · CompTIA Security+</div>
+            <div class="banner-title">Lesson 10: <span>Assess Endpoint</span> Security Capabilities</div>
+            <div class="banner-sub">Hardening, protection, and monitoring of every device on the network</div>
+        </div>
+        <div class="banner-credits">
+            <span class="credit-pill credit-learner">📖 Learner Portal</span>
+            <span class="credit-pill credit-author">Dr. Solomon Seifu (Lead Technical Instructor &amp; Author)</span>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     LAYOUT
+══════════════════════════════════════════════════ -->
+<div class="layout">
+
+    <!-- LEFT SIDEBAR -->
+    <div class="sidebar">
+        <div>
+            <div class="sidebar-section-label">Navigation</div>
+            <ul class="sidebar-nav" id="sidebar-nav">
+                <li data-quest="overview" class="active">
+                    <span class="nav-icon">🗺️</span> Overview
+                </li>
+                <li data-quest="quest1">
+                    <span class="nav-icon">🛡️</span> Hardening
+                </li>
+                <li data-quest="quest2">
+                    <span class="nav-icon">🔬</span> Endpoint Protection
+                </li>
+                <li data-quest="quest3">
+                    <span class="nav-icon">📋</span> Asset &amp; Patch Mgmt
+                </li>
+                <li data-quest="quest4">
+                    <span class="nav-icon">🔍</span> EDR &amp; Monitoring
+                </li>
+                <li data-quest="quest5">
+                    <span class="nav-icon">⚔️</span> Scenarios &amp; Review
+                </li>
+                <li data-quest="review">
+                    <span class="nav-icon">🎯</span> Review Activity
+                </li>
+                <li data-quest="resources">
+                    <span class="nav-icon">📥</span> Resources
+                </li>
+            </ul>
+        </div>
+
+        <div class="progress-widget">
+            <h4>🎯 Quiz Progress</h4>
+            <div class="progress-track">
+                <div class="progress-fill" id="sidebar-progress"></div>
+            </div>
+            <div class="progress-pct" id="progress-label">0%</div>
+        </div>
+
+        <div class="badges-widget">
+            <h4>🏆 Earned Badges</h4>
+            <div class="badge-pills">
+                <span class="badge-pill">Endpoint Defender</span>
+                <span class="badge-pill">Patch Master</span>
+                <span class="badge-pill">Threat Hunter</span>
+                <span class="badge-pill">EDR Pro</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+
+        <!-- TAB BAR -->
+        <div class="tab-bar">
+            <button class="tab-btn active" data-tab="overview">🗺️ Overview</button>
+            <button class="tab-btn" data-tab="quest1">🛡️ Hardening</button>
+            <button class="tab-btn" data-tab="quest2">🔬 Endpoint Protection</button>
+            <button class="tab-btn" data-tab="quest3">📋 Asset &amp; Patch Mgmt</button>
+            <button class="tab-btn" data-tab="quest4">🔍 EDR &amp; Monitoring</button>
+            <button class="tab-btn" data-tab="quest5">⚔️ Scenarios &amp; Review</button>
+            <button class="tab-btn" data-tab="review">🎯 Review Activity</button>
+            <button class="tab-btn" data-tab="resources">📥 Resources</button>
+        </div>
+
+        <!-- ═══════════════════════════════
+             OVERVIEW TAB
+        ═══════════════════════════════ -->
+        <div class="tab-content active" id="overview">
+
+            <div class="hook-box">
+                <h2>💻 Every Device Is a Doorway</h2>
+                <p><strong>A single unpatched laptop. An endpoint with no antivirus. A USB drive plugged into a workstation. Any one of these can be the entry point that unravels an entire organization.</strong></p>
+                <p style="margin-top:10px;">Endpoints — laptops, desktops, servers, mobile devices, IoT devices — are the most targeted surface in modern cybersecurity attacks. They are everywhere, they are diverse, and they are operated by humans who make mistakes.</p>
+                <p style="margin-top:10px;">This lesson teaches you how to <strong>assess endpoint security capabilities</strong> — understanding the tools, configurations, and controls that protect every device, and being able to evaluate whether those protections are actually working.</p>
+            </div>
+
+            <div class="scenario-box">
+                <h3>📖 What Is Endpoint Security?</h3>
+                <p>Endpoint security is the practice of securing the devices that connect to a network — ensuring each one is hardened, protected, monitored, and maintained.</p>
+                <ul>
+                    <li>It covers every device from employee laptops to cloud servers to factory sensors</li>
+                    <li>It applies before, during, and after a potential compromise</li>
+                    <li>It combines technical controls (antivirus, EDR, patching) with configuration standards (hardening, least privilege)</li>
+                    <li>It is the last line of defense — even if an attacker bypasses the network perimeter, strong endpoint security can still stop them</li>
+                </ul>
+            </div>
+
+            <div class="objective-list">
+                <h3>🎓 Learning Objectives</h3>
+                <ul>
+                    <li><strong>Endpoint Hardening:</strong> Understand how to reduce the attack surface of a device through secure configuration, disabling unused services, and applying configuration baselines</li>
+                    <li><strong>Endpoint Protection Platforms:</strong> Learn how antivirus, anti-malware, host-based firewalls, and DLP work at the endpoint level</li>
+                    <li><strong>Asset &amp; Patch Management:</strong> Master the processes for tracking assets and keeping software current to eliminate known vulnerabilities</li>
+                    <li><strong>EDR &amp; Monitoring:</strong> Understand Endpoint Detection and Response tools and how continuous monitoring catches threats that prevention misses</li>
+                    <li><strong>Mobile &amp; Specialized Endpoints:</strong> Extend endpoint security thinking to mobile devices, IoT, OT, and BYOD environments</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h4>💡 Why Endpoints Are the Primary Attack Target</h4>
+                <ul>
+                    <li><strong>Volume:</strong> An organization may have thousands of endpoints — each one is a potential entry point</li>
+                    <li><strong>Human factor:</strong> Endpoints are used by people — who click phishing links, plug in USB drives, and disable security alerts</li>
+                    <li><strong>Diversity:</strong> Laptops, servers, phones, tablets, IoT — each category has its own vulnerabilities and security requirements</li>
+                    <li><strong>Legacy systems:</strong> Old unpatched endpoints are common in every industry — especially healthcare, manufacturing, and government</li>
+                </ul>
+            </div>
+
+            <div class="reflection-prompt">
+                <h4>🤔 Think About It</h4>
+                <p>If an attacker already bypassed your perimeter firewall and is inside the network — what endpoint controls would prevent them from compromising your most critical servers?</p>
+            </div>
+
+            <div class="structure-block">
+                <h3>🚀 Lesson Structure</h3>
+                <p style="font-size:0.92em;color:var(--text-mid);margin-bottom:10px;">This lesson consists of 5 quests (approximately 2.5–3 hours total):</p>
+                <ul>
+                    <li><strong>Quest 1:</strong> Endpoint Hardening — Secure configuration, baselines, and attack surface reduction (35–40 min)</li>
+                    <li><strong>Quest 2:</strong> Endpoint Protection Platforms — AV, EDR foundations, host firewalls, and DLP (30–35 min)</li>
+                    <li><strong>Quest 3:</strong> Asset &amp; Patch Management — Inventory, vulnerability tracking, and patching workflows (25–30 min)</li>
+                    <li><strong>Quest 4:</strong> EDR &amp; Continuous Monitoring — Behavioral detection, threat hunting, and telemetry analysis (30–35 min)</li>
+                    <li><strong>Quest 5:</strong> Real-World Scenarios &amp; Lesson Review — Apply everything across realistic attack scenarios (20–25 min)</li>
+                </ul>
+            </div>
+
+        </div><!-- /overview -->
+
+        <!-- ═══════════════════════════════
+             QUEST 1: HARDENING
+        ═══════════════════════════════ -->
+        <div class="tab-content" id="quest1">
+            <div class="quest-section">
+                <h3>🛡️ Quest 1: Endpoint Hardening</h3>
+                <p><strong>Quest Goal:</strong> Learn how to reduce the attack surface of endpoints through secure configuration and baselines</p>
+                <p><strong>Time:</strong> 35–40 minutes</p>
+
+                <h4>What Is Endpoint Hardening?</h4>
+                <p>Hardening is the process of configuring a system to minimize its attack surface — removing everything that isn't needed and locking down everything that remains. A hardened system gives an attacker fewer ways in and fewer things to exploit.</p>
+
+                <div class="info-box">
+                    <h4>💡 The Attack Surface Mindset</h4>
+                    <p>Every service, port, account, and application on a device is a potential entry point. Hardening asks: <em>Does this need to be here? Can it be turned off, restricted, or replaced with something safer?</em></p>
+                </div>
+
+                <h4>Configuration Baselines</h4>
+                <p>A configuration baseline is a documented set of security settings that all devices of a given type must meet. Baselines are built from industry standards and applied consistently across an organization.</p>
+
+                <div class="example-box">
+                    <h4>Industry Baseline Standards</h4>
+                    <ul>
+                        <li><strong>CIS Benchmarks (Center for Internet Security)</strong> — detailed hardening guides for every major OS, browser, and application. Free, widely adopted, exam-relevant.</li>
+                        <li><strong>DISA STIGs (Security Technical Implementation Guides)</strong> — U.S. Department of Defense hardening standards, mandatory for federal systems.</li>
+                        <li><strong>NIST SP 800-70</strong> — National Checklist Program for security configuration checklists.</li>
+                        <li><strong>Vendor security guides</strong> — Microsoft Security Baselines, Apple security configuration guides, etc.</li>
+                    </ul>
+                </div>
+
+                <h4>Key Hardening Actions</h4>
+
+                <div class="example-box">
+                    <h4>1. Remove Unnecessary Software and Services</h4>
+                    <ul>
+                        <li>Uninstall applications not required for the system's function</li>
+                        <li>Disable services that don't need to run (Telnet, FTP, SNMP on workstations)</li>
+                        <li>Close all ports not required for business operations</li>
+                        <li><strong>Principle:</strong> If it's not needed, it shouldn't be there</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>2. Account and Privilege Hardening</h4>
+                    <ul>
+                        <li><strong>Disable default accounts</strong> — rename or disable the built-in "Administrator" and "Guest" accounts</li>
+                        <li><strong>Enforce least privilege</strong> — users should only have the access they need for their role, nothing more</li>
+                        <li><strong>Remove shared accounts</strong> — every user should have their own account for accountability</li>
+                        <li><strong>Enforce strong password policies</strong> — minimum length, complexity, expiration, and lockout thresholds</li>
+                        <li><strong>Privileged Access Workstations (PAWs)</strong> — dedicated hardened devices used only for administrative tasks</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>3. Operating System Hardening</h4>
+                    <ul>
+                        <li><strong>Enable automatic updates</strong> — ensures security patches are applied promptly</li>
+                        <li><strong>Enable and configure the host-based firewall</strong> — block all inbound traffic not explicitly needed</li>
+                        <li><strong>Enable full-disk encryption</strong> — BitLocker (Windows), FileVault (macOS), LUKS (Linux) — protects data if a device is stolen</li>
+                        <li><strong>Enable Secure Boot</strong> — prevents unauthorized operating systems or bootloaders from loading</li>
+                        <li><strong>Disable AutoRun/AutoPlay</strong> — prevents malware from automatically executing when removable media is inserted</li>
+                        <li><strong>Enable audit logging</strong> — capture logon events, privilege use, process creation, and file access</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>4. Application Hardening</h4>
+                    <ul>
+                        <li><strong>Application allowlisting</strong> — only pre-approved applications are permitted to run; everything else is blocked by default</li>
+                        <li><strong>Browser hardening</strong> — disable unnecessary plugins, enforce HTTPS-only mode, block third-party cookies</li>
+                        <li><strong>Disable macros</strong> — Microsoft Office macro execution should be restricted or blocked entirely for most users</li>
+                        <li><strong>Script execution policies</strong> — restrict PowerShell execution policy to signed scripts only</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <h4>⚠️ Common Hardening Mistakes</h4>
+                    <ul>
+                        <li><strong>Applying hardening only once</strong> — new software, updates, and user changes can undo hardening settings. Use Group Policy or MDM to enforce baselines continuously.</li>
+                        <li><strong>Over-hardening</strong> — disabling too many services can break legitimate functionality and create user workarounds that are less secure than the original setting</li>
+                        <li><strong>No baseline documentation</strong> — if you don't document what "hardened" looks like, you can't verify that systems meet the standard</li>
+                        <li><strong>Hardening servers but ignoring workstations</strong> — attackers often use workstations as a pivot point to reach servers</li>
+                    </ul>
+                </div>
+
+                <h4>Group Policy and MDM for Hardening Enforcement</h4>
+                <p>Hardening settings must be enforced automatically — not just configured once manually. In enterprise environments, this is done through:</p>
+                <ul>
+                    <li><strong>Group Policy Objects (GPOs)</strong> — centrally push configuration settings to Windows endpoints via Active Directory</li>
+                    <li><strong>Mobile Device Management (MDM)</strong> — enforce configuration profiles on laptops, tablets, and phones (Microsoft Intune, Jamf, VMware Workspace ONE)</li>
+                    <li><strong>Configuration Management tools</strong> — Ansible, Chef, Puppet — automate hardening across hundreds or thousands of systems</li>
+                </ul>
+
+                <div class="reflection-prompt">
+                    <h4>🤔 Reflection</h4>
+                    <p>A new employee's laptop arrives with Windows installed and nothing else configured. List five hardening steps you would apply before connecting it to the corporate network. Why does the order matter?</p>
+                </div>
+
+                <h4>Quest 1 Knowledge Check</h4>
+
+                <div class="quiz-question" data-answer="2">
+                    <h4>Q1: An organization wants to ensure that only pre-approved applications can execute on all endpoints. Which hardening control BEST implements this requirement?</h4>
+                    <ul class="quiz-options">
+                        <li data-option="1">Installing antivirus on all endpoints</li>
+                        <li data-option="2">Implementing application allowlisting</li>
+                        <li data-option="3">Enabling full-disk encryption</li>
+                        <li data-option="4">Configuring a host-based firewall</li>
+                    </ul>
+                    <div class="quiz-feedback"><p class="feedback-text"></p></div>
+                </div>
+
+                <div class="quiz-question" data-answer="3">
+                    <h4>Q2: A security analyst discovers that the default Administrator account is enabled and using the default name on 200 workstations. What is the security risk?</h4>
+                    <ul class="quiz-options">
+                        <li data-option="1">The account will cause performance issues on the systems</li>
+                        <li data-option="2">Default accounts cannot receive security patches</li>
+                        <li data-option="3">Attackers can use the well-known account name to focus brute force attacks, and default credentials may still be in use</li>
+                        <li data-option="4">The Administrator account prevents least privilege from being enforced</li>
+                    </ul>
+                    <div class="quiz-feedback"><p class="feedback-text"></p></div>
+                </div>
+
+                <div class="quiz-question" data-answer="1">
+                    <h4>Q3: Which industry standard provides detailed configuration hardening guides for operating systems, browsers, and applications?</h4>
+                    <ul class="quiz-options">
+                        <li data-option="1">CIS Benchmarks</li>
+                        <li data-option="2">NIST Cybersecurity Framework</li>
+                        <li data-option="3">ISO 27001</li>
+                        <li data-option="4">OWASP Top 10</li>
+                    </ul>
+                    <div class="quiz-feedback"><p class="feedback-text"></p></div>
+                </div>
+
+            </div>
+        </div><!-- /quest1 -->
+
+        <!-- ═══════════════════════════════
+             QUEST 2: ENDPOINT PROTECTION
+        ═══════════════════════════════ -->
+        <div class="tab-content" id="quest2">
+            <div class="quest-section">
+                <h3>🔬 Quest 2: Endpoint Protection Platforms</h3>
+                <p><strong>Quest Goal:</strong> Understand the tools that actively protect endpoints from malware, unauthorized access, and data loss</p>
+                <p><strong>Time:</strong> 30–35 minutes</p>
+
+                <h4>Antivirus and Anti-Malware</h4>
+                <p>Antivirus (AV) is the foundational endpoint protection tool. It scans files, processes, and memory for known malicious code and blocks or removes detected threats.</p>
+
+                <table>
+                    <tr><th>Detection Method</th><th>How It Works</th><th>Strength</th><th>Weakness</th></tr>
+                    <tr>
+                        <td><strong>Signature-based</strong></td>
+                        <td>Compares files against a database of known malware hashes and patterns</td>
+                        <td><span class="tag tag-good">High accuracy for known threats</span></td>
+                        <td><span class="tag tag-bad">Blind to new/zero-day malware</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Heuristic/Behavioral</strong></td>
+                        <td>Flags code that behaves like malware — even without a known signature</td>
+                        <td><span class="tag tag-good">Can catch new threats</span></td>
+                        <td><span class="tag tag-medium">Higher false positive rate</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sandboxing</strong></td>
+                        <td>Executes suspicious files in an isolated environment to observe behavior</td>
+                        <td><span class="tag tag-good">Catches evasive malware</span></td>
+                        <td><span class="tag tag-medium">Performance-intensive; not real-time</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cloud-based scanning</strong></td>
+                        <td>Sends file hashes to the cloud for real-time threat intelligence lookup</td>
+                        <td><span class="tag tag-good">Always current; no local update delays</span></td>
+                        <td><span class="tag tag-bad">Requires internet connectivity</span></td>
+                    </tr>
+                </table>
+
+                <div class="warning-box">
+                    <h4>⚠️ Important: AV Is Not Enough</h4>
+                    <p>Modern attackers specifically craft malware to evade antivirus. Fileless malware, living-off-the-land attacks, and encrypted payloads regularly bypass traditional AV. Antivirus is necessary but not sufficient — it must be supplemented with EDR, behavioral monitoring, and hardening.</p>
+                </div>
+
+                <h4>Host-Based Firewall (HBFW)</h4>
+                <p>A host-based firewall runs on the endpoint itself and controls which network connections the device can make — regardless of what the network perimeter firewall allows.</p>
+                <ul>
+                    <li><strong>Inbound rules</strong> — block unauthorized services and ports from being reached on the endpoint</li>
+                    <li><strong>Outbound rules</strong> — restrict which applications can make outbound connections (preventing malware from calling home)</li>
+                    <li><strong>Critical value</strong> — if malware already infected one machine, the host-based firewall on adjacent machines can block lateral movement attempts</li>
+                    <li><strong>Examples:</strong> Windows Defender Firewall, iptables/nftables (Linux), PF (macOS)</li>
+                </ul>
+
+                <h4>Data Loss Prevention (DLP) at the Endpoint</h4>
+                <p>Endpoint DLP monitors and controls data movement on the device itself — what can be copied, uploaded, printed, or transmitted to external destinations.</p>
+
+                <div class="example-box">
+                    <h4>What Endpoint DLP Can Block</h4>
+                    <ul>
+                        <li>Copying sensitive files to USB drives or external storage</li>
+                        <li>Uploading confidential documents to personal cloud storage (Google Drive, Dropbox)</li>
+                        <li>Emailing files containing credit card numbers or Social Security numbers to external addresses</li>
+                        <li>Printing documents classified above a certain sensitivity level</li>
+                        <li>Screenshots of screens containing regulated data</li>
+                    </ul>
+                </div>
+
+                <h4>Full-Disk Encryption (FDE)</h4>
+                <p>Full-disk encryption encrypts all data on the storage drive — so if a device is lost or stolen, the data cannot be read without the encryption key.</p>
+                <ul>
+                    <li><strong>BitLocker</strong> (Windows) — integrated with TPM chip for hardware-backed key protection</li>
+                    <li><strong>FileVault</strong> (macOS) — Apple's built-in full-disk encryption</li>
+                    <li><strong>LUKS</strong> (Linux) — Linux Unified Key Setup, standard Linux disk encryption</li>
+                    <li><strong>TPM (Trusted Platform Module)</strong> — a hardware chip that stores encryption keys and ensures the system hasn't been tampered with at boot</li>
+                </ul>
+
+                <div class="success-box">
+                    <h4>✅ Real-World Impact of FDE</h4>
+                    <p>In 2016, a VA hospital employee lost a laptop containing records of 26 million veterans. Without encryption, the data was immediately accessible. Today, healthcare and government regulations (HIPAA, FISMA) mandate full-disk encryption on all portable devices. A stolen encrypted laptop is a hardware loss — not a data breach.</p>
+                </div>
+
+                <h4>Endpoint Protection Platform (EPP) vs. EDR</h4>
+                <table>
+                    <tr><th>Feature</th><th>EPP (Endpoint Protection Platform)</th><th>EDR (Endpoint Detection &amp; Response)</th></tr>
+                    <tr><td><strong>Primary Goal</strong></td><td>Prevent threats from executing</td><td>Detect and respond to threats that got through</td></tr>
+                    <tr><td><strong>Approach</strong></td><td>Signature + heuristic blocking</td><td>Continuous behavioral monitoring and telemetry</td></tr>
+                    <tr><td><strong>Response</strong></td><td>Automated block/quarantine</td><td>Analyst-driven investigation and remediation</td></tr>
+                    <tr><td><strong>Visibility</strong></td><td>Limited — event at time of detection</td><td>Full timeline — what happened before, during, and after</td></tr>
+                    <tr><td><strong>Typical Tools</strong></td><td>Symantec EP, McAfee, Windows Defender AV</td><td>CrowdStrike Falcon, SentinelOne, Microsoft Defender for Endpoint</td></tr>
+                </table>
+
+                <div class="reflection-prompt">
+                    <h4>🤔 Reflection</h4>
+                    <p>A user reports their AV flagged and removed a suspicious file. Two days later, the same machine starts communicating with an external IP address at 3 AM. What does this tell you about the limits of signature-based AV alone?</p>
+                </div>
+
+                <h4>Quest 2 Knowledge Check</h4>
+
+                <div class="quiz-question" data-answer="3">
+                    <h4>Q4: A laptop containing patient health records is stolen from a hospital employee's car. The drive was encrypted with BitLocker and the recovery key was stored in Active Directory. What is the impact of this incident?</h4>
+                    <ul class="quiz-options">
+                        <li data-option="1">It is a reportable data breach — encryption does not prevent data exposure</li>
+                        <li data-option="2">The attacker can bypass BitLocker using the laptop's hardware</li>
+                        <li data-option="3">The data is protected — without the BitLocker recovery key and authentication, the drive contents are unreadable</li>
+                        <li data-option="4">BitLocker only protects data if the attacker is not technically skilled</li>
+                    </ul>
+                    <div class="quiz-feedback"><p class="feedback-text"></p></div>
+                </div>
+
+                <div class="quiz-question" data-answer="2">
+                    <h4>Q5: Which type of malware detection is MOST effective at identifying a completely new threat that has never been seen before?</h4>
+                    <ul class="quiz-options">
+                        <li data-option="1">Signature-based detection</li>
+                        <li data-option="2">Heuristic and behavioral detection</li>
+                        <li data-option="3">Hash-based file scanning</li>
+                        <li data-option="4">Blacklist-based URL filtering</li>
+                    </ul>
+                    <div class="quiz-feedback"><p class="feedback-text"></p></div>
+                </div>
+
+                <div class="quiz-question" data-answer="4">
+                    <h4>Q6: An employee attempts to copy a file containing 500 Social Security Numbers to a personal USB drive. Which control would MOST directly prevent this data loss?</h4>
+                    <ul class="quiz-options">
+                        <li data-option="1">Host-based firewall blocking outbound connections</li>
+                        <li data-option="2">Antivirus scanning the USB drive on insertion</li>
+                        <li data-option="3">Full-disk encryption on the endpoint</li>
+                        <li data-option="4">Endpoint DLP policy blocking removable media transfers of sensitive data patterns</li>
+                    </ul>
+                    <div class="quiz-feedback"><p class="feedback-text"></p></div>
+                </div>
+
+            </div>
+        </div><!-- /quest2 -->
+
+        <!-- ═══════════════════════════════
+             QUEST 3: ASSET & PATCH MGMT
+        ═══════════════════════════════ -->
+        <div class="tab-content" id="quest3">
+            <div class="quest-section">
+                <h3>📋 Quest 3: Asset &amp; Patch Management</h3>
+                <p><strong>Quest Goal:</strong> Understand how organizations track assets and eliminate vulnerabilities through systematic patching</p>
+                <p><strong>Time:</strong> 25–30 minutes</p>
+
+                <h4>Why Asset Management Matters for Endpoint Security</h4>
+                <p>You cannot secure what you don't know exists. Asset management is the foundation of every other endpoint security capability — you can't patch, monitor, or harden a device that isn't in your inventory.</p>
+
+                <div class="info-box">
+                    <h4>💡 Asset Inventory Essentials</h4>
+                    <p>A complete endpoint asset inventory captures:</p>
+                    <ul>
+                        <li>Device type, make, model, and serial number</li>
+                        <li>Operating system and version</li>
+                        <li>Installed software and versions</li>
+                        <li>Assigned user and department</li>
+                        <li>Network location and IP/MAC address history</li>
+                        <li>Last seen on network and current compliance status</li>
+                    </ul>
+                </div>
+
+                <h4>Asset Discovery Methods</h4>
+                <div class="example-box">
+                    <h4>Active vs. Passive Discovery</h4>
+                    <ul>
+                        <li><strong>Active discovery</strong> — tools like Nmap, Nessus, or Qualys scan the network to enumerate all connected devices. Generates traffic but produces an immediate inventory snapshot.</li>
+                        <li><strong>Passive discovery</strong> — monitors existing network traffic (ARP, DHCP, DNS) to identify devices without active scanning. No additional traffic generated — ideal for sensitive OT/ICS networks.</li>
+                        <li><strong>Agent-based discovery</strong> — a lightweight software agent installed on each endpoint reports its configuration and status back to a central management platform in real time.</li>
+                    </ul>
+                </div>
+
+                <h4>Patch Management</h4>
+                <p>Patch management is the systematic process of identifying, acquiring, testing, and deploying software updates to eliminate known vulnerabilities. The majority of successful breaches exploit known, patchable vulnerabilities — many of which had patches available months or years before the attack.</p>
+
+                <div class="warning-box">
+                    <h4>⚠️ The Cost of Slow Patching</h4>
+                    <p>The <strong>2017 WannaCry ransomware attack</strong> infected 230,000 systems in 150 countries — exploiting EternalBlue (MS17-010), a Windows vulnerability that Microsoft had patched two months earlier. Organizations that applied the patch were immune. Those that didn't were devastated. The lesson: patch speed is a security KPI.</p>
+                </div>
+
+                <h4>The Patch Management Lifecycle</h4>
+
+                <table>
+                    <tr><th>Step</th><th>Action</th><th>Key Consideration</th></tr>
+                    <tr>
+                        <td><strong>1. Identify</strong></td>
+                        <td>Discover available patches from vendor advisories, CVE databases, CISA KEV catalog</td>
+                        <td>Subscribe to vendor security bulletins; monitor NVD and CISA</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Evaluate</strong></td>
+                        <td>Assess severity (CVSS score), exploitability, and business impact</td>
+                        <td>Critical and actively exploited vulnerabilities are patched first</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Test</strong></td>
+                        <td>Deploy patch in a test environment first to verify compatibility</td>
+                        <td>Patches can break applications — test before production deployment</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. Deploy</strong></td>
+                        <td>Push patch to production systems using patch management tools</td>
+                        <td>Use staged rollout — start with non-critical systems first</td>
+                    </tr>
+                    <tr>
+                        <td><strong>5. Verify</strong></td>
+                        <td>Confirm patch was applied successfully on all target systems</td>
+                        <td>Generate compliance reports; track unpatched systems</td>
+                    </tr>
+                    <tr>
+                        <td><strong>6. Document</strong></td>
+                        <td>Record what was patched, when, and any exceptions granted</td>
+                        <td>Exception documentation is required for compliance audits</td>
+                    </tr>
+                </table>
+
+                <h4>Patch Prioritization: CVSS and CISA KEV</h4>
+                <ul>
+                    <li><strong>CVSS (Common Vulnerability Scoring System)</strong> — rates vulnerabilities 0–10 based on exploitability, impact, and complexity. CVSS 9.0–10 = Critical; 7.0–8.9 = High.</li>
+                    <li><strong>CISA Known Exploited Vulnerabilities (KEV) Catalog</strong> — a list of vulnerabilities that are actively being exploited in the wild. These must be prioritized above all others — if it's on the KEV list, attackers are using it right now.</li>
+                    <li><strong>Patch SLAs</strong> — many organizations set patching timelines by severity: Critical = 24–72 hours; High = 7 days; Medium = 30 days; Low = 90 days.</li>
+                </ul>
+
+                <h4>Patch Management Tools</h4>
+                <div class="example-box">
+                    <h4>Enterprise Patch Management Platforms</h4>
+                    <ul>
+                        <li><strong>Microsoft WSUS / SCCM / Intune</strong> — Windows-native patch deployment and compliance reporting</li>
+                        <li><strong>Ivanti Patch for Endpoints</strong> — multi-OS patching including third-party applications</li>
+                        <li><strong>Qualys / Tenable</strong> — vulnerability scanning + integrated patch deployment workflows</li>
+                        <li><strong>Ansible / Puppet / Chef</strong> — infrastructure-as-code tools that can automate patch deployment across large fleets</li>
+                    </ul>
+                </div>
+
+                <h4>Handling Patch Exceptions</h4>
+                <p>Sometimes systems cannot be patched immediately — legacy applications that break with new patches, critical systems that cannot tolerate downtime, vendor-supported systems where patching voids the warranty. These require a formal exception process:</p>
+                <ul>
+                    <li>Document the vulnerability and the reason patching is delayed</li>
+                    <li>Apply compensating controls (network isolation, WAF rules, enhanced monitoring)</li>
+                    <li>Set a review date for the exception — not an indefinite waiver</li>
+                    <li>Accept risk formally through a Risk Acceptance process signed by management</li>
+                </ul>
+
+                <div class="reflection-prompt">
+                    <h4>🤔 Reflection</h4>
+                    <p>A hospital relies on a critical medical imaging system that runs Windows XP and cannot be updated because the vendor no longer supports the software. What compensating controls would you apply to protect this endpoint while the hospital plans a replacement?</p>
+                </div>
+
+                <h4>Quest 3 Knowledge Check</h4>
+
+                <div class="quiz-question" data-answer="4">
+                    <h4>Q7: Which source BEST indicates that a vulnerability should be patched immediately because attackers are actively using it in real attacks right now?</h4>
+                    <ul class="quiz-options">
+                        <li data-option="1">The vulnerability has a CVSS score of 5.0</li>
+                        <li data-option="2">The vendor released a patch last month</li>
+                        <li data-option="3">The vulnerability was published in the NVD database</li>
+                        <li data-option="4">The vulnerability appears in the CISA Known Exploited Vulnerabilities (KEV) catalog</li>
+                    </ul>
+                    <div class="quiz-feedback"><p class="feedback-text"></p></div>
+                </div>
+
+                <div class="quiz-question" data-answer="1">
+                    <h4>Q8: A legacy manufacturing control system cannot be patched because the vendor no longer provides updates. What is the MOST appropriate security response?</h4>
+                    <ul class="quiz-options">
+                        <li data-option="1">Isolate the system on a separate network segment, apply compensating controls, document a formal risk acceptance, and plan for replacement</li>
+                        <li data-option="2">Immediately decommission the system to eliminate the risk</li>
+                        <li data-option="3">Continue normal operations since the system is air-gapped</li>
+                        <li data-option="4">Apply third-party unofficial patches from the internet</li>
+                    </ul>
+                    <div class="quiz-feedback"><p class="feedback-text"></p></div>
+                </div>
+
+            </div>
+        </div><!-- /quest3 -->
+
+        <!-- ═══════════════════════════════
+             QUEST 4: EDR & MONITORING
+        ═══════════════════════════════ -->
+        <div class="tab-content" id="quest4">
+            <div class="quest-section">
+                <h3>🔍 Quest 4: EDR &amp; Continuous Endpoint Monitoring</h3>
+                <p><strong>Quest Goal:</strong> Understand how EDR tools detect, investigate, and respond to threats that bypass prevention</p>
+                <p><strong>Time:</strong> 30–35 minutes</p>
+
+                <h4>What Is EDR?</h4>
+                <p>Endpoint Detection and Response (EDR) is a security solution that continuously monitors endpoint activity, records detailed telemetry, and enables both automated and analyst-driven detection and response to threats — including threats that bypassed traditional antivirus.</p>
+
+                <div class="info-box">
+                    <h4>💡 Why EDR Exists</h4>
+                    <p>Traditional AV asks: <em>"Is this file malicious?"</em><br>
+                    EDR asks: <em>"What is this process doing? Who ran it? What files did it touch? What network connections did it make? How did it get here?"</em><br><br>
+                    EDR provides the <strong>full context</strong> needed to understand an attack — not just detect a file. This is critical because modern attacks use legitimate system tools (PowerShell, WMI, certutil) that AV won't flag.</p>
+                </div>
+
+                <h4>Core EDR Capabilities</h4>
+
+                <div class="example-box">
+                    <h4>1. Continuous Telemetry Collection</h4>
+                    <p>EDR agents collect a rich stream of endpoint data:</p>
+                    <ul>
+                        <li>Every process created — name, parent process, command-line arguments, user context</li>
+                        <li>Every network connection — source/destination IP, port, protocol, associated process</li>
+                        <li>Every file created, modified, or deleted</li>
+                        <li>Registry changes (Windows)</li>
+                        <li>User logon and logoff events</li>
+                        <li>PowerShell and script execution</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>2. Behavioral Detection</h4>
+                    <p>EDR identifies attacker behavior patterns — known as TTPs (Tactics, Techniques, and Procedures) — mapped to the <strong>MITRE ATT&amp;CK framework</strong>:</p>
+                    <ul>
+                        <li>A process injecting code into another process (T1055 — Process Injection)</li>
+                        <li>PowerShell downloading a file from the internet (T1059 — Command and Scripting Interpreter)</li>
+                        <li>A service creating a new admin account (T1136 — Create Account)</li>
+                        <li>A process establishing persistence via a scheduled task (T1053 — Scheduled Task)</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>3. Investigation and Threat Hunting</h4>
+                    <ul>
+                        <li><strong>Attack timeline reconstruction</strong> — trace exactly how an attacker moved through the system from initial access to final action</li>
+                        <li><strong>Process tree visualization</strong> — see parent-child process relationships to identify suspicious process chains</li>
+                        <li><strong>Threat hunting queries</strong> — analysts proactively search telemetry for indicators of compromise that automated detection may have missed</li>
+                        <li><strong>Retrospective detection</strong> — when a new threat intelligence indicator is published, EDR can search historical telemetry to find if the threat was already present</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>4. Automated Response</h4>
+                    <ul>
+                        <li><strong>Isolate endpoint</strong> — immediately cut the device's network access while preserving the ability for analysts to continue investigating remotely</li>
+                        <li><strong>Kill process</strong> — terminate a malicious process without rebooting the system</li>
+                        <li><strong>Quarantine file</strong> — move a malicious file to an isolated location where it cannot execute</li>
+                        <li><strong>Rollback changes</strong> — some EDR platforms can undo changes made by ransomware (restore encrypted files)</li>
+                    </ul>
+                </div>
+
+                <h4>MITRE ATT&amp;CK Framework</h4>
+                <p>The MITRE ATT&amp;CK framework is a globally accessible knowledge base of adversary tactics and techniques based on real-world observations. EDR products map their detections to ATT&amp;CK categories — giving analysts a common language for describing attacker behavior.</p>
+
+                <table>
+                    <tr><th>ATT&amp;CK Tactic</th><th>What It Describes</th><th>Example Technique</th></tr>
+                    <tr><td><strong>Initial Access</strong></td><td>How attacker gets into the environment</td><td>Phishing (T1566), Exploit Public-Facing App (T1190)</td></tr>
+                    <tr><td><strong>Execution</strong></td><td>How attacker runs malicious code</td><td>PowerShell (T1059.001), WMI (T1047)</td></tr>
+                    <tr><td><strong>Persistence</strong></td><td>How attacker maintains access</td><td>Registry Run Keys (T1547), Scheduled Tasks (T1053)</td></tr>
+                    <tr><td><strong>Privilege Escalation</strong></td><td>How attacker gains higher privileges</td><td>Token Impersonation (T1134), Bypass UAC (T1548)</td></tr>
+                    <tr><td><strong>Defense Evasion</strong></td><td>How attacker avoids detection</td><td>Masquerading (T1036), Disable Security Tools (T1562)</td></tr>
+                    <tr><td><strong>Lateral Movement</strong></td><td>How attacker moves through the network</td><td>Pass the Hash (T1550), RDP (T1021.001)</td></tr>
+                    <tr><td><strong>Exfiltration</strong></td><td>How attacker steals data</td><td>Exfil Over C2 Channel (T1041), DNS Tunneling (T1048)</td></tr>
+                </table>
+
+                <h4>Mobile Device Security</h4>
+                <p>Mobile devices (smartphones, tablets) are endpoints too — and they present unique security challenges:</p>
+                <ul>
+                    <li><strong>MDM (Mobile Device Management)</strong> — enforce security policies on mobile endpoints: require PIN/biometric, enable remote wipe, restrict app installation to approved sources, enforce encryption</li>
+                    <li><strong>MAM (Mobile Application Management)</strong> — manage and secure specific business applications without controlling the entire personal device (important for BYOD)</li>
+                    <li><strong>BYOD (Bring Your Own Device)</strong> — when employees use personal devices for work. Requires containerization — separating corporate data from personal data on the same device</li>
+                    <li><strong>Mobile threat defense (MTD)</strong> — detect network attacks, malicious apps, and OS exploits on mobile platforms</li>
+                </ul>
+
+                <div class="reflection-prompt">
+                    <h4>🤔 Reflection</h4>
+                    <p>An EDR alert shows: <code>cmd.exe → powershell.exe -EncodedCommand [base64 string] → net.exe user HackerAdmin /add</code>. Walk through what each step of this process chain likely represents. Which MITRE ATT&amp;CK tactics are involved?</p>
+                </div>
+
+                <h4>Quest 4 Knowledge Check</h4>
+
+                <div class="quiz-question" data-answer="3">
+                    <h4>Q9: A security analyst needs to investigate how an attacker moved through an endpoint over the past 48 hours — what processes ran, what files were touched, and what network connections were made. Which tool provides this capability?</h4>
+                    <ul class="quiz-options">
+                        <li data-option="1">Antivirus with signature-based detection</li>
+                        <li data-option="2">Host-based firewall logs</li>
+                        <li data-option="3">Endpoint Detection and Response (EDR) platform</li>
+                        <li data-option="4">Patch management console</li>
+                    </ul>
+                    <div class="quiz-feedback"><p class="feedback-text"></p></div>
+                </div>
+
+                <div class="quiz-question" data-answer="2">
+                    <h4>Q10: An organization wants to manage corporate email and applications on employees' personal smartphones without controlling the entire device. Which technology BEST supports this?</h4>
+                    <ul class="quiz-options">
+                        <li data-option="1">MDM (Mobile Device Management) with full device enrollment</li>
+                        <li data-option="2">MAM (Mobile Application Management) with containerization</li>
+                        <li data-option="3">Mobile threat defense (MTD) scanning all device activity</li>
+                        <li data-option="4">Full-disk encryption enforced across all personal devices</li>
+                    </ul>
+                    <div class="quiz-feedback"><p class="feedback-text"></p></div>
+                </div>
+
+                <div class="quiz-question" data-answer="4">
+                    <h4>Q11: Which framework provides a structured knowledge base of adversary tactics and techniques used by EDR platforms to categorize and contextualize endpoint detections?</h4>
+                    <ul class="quiz-options">
+                        <li data-option="1">NIST Cybersecurity Framework</li>
+                        <li data-option="2">CIS Controls</li>
+                        <li data-option="3">OWASP Top 10</li>
+                        <li data-option="4">MITRE ATT&amp;CK Framework</li>
+                    </ul>
+                    <div class="quiz-feedback"><p class="feedback-text"></p></div>
+                </div>
+
+            </div>
+        </div><!-- /quest4 -->
+
+        <!-- ═══════════════════════════════
+             QUEST 5: SCENARIOS & REVIEW
+        ═══════════════════════════════ -->
+        <div class="tab-content" id="quest5">
+            <div class="quest-section">
+                <h3>⚔️ Quest 5: Real-World Scenarios &amp; Lesson Review</h3>
+                <p><strong>Quest Goal:</strong> Apply all endpoint security concepts to realistic attack scenarios</p>
+                <p><strong>Time:</strong> 20–25 minutes</p>
+
+                <h4>Scenario 1: The Phishing Foothold</h4>
+                <div class="example-box">
+                    <h4>📌 Situation</h4>
+                    <p>An employee opens a phishing email attachment on their work laptop. The attachment executes a macro that downloads a PowerShell script from an external URL. The script disables Windows Defender and creates a backdoor admin account.</p>
+                    <p style="margin-top:10px;"><strong>Which endpoint security controls would have stopped this attack — and at which stage?</strong></p>
+                    <ul>
+                        <li><strong>Disable macros (hardening)</strong> → stops the initial macro execution entirely</li>
+                        <li><strong>Application allowlisting</strong> → prevents the unauthorized PowerShell download execution</li>
+                        <li><strong>EDR behavioral detection</strong> → flags PowerShell downloading and executing code as suspicious (T1059.001)</li>
+                        <li><strong>Host-based firewall outbound rules</strong> → blocks the PowerShell connection to the external C2 server</li>
+                        <li><strong>Least privilege</strong> → if the user lacks admin rights, <code>net user /add</code> fails silently</li>
+                    </ul>
+                </div>
+
+                <h4>Scenario 2: The Lost Laptop</h4>
+                <div class="example-box">
+                    <h4>📌 Situation</h4>
+                    <p>A sales executive leaves their laptop at an airport. The laptop contains a local copy of the entire customer database — 80,000 records including names, emails, and payment information. There is no MDM or FDE configured.</p>
+                    <p style="margin-top:10px;"><strong>What is the outcome — and how would proper endpoint security have changed it?</strong></p>
+                    <ul>
+                        <li><strong>Without FDE:</strong> Anyone who finds the laptop can boot from a USB drive, bypass the Windows login, and read all files — immediate reportable data breach</li>
+                        <li><strong>With BitLocker + TPM:</strong> The drive contents are unreadable without the encryption key — hardware loss, not data breach</li>
+                        <li><strong>With MDM + remote wipe:</strong> IT can remotely wipe the device the moment the loss is reported, eliminating any remaining risk</li>
+                        <li><strong>With DLP:</strong> The customer database should never have been stored locally — DLP policy would block downloading the full database to a local drive</li>
+                    </ul>
+                </div>
+
+                <h4>Scenario 3: The Unpatched Server</h4>
+                <div class="example-box">
+                    <h4>📌 Situation</h4>
+                    <p>A web-facing server running an 18-month-old version of Apache has a critical RCE vulnerability (CVSS 9.8) that was added to the CISA KEV catalog 3 weeks ago. The patch management team rated it "Medium priority" because of concerns about application compatibility.</p>
+                    <p style="margin-top:10px;"><strong>What went wrong, and what should have been done?</strong></p>
+                    <ul>
+                        <li><strong>Wrong:</strong> Using internal compatibility concerns to override CISA KEV designation — actively exploited = emergency patch regardless of compatibility</li>
+                        <li><strong>Wrong:</strong> No compensating control (WAF rule, network isolation) applied while waiting for the patch</li>
+                        <li><strong>Correct approach:</strong> Immediately apply a WAF virtual patch to block the exploit pattern; schedule an emergency maintenance window; test and deploy the patch within 72 hours of KEV listing; verify deployment through the patch management console</li>
+                    </ul>
+                </div>
+
+                <h4>Final Lesson Review</h4>
+
+                <div class="quiz-question" data-answer="3">
+                    <h4>Q12: A security team wants to prevent attackers from using legitimate Windows tools (PowerShell, WMI, certutil) to run malicious commands — a technique known as "living off the land." Which combination of controls BEST addresses this?</h4>
+                    <ul class="quiz-options">
+                        <li data-option="1">Antivirus signature updates and weekly vulnerability scans</li>
+                        <li data-option="2">Full-disk encryption and VPN enforcement for all users</li>
+                        <li data-option="3">EDR with behavioral detection + PowerShell script block logging + application allowlisting</li>
+                        <li data-option="4">Strong password policy and account lockout enforcement</li>
+                    </ul>
+                    <div class="quiz-feedback"><p class="feedback-text"></p></div>
+                </div>
+
+                <div class="quiz-question" data-answer="1">
+                    <h4>Q13: Which of the following BEST describes the relationship between an EPP and an EDR solution?</h4>
+                    <ul class="quiz-options">
+                        <li data-option="1">EPP prevents known threats from executing; EDR detects and investigates threats that bypassed prevention</li>
+                        <li data-option="2">EPP replaces the need for EDR once fully deployed</li>
+                        <li data-option="3">EDR is an older technology that EPP was designed to replace</li>
+                        <li data-option="4">Both EPP and EDR perform identical functions at the endpoint</li>
+                    </ul>
+                    <div class="quiz-feedback"><p class="feedback-text"></p></div>
+                </div>
+
+                <div class="quiz-question" data-answer="2">
+                    <h4>Q14: A penetration tester reports that several workstations have port 445 (SMB) open and an unpatched version of Windows with MS17-010 (EternalBlue). What is the MOST immediate risk?</h4>
+                    <ul class="quiz-options">
+                        <li data-option="1">Users may experience slow file transfer performance</li>
+                        <li data-option="2">Attackers can use EternalBlue to gain remote code execution and spread laterally — as demonstrated in the WannaCry and NotPetya attacks</li>
+                        <li data-option="3">The open port will cause the host-based firewall to fail</li>
+                        <li data-option="4">The SMB service will consume excessive bandwidth and degrade network performance</li>
+                    </ul>
+                    <div class="quiz-feedback"><p class="feedback-text"></p></div>
+                </div>
+
+                <div class="success-box">
+                    <h4>✅ Lesson 10 Key Takeaways</h4>
+                    <ul>
+                        <li><strong>Hardening reduces attack surface</strong> — remove what isn't needed, lock down what remains, enforce baselines automatically</li>
+                        <li><strong>AV is not enough</strong> — supplement with EDR, host-based firewall, DLP, and FDE for layered endpoint protection</li>
+                        <li><strong>You can't secure what you don't know exists</strong> — asset inventory is the foundation of all endpoint security</li>
+                        <li><strong>Patch speed is a security metric</strong> — CISA KEV = patch now; CVSS Critical = patch within 24–72 hours</li>
+                        <li><strong>EDR provides visibility that prevention tools cannot</strong> — behavioral detection, process telemetry, and timeline reconstruction catch what AV misses</li>
+                        <li><strong>Every device is an endpoint</strong> — laptops, servers, phones, IoT — all require endpoint security thinking</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div><!-- /quest5 -->
+
+        <!-- ═══════════════════════════════
+             RESOURCES TAB
+        ═══════════════════════════════ -->
+        <!-- ═══ REVIEW ACTIVITY TAB ═══ -->
+        <div class="tab-content" id="review">
+            <div class="rv-intro">
+                <p>Fifty-six CompTIA Security+ style questions drawn from both Lesson 10 review activities: <strong>Endpoint Security</strong> (endpoint hardening and techniques, configuration, endpoint and advanced protection, and hardening specialized devices) and <strong>Mobile Device Hardening</strong> (mobile hardening, full-device encryption and external media, location services, and cellular, GPS, Wi-Fi, tethering, Bluetooth, and NFC connection methods). Each question has one best answer; answer choices are shuffled on every load. Pick an option to see immediate feedback. Your score out of 56 appears once all questions are answered, with <strong>70% to pass</strong>. Use <strong>Reshuffle &amp; reset</strong> to start over with a fresh order.</p>
+            </div>
+
+            <div class="rv-progress-wrap">
+                <div class="rv-stat">
+                    <span class="count" id="rvCount">Answered 0 / 56</span>
+                    <div class="rv-controls">
+                        <button class="rv-btn ghost" id="rvResults" disabled>See my score</button>
+                        <button class="rv-btn" id="rvReset">🔄 Reshuffle &amp; reset</button>
+                    </div>
+                </div>
+                <div class="rv-bar"><div class="rv-bar-fill" id="rvFill"></div></div>
+            </div>
+
+            <div class="rv-results" id="rvResultsPanel">
+                <h3>Your Result</h3>
+                <div class="rv-score-num" id="rvScoreNum">0 / 56</div>
+                <div class="rv-score-pct" id="rvScorePct">0%</div>
+                <div class="rv-verdict" id="rvVerdict">&nbsp;</div>
+                <p class="note">Pass line is 70% (40 / 56). Review any questions you missed, then reshuffle and try again.</p>
+            </div>
+
+            <div id="rvQuiz"></div>
+        </div>
+
+        <div class="tab-content" id="resources">
+            <div class="quest-section">
+                <h3>📥 Resources &amp; References</h3>
+
+                <h4>Security+ Exam Objectives — Lesson 10 Coverage</h4>
+                <table>
+                    <tr><th>Exam Domain</th><th>Objective</th></tr>
+                    <tr><td>3.0 — Implementation</td><td>3.2 — Implement host or application security solutions (hardening, EPP, EDR, DLP, FDE)</td></tr>
+                    <tr><td>4.0 — Operations &amp; Incident Response</td><td>4.1 — Use appropriate tool to assess organizational security (asset management, vulnerability scanning)</td></tr>
+                    <tr><td>2.0 — Threats, Vulnerabilities &amp; Mitigations</td><td>2.5 — Explain the purpose of mitigation techniques for attacks (patch management, configuration enforcement)</td></tr>
+                </table>
+
+                <h4>Key Frameworks &amp; Standards</h4>
+                <div class="info-box">
+                    <ul>
+                        <li><strong>CIS Benchmarks</strong> — <code>cisecurity.org/cis-benchmarks</code> — free hardening guides for every major OS and application</li>
+                        <li><strong>MITRE ATT&amp;CK</strong> — <code>attack.mitre.org</code> — adversary tactics and techniques knowledge base; essential for EDR and threat hunting</li>
+                        <li><strong>CISA KEV Catalog</strong> — <code>cisa.gov/known-exploited-vulnerabilities-catalog</code> — actively exploited vulnerabilities requiring immediate patching</li>
+                        <li><strong>NIST SP 800-128</strong> — Guide for Security-Focused Configuration Management of Information Systems</li>
+                        <li><strong>NIST SP 800-40</strong> — Guide to Enterprise Patch Management Planning</li>
+                        <li><strong>NIST SP 800-124</strong> — Guidelines for Managing the Security of Mobile Devices</li>
+                    </ul>
+                </div>
+
+                <h4>Key Terms to Know for the Exam</h4>
+                <table>
+                    <tr><th>Term</th><th>Definition</th></tr>
+                    <tr><td><strong>Hardening</strong></td><td>Configuring a system to reduce its attack surface by removing unneeded services, applying secure settings, and enforcing baselines</td></tr>
+                    <tr><td><strong>Configuration baseline</strong></td><td>A documented set of security settings all devices of a type must meet (e.g., CIS Benchmark)</td></tr>
+                    <tr><td><strong>EPP</strong></td><td>Endpoint Protection Platform — prevents known threats using AV, anti-malware, and policy-based controls</td></tr>
+                    <tr><td><strong>EDR</strong></td><td>Endpoint Detection and Response — continuously monitors endpoint telemetry to detect, investigate, and respond to threats</td></tr>
+                    <tr><td><strong>DLP</strong></td><td>Data Loss Prevention — prevents sensitive data from leaving the endpoint through unauthorized channels</td></tr>
+                    <tr><td><strong>FDE</strong></td><td>Full-Disk Encryption — encrypts all data on a drive so it is unreadable without the correct key</td></tr>
+                    <tr><td><strong>CVSS</strong></td><td>Common Vulnerability Scoring System — rates vulnerabilities 0–10 by severity; guides patch prioritization</td></tr>
+                    <tr><td><strong>CISA KEV</strong></td><td>Known Exploited Vulnerabilities catalog — vulnerabilities being actively exploited that require immediate remediation</td></tr>
+                    <tr><td><strong>MDM</strong></td><td>Mobile Device Management — enforces security policies on mobile endpoints</td></tr>
+                    <tr><td><strong>MAM</strong></td><td>Mobile Application Management — manages specific business apps on personal devices without controlling the whole device</td></tr>
+                    <tr><td><strong>MITRE ATT&amp;CK</strong></td><td>Framework mapping adversary tactics, techniques, and procedures used to classify and investigate endpoint threats</td></tr>
+                    <tr><td><strong>Application allowlisting</strong></td><td>Only pre-approved applications are permitted to execute; all others are blocked by default</td></tr>
+                    <tr><td><strong>PAW</strong></td><td>Privileged Access Workstation — a hardened dedicated device used only for administrative tasks</td></tr>
+                </table>
+
+                <div class="reflection-prompt">
+                    <h4>🤔 Final Preparation Questions</h4>
+                    <p>Before class, be ready to discuss:</p>
+                    <ul style="margin-left:20px;margin-top:8px;">
+                        <li>What is the difference between EPP and EDR — and why do organizations need both?</li>
+                        <li>Why is the CISA KEV catalog more actionable for patch prioritization than just using CVSS scores?</li>
+                        <li>How does application allowlisting stop "living off the land" attacks where attackers use legitimate Windows tools?</li>
+                        <li>What specific endpoint controls would you deploy first if you had one week and a $50,000 budget for a 500-workstation company?</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div><!-- /resources -->
+
+        <!-- BOTTOM FOOTER (inside main content) -->
+        <div class="bottom-footer">
+            <div class="footer-left">
+                <p>CyberEdge</p>
+                <span>CompTIA Security+ · Lesson 10: Assess Endpoint Security Capabilities · Learner Portal</span>
+            </div>
+            <div class="footer-nav">
+                <button onclick="prevQuest()">← Previous</button>
+                <button onclick="nextQuest()">Next →</button>
+            </div>
+        </div>
+
+    </div><!-- /main-content -->
+</div><!-- /layout -->
+
+<script>
+    const quests = ['overview','quest1','quest2','quest3','quest4','quest5','review','resources'];
+    let currentQuest = 0;
+
+    const quizData = {
+        "Q1: An organization wants to ensure that only pre-approved applications can execute on all endpoints. Which hardening control BEST implements this requirement?": {
+            correct: 2,
+            explanation: "Correct! Application allowlisting permits only approved applications to run — everything else is blocked by default. This stops unknown malware, unauthorized software, and living-off-the-land attacks that use unapproved binaries.",
+            incorrectExplanation: "Not quite. Antivirus reacts to known threats; FDE protects data at rest; firewalls control network access. Only application allowlisting proactively blocks any unapproved executable from running. 🔄 Reflect: What would happen if an attacker renamed their malware to 'notepad.exe'?"
+        },
+        "Q2: A security analyst discovers that the default Administrator account is enabled and using the default name on 200 workstations. What is the security risk?": {
+            correct: 3,
+            explanation: "Correct! The well-known 'Administrator' account name gives attackers a known target for brute force and credential stuffing. Default credentials may also be unchanged. Renaming and disabling reduces this attack surface significantly.",
+            incorrectExplanation: "Not correct. The real risk is that attackers know the default account name exists and may try to brute-force it or use default credentials. Renaming or disabling default accounts removes a predictable attack target. 🔄 Reflect: What other default credentials might exist on your network devices?"
+        },
+        "Q3: Which industry standard provides detailed configuration hardening guides for operating systems, browsers, and applications?": {
+            correct: 1,
+            explanation: "Correct! CIS Benchmarks (from the Center for Internet Security) provide free, detailed, prescriptive hardening guides for every major OS, browser, cloud platform, and application. They are the most widely used baseline standard in industry and are directly referenced in Security+ objectives.",
+            incorrectExplanation: "Not quite. NIST CSF is a risk management framework; ISO 27001 is an information security management standard; OWASP Top 10 covers web application risks. CIS Benchmarks specifically provide the detailed technical configuration checklists for hardening systems. 🔄 Reflect: Why would a government contractor use DISA STIGs instead of CIS Benchmarks?"
+        },
+        "Q4: A laptop containing patient health records is stolen from a hospital employee's car. The drive was encrypted with BitLocker and the recovery key was stored in Active Directory. What is the impact of this incident?": {
+            correct: 3,
+            explanation: "Correct! Full-disk encryption means the stolen drive contents are unreadable without the BitLocker key. Since the recovery key is stored in AD (not on the device), the attacker cannot access the data. This is a hardware loss but NOT a data breach under HIPAA.",
+            incorrectExplanation: "Not correct. Full-disk encryption directly addresses this scenario — the drive contents are mathematically scrambled without the decryption key. Since the key is in Active Directory and not on the laptop, the attacker cannot read the patient data. 🔄 Reflect: What would happen if the BitLocker recovery key was stored in a file on the same laptop?"
+        },
+        "Q5: Which type of malware detection is MOST effective at identifying a completely new threat that has never been seen before?": {
+            correct: 2,
+            explanation: "Correct! Heuristic and behavioral detection analyzes what code DOES rather than what it looks like. A brand-new malware sample with no known signature can still be detected if it behaves like malware (modifies registry keys, injects into processes, downloads payloads). This is why behavioral detection is essential for zero-day threats.",
+            incorrectExplanation: "Not correct. Signature-based detection, hash scanning, and blacklists all require prior knowledge of the threat. Only heuristic/behavioral detection can identify a threat it has never seen before, based on what it does rather than what it looks like. 🔄 Reflect: Why would an attacker modify their malware slightly before each attack campaign?"
+        },
+        "Q6: An employee attempts to copy a file containing 500 Social Security Numbers to a personal USB drive. Which control would MOST directly prevent this data loss?": {
+            correct: 4,
+            explanation: "Correct! Endpoint DLP specifically monitors data content and movement. A DLP policy that recognizes SSN patterns and blocks transfer to removable media directly prevents this exact data loss scenario. The other options address different threats.",
+            incorrectExplanation: "Not quite. Firewalls control network traffic (USB isn't network); AV scans for malware (SSNs aren't malware); FDE protects the device if stolen (the file is being actively copied by the legitimate user). Only DLP can inspect the content being transferred and block it based on data classification. 🔄 Reflect: How would DLP policy handle an employee who zips and password-protects the file before copying it?"
+        },
+        "Q7: Which source BEST indicates that a vulnerability should be patched immediately because attackers are actively using it in real attacks right now?": {
+            correct: 4,
+            explanation: "Correct! The CISA Known Exploited Vulnerabilities (KEV) catalog lists vulnerabilities that threat actors are actively exploiting in real attacks today. Being on the KEV list is the highest-priority signal for immediate patching — even above a high CVSS score alone.",
+            incorrectExplanation: "Not quite. A CVSS score measures theoretical severity; NVD publication means it's documented; vendor patches just mean it's fixable. The CISA KEV catalog specifically means 'attackers are using this right now in real environments.' That is the strongest signal for immediate action. 🔄 Reflect: Why might a CVSS 6.0 vulnerability on the KEV list require faster patching than a CVSS 9.5 vulnerability that isn't?"
+        },
+        "Q8: A legacy manufacturing control system cannot be patched because the vendor no longer provides updates. What is the MOST appropriate security response?": {
+            correct: 1,
+            explanation: "Correct! When patching is not possible, compensating controls must be applied: network isolation (VLAN segmentation), application-layer firewalls, enhanced monitoring, and formal risk acceptance documentation. Decommissioning immediately may not be operationally feasible; continuing without controls is unacceptable.",
+            incorrectExplanation: "Not correct. Immediate decommissioning may not be operationally possible for critical manufacturing systems. Ignoring the risk is unacceptable. Third-party unofficial patches introduce new risk. The correct answer is isolation + compensating controls + documented risk acceptance + a replacement roadmap. 🔄 Reflect: What compensating controls specifically would you apply around a legacy Windows XP medical device?"
+        },
+        "Q9: A security analyst needs to investigate how an attacker moved through an endpoint over the past 48 hours — what processes ran, what files were touched, and what network connections were made. Which tool provides this capability?": {
+            correct: 3,
+            explanation: "Correct! EDR platforms continuously record endpoint telemetry — every process, file, registry change, and network connection. This historical record enables analysts to reconstruct exactly what happened during an attack, including events that occurred before an alert fired.",
+            incorrectExplanation: "Not correct. AV only alerts on known threats at the moment of detection; firewall logs show network connections but not process context; patch consoles track software versions. Only EDR provides the rich, continuous, contextual telemetry needed for 48-hour retrospective analysis. 🔄 Reflect: Why is retrospective analysis important if an alert wasn't triggered until day 2 of a 48-hour intrusion?"
+        },
+        "Q10: An organization wants to manage corporate email and applications on employees' personal smartphones without controlling the entire device. Which technology BEST supports this?": {
+            correct: 2,
+            explanation: "Correct! MAM (Mobile Application Management) with containerization manages specific business applications within a secure container on the device — without giving IT control over personal apps, photos, or data. This is the appropriate BYOD model when employees use personal devices.",
+            incorrectExplanation: "Not correct. Full MDM enrollment gives IT too much control over personal devices (invasive, legally problematic). MTD scans threats but doesn't manage apps. FDE on personal devices is not something IT can mandate for personal property. MAM containerization is specifically designed for this BYOD use case. 🔄 Reflect: What data privacy concerns would full MDM enrollment create in a BYOD program?"
+        },
+        "Q11: Which framework provides a structured knowledge base of adversary tactics and techniques used by EDR platforms to categorize and contextualize endpoint detections?": {
+            correct: 4,
+            explanation: "Correct! MITRE ATT&CK (Adversarial Tactics, Techniques and Common Knowledge) is the global standard framework that maps adversary behavior to named tactics and techniques. EDR vendors map their detections to ATT&CK IDs — giving analysts a common language to understand what an attacker did.",
+            incorrectExplanation: "Not correct. NIST CSF is a risk management framework; CIS Controls are security best practices; OWASP covers web app vulnerabilities. MITRE ATT&CK specifically catalogs adversary behavior — the 'how attackers operate' knowledge base used by EDR, threat intelligence, and red/blue teams. 🔄 Reflect: How would knowing ATT&CK TTP T1059 (Command and Scripting Interpreter) help you write an EDR detection rule?"
+        },
+        "Q12: A security team wants to prevent attackers from using legitimate Windows tools (PowerShell, WMI, certutil) to run malicious commands — a technique known as \"living off the land.\" Which combination of controls BEST addresses this?": {
+            correct: 3,
+            explanation: "Correct! Living-off-the-land attacks use legitimate tools that AV won't flag. EDR behavioral detection spots suspicious usage patterns; PowerShell script block logging records exactly what scripts executed; application allowlisting can restrict who can run these tools and in what contexts.",
+            incorrectExplanation: "Not correct. AV signatures miss living-off-the-land attacks because no malware file exists. FDE and VPN don't address process execution. Passwords don't stop an attacker who already has credentials. The correct combination uses behavioral monitoring, logging, and execution controls to catch misuse of legitimate tools. 🔄 Reflect: Could an attacker bypass script block logging? How would EDR still detect them?"
+        },
+        "Q13: Which of the following BEST describes the relationship between an EPP and an EDR solution?": {
+            correct: 1,
+            explanation: "Correct! EPP (Endpoint Protection Platform) focuses on prevention — blocking known threats before they execute. EDR (Endpoint Detection and Response) focuses on detection and response — finding and investigating threats that got through prevention. They are complementary, not interchangeable.",
+            incorrectExplanation: "Not correct. EPP and EDR serve fundamentally different purposes. EPP prevents; EDR detects and responds. Neither replaces the other — modern enterprise endpoint security uses both, sometimes in a combined XDR platform. 🔄 Reflect: Why would an organization still need EDR if their EPP has a 99.5% detection rate?"
+        },
+        "Q14: A penetration tester reports that several workstations have port 445 (SMB) open and an unpatched version of Windows with MS17-010 (EternalBlue). What is the MOST immediate risk?": {
+            correct: 2,
+            explanation: "Correct! EternalBlue (MS17-010) allows unauthenticated remote code execution via SMB. It was the vulnerability behind both WannaCry (2017) and NotPetya (2017) — two of the most destructive cyberattacks in history. Unpatched systems with port 445 open are immediately vulnerable to worm-like spread.",
+            incorrectExplanation: "Not correct. The risk is not performance-related. EternalBlue enables unauthenticated remote code execution — meaning an attacker on the same network can fully compromise these systems, install ransomware, and spread to every other unpatched machine automatically. This requires emergency patching. 🔄 Reflect: If you can't patch immediately, what two controls would you apply right now to reduce the risk?"
+        }
+    };
+
+    function navigate(questId) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.sidebar-nav li').forEach(l => l.classList.remove('active'));
+
+        document.getElementById(questId).classList.add('active');
+        document.querySelector(`.tab-btn[data-tab="${questId}"]`).classList.add('active');
+        document.querySelector(`.sidebar-nav li[data-quest="${questId}"]`).classList.add('active');
+
+        currentQuest = quests.indexOf(questId);
+        document.querySelector('.main-content').scrollTop = 0;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function nextQuest() {
+        if (currentQuest < quests.length - 1) navigate(quests[currentQuest + 1]);
+    }
+
+    function prevQuest() {
+        if (currentQuest > 0) navigate(quests[currentQuest - 1]);
+    }
+
+    // Tab bar clicks
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => navigate(btn.getAttribute('data-tab')));
+    });
+
+    // Sidebar clicks
+    document.querySelectorAll('.sidebar-nav li').forEach(item => {
+        item.addEventListener('click', () => navigate(item.getAttribute('data-quest')));
+    });
+
+    // Quiz interaction
+    let totalQuestions = 0;
+    let answeredQuestions = 0;
+
+    document.querySelectorAll('.quiz-question').forEach(question => {
+        totalQuestions++;
+        const correctAnswer = parseInt(question.getAttribute('data-answer'));
+        const questionText = question.querySelector('h4').textContent;
+        const options = question.querySelectorAll('.quiz-options li');
+        const feedbackDiv = question.querySelector('.quiz-feedback');
+        const feedbackText = feedbackDiv.querySelector('.feedback-text');
+
+        options.forEach(option => {
+            option.addEventListener('click', function () {
+                if (this.classList.contains('disabled')) return;
+
+                const selected = parseInt(this.getAttribute('data-option'));
+                const data = quizData[questionText];
+
+                options.forEach(o => o.classList.add('disabled'));
+
+                if (selected === correctAnswer) {
+                    this.classList.add('correct');
+                    feedbackDiv.classList.add('show', 'correct-feedback');
+                    feedbackText.innerHTML = `<strong>✅ Correct!</strong><br>${data ? data.explanation : 'Well done!'}`;
+                } else {
+                    this.classList.add('incorrect');
+                    options.forEach(o => {
+                        if (parseInt(o.getAttribute('data-option')) === correctAnswer) o.classList.add('correct');
+                    });
+                    feedbackDiv.classList.add('show', 'incorrect-feedback');
+                    feedbackText.innerHTML = `<strong>❌ Incorrect.</strong><br>${data ? data.incorrectExplanation : 'Review the concept and try again.'}<br><br><em>The correct answer is highlighted in green.</em>`;
+                }
+
+                answeredQuestions++;
+                updateProgress();
+            });
+        });
+    });
+
+    function updateProgress() {
+        const pct = Math.round((answeredQuestions / totalQuestions) * 100);
+        document.getElementById('sidebar-progress').style.width = pct + '%';
+        document.getElementById('progress-label').textContent = pct + '%';
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight' && !e.target.matches('input, textarea')) nextQuest();
+        if (e.key === 'ArrowLeft'  && !e.target.matches('input, textarea')) prevQuest();
+    });
+
+    updateProgress();
+
+/* ===================== REVIEW ACTIVITY ENGINE ===================== */
+(function(){
+  var RV_TOTAL=56, RV_PASS=0.70;
+  var RV_QUESTIONS=[
+    /* ===== SECTION 1: ENDPOINT SECURITY ===== */
+    {s:1,cat:"Endpoint Hardening",scn:true,q:"A workstation is deployed using its default, out-of-box configuration. From a security standpoint, what is the primary concern?",o:[
+      {t:"Default configurations favor ease of setup and compatibility, leaving an unnecessarily large attack surface.",c:true,f:"Out-of-box settings are tuned for convenience, not security. Hardening removes that excess to shrink the attack surface."},
+      {t:"Default configurations disable all networking, preventing the device from receiving updates.",c:false,f:"Not the best answer. The correct choice is: Default configurations favor ease of setup and compatibility, leaving an unnecessarily large attack surface."},
+      {t:"Default configurations always enable full disk encryption, which slows the system down.",c:false,f:"Not the best answer. The correct choice is: Default configurations favor ease of setup and compatibility, leaving an unnecessarily large attack surface."},
+      {t:"Default configurations automatically enforce least privilege for every account.",c:false,f:"Not the best answer. The correct choice is: Default configurations favor ease of setup and compatibility, leaving an unnecessarily large attack surface."}
+    ]},
+    {s:1,cat:"Hardening Techniques",scn:true,q:"During hardening you find a network service running on a server that no one uses. What is the best action?",o:[
+      {t:"Remove the service entirely, since it serves no operational purpose.",c:true,f:"If it is not needed, remove it. A disabled service can be re-enabled and still represents code on the system; removal eliminates the vector."},
+      {t:"Disable the service so it can be quickly re-enabled if needed later.",c:false,f:"Not the best answer. The correct choice is: Remove the service entirely, since it serves no operational purpose."},
+      {t:"Leave it running but block its port at the perimeter firewall.",c:false,f:"Not the best answer. The correct choice is: Remove the service entirely, since it serves no operational purpose."},
+      {t:"Rename the service so attackers cannot identify it.",c:false,f:"Not the best answer. The correct choice is: Remove the service entirely, since it serves no operational purpose."}
+    ]},
+    {s:1,cat:"Hardening Techniques",scn:true,q:"A standard user occasionally needs to install approved software. Which approach best follows the principle of least privilege?",o:[
+      {t:"Provide a separate elevated account to be used only when administrative action is required.",c:true,f:"Least privilege means no standing elevated rights. A separate, occasionally-used admin account limits what a compromise of the daily account can do."},
+      {t:"Add the user to the local Administrators group for convenience.",c:false,f:"Not the best answer. The correct choice is: Provide a separate elevated account to be used only when administrative action is required."},
+      {t:"Disable User Account Control so prompts do not interrupt the user.",c:false,f:"Not the best answer. The correct choice is: Provide a separate elevated account to be used only when administrative action is required."},
+      {t:"Grant the user Domain Admin rights to cover any future need.",c:false,f:"Not the best answer. The correct choice is: Provide a separate elevated account to be used only when administrative action is required."}
+    ]},
+    {s:1,cat:"Endpoint Configuration",scn:false,q:"What is the recommended practice before deploying operating system patches across the enterprise?",o:[
+      {t:"Test the patches in a staging environment before rolling them out to production.",c:true,f:"Patching must balance speed with stability. Testing in staging catches breakage before it reaches production."},
+      {t:"Deploy immediately to every system to close the vulnerability as fast as possible.",c:false,f:"Not the best answer. The correct choice is: Test the patches in a staging environment before rolling them out to production."},
+      {t:"Wait at least one year to be certain the patch is stable.",c:false,f:"Not the best answer. The correct choice is: Test the patches in a staging environment before rolling them out to production."},
+      {t:"Patch only the systems that have already shown signs of compromise.",c:false,f:"Not the best answer. The correct choice is: Test the patches in a staging environment before rolling them out to production."}
+    ]},
+    {s:1,cat:"Endpoint Configuration",scn:true,q:"A company laptop is stolen from an airport. Which control most directly protects the data stored on it?",o:[
+      {t:"Full disk encryption.",c:true,f:"Full disk encryption renders data at rest unreadable without the key, which is the core protection against a lost or stolen device."},
+      {t:"A host-based firewall.",c:false,f:"Not the best answer. The correct choice is: Full disk encryption."},
+      {t:"Up-to-date antivirus software.",c:false,f:"Not the best answer. The correct choice is: Full disk encryption."},
+      {t:"A password-protected BIOS boot order.",c:false,f:"Not the best answer. The correct choice is: Full disk encryption."}
+    ]},
+    {s:1,cat:"Endpoint Configuration",scn:false,q:"What is the primary purpose of a Trusted Platform Module (TPM) on an endpoint?",o:[
+      {t:"To securely store cryptographic keys used for encryption and integrity verification.",c:true,f:"A TPM is a hardware root of trust that protects keys (for example, the BitLocker key) and supports boot integrity checks."},
+      {t:"To scan incoming files against a malware signature database.",c:false,f:"Not the best answer. The correct choice is: To securely store cryptographic keys used for encryption and integrity verification."},
+      {t:"To act as a software firewall for inbound traffic.",c:false,f:"Not the best answer. The correct choice is: To securely store cryptographic keys used for encryption and integrity verification."},
+      {t:"To remove the need for regular patching.",c:false,f:"Not the best answer. The correct choice is: To securely store cryptographic keys used for encryption and integrity verification."}
+    ]},
+    {s:1,cat:"Endpoint Configuration",scn:false,q:"Secure Boot is designed to protect primarily against which type of threat?",o:[
+      {t:"Unauthorized or tampered code attempting to load during system startup.",c:true,f:"Secure Boot verifies that only trusted, signed software loads during boot, blocking boot-level malware and tampering."},
+      {t:"Phishing emails delivered to the user's inbox.",c:false,f:"Not the best answer. The correct choice is: Unauthorized or tampered code attempting to load during system startup."},
+      {t:"Weak or reused user passwords.",c:false,f:"Not the best answer. The correct choice is: Unauthorized or tampered code attempting to load during system startup."},
+      {t:"Volumetric denial-of-service attacks from the network.",c:false,f:"Not the best answer. The correct choice is: Unauthorized or tampered code attempting to load during system startup."}
+    ]},
+    {s:1,cat:"Endpoint Protection",scn:false,q:"Why is signature-based antivirus, on its own, insufficient against modern threats?",o:[
+      {t:"It can only detect threats with a known signature, so it misses novel, polymorphic, and fileless attacks.",c:true,f:"Signature matching is reactive. Behavior-based tools are needed to catch threats that have no existing signature."},
+      {t:"It is unable to scan files located on removable media.",c:false,f:"Not the best answer. The correct choice is: It can only detect threats with a known signature, so it misses novel, polymorphic, and fileless attacks."},
+      {t:"It never requires signature updates to stay effective.",c:false,f:"Not the best answer. The correct choice is: It can only detect threats with a known signature, so it misses novel, polymorphic, and fileless attacks."},
+      {t:"It blocks all network traffic by default, breaking applications.",c:false,f:"Not the best answer. The correct choice is: It can only detect threats with a known signature, so it misses novel, polymorphic, and fileless attacks."}
+    ]},
+    {s:1,cat:"Advanced Endpoint Protection",scn:false,q:"Which capability most clearly distinguishes EDR from traditional antivirus?",o:[
+      {t:"It continuously collects endpoint telemetry and detects threats by behavior, with the ability to respond.",c:true,f:"EDR adds continuous behavioral monitoring, an activity timeline, and response actions such as host isolation, well beyond signature scanning."},
+      {t:"It relies solely on signature matching to identify malware.",c:false,f:"Not the best answer. The correct choice is: It continuously collects endpoint telemetry and detects threats by behavior, with the ability to respond."},
+      {t:"It only runs during a manually scheduled scan.",c:false,f:"Not the best answer. The correct choice is: It continuously collects endpoint telemetry and detects threats by behavior, with the ability to respond."},
+      {t:"It is incapable of isolating a compromised host.",c:false,f:"Not the best answer. The correct choice is: It continuously collects endpoint telemetry and detects threats by behavior, with the ability to respond."}
+    ]},
+    {s:1,cat:"Advanced Endpoint Protection",scn:false,q:"How does XDR extend the capabilities of EDR?",o:[
+      {t:"It correlates telemetry across endpoints, network, cloud, email, and other sources for a unified view.",c:true,f:"XDR (Extended Detection and Response) widens the lens beyond the endpoint so an attack spanning multiple layers is seen as one connected chain."},
+      {t:"It restricts monitoring to a single endpoint at a time.",c:false,f:"Not the best answer. The correct choice is: It correlates telemetry across endpoints, network, cloud, email, and other sources for a unified view."},
+      {t:"It removes the need for any agent on the endpoint.",c:false,f:"Not the best answer. The correct choice is: It correlates telemetry across endpoints, network, cloud, email, and other sources for a unified view."},
+      {t:"It functions only when the device is offline.",c:false,f:"Not the best answer. The correct choice is: It correlates telemetry across endpoints, network, cloud, email, and other sources for a unified view."}
+    ]},
+    {s:1,cat:"Advanced Endpoint Protection",scn:true,q:"An organization has no in-house security operations team but needs round-the-clock detection and response. What is the best fit?",o:[
+      {t:"Engage a Managed Detection and Response (MDR) service.",c:true,f:"MDR is a hosted service that provides the detection-and-response function for organizations lacking their own security operations capability."},
+      {t:"Purchase additional antivirus licenses for every endpoint.",c:false,f:"Not the best answer. The correct choice is: Engage a Managed Detection and Response (MDR) service."},
+      {t:"Disable logging to reduce the volume of alerts to review.",c:false,f:"Not the best answer. The correct choice is: Engage a Managed Detection and Response (MDR) service."},
+      {t:"Rely on end users to notice and report incidents.",c:false,f:"Not the best answer. The correct choice is: Engage a Managed Detection and Response (MDR) service."}
+    ]},
+    {s:1,cat:"Advanced Endpoint Protection",scn:false,q:"What is the key difference between a HIDS and a HIPS?",o:[
+      {t:"A HIDS detects and alerts on suspicious activity, while a HIPS detects and actively blocks it.",c:true,f:"Detection versus prevention, the same distinction as IDS versus IPS, applied at the individual host."},
+      {t:"A HIDS blocks threats, while a HIPS only writes them to a log.",c:false,f:"Not the best answer. The correct choice is: A HIDS detects and alerts on suspicious activity, while a HIPS detects and actively blocks it."},
+      {t:"They are identical and the terms are interchangeable.",c:false,f:"Not the best answer. The correct choice is: A HIDS detects and alerts on suspicious activity, while a HIPS detects and actively blocks it."},
+      {t:"A HIPS works only on network traffic, never on the host itself.",c:false,f:"Not the best answer. The correct choice is: A HIDS detects and alerts on suspicious activity, while a HIPS detects and actively blocks it."}
+    ]},
+    {s:1,cat:"Advanced Endpoint Protection",scn:false,q:"A finance employee's valid credentials are used to sign in at 2 a.m. from another country, followed by a large data download. Which tool is best suited to flag this as suspicious?",o:[
+      {t:"User and Entity Behavior Analytics (UEBA).",c:true,f:"The credentials are valid, so authentication succeeds. UEBA baselines normal behavior and flags deviations such as unusual time, location, and data volume."},
+      {t:"Signature-based antivirus.",c:false,f:"Not the best answer. The correct choice is: User and Entity Behavior Analytics (UEBA)."},
+      {t:"A host-based firewall rule.",c:false,f:"Not the best answer. The correct choice is: User and Entity Behavior Analytics (UEBA)."},
+      {t:"Full disk encryption.",c:false,f:"Not the best answer. The correct choice is: User and Entity Behavior Analytics (UEBA)."}
+    ]},
+    {s:1,cat:"Endpoint Configuration",scn:false,q:"Which control most effectively prevents unauthorized applications from executing on a hardened endpoint?",o:[
+      {t:"Application allow-listing, so only approved programs are permitted to run.",c:true,f:"Allow-listing (default-deny) is stronger than block-listing because anything not explicitly approved is prevented from running."},
+      {t:"Increasing the size of the system page file.",c:false,f:"Not the best answer. The correct choice is: Application allow-listing, so only approved programs are permitted to run."},
+      {t:"Disabling the host-based firewall to avoid conflicts.",c:false,f:"Not the best answer. The correct choice is: Application allow-listing, so only approved programs are permitted to run."},
+      {t:"Enabling the built-in guest account for flexibility.",c:false,f:"Not the best answer. The correct choice is: Application allow-listing, so only approved programs are permitted to run."}
+    ]},
+    {s:1,cat:"Endpoint Configuration",scn:false,q:"To reduce malware introduction and data exfiltration through USB drives on managed endpoints, the best control is to:",o:[
+      {t:"Enforce removable-media policy and encryption, or block unauthorized USB storage entirely.",c:true,f:"Removable-media controls directly address the USB threat path, which disk encryption and password length do not."},
+      {t:"Encrypt only the internal system drive and ignore external media.",c:false,f:"Not the best answer. The correct choice is: Enforce removable-media policy and encryption, or block unauthorized USB storage entirely."},
+      {t:"Increase the antivirus scan frequency and take no other action.",c:false,f:"Not the best answer. The correct choice is: Enforce removable-media policy and encryption, or block unauthorized USB storage entirely."},
+      {t:"Require users to choose longer login passwords.",c:false,f:"Not the best answer. The correct choice is: Enforce removable-media policy and encryption, or block unauthorized USB storage entirely."}
+    ]},
+    {s:1,cat:"Endpoint Configuration",scn:false,q:"What is the main purpose of a configuration baseline?",o:[
+      {t:"To provide a known-good standard to build and measure endpoints against, helping detect configuration drift.",c:true,f:"A baseline is the documented secure standard; without one you cannot reliably measure whether a system has drifted out of compliance."},
+      {t:"To document the salaries of the IT support team.",c:false,f:"Not the best answer. The correct choice is: To provide a known-good standard to build and measure endpoints against, helping detect configuration drift."},
+      {t:"To serve as a complete replacement for antivirus software.",c:false,f:"Not the best answer. The correct choice is: To provide a known-good standard to build and measure endpoints against, helping detect configuration drift."},
+      {t:"To increase raw CPU performance on the endpoint.",c:false,f:"Not the best answer. The correct choice is: To provide a known-good standard to build and measure endpoints against, helping detect configuration drift."}
+    ]},
+    {s:1,cat:"Hardening Techniques",scn:true,q:"An organization wants vendor-neutral, regularly updated secure-configuration guides that align with frameworks such as PCI DSS and NIST. Which resource best fits?",o:[
+      {t:"CIS Benchmarks.",c:true,f:"CIS Benchmarks are vendor-neutral, continuously updated, and map to major frameworks. STIGs are valid baselines but are specific to U.S. Department of Defense use."},
+      {t:"DISA STIGs.",c:false,f:"Not the best answer. The correct choice is: CIS Benchmarks."},
+      {t:"The hardware vendor's marketing website.",c:false,f:"Not the best answer. The correct choice is: CIS Benchmarks."},
+      {t:"A community wiki edited by anonymous users.",c:false,f:"Not the best answer. The correct choice is: CIS Benchmarks."}
+    ]},
+    {s:1,cat:"Hardening Specialized Devices",scn:true,q:"A defense contractor must comply with U.S. Department of Defense configuration standards. Which baseline is required?",o:[
+      {t:"DISA STIGs.",c:true,f:"Security Technical Implementation Guides (STIGs), published by DISA, are the mandatory configuration standard for DoD systems."},
+      {t:"CIS Benchmarks.",c:false,f:"Not the best answer. The correct choice is: DISA STIGs."},
+      {t:"ISO 9001 quality standards.",c:false,f:"Not the best answer. The correct choice is: DISA STIGs."},
+      {t:"The OWASP Top Ten list.",c:false,f:"Not the best answer. The correct choice is: DISA STIGs."}
+    ]},
+    {s:1,cat:"Hardening Specialized Devices",scn:false,q:"Why do embedded and IoT devices require a different hardening approach than standard PCs?",o:[
+      {t:"They have limited compute and memory, fixed functions, and are often physically exposed, so controls must be lightweight.",c:true,f:"Constrained resources, fixed purpose, long lifespans, and physical exposure mean a full PC protection suite will not fit; lightweight, robust controls are required."},
+      {t:"They have effectively unlimited processing resources to run any security tool.",c:false,f:"Not the best answer. The correct choice is: They have limited compute and memory, fixed functions, and are often physically exposed, so controls must be lightweight."},
+      {t:"They never connect to a network and therefore cannot be attacked.",c:false,f:"Not the best answer. The correct choice is: They have limited compute and memory, fixed functions, and are often physically exposed, so controls must be lightweight."},
+      {t:"They automatically patch and reconfigure themselves without administration.",c:false,f:"Not the best answer. The correct choice is: They have limited compute and memory, fixed functions, and are often physically exposed, so controls must be lightweight."}
+    ]},
+    {s:1,cat:"Hardening Specialized Devices",scn:false,q:"What is the single most important network control for protecting ICS and SCADA (operational technology) systems?",o:[
+      {t:"Strict network segmentation that isolates the OT network from the IT network.",c:true,f:"Segmentation prevents a compromise of the IT network from reaching the systems that control physical processes."},
+      {t:"Placing OT devices on the same VLAN as corporate workstations for easier access.",c:false,f:"Not the best answer. The correct choice is: Strict network segmentation that isolates the OT network from the IT network."},
+      {t:"Exposing the systems to the internet to allow convenient remote management.",c:false,f:"Not the best answer. The correct choice is: Strict network segmentation that isolates the OT network from the IT network."},
+      {t:"Disabling logging on the OT systems to conserve their limited resources.",c:false,f:"Not the best answer. The correct choice is: Strict network segmentation that isolates the OT network from the IT network."}
+    ]},
+    {s:1,cat:"Hardening Specialized Devices",scn:false,q:"A unidirectional gateway, or data diode, is used to:",o:[
+      {t:"Enforce one-way data flow, preventing any inbound communication into a protected network.",c:true,f:"A data diode physically allows data to travel in only one direction, commonly out of a protected OT segment, blocking inbound attacks."},
+      {t:"Permit fast two-way encrypted traffic between OT and IT networks.",c:false,f:"Not the best answer. The correct choice is: Enforce one-way data flow, preventing any inbound communication into a protected network."},
+      {t:"Accelerate patch downloads to embedded devices.",c:false,f:"Not the best answer. The correct choice is: Enforce one-way data flow, preventing any inbound communication into a protected network."},
+      {t:"Replace the logging function of a firewall.",c:false,f:"Not the best answer. The correct choice is: Enforce one-way data flow, preventing any inbound communication into a protected network."}
+    ]},
+    {s:1,cat:"Hardening Specialized Devices",scn:true,q:"You must deploy an ICS device whose vendor does not provide security updates. What is the best approach?",o:[
+      {t:"Implement compensating controls such as segmentation, monitoring, and strict access control.",c:true,f:"When patching is not possible, compensating controls reduce the residual risk to an acceptable level."},
+      {t:"Deploy it as-is and assume it will not be targeted.",c:false,f:"Not the best answer. The correct choice is: Implement compensating controls such as segmentation, monitoring, and strict access control."},
+      {t:"Connect it directly to the internet so it can find its own updates.",c:false,f:"Not the best answer. The correct choice is: Implement compensating controls such as segmentation, monitoring, and strict access control."},
+      {t:"Disable the surrounding security controls to avoid compatibility conflicts.",c:false,f:"Not the best answer. The correct choice is: Implement compensating controls such as segmentation, monitoring, and strict access control."}
+    ]},
+    {s:1,cat:"Hardening Specialized Devices",scn:true,q:"An organization needs to enforce encryption and remotely wipe lost smartphones across hundreds of devices. What is the best solution?",o:[
+      {t:"Deploy a Mobile Device Management (MDM) platform.",c:true,f:"MDM centralizes policy enforcement, configuration, and remote actions such as lock and wipe across the entire fleet."},
+      {t:"Ask each user to configure the settings manually.",c:false,f:"Not the best answer. The correct choice is: Deploy a Mobile Device Management (MDM) platform."},
+      {t:"Email a written security policy to all staff.",c:false,f:"Not the best answer. The correct choice is: Deploy a Mobile Device Management (MDM) platform."},
+      {t:"Disable the cameras on every device.",c:false,f:"Not the best answer. The correct choice is: Deploy a Mobile Device Management (MDM) platform."}
+    ]},
+    {s:1,cat:"Hardening Specialized Devices",scn:true,q:"In a BYOD environment, how can an organization protect corporate data without controlling the employee's entire personal device?",o:[
+      {t:"Use containerization to separate and manage only the corporate data and applications.",c:true,f:"Containerization isolates work data in a managed space, allowing a selective wipe and policy enforcement without touching personal data."},
+      {t:"Take full administrative ownership of the employee's personal device.",c:false,f:"Not the best answer. The correct choice is: Use containerization to separate and manage only the corporate data and applications."},
+      {t:"Prohibit the use of all mobile devices for work.",c:false,f:"Not the best answer. The correct choice is: Use containerization to separate and manage only the corporate data and applications."},
+      {t:"Disable the personal device's cellular radio.",c:false,f:"Not the best answer. The correct choice is: Use containerization to separate and manage only the corporate data and applications."}
+    ]},
+    {s:1,cat:"Hardening Specialized Devices",scn:false,q:"Which is a recommended hardening control specific to mobile devices?",o:[
+      {t:"Disabling Bluetooth and NFC when not in use and enforcing a screen lock.",c:true,f:"Unused radios are passive attack surfaces, and a screen lock turns physical possession into something less than instant full access."},
+      {t:"Leaving Bluetooth and NFC always enabled for user convenience.",c:false,f:"Not the best answer. The correct choice is: Disabling Bluetooth and NFC when not in use and enforcing a screen lock."},
+      {t:"Allowing application installation from any third-party source.",c:false,f:"Not the best answer. The correct choice is: Disabling Bluetooth and NFC when not in use and enforcing a screen lock."},
+      {t:"Connecting preferentially to open public Wi-Fi networks.",c:false,f:"Not the best answer. The correct choice is: Disabling Bluetooth and NFC when not in use and enforcing a screen lock."}
+    ]},
+    {s:1,cat:"Endpoint Protection",scn:false,q:"What is the primary function of a host-based firewall on an endpoint?",o:[
+      {t:"To control inbound and outbound network traffic to and from that specific host.",c:true,f:"A host firewall filters traffic at the individual device, complementing the network firewall with host-specific rules."},
+      {t:"To encrypt the contents of the local hard drive.",c:false,f:"Not the best answer. The correct choice is: To control inbound and outbound network traffic to and from that specific host."},
+      {t:"To scan email attachments for malicious payloads.",c:false,f:"Not the best answer. The correct choice is: To control inbound and outbound network traffic to and from that specific host."},
+      {t:"To manage the complexity rules for user passwords.",c:false,f:"Not the best answer. The correct choice is: To control inbound and outbound network traffic to and from that specific host."}
+    ]},
+    {s:1,cat:"Advanced Endpoint Protection",scn:true,q:"Malware has bypassed antivirus and run on a host. Which capability would best let an analyst reconstruct the full timeline of what it did?",o:[
+      {t:"EDR's recorded endpoint telemetry and activity history.",c:true,f:"EDR continuously records process, file, registry, and network activity, providing the forensic timeline needed to scope an incident."},
+      {t:"A stronger account password policy.",c:false,f:"Not the best answer. The correct choice is: EDR's recorded endpoint telemetry and activity history."},
+      {t:"Full disk encryption on the affected machine.",c:false,f:"Not the best answer. The correct choice is: EDR's recorded endpoint telemetry and activity history."},
+      {t:"A BIOS supervisor password.",c:false,f:"Not the best answer. The correct choice is: EDR's recorded endpoint telemetry and activity history."}
+    ]},
+    {s:1,cat:"Endpoint Hardening",scn:false,q:"An endpoint shows sustained 100% CPU usage and overheating with no legitimate workload running. This is most consistent with:",o:[
+      {t:"Cryptojacking malware consuming the device's resources to mine cryptocurrency.",c:true,f:"Unexplained, sustained resource consumption is a classic indicator of cryptojacking, where malware steals compute to mine currency."},
+      {t:"A correctly applied least-privilege configuration.",c:false,f:"Not the best answer. The correct choice is: Cryptojacking malware consuming the device's resources to mine cryptocurrency."},
+      {t:"Normal overhead from full disk encryption.",c:false,f:"Not the best answer. The correct choice is: Cryptojacking malware consuming the device's resources to mine cryptocurrency."},
+      {t:"A properly functioning host-based firewall.",c:false,f:"Not the best answer. The correct choice is: Cryptojacking malware consuming the device's resources to mine cryptocurrency."}
+    ]},
+    /* ===== SECTION 2: MOBILE DEVICE HARDENING ===== */
+    {s:2,cat:"Mobile Hardening Techniques",scn:true,q:"Which control most directly prevents immediate access to data if a smartphone is physically lost or stolen?",o:[
+      {t:"Enforcing a screen lock using a PIN, password, or biometric.",c:true,f:"A screen lock turns physical possession into something far short of instant full access, making it the first-line control for a lost device."},
+      {t:"Raising the device's monthly cellular data limit.",c:false,f:"Not the best answer. The correct choice is: Enforcing a screen lock using a PIN, password, or biometric."},
+      {t:"Enabling Bluetooth discoverable mode.",c:false,f:"Not the best answer. The correct choice is: Enforcing a screen lock using a PIN, password, or biometric."},
+      {t:"Installing several additional apps from the official store.",c:false,f:"Not the best answer. The correct choice is: Enforcing a screen lock using a PIN, password, or biometric."}
+    ]},
+    {s:2,cat:"Mobile Hardening Techniques",scn:false,q:"Why does rooting an Android device or jailbreaking an iOS device increase security risk?",o:[
+      {t:"It removes the built-in security restrictions and app sandboxing, giving untrusted code far more access.",c:true,f:"Rooting and jailbreaking strip away the platform protections that normally contain apps, which is exactly why MDM often blocks such devices."},
+      {t:"It automatically encrypts the entire device for the user.",c:false,f:"Not the best answer. The correct choice is: It removes the built-in security restrictions and app sandboxing, giving untrusted code far more access."},
+      {t:"It enforces enterprise MDM policy more strictly than normal.",c:false,f:"Not the best answer. The correct choice is: It removes the built-in security restrictions and app sandboxing, giving untrusted code far more access."},
+      {t:"It permanently blocks all sideloaded applications.",c:false,f:"Not the best answer. The correct choice is: It removes the built-in security restrictions and app sandboxing, giving untrusted code far more access."}
+    ]},
+    {s:2,cat:"Mobile Hardening Techniques",scn:false,q:"A hardened mobile device policy should require that applications are installed:",o:[
+      {t:"Only from trusted, official app stores, with sideloading restricted.",c:true,f:"Restricting installs to vetted official stores and blocking sideloading reduces the chance of installing malicious or tampered apps."},
+      {t:"From any available source to maximize user flexibility.",c:false,f:"Not the best answer. The correct choice is: Only from trusted, official app stores, with sideloading restricted."},
+      {t:"Only while connected to a public Wi-Fi network.",c:false,f:"Not the best answer. The correct choice is: Only from trusted, official app stores, with sideloading restricted."},
+      {t:"Only by transferring the installer over Bluetooth.",c:false,f:"Not the best answer. The correct choice is: Only from trusted, official app stores, with sideloading restricted."}
+    ]},
+    {s:2,cat:"Mobile Hardening Techniques",scn:false,q:"A flashlight app requests access to contacts, location, and the microphone. What is the best response?",o:[
+      {t:"Deny the unnecessary permissions, since they exceed what the app needs to function.",c:true,f:"Least privilege applies to mobile apps too: a flashlight has no legitimate need for contacts, location, or the microphone."},
+      {t:"Grant every requested permission so the app works fully.",c:false,f:"Not the best answer. The correct choice is: Deny the unnecessary permissions, since they exceed what the app needs to function."},
+      {t:"Remove the device operating system and reinstall it.",c:false,f:"Not the best answer. The correct choice is: Deny the unnecessary permissions, since they exceed what the app needs to function."},
+      {t:"Disable the screen lock so the app can be tested quickly.",c:false,f:"Not the best answer. The correct choice is: Deny the unnecessary permissions, since they exceed what the app needs to function."}
+    ]},
+    {s:2,cat:"Full Device Encryption & External Media",scn:true,q:"What does full device encryption protect on a smartphone?",o:[
+      {t:"Data at rest, making it unreadable if the device is lost or stolen.",c:true,f:"Device encryption secures stored data, the core protection when a device falls into the wrong hands."},
+      {t:"Only data while it is being transmitted over Wi-Fi.",c:false,f:"Not the best answer. The correct choice is: Data at rest, making it unreadable if the device is lost or stolen."},
+      {t:"The physical device against drops and water damage.",c:false,f:"Not the best answer. The correct choice is: Data at rest, making it unreadable if the device is lost or stolen."},
+      {t:"The battery against overheating during charging.",c:false,f:"Not the best answer. The correct choice is: Data at rest, making it unreadable if the device is lost or stolen."}
+    ]},
+    {s:2,cat:"Full Device Encryption & External Media",scn:true,q:"An organization permits microSD cards in company phones. What is the key risk and the right control?",o:[
+      {t:"Removable media can leave the organization with data unencrypted, so enforce external-media encryption or block it.",c:true,f:"External media is portable data that can walk out the door; it must be encrypted or disallowed under policy."},
+      {t:"SD cards encrypt themselves automatically, so no control is needed.",c:false,f:"Not the best answer. The correct choice is: Removable media can leave the organization with data unencrypted, so enforce external-media encryption or block it."},
+      {t:"SD cards are incapable of storing sensitive corporate data.",c:false,f:"Not the best answer. The correct choice is: Removable media can leave the organization with data unencrypted, so enforce external-media encryption or block it."},
+      {t:"SD cards inherently block malware, improving security.",c:false,f:"Not the best answer. The correct choice is: Removable media can leave the organization with data unencrypted, so enforce external-media encryption or block it."}
+    ]},
+    {s:2,cat:"Full Device Encryption & External Media",scn:false,q:"On many mobile platforms, the effective strength of device encryption is tied to:",o:[
+      {t:"The user's passcode or credential, so a weak or absent passcode weakens the protection.",c:true,f:"The encryption key is derived from or protected by the user's credential, which is why a strong passcode is essential."},
+      {t:"The number of applications installed on the device.",c:false,f:"Not the best answer. The correct choice is: The user's passcode or credential, so a weak or absent passcode weakens the protection."},
+      {t:"How many Bluetooth devices have been paired.",c:false,f:"Not the best answer. The correct choice is: The user's passcode or credential, so a weak or absent passcode weakens the protection."},
+      {t:"The current screen brightness setting.",c:false,f:"Not the best answer. The correct choice is: The user's passcode or credential, so a weak or absent passcode weakens the protection."}
+    ]},
+    {s:2,cat:"Full Device Encryption & External Media",scn:false,q:"A lost phone is encrypted and enrolled in MDM. What is the fastest way to ensure its data cannot be recovered?",o:[
+      {t:"Issue a remote wipe through the MDM platform.",c:true,f:"MDM remote wipe removes the data (or the encryption key), rendering the device's contents unrecoverable."},
+      {t:"Call the carrier to increase the device's data plan.",c:false,f:"Not the best answer. The correct choice is: Issue a remote wipe through the MDM platform."},
+      {t:"Remotely disable location services on the device.",c:false,f:"Not the best answer. The correct choice is: Issue a remote wipe through the MDM platform."},
+      {t:"Change the Wi-Fi password back at the office.",c:false,f:"Not the best answer. The correct choice is: Issue a remote wipe through the MDM platform."}
+    ]},
+    {s:2,cat:"Location Services",scn:true,q:"An employee posts a photo taken on a work phone. What hidden risk can the image file carry?",o:[
+      {t:"Embedded geolocation metadata (a geotag) that reveals exactly where the photo was taken.",c:true,f:"Photos often contain EXIF geotags; sharing them can disclose sensitive locations such as a facility or a home."},
+      {t:"Code that automatically installs malware on viewers' devices.",c:false,f:"Not the best answer. The correct choice is: Embedded geolocation metadata (a geotag) that reveals exactly where the photo was taken."},
+      {t:"A setting that disables the phone's screen lock.",c:false,f:"Not the best answer. The correct choice is: Embedded geolocation metadata (a geotag) that reveals exactly where the photo was taken."},
+      {t:"A process that encrypts the photo so no one can open it.",c:false,f:"Not the best answer. The correct choice is: Embedded geolocation metadata (a geotag) that reveals exactly where the photo was taken."}
+    ]},
+    {s:2,cat:"Location Services",scn:true,q:"Applying least privilege to mobile location data, an organization should:",o:[
+      {t:"Allow location access only to apps that genuinely require it, and disable it for the rest.",c:true,f:"Most apps do not need location; granting it only where required limits tracking and data exposure."},
+      {t:"Enable location for every app to guarantee they all function.",c:false,f:"Not the best answer. The correct choice is: Allow location access only to apps that genuinely require it, and disable it for the rest."},
+      {t:"Disable device encryption to conserve battery.",c:false,f:"Not the best answer. The correct choice is: Allow location access only to apps that genuinely require it, and disable it for the rest."},
+      {t:"Turn off all cellular data on the device permanently.",c:false,f:"Not the best answer. The correct choice is: Allow location access only to apps that genuinely require it, and disable it for the rest."}
+    ]},
+    {s:2,cat:"Location Services",scn:false,q:"An MDM platform uses geofencing primarily to:",o:[
+      {t:"Trigger policy actions based on a device's physical location, such as restricting features in certain areas.",c:true,f:"Geofencing lets policy respond to location, for example disabling the camera inside a secure facility."},
+      {t:"Encrypt the contents of the device's internal storage.",c:false,f:"Not the best answer. The correct choice is: Trigger policy actions based on a device's physical location, such as restricting features in certain areas."},
+      {t:"Eliminate the need for a screen lock on the device.",c:false,f:"Not the best answer. The correct choice is: Trigger policy actions based on a device's physical location, such as restricting features in certain areas."},
+      {t:"Boost the strength of the GPS signal the device receives.",c:false,f:"Not the best answer. The correct choice is: Trigger policy actions based on a device's physical location, such as restricting features in certain areas."}
+    ]},
+    {s:2,cat:"Location Services",scn:true,q:"Why is continuous location tracking a security and privacy concern on a corporate device?",o:[
+      {t:"It can expose user movement patterns and sensitive site locations if the data is leaked or misused.",c:true,f:"Persistent location history is sensitive data in its own right and a privacy liability if exposed."},
+      {t:"It always drains the device's encryption keys over time.",c:false,f:"Not the best answer. The correct choice is: It can expose user movement patterns and sensitive site locations if the data is leaked or misused."},
+      {t:"It blocks the device from receiving software updates.",c:false,f:"Not the best answer. The correct choice is: It can expose user movement patterns and sensitive site locations if the data is leaked or misused."},
+      {t:"It prevents Bluetooth from pairing with accessories.",c:false,f:"Not the best answer. The correct choice is: It can expose user movement patterns and sensitive site locations if the data is leaked or misused."}
+    ]},
+    {s:2,cat:"Cellular & GPS Connection Methods",scn:false,q:"Which statement about GPS on a mobile device is accurate?",o:[
+      {t:"GPS is receive-only; the device calculates its position from satellite signals rather than transmitting to the satellites.",c:true,f:"GPS receivers only listen to satellite signals; location sharing happens through other channels, not the satellites."},
+      {t:"GPS continuously uploads the user's location directly to the satellites.",c:false,f:"Not the best answer. The correct choice is: GPS is receive-only; the device calculates its position from satellite signals rather than transmitting to the satellites."},
+      {t:"GPS requires an active Bluetooth pairing to function.",c:false,f:"Not the best answer. The correct choice is: GPS is receive-only; the device calculates its position from satellite signals rather than transmitting to the satellites."},
+      {t:"GPS encrypts all of the device's cellular traffic.",c:false,f:"Not the best answer. The correct choice is: GPS is receive-only; the device calculates its position from satellite signals rather than transmitting to the satellites."}
+    ]},
+    {s:2,cat:"Cellular & GPS Connection Methods",scn:false,q:"A rogue device impersonates a legitimate cell tower to intercept nearby mobile traffic. This is known as:",o:[
+      {t:"An IMSI catcher, for example a Stingray.",c:true,f:"An IMSI catcher mimics a cell tower to capture device identifiers and traffic; the evil twin is its Wi-Fi equivalent."},
+      {t:"An evil twin wireless access point.",c:false,f:"Not the best answer. The correct choice is: An IMSI catcher, for example a Stingray."},
+      {t:"A bluejacking attack.",c:false,f:"Not the best answer. The correct choice is: An IMSI catcher, for example a Stingray."},
+      {t:"An NFC relay attack.",c:false,f:"Not the best answer. The correct choice is: An IMSI catcher, for example a Stingray."}
+    ]},
+    {s:2,cat:"Cellular & GPS Connection Methods",scn:false,q:"Assisted GPS (A-GPS) improves the speed of a location fix by:",o:[
+      {t:"Using cellular network data to help the device acquire satellites more quickly.",c:true,f:"A-GPS leverages the cellular network to shorten the time needed to lock onto satellites."},
+      {t:"Transmitting the device's encryption key to the nearest tower.",c:false,f:"Not the best answer. The correct choice is: Using cellular network data to help the device acquire satellites more quickly."},
+      {t:"Automatically disabling the device's Wi-Fi radio.",c:false,f:"Not the best answer. The correct choice is: Using cellular network data to help the device acquire satellites more quickly."},
+      {t:"Encrypting the GPS signal from end to end.",c:false,f:"Not the best answer. The correct choice is: Using cellular network data to help the device acquire satellites more quickly."}
+    ]},
+    {s:2,cat:"Cellular & GPS Connection Methods",scn:true,q:"An attacker broadcasts false satellite signals so a device reports an incorrect location. This attack is called:",o:[
+      {t:"GPS spoofing.",c:true,f:"GPS spoofing feeds counterfeit signals to mislead the receiver about its true position."},
+      {t:"Bluesnarfing.",c:false,f:"Not the best answer. The correct choice is: GPS spoofing."},
+      {t:"SIM cloning.",c:false,f:"Not the best answer. The correct choice is: GPS spoofing."},
+      {t:"NFC skimming.",c:false,f:"Not the best answer. The correct choice is: GPS spoofing."}
+    ]},
+    {s:2,cat:"Wi-Fi & Tethering Connection Methods",scn:true,q:"A user connects to a Wi-Fi network named like the company's but actually run by an attacker to intercept traffic. This is:",o:[
+      {t:"An evil twin, a rogue access point.",c:true,f:"An evil twin imitates a trusted SSID to lure clients and intercept their traffic."},
+      {t:"An IMSI catcher.",c:false,f:"Not the best answer. The correct choice is: An evil twin, a rogue access point."},
+      {t:"A bluebugging attack.",c:false,f:"Not the best answer. The correct choice is: An evil twin, a rogue access point."},
+      {t:"A geofence.",c:false,f:"Not the best answer. The correct choice is: An evil twin, a rogue access point."}
+    ]},
+    {s:2,cat:"Wi-Fi & Tethering Connection Methods",scn:true,q:"An employee must use an open public Wi-Fi network. What is the best protection for corporate data in transit?",o:[
+      {t:"Connect through a VPN so the traffic is encrypted end to end.",c:true,f:"On untrusted networks a VPN encrypts traffic, protecting it from interception on the shared medium."},
+      {t:"Disable the device's screen lock to speed up the connection.",c:false,f:"Not the best answer. The correct choice is: Connect through a VPN so the traffic is encrypted end to end."},
+      {t:"Turn on Bluetooth discoverable mode while connected.",c:false,f:"Not the best answer. The correct choice is: Connect through a VPN so the traffic is encrypted end to end."},
+      {t:"Enable mobile payment services for the session.",c:false,f:"Not the best answer. The correct choice is: Connect through a VPN so the traffic is encrypted end to end."}
+    ]},
+    {s:2,cat:"Wi-Fi & Tethering Connection Methods",scn:true,q:"When a smartphone is used as a personal hotspot (tethering), the main security concern is that:",o:[
+      {t:"It turns the phone into an access point that, if poorly secured, can expose the connected devices and the phone itself.",c:true,f:"A hotspot makes the phone a network gateway; weak security on it endangers everything connected through it."},
+      {t:"It permanently disables the device's GPS receiver.",c:false,f:"Not the best answer. The correct choice is: It turns the phone into an access point that, if poorly secured, can expose the connected devices and the phone itself."},
+      {t:"It encrypts the external SD card automatically.",c:false,f:"Not the best answer. The correct choice is: It turns the phone into an access point that, if poorly secured, can expose the connected devices and the phone itself."},
+      {t:"It blocks all incoming phone calls while active.",c:false,f:"Not the best answer. The correct choice is: It turns the phone into an access point that, if poorly secured, can expose the connected devices and the phone itself."}
+    ]},
+    {s:2,cat:"Wi-Fi & Tethering Connection Methods",scn:false,q:"Modern smartphones use randomized Wi-Fi MAC addresses primarily to:",o:[
+      {t:"Reduce the ability to track the device across different networks.",c:true,f:"MAC randomization frustrates passive tracking that would otherwise follow a fixed hardware address between networks."},
+      {t:"Increase the maximum range of the Wi-Fi radio.",c:false,f:"Not the best answer. The correct choice is: Reduce the ability to track the device across different networks."},
+      {t:"Encrypt the data stored on the device.",c:false,f:"Not the best answer. The correct choice is: Reduce the ability to track the device across different networks."},
+      {t:"Speed up the Bluetooth pairing process.",c:false,f:"Not the best answer. The correct choice is: Reduce the ability to track the device across different networks."}
+    ]},
+    {s:2,cat:"Bluetooth Connection Methods",scn:false,q:"Which is a recommended Bluetooth hardening practice?",o:[
+      {t:"Disable Bluetooth and discoverable mode when they are not in use.",c:true,f:"Turning off the radio and discoverability when idle removes a passive attack surface."},
+      {t:"Leave the device discoverable so accessories can connect quickly.",c:false,f:"Not the best answer. The correct choice is: Disable Bluetooth and discoverable mode when they are not in use."},
+      {t:"Automatically pair with any nearby device that requests it.",c:false,f:"Not the best answer. The correct choice is: Disable Bluetooth and discoverable mode when they are not in use."},
+      {t:"Use Bluetooth proximity in place of a screen lock.",c:false,f:"Not the best answer. The correct choice is: Disable Bluetooth and discoverable mode when they are not in use."}
+    ]},
+    {s:2,cat:"Bluetooth Connection Methods",scn:true,q:"Unauthorized access to data such as contacts or messages on a device over a Bluetooth connection is called:",o:[
+      {t:"Bluesnarfing.",c:true,f:"Bluesnarfing steals data over Bluetooth; bluejacking, by contrast, only pushes unsolicited messages."},
+      {t:"Bluejacking.",c:false,f:"Not the best answer. The correct choice is: Bluesnarfing."},
+      {t:"An evil twin attack.",c:false,f:"Not the best answer. The correct choice is: Bluesnarfing."},
+      {t:"SIM swapping.",c:false,f:"Not the best answer. The correct choice is: Bluesnarfing."}
+    ]},
+    {s:2,cat:"Bluetooth Connection Methods",scn:false,q:"Sending unsolicited messages to a nearby device over Bluetooth, typically as a nuisance, is known as:",o:[
+      {t:"Bluejacking.",c:true,f:"Bluejacking is the unsolicited-message nuisance; it does not extract data the way bluesnarfing does."},
+      {t:"Bluesnarfing.",c:false,f:"Not the best answer. The correct choice is: Bluejacking."},
+      {t:"GPS spoofing.",c:false,f:"Not the best answer. The correct choice is: Bluejacking."},
+      {t:"An NFC relay attack.",c:false,f:"Not the best answer. The correct choice is: Bluejacking."}
+    ]},
+    {s:2,cat:"Bluetooth Connection Methods",scn:true,q:"Why is leaving a device in Bluetooth discoverable mode a risk?",o:[
+      {t:"It advertises the device to nearby attackers, increasing exposure to pairing-based attacks.",c:true,f:"Discoverable mode broadcasts the device's presence, making it an easier target for Bluetooth-based attacks."},
+      {t:"It disables encryption on the device's cellular link.",c:false,f:"Not the best answer. The correct choice is: It advertises the device to nearby attackers, increasing exposure to pairing-based attacks."},
+      {t:"It prevents the operating system from installing updates.",c:false,f:"Not the best answer. The correct choice is: It advertises the device to nearby attackers, increasing exposure to pairing-based attacks."},
+      {t:"It increases the accuracy of the GPS receiver.",c:false,f:"Not the best answer. The correct choice is: It advertises the device to nearby attackers, increasing exposure to pairing-based attacks."}
+    ]},
+    {s:2,cat:"NFC & Mobile Payment Services",scn:false,q:"Which is a defining security characteristic of NFC?",o:[
+      {t:"It operates only over a very short range of a few centimeters, which limits but does not eliminate interception risk.",c:true,f:"NFC's short range raises the bar for interception, but relay and eavesdropping attacks are still possible."},
+      {t:"It works over hundreds of meters, similar to Wi-Fi.",c:false,f:"Not the best answer. The correct choice is: It operates only over a very short range of a few centimeters, which limits but does not eliminate interception risk."},
+      {t:"It requires a cellular tower connection to function.",c:false,f:"Not the best answer. The correct choice is: It operates only over a very short range of a few centimeters, which limits but does not eliminate interception risk."},
+      {t:"It encrypts the entire contents of the device's storage.",c:false,f:"Not the best answer. The correct choice is: It operates only over a very short range of a few centimeters, which limits but does not eliminate interception risk."}
+    ]},
+    {s:2,cat:"NFC & Mobile Payment Services",scn:true,q:"How do services such as Apple Pay and Google Pay protect the actual card number during a transaction?",o:[
+      {t:"They use tokenization, substituting a device-specific token for the real card number (PAN).",c:true,f:"Tokenization keeps the real PAN off the wire; only a token usable in limited contexts is exchanged."},
+      {t:"They transmit the card number in plain text very quickly.",c:false,f:"Not the best answer. The correct choice is: They use tokenization, substituting a device-specific token for the real card number (PAN)."},
+      {t:"They disable the device's screen lock during the payment.",c:false,f:"Not the best answer. The correct choice is: They use tokenization, substituting a device-specific token for the real card number (PAN)."},
+      {t:"They broadcast the card number over Bluetooth to the reader.",c:false,f:"Not the best answer. The correct choice is: They use tokenization, substituting a device-specific token for the real card number (PAN)."}
+    ]},
+    {s:2,cat:"NFC & Mobile Payment Services",scn:true,q:"An attacker attempts to capture or relay the NFC exchange between a phone and a reader. This threat is best mitigated by:",o:[
+      {t:"Disabling NFC when not in use and relying on tokenized, authenticated payment apps.",c:true,f:"Keeping NFC off when idle and using authenticated, tokenized payments limits the window and value of an NFC attack."},
+      {t:"Leaving NFC enabled at all times for convenience.",c:false,f:"Not the best answer. The correct choice is: Disabling NFC when not in use and relying on tokenized, authenticated payment apps."},
+      {t:"Increasing the device's screen timeout setting.",c:false,f:"Not the best answer. The correct choice is: Disabling NFC when not in use and relying on tokenized, authenticated payment apps."},
+      {t:"Turning off full device encryption.",c:false,f:"Not the best answer. The correct choice is: Disabling NFC when not in use and relying on tokenized, authenticated payment apps."}
+    ]},
+    {s:2,cat:"NFC & Mobile Payment Services",scn:false,q:"Which practice best protects mobile payments on a hardened device?",o:[
+      {t:"Require device authentication, such as a biometric or PIN, before a payment is authorized.",c:true,f:"Requiring authentication before payment ensures a lost or borrowed phone cannot be used to pay freely."},
+      {t:"Allow payments with no screen lock so checkout is faster.",c:false,f:"Not the best answer. The correct choice is: Require device authentication, such as a biometric or PIN, before a payment is authorized."},
+      {t:"Keep NFC discoverable to every nearby reader.",c:false,f:"Not the best answer. The correct choice is: Require device authentication, such as a biometric or PIN, before a payment is authorized."},
+      {t:"Store full card numbers in a plain notes app for backup.",c:false,f:"Not the best answer. The correct choice is: Require device authentication, such as a biometric or PIN, before a payment is authorized."}
+    ]}
+  ];
+  var SECTION_META={
+    1:{label:"Review Activity 1 \u00b7 Endpoint Security"},
+    2:{label:"Review Activity 2 \u00b7 Mobile Device Hardening"}
+  };
+  var LETTERS=['A','B','C','D','E'];
+  var rvAnswered={}, rvCorrectCount=0;
+  function shuffle(a){ for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
+
+  function build(){
+    rvAnswered={}; rvCorrectCount=0;
+    var order=RV_QUESTIONS.map(function(_,i){return i;});
+    var s1=order.filter(function(i){return RV_QUESTIONS[i].s===1;});
+    var s2=order.filter(function(i){return RV_QUESTIONS[i].s===2;});
+    function groupShuffle(idxs){
+      var seen=[], groups={};
+      idxs.forEach(function(i){ var c=RV_QUESTIONS[i].cat; if(!groups[c]){groups[c]=[];seen.push(c);} groups[c].push(i); });
+      var out=[]; seen.forEach(function(c){ out=out.concat(shuffle(groups[c])); }); return out;
+    }
+    var finalOrder=groupShuffle(s1).concat(groupShuffle(s2));
+    var host=document.getElementById('rvQuiz');
+    host.innerHTML=''; var displayNum=0, lastSection=null, lastCat=null;
+    finalOrder.forEach(function(qi){
+      var Q=RV_QUESTIONS[qi];
+      if(Q.s!==lastSection){
+        lastSection=Q.s; lastCat=null;
+        var lab=document.createElement('div'); lab.className='rv-section-label';
+        lab.innerHTML='<span class="badge-ra">'+(Q.s===1?'RA1':'RA2')+'</span> '+SECTION_META[Q.s].label;
+        host.appendChild(lab);
+      }
+      if(Q.cat!==lastCat){
+        lastCat=Q.cat;
+        var cl=document.createElement('div'); cl.className='rv-cat-label'; cl.textContent=Q.cat; host.appendChild(cl);
+      }
+      displayNum++;
+      var card=document.createElement('div'); card.className='rv-q'; card.setAttribute('data-qi',qi);
+      var chips='<div class="qchips"><span class="rv-chip topic">'+Q.cat+'</span>'+(Q.scn?'<span class="rv-chip scn">Scenario</span>':'')+'</div>';
+      var head='<div class="qhead"><span class="qnum">Q'+displayNum+'</span><span class="qtext">'+Q.q+'</span></div>';
+      card.innerHTML=chips+head;
+      var optOrder=shuffle(Q.o.map(function(_,i){return i;}));
+      optOrder.forEach(function(oi,pos){
+        var O=Q.o[oi];
+        var btn=document.createElement('button'); btn.className='rv-opt';
+        btn.innerHTML='<span class="ltr">'+LETTERS[pos]+'</span><span>'+O.t+'</span>';
+        btn.addEventListener('click',function(){ answer(card,qi,O,btn); });
+        card.appendChild(btn);
+      });
+      var fb=document.createElement('div'); fb.className='rv-fb'; card.appendChild(fb);
+      host.appendChild(card);
+    });
+    document.getElementById('rvResultsPanel').classList.remove('show');
+    document.getElementById('rvResults').disabled=true;
+    updateRv();
+  }
+
+  function answer(card,qi,O,btn){
+    if(rvAnswered[qi]) return; rvAnswered[qi]=true; if(O.c) rvCorrectCount++;
+    var opts=card.querySelectorAll('.rv-opt');
+    opts.forEach(function(b){ b.disabled=true; });
+    btn.classList.add(O.c?'correct':'wrong');
+    if(!O.c){
+      var Q=RV_QUESTIONS[qi]; var ct=Q.o.filter(function(x){return x.c;})[0].t;
+      opts.forEach(function(b){ if(b.querySelector('span:last-child').innerHTML===ct){ b.classList.add('correct'); } else if(b!==btn){ b.classList.add('dim'); } });
+    } else { opts.forEach(function(b){ if(b!==btn) b.classList.add('dim'); }); }
+    var fb=card.querySelector('.rv-fb'); fb.className='rv-fb show '+(O.c?'good':'bad');
+    fb.innerHTML='<b>'+(O.c?'Correct.':'Not the best answer.')+'</b> '+O.f;
+    updateRv();
+  }
+
+  function updateRv(){
+    var n=Object.keys(rvAnswered).length;
+    document.getElementById('rvCount').textContent='Answered '+n+' / '+RV_TOTAL;
+    document.getElementById('rvFill').style.width=(n/RV_TOTAL*100)+'%';
+    document.getElementById('rvResults').disabled = n<RV_TOTAL;
+    if(n>=RV_TOTAL) showRv(false);
+  }
+
+  function showRv(scroll){
+    var pct=Math.round(rvCorrectCount/RV_TOTAL*100), pass=(rvCorrectCount/RV_TOTAL)>=RV_PASS;
+    document.getElementById('rvScoreNum').textContent=rvCorrectCount+' / '+RV_TOTAL;
+    document.getElementById('rvScorePct').textContent=pct+'% correct';
+    var v=document.getElementById('rvVerdict'); v.textContent=pass?'PASS \u2713':'Keep studying';
+    v.className='rv-verdict '+(pass?'pass':'fail');
+    document.getElementById('rvResultsPanel').classList.add('show');
+    if(scroll){ var r=document.getElementById('rvResultsPanel'); if(r.scrollIntoView) r.scrollIntoView({behavior:'smooth',block:'center'}); }
+  }
+
+  document.getElementById('rvResults').addEventListener('click',function(){ showRv(true); });
+  document.getElementById('rvReset').addEventListener('click',function(){
+    build();
+    var mc=document.querySelector('.main-content'); if(mc) mc.scrollTop=0;
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+  build();
+})();
+
+</script>
+  <script src="../shared/lesson-bridge.js"></script>
+</body>
+</html>

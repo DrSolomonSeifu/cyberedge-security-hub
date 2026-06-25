@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 16 — Summarize Data Protection and Compliance Concepts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Mulish:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink-bg:#0b2026;
+    --ink-bg-2:#0f2a31;
+    --paper:#f5efe2;
+    --paper-2:#fbf7ee;
+    --ink:#15282b;
+    --muted:#5d6f6f;
+    --teal:#1f7a72;
+    --teal-deep:#145e57;
+    --amber:#d99a2b;
+    --coral:#d9694f;
+    --line:#ddd3bd;
+    --line-soft:#e8e0cf;
+    --display:'Fraunces',Georgia,serif;
+    --body:'Mulish',system-ui,sans-serif;
+    --mono:'JetBrains Mono',monospace;
+    --shadow:0 18px 40px -22px rgba(0,0,0,.55);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body);
+    background:
+      radial-gradient(1200px 600px at 75% -10%, #14383f 0%, transparent 60%),
+      radial-gradient(900px 500px at 0% 100%, #103138 0%, transparent 55%),
+      var(--ink-bg);
+    color:var(--ink);
+    line-height:1.6;
+    min-height:100vh;
+    padding:28px 16px 60px;
+  }
+  .shell{
+    max-width:1200px;
+    margin:0 auto;
+    background:var(--paper);
+    border-radius:20px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    border:1px solid rgba(0,0,0,.06);
+  }
+
+  /* ===== HEADER ===== */
+  header.masthead{
+    background:linear-gradient(135deg,var(--ink-bg) 0%, #123339 60%, var(--teal-deep) 130%);
+    color:#f6f1e6;
+    padding:34px 40px 30px;
+    position:relative;
+    border-bottom:3px solid var(--amber);
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--amber);
+    display:flex;align-items:center;gap:12px;
+    margin-bottom:14px;
+  }
+  .eyebrow::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(217,154,43,.6),transparent)}
+  .masthead h1{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(26px,3.4vw,40px);
+    line-height:1.12;
+    letter-spacing:.2px;
+    display:flex;align-items:center;gap:16px;
+  }
+  .pulse{
+    flex:0 0 auto;
+    width:54px;height:54px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #2ea79b, #145e57);
+    display:grid;place-items:center;
+    font-size:26px;
+    box-shadow:0 0 0 0 rgba(46,167,155,.55);
+    animation:pulse 2.6s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(46,167,155,.5)}
+    70%{box-shadow:0 0 0 18px rgba(46,167,155,0)}
+    100%{box-shadow:0 0 0 0 rgba(46,167,155,0)}
+  }
+  .masthead .sub{
+    margin-top:14px;
+    max-width:760px;
+    color:#cfe0dd;
+    font-size:15.5px;
+  }
+  .meta-row{
+    margin-top:20px;display:flex;flex-wrap:wrap;gap:10px;
+  }
+  .meta-chip{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;
+    background:rgba(246,241,230,.08);
+    border:1px solid rgba(246,241,230,.2);
+    color:#e7ddc9;
+    padding:6px 12px;border-radius:999px;
+  }
+
+  /* ===== NAV ===== */
+  nav.tabs{
+    position:sticky;top:0;z-index:40;
+    background:var(--paper-2);
+    border-bottom:1px solid var(--line);
+    display:flex;flex-wrap:wrap;gap:4px;
+    padding:10px 18px;
+  }
+  nav.tabs button{
+    font-family:var(--body);font-weight:700;font-size:13.5px;
+    letter-spacing:.01em;
+    color:var(--muted);
+    background:transparent;border:1px solid transparent;
+    padding:9px 15px;border-radius:10px;cursor:pointer;
+    display:flex;align-items:center;gap:8px;
+    transition:.18s;
+  }
+  nav.tabs button .tag{
+    font-family:var(--mono);font-size:10.5px;
+    background:var(--line-soft);color:var(--teal-deep);
+    padding:2px 7px;border-radius:6px;
+  }
+  nav.tabs button:hover{color:var(--ink);background:#efe7d5}
+  nav.tabs button.active{
+    color:#fff;background:var(--teal);border-color:var(--teal-deep);
+    box-shadow:0 6px 14px -8px var(--teal-deep);
+  }
+  nav.tabs button.active .tag{background:rgba(255,255,255,.22);color:#fff}
+
+  /* ===== CONTENT ===== */
+  main{padding:38px 40px 46px}
+  .panel{display:none;animation:fade .35s ease}
+  .panel.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .section-head{margin-bottom:8px}
+  .section-head .kicker{
+    font-family:var(--mono);font-size:12px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--coral);
+  }
+  .section-head h2{
+    font-family:var(--display);font-weight:600;
+    font-size:clamp(23px,2.7vw,32px);color:var(--ink);
+    line-height:1.15;margin-top:6px;
+  }
+  .lede{font-size:16px;color:#3a4d4d;max-width:840px;margin:14px 0 26px}
+
+  h3.block{
+    font-family:var(--display);font-weight:600;font-size:21px;
+    color:var(--teal-deep);margin:30px 0 12px;
+    padding-bottom:8px;border-bottom:2px solid var(--line);
+    display:flex;align-items:center;gap:10px;
+  }
+  h3.block .num{
+    font-family:var(--mono);font-size:12px;font-weight:600;
+    background:var(--teal);color:#fff;padding:3px 9px;border-radius:7px;
+    letter-spacing:.04em;
+  }
+  h4.sub{
+    font-family:var(--body);font-weight:800;font-size:16.5px;
+    color:var(--ink);margin:20px 0 8px;letter-spacing:.01em;
+  }
+  p{margin:10px 0;font-size:15.5px;color:#2c3d3d}
+  ul,ol{margin:10px 0 10px 4px;padding-left:22px}
+  li{margin:7px 0;font-size:15.5px;color:#2c3d3d}
+  li::marker{color:var(--teal)}
+  strong{color:var(--ink)}
+  .term{color:var(--teal-deep);font-weight:800}
+
+  /* cards / panels */
+  .grid{display:grid;gap:16px;margin:18px 0}
+  .grid.two{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .grid.three{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  .card{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:14px;padding:18px 18px 16px;
+    position:relative;
+  }
+  .card::before{
+    content:"";position:absolute;left:0;top:14px;bottom:14px;width:4px;
+    border-radius:4px;background:var(--teal);
+  }
+  .card.amber::before{background:var(--amber)}
+  .card.coral::before{background:var(--coral)}
+  .card h5{
+    font-family:var(--body);font-weight:800;font-size:15.5px;color:var(--ink);
+    margin-bottom:4px;padding-left:10px;
+  }
+  .card p,.card ul{padding-left:10px;font-size:14.5px}
+  .card ul{margin-left:0}
+
+  .callout{
+    background:linear-gradient(180deg,#fff8ea,#fdf3df);
+    border:1px solid #ecd9a8;border-left:5px solid var(--amber);
+    border-radius:12px;padding:16px 18px;margin:18px 0;
+  }
+  .callout .label{
+    font-family:var(--mono);font-size:11px;letter-spacing:.18em;
+    text-transform:uppercase;color:#a9781b;font-weight:600;
+  }
+  .callout.teal{background:linear-gradient(180deg,#edf7f5,#e4f1ee);border-color:#bfe0da;border-left-color:var(--teal)}
+  .callout.teal .label{color:var(--teal-deep)}
+
+  .example{
+    background:#fff;border:1px dashed var(--line);border-radius:12px;
+    padding:14px 16px;margin:14px 0;font-size:15px;
+  }
+  .example .ex{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--coral);display:block;margin-bottom:6px}
+
+  table.t{width:100%;border-collapse:collapse;margin:18px 0;font-size:14.5px;background:#fff;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+  table.t th{background:var(--ink-bg);color:#f3ead7;font-family:var(--body);font-weight:700;text-align:left;padding:11px 14px;font-size:13.5px}
+  table.t td{padding:11px 14px;border-top:1px solid var(--line-soft);vertical-align:top}
+  table.t tr:nth-child(even) td{background:#faf6ec}
+
+  /* timeline */
+  .timeline{position:relative;margin:20px 0 8px;padding-left:30px}
+  .timeline::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:var(--line)}
+  .tl-step{position:relative;margin:0 0 16px}
+  .tl-step::before{content:"";position:absolute;left:-26px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--teal);border:3px solid var(--paper)}
+  .tl-step h5{font-family:var(--body);font-weight:800;font-size:15px;color:var(--ink)}
+  .tl-step p{margin:4px 0 0;font-size:14.5px}
+  .tl-step .n{font-family:var(--mono);font-size:11px;color:var(--coral);font-weight:600}
+
+  .pill{display:inline-block;font-family:var(--mono);font-size:11px;background:var(--line-soft);color:var(--teal-deep);padding:3px 9px;border-radius:7px;margin:2px 4px 2px 0}
+
+  /* ===== REVIEW ACTIVITY / QUIZ ===== */
+  .rv-intro{background:var(--paper-2);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:22px}
+  .rv-progress-wrap{position:sticky;top:58px;z-index:30;background:var(--paper);padding:12px 0 14px;margin-bottom:8px;border-bottom:1px solid var(--line-soft)}
+  .rv-bar{height:10px;background:var(--line-soft);border-radius:999px;overflow:hidden}
+  .rv-bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--amber));transition:width .4s ease}
+  .rv-stat{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .rv-stat .count{font-family:var(--mono);font-size:13px;color:var(--teal-deep);font-weight:600}
+  .rv-controls{display:flex;gap:10px;flex-wrap:wrap}
+  .rv-btn{font-family:var(--body);font-weight:700;font-size:13.5px;padding:9px 16px;border-radius:10px;border:1px solid var(--teal-deep);background:var(--teal);color:#fff;cursor:pointer;transition:.16s}
+  .rv-btn:hover{background:var(--teal-deep)}
+  .rv-btn.ghost{background:transparent;color:var(--teal-deep)}
+  .rv-btn.ghost:hover{background:#e9f3f0}
+  .rv-btn:disabled{opacity:.45;cursor:not-allowed}
+
+  .rv-section-label{font-family:var(--display);font-weight:600;font-size:20px;color:var(--teal-deep);margin:26px 0 4px;display:flex;align-items:center;gap:10px}
+  .rv-section-label .badge{font-family:var(--mono);font-size:11px;background:var(--coral);color:#fff;padding:3px 9px;border-radius:7px}
+  .rv-section-sub{font-size:14px;color:var(--muted);margin-bottom:6px}
+
+  .rv-q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 20px 16px;margin:16px 0}
+  .rv-q .qhead{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px}
+  .rv-q .qnum{font-family:var(--mono);font-size:12px;font-weight:600;background:var(--ink-bg);color:#f3ead7;padding:4px 9px;border-radius:7px;flex:0 0 auto}
+  .rv-q .qtext{font-weight:700;font-size:15.5px;color:var(--ink)}
+  .rv-q .qchips{margin-bottom:12px;display:flex;gap:6px;flex-wrap:wrap}
+  .rv-chip{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:6px}
+  .rv-chip.topic{background:var(--line-soft);color:var(--teal-deep)}
+  .rv-chip.scn{background:#fbe7df;color:var(--coral)}
+  .rv-opt{display:block;width:100%;text-align:left;background:var(--paper-2);border:1.5px solid var(--line);border-radius:11px;padding:12px 14px;margin:8px 0;cursor:pointer;font-family:var(--body);font-size:14.5px;color:var(--ink);transition:.14s;display:flex;gap:10px;align-items:flex-start}
+  .rv-opt:hover:not(:disabled){border-color:var(--teal);background:#fff}
+  .rv-opt .ltr{font-family:var(--mono);font-weight:600;font-size:12.5px;color:var(--teal-deep);flex:0 0 auto;margin-top:1px}
+  .rv-opt:disabled{cursor:default}
+  .rv-opt.correct{background:#e8f6ef;border-color:#3aa07f;color:#14402f}
+  .rv-opt.correct .ltr{color:#2e7d5b}
+  .rv-opt.wrong{background:#fcebe6;border-color:var(--coral);color:#7a2c1c}
+  .rv-opt.wrong .ltr{color:var(--coral)}
+  .rv-opt.dim{opacity:.6}
+  .rv-fb{display:none;margin:6px 0 4px;padding:11px 13px;border-radius:10px;font-size:13.8px;line-height:1.5}
+  .rv-fb.show{display:block;animation:fade .25s ease}
+  .rv-fb.good{background:#e8f6ef;border:1px solid #bfe3d2;color:#1c5440}
+  .rv-fb.bad{background:#fcebe6;border:1px solid #f0c8bd;color:#7a3322}
+  .rv-fb b{font-weight:800}
+
+  .rv-results{display:none;margin:26px 0 8px;border-radius:16px;padding:26px;text-align:center;color:#fff;background:linear-gradient(135deg,var(--ink-bg),var(--teal-deep))}
+  .rv-results.show{display:block;animation:fade .35s ease}
+  .rv-results h3{font-family:var(--display);font-weight:600;font-size:26px;margin-bottom:6px}
+  .rv-score-num{font-family:var(--mono);font-size:46px;font-weight:600;letter-spacing:.02em;margin:6px 0}
+  .rv-score-pct{font-size:17px;color:#cfe0dd}
+  .rv-verdict{display:inline-block;margin-top:14px;font-weight:800;font-size:15px;padding:8px 20px;border-radius:999px}
+  .rv-verdict.pass{background:#2ea79b;color:#06231f}
+  .rv-verdict.fail{background:var(--amber);color:#3a2a07}
+  .rv-results p.note{margin-top:14px;color:#bcd0cd;font-size:13.5px}
+
+  /* footer */
+  footer{background:var(--ink-bg);color:#cddeda;padding:24px 40px;text-align:center;border-top:3px solid var(--amber)}
+  footer .credit{font-family:var(--body);font-weight:700;font-size:14px;color:#f3ead7}
+  footer .credit2{font-family:var(--mono);font-size:11.5px;color:#8fa6a3;margin-top:6px;letter-spacing:.04em}
+
+  @media (max-width:680px){
+    body{padding:10px 6px 30px}
+    header.masthead{padding:24px 20px}
+    main{padding:26px 20px 34px}
+    nav.tabs{padding:8px 10px}
+    nav.tabs button{font-size:12.5px;padding:8px 11px}
+    .rv-progress-wrap{top:0}
+  }
+</style>
+  <link rel="stylesheet" href="../shared/mobile-responsive.css">
+</head>
+<body>
+<div class="shell">
+  <header class="masthead">
+    <div class="eyebrow">CompTIA Security+ SY0-701 &nbsp;&middot;&nbsp; Lesson 16</div>
+    <h1><span class="pulse">&#128274;</span> Summarize Data Protection and Compliance Concepts</h1>
+    <p class="sub">How organizations classify and protect sensitive data, meet legal and regulatory obligations, and build a workforce that keeps that data safe. The final lesson of the governance and risk arc.</p>
+    <div class="meta-row">
+      
+      <span class="meta-chip">2 Objectives + Personnel Policies</span>
+      <span class="meta-chip">Review Activity: 30 Questions</span>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabnav">
+    <button class="active" data-target="overview"><span class="tag">00</span> Overview</button>
+    <button data-target="t16a"><span class="tag">16A</span> Data Classification &amp; Privacy</button>
+    <button data-target="t16b"><span class="tag">16B</span> Compliance &amp; Monitoring</button>
+    <button data-target="t16c"><span class="tag">16C</span> Data Protection &amp; DLP</button>
+    <button data-target="t16d"><span class="tag">16D</span> Personnel Policies</button>
+    <button data-target="review"><span class="tag">RA</span> Review Activity</button>
+  </nav>
+
+  <main>
+    <!-- ===================== OVERVIEW ===================== -->
+    <section class="panel active" id="overview">
+      <div class="section-head">
+        <div class="kicker">Lesson Briefing</div>
+        <h2>Data Protection and Compliance</h2>
+      </div>
+      <p class="lede">Two ideas anchor this lesson. <span class="term">Data protection</span> is about securing data against unauthorized access, loss, or misuse through encryption, access controls, backup, and secure storage. <span class="term">Compliance</span> is about conforming to the legal, regulatory, and industry requirements that govern how data is handled, kept private, secured, and reported on. When an organization gets either wrong, the cost is real: legal liability, reputational damage, and financial penalties.</p>
+
+      <div class="callout teal">
+        <span class="label">Why it matters</span>
+        <p style="margin-top:6px">Classifying data tells you how hard to protect it. Compliance tells you what the law and your contracts demand. And personnel policies turn all of that into daily behavior, because most data is ultimately handled by people, not machines.</p>
+      </div>
+
+      <h3 class="block"><span class="num">MAP</span> What this lesson covers</h3>
+      <div class="grid two">
+        <div class="card">
+          <h5>Objective 1 &middot; Privacy &amp; Data Sensitivity</h5>
+          <ul>
+            <li>Data types, classifications, and sovereignty</li>
+            <li>Privacy data, data roles, and the right to be forgotten</li>
+            <li>Privacy breaches vs data breaches and notification duties</li>
+          </ul>
+        </div>
+        <div class="card amber">
+          <h5>Objective 2 &middot; Privacy &amp; Data Protection Controls</h5>
+          <ul>
+            <li>Compliance issues, monitoring, and reporting</li>
+            <li>Data states and data protection methods</li>
+            <li>Data loss prevention (DLP)</li>
+          </ul>
+        </div>
+        <div class="card coral">
+          <h5>Personnel Policies</h5>
+          <ul>
+            <li>Conduct policies, AUP, BYOD, and clean desk</li>
+            <li>User and role-based security training</li>
+            <li>The security awareness training lifecycle</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h5>Review Activity</h5>
+          <ul>
+            <li>30 CompTIA-style best-answer questions</li>
+            <li>Random answer order, per-option feedback</li>
+            <li>Final score out of 30, reshuffle and reset</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout">
+        <span class="label">How to use this portal</span>
+        <p style="margin-top:6px">Work through the four content tabs in order, then test yourself in the Review Activity. Every answer you pick shows you why it is right or wrong, so a wrong answer is still a learning moment.</p>
+      </div>
+    </section>
+
+    <!-- ===================== 16A ===================== -->
+    <section class="panel" id="t16a">
+      <div class="section-head">
+        <div class="kicker">Objective 1</div>
+        <h2>Data Classification &amp; Privacy</h2>
+      </div>
+      <p class="lede">Before you can protect data, you have to know what it is and who has rights over it. This topic separates <span class="term">privacy</span> (a person's right to control their personal information) from <span class="term">data sensitivity</span> (how data is classified by confidentiality and impact), then walks through types, classifications, sovereignty, roles, and breaches.</p>
+
+      <h3 class="block"><span class="num">16A.1</span> Privacy vs Data Sensitivity</h3>
+      <div class="grid two">
+        <div class="card">
+          <h5>Privacy</h5>
+          <p>The right of an individual to control the collection, use, and disclosure of their personal information. It is about the person and their rights.</p>
+        </div>
+        <div class="card amber">
+          <h5>Data Sensitivity</h5>
+          <p>A way of classifying data by its sensitivity, confidentiality, and the impact that disclosure would cause. It is about the data and its handling.</p>
+        </div>
+      </div>
+
+      <h3 class="block"><span class="num">16A.2</span> Data Types</h3>
+      <table class="t">
+        <tr><th>Type</th><th>What it is</th><th>How it is protected</th></tr>
+        <tr><td><strong>Regulated data</strong></td><td>PII and similar data governed by law, e.g. health records under HIPAA, cardholder data under PCI DSS</td><td>Specific legal controls and reporting requirements</td></tr>
+        <tr><td><strong>Trade secrets</strong></td><td>Proprietary business information that gives a competitive edge</td><td>Non-disclosure agreements (NDAs), access restrictions</td></tr>
+        <tr><td><strong>Intellectual property</strong></td><td>Patents, copyrights, trademarks, creative works</td><td>Legal protections, obfuscation of source code</td></tr>
+        <tr><td><strong>Legal &amp; financial data</strong></td><td>Contracts, statements, account records</td><td>Confidentiality controls, retention rules</td></tr>
+      </table>
+      <div class="callout">
+        <span class="label">Human-readable vs not</span>
+        <p style="margin-top:6px"><strong>Human-readable</strong> data (documents, spreadsheets) is best protected with monitoring, DLP, and content filtering. <strong>Non-human-readable</strong> data (database records, binary, machine data) leans more on encryption, access controls, and intrusion detection.</p>
+      </div>
+
+      <h3 class="block"><span class="num">16A.3</span> Data Classifications</h3>
+      <h4 class="sub">Confidentiality schema</h4>
+      <p>Labels data by how damaging disclosure would be: <span class="pill">Public / Unclassified</span><span class="pill">Confidential</span><span class="pill">Secret</span><span class="pill">Top Secret</span> Tools such as <span class="term">Microsoft Purview</span> can automatically apply these labels and watermark documents based on their content.</p>
+      <h4 class="sub">Asset-type schema</h4>
+      <ul>
+        <li><strong>Proprietary</strong> — intellectual property unique to the organization</li>
+        <li><strong>Private</strong> — personal information (PII) about individuals</li>
+        <li><strong>Sensitive</strong> — special categories under regulations like GDPR</li>
+        <li><strong>Restricted</strong> — the most tightly controlled data, access on a strict need-to-know basis</li>
+      </ul>
+
+      <h3 class="block"><span class="num">16A.4</span> Data Sovereignty &amp; Geography</h3>
+      <div class="grid two">
+        <div class="card">
+          <h5>Data sovereignty</h5>
+          <p>A jurisdiction can require that data about its residents be processed and stored within its borders. GDPR's treatment of EU/EEA data is the classic example, often satisfied through <strong>data localization</strong> or contractual safeguards.</p>
+        </div>
+        <div class="card amber">
+          <h5>Geographical considerations</h5>
+          <p>Where data physically lives affects both protection and forensics. <strong>Constraint-based access controls</strong> can validate a user's geographic location before granting access.</p>
+        </div>
+      </div>
+
+      <h3 class="block"><span class="num">16A.5</span> Privacy Data &amp; Roles</h3>
+      <p><span class="term">Privacy data</span> is PII or sensitive data tied to a person's identity, and that person (the data subject) has rights over it. <span class="term">Confidential data</span> is any sensitive business information, such as trade secrets, IP, or source code, where no individual holds subject rights.</p>
+      <div class="callout teal">
+        <span class="label">GDPR reaches across borders</span>
+        <p style="margin-top:6px">GDPR is extraterritorial: it applies to the data of EU residents regardless of where the processing organization is located, and it restricts transferring that data outside the EEA.</p>
+      </div>
+      <h4 class="sub">The three GDPR roles</h4>
+      <div class="grid three">
+        <div class="card"><h5>Data Controller</h5><p>Decides why and how data is processed. Accountable, obtains consent, issues privacy notices.</p></div>
+        <div class="card amber"><h5>Data Processor</h5><p>Acts only on the controller's instructions, makes no independent decisions. Example: cloud or payroll provider.</p></div>
+        <div class="card coral"><h5>Data Subject</h5><p>The individual the data is about. Holds rights, exercised through the controller.</p></div>
+      </div>
+      <h4 class="sub">Data subject rights (GDPR / CCPA)</h4>
+      <p><span class="pill">Access</span><span class="pill">Rectification</span><span class="pill">Erasure</span><span class="pill">Restriction</span><span class="pill">Portability</span><span class="pill">Object</span><span class="pill">Withdraw consent</span></p>
+      <div class="example">
+        <span class="ex">Right to be forgotten</span>
+        When a data subject requests erasure, the controller must erase the data promptly unless a legitimate ground to keep it applies (such as a legal obligation, a legal claim, or freedom of expression). The duty can extend to third parties the data was shared with.
+      </div>
+      <h4 class="sub">Ownership, inventories, and retention</h4>
+      <ul>
+        <li>Personal data is not traditional property: organizations are <strong>custodians or stewards</strong>, not owners.</li>
+        <li>GDPR and CCPA require organizations to keep <strong>data inventories</strong> and records of processing.</li>
+        <li><strong>Data minimization</strong> and <strong>purpose limitation</strong> mean keeping only what is needed, only as long as needed, then deleting or anonymizing it securely.</li>
+      </ul>
+
+      <h3 class="block"><span class="num">16A.6</span> Privacy Breaches vs Data Breaches</h3>
+      <div class="grid two">
+        <div class="card coral"><h5>Data breach</h5><p>Information is read, modified, or deleted without authorization. Applies to any data, including IP and source code.</p></div>
+        <div class="card coral"><h5>Privacy breach</h5><p>A breach specifically involving personal or sensitive personal data.</p></div>
+      </div>
+      <p>Consequences include reputational damage, identity theft, fines (sometimes a percentage of turnover), and IP theft.</p>
+      <div class="callout">
+        <span class="label">Notification is not optional</span>
+        <p style="margin-top:6px">Accidental breaches still count. A misdirected unredacted database report or a mis-permissioned file is notifiable even if no one is known to have viewed it. Escalate and disclose; never quietly remediate. Disclosure explains what was breached, who to contact, the likely consequences, and the mitigation.</p>
+        <ul style="margin-top:8px">
+          <li><strong>HIPAA</strong> — notify affected individuals and the HHS Secretary; if more than 500 are affected, also notify prominent media.</li>
+          <li><strong>GDPR</strong> — notify the supervisory authority within <strong>72 hours</strong> of becoming aware.</li>
+        </ul>
+      </div>
+    </section>
+    <!-- ===================== 16B ===================== -->
+    <section class="panel" id="t16b">
+      <div class="section-head">
+        <div class="kicker">Objective 2 &middot; Part 1</div>
+        <h2>Compliance, Monitoring &amp; Reporting</h2>
+      </div>
+      <p class="lede"><span class="term">Security compliance</span> is adherence to the standards, regulations, policies, and best practices that protect information, mitigate risk, and preserve confidentiality, integrity, and availability. This topic covers where compliance breaks down and how organizations monitor and report on it.</p>
+
+      <h3 class="block"><span class="num">16B.1</span> Compliance Issues</h3>
+      <div class="grid three">
+        <div class="card">
+          <h5>Legal &amp; Regulatory Noncompliance</h5>
+          <p>Failing to meet laws and regulations can bring sanctions, large fines, lawsuits, reputational harm, and heightened regulatory scrutiny.</p>
+        </div>
+        <div class="card amber">
+          <h5>Software Licensing</h5>
+          <p>Exceeding permitted installations, sharing, modifying, or redistributing software can lead to license revocation or suspension, penalties, and required remediation, management, and audits.</p>
+        </div>
+        <div class="card coral">
+          <h5>Contractual Noncompliance</h5>
+          <p>Breaking contract terms can trigger breach of contract, termination, indemnification and liability claims, and noncompliance penalties.</p>
+        </div>
+      </div>
+
+      <h3 class="block"><span class="num">16B.2</span> Monitoring &amp; Reporting</h3>
+      <p>Compliance monitoring and reporting is the systematic work of assessing, evaluating, and reporting on whether the organization is meeting its laws, regulations, contracts, and standards.</p>
+      <table class="t">
+        <tr><th>Internal reporting</th><th>External reporting</th></tr>
+        <tr>
+          <td>Audience: risk managers, executives, analysts, privacy officers. Tends to carry operational detail.</td>
+          <td>Audience: shareholders, customers, regulators, vendors. Driven by regulatory requirements; tends to be high-level summaries.</td>
+        </tr>
+      </table>
+      <h4 class="sub">Compliance monitoring in practice</h4>
+      <ul>
+        <li><strong>Watch actions</strong> across the organization and <strong>assess third parties</strong> for ongoing adherence.</li>
+        <li><strong>Attestation and acknowledgment</strong> — signed agreements, policy acknowledgments, and completed training provide evidence of compliance.</li>
+        <li><strong>Internal self-assessments and audits</strong> vs <strong>external independent audits and inspections</strong>.</li>
+        <li><strong>Automation</strong> through compliance management software keeps monitoring continuous and consistent.</li>
+      </ul>
+      <div class="callout teal">
+        <span class="label">Attestation</span>
+        <p style="margin-top:6px">A formal confirmation, made by a qualified independent entity, that controls are in place and operating effectively. It gives stakeholders assurance that the organization's claims hold up.</p>
+      </div>
+    </section>
+
+    <!-- ===================== 16C ===================== -->
+    <section class="panel" id="t16c">
+      <div class="section-head">
+        <div class="kicker">Objective 2 &middot; Part 2</div>
+        <h2>Data Protection &amp; DLP</h2>
+      </div>
+      <p class="lede">Data has to be protected wherever it lives and however it moves. This topic covers the three <span class="term">data states</span>, the toolbox of <span class="term">data protection methods</span>, and how <span class="term">data loss prevention</span> automates discovery, classification, and enforcement.</p>
+
+      <h3 class="block"><span class="num">16C.1</span> The Three Data States</h3>
+      <div class="grid three">
+        <div class="card">
+          <h5>At Rest</h5>
+          <p>Data in storage. Protect with whole-disk, database, and file encryption, plus access control lists running on a trusted OS.</p>
+        </div>
+        <div class="card amber">
+          <h5>In Motion / Transit</h5>
+          <p>Data crossing a network. Protect with TLS and IPSec, often using ephemeral keys.</p>
+        </div>
+        <div class="card coral">
+          <h5>In Use / Processing</h5>
+          <p>Data in volatile memory (RAM, CPU), where it is decrypted and most exposed. Protect with a trusted execution environment such as Intel SGX.</p>
+        </div>
+      </div>
+
+      <h3 class="block"><span class="num">16C.2</span> Data Protection Methods</h3>
+      <table class="t">
+        <tr><th>Method</th><th>What it does</th></tr>
+        <tr><td><strong>Geographic restrictions</strong></td><td>Limit where data can be stored or accessed from</td></tr>
+        <tr><td><strong>Encryption</strong></td><td>Reversible with a key; protects confidentiality across all states</td></tr>
+        <tr><td><strong>Hashing</strong></td><td>One-way; verifies integrity and stores passwords</td></tr>
+        <tr><td><strong>Masking</strong></td><td>Partially conceals a value while preserving its format (e.g. **** 1234)</td></tr>
+        <tr><td><strong>Tokenization</strong></td><td>Substitutes a value with a random token; common in payments</td></tr>
+        <tr><td><strong>Obfuscation</strong></td><td>Makes data or source code hard to interpret; protects IP</td></tr>
+        <tr><td><strong>Segmentation</strong></td><td>Isolates components with least-privilege access (e.g. an EHR network zone)</td></tr>
+        <tr><td><strong>Permission restrictions</strong></td><td>ACL, RBAC, MAC, ABAC enforcing least privilege</td></tr>
+      </table>
+      <div class="callout">
+        <span class="label">Tell them apart on the exam</span>
+        <p style="margin-top:6px"><strong>Encryption</strong> is reversible with a key. <strong>Hashing</strong> is one-way. <strong>Masking</strong> hides part of a value but keeps its format. <strong>Tokenization</strong> swaps in a random, unrelated token stored in a vault.</p>
+      </div>
+
+      <h3 class="block"><span class="num">16C.3</span> Data Loss Prevention (DLP)</h3>
+      <p>DLP automates the discovery and classification of sensitive data and enforces rules about how it can move.</p>
+      <h4 class="sub">Components</h4>
+      <ul>
+        <li><strong>Policy server</strong> defines and manages the rules.</li>
+        <li><strong>Endpoint agents</strong> watch local actions; <strong>network agents</strong> watch data in motion.</li>
+        <li>Scanning covers both structured and unstructured data, and can block transfers over USB, email, instant messaging, social media, and cloud.</li>
+      </ul>
+      <div class="example">
+        <span class="ex">Example</span>
+        An Office 365 DLP policy detects patterns like ITINs, SSNs, and passport numbers and acts on them automatically.
+      </div>
+      <h4 class="sub">Remediation actions</h4>
+      <div class="grid two">
+        <div class="card"><h5>Alert only</h5><p>Log and notify, but let the action proceed.</p></div>
+        <div class="card amber"><h5>Block</h5><p>Stop the transfer outright.</p></div>
+        <div class="card coral"><h5>Quarantine</h5><p>Move the data to a secure holding area.</p></div>
+        <div class="card"><h5>Tombstone</h5><p>Replace the file with a placeholder stub explaining the violation.</p></div>
+      </div>
+      <p style="margin-top:8px">DLP can operate <strong>client-side</strong> (on the endpoint) or <strong>server-side</strong> (in the network or cloud).</p>
+    </section>
+    <!-- ===================== 16D ===================== -->
+    <section class="panel" id="t16d">
+      <div class="section-head">
+        <div class="kicker">Personnel Policies</div>
+        <h2>People, Conduct &amp; Training</h2>
+      </div>
+      <p class="lede"><span class="term">Personnel policies</span> are the guidelines, expectations, and standards that keep behavior consistent, support communication and development, resolve conflict, and manage risk. Most data is handled by people, so this is where data protection becomes daily practice.</p>
+
+      <h3 class="block"><span class="num">16D.1</span> Conduct Policies</h3>
+      <div class="grid two">
+        <div class="card">
+          <h5>Operational + Acceptable Use Policy (AUP)</h5>
+          <p>Covers credential management, data handling, and incident response. The AUP forbids fraud, defamation, illegal activity, unauthorized hardware or software, and snooping, and it must be reasonable.</p>
+        </div>
+        <div class="card amber">
+          <h5>Code of Conduct</h5>
+          <p>Sets the rules of behavior, with stricter clauses for privileged users who hold elevated access.</p>
+        </div>
+        <div class="card coral">
+          <h5>Social Media Use &amp; Analysis</h5>
+          <p>Addresses social media risks. Corporate communications are stored, logged, and monitored, and the organization may review employees' public social media for risk.</p>
+        </div>
+        <div class="card">
+          <h5>Personally Owned Devices (BYOD)</h5>
+          <p>Portable devices are a threat surface, managed with NAC, endpoint controls, and DLP. <strong>Shadow IT</strong> (unsanctioned tools) risks exfiltration, malware, and license violations.</p>
+        </div>
+        <div class="card amber">
+          <h5>Clean Desk Policy</h5>
+          <p>Keeps sensitive materials from being left exposed at workstations.</p>
+        </div>
+      </div>
+
+      <h3 class="block"><span class="num">16D.2</span> User &amp; Role-Based Training</h3>
+      <p>Untrained users are a vulnerability, so training reaches every level of the organization. It is <strong>graded by role and aligned to actual job duties, not titles</strong>, with beginner, intermediate, and advanced tiers.</p>
+      <h4 class="sub">Common training topics</h4>
+      <p><span class="pill">Policies &amp; penalties</span><span class="pill">Incident reporting</span><span class="pill">Site security</span><span class="pill">Data handling / PII</span><span class="pill">Password &amp; account</span><span class="pill">Social engineering &amp; malware</span><span class="pill">Secure software use</span></p>
+      <div class="callout teal">
+        <span class="label">Standards behind the training</span>
+        <p style="margin-top:6px">Role-based design draws on the <strong>NIST NICE</strong> framework, knowledge, skills, and abilities (<strong>KSAs</strong>), and <strong>NIST SP 800-50</strong>.</p>
+      </div>
+
+      <h3 class="block"><span class="num">16D.3</span> Training Topics &amp; Techniques</h3>
+      <h4 class="sub">Techniques</h4>
+      <div class="grid three">
+        <div class="card"><h5>Computer-Based Training (CBT)</h5><p>Simulations and branching scenarios learners work through at their own pace.</p></div>
+        <div class="card amber"><h5>Gamification</h5><p>Capture-the-flag challenges, badges, and avatars to drive engagement.</p></div>
+        <div class="card coral"><h5>Phishing Campaigns</h5><p>Simulated phishing to teach recognition of urgent, spoofed, or enticing messages, and to practice reporting.</p></div>
+      </div>
+      <h4 class="sub">Topics to cover</h4>
+      <p><span class="pill">Situational awareness</span><span class="pill">Reporting &amp; escalation</span><span class="pill">Policy / handbooks</span><span class="pill">Insider threat</span><span class="pill">Password management (MFA)</span><span class="pill">Removable media &amp; cables</span><span class="pill">Hybrid / remote work</span><span class="pill">Social engineering</span><span class="pill">Operational security</span></p>
+      <div class="example">
+        <span class="ex">Watch for</span>
+        Removable media and cables covers more than lost USB sticks: it includes deliberately dropped USB drives and malicious charging cables designed to compromise a device.
+      </div>
+
+      <h3 class="block"><span class="num">16D.4</span> Security Awareness Training Lifecycle</h3>
+      <p>Training is a continuous cycle, not a one-time event. Follow a single phishing program through the seven stages:</p>
+      <div class="timeline">
+        <div class="tl-step"><span class="n">STAGE 1</span><h5>Assessment</h5><p>Measure the baseline: run an initial phishing test to see how susceptible the workforce is.</p></div>
+        <div class="tl-step"><span class="n">STAGE 2</span><h5>Planning &amp; Design</h5><p>Define objectives and design content targeting the weaknesses found.</p></div>
+        <div class="tl-step"><span class="n">STAGE 3</span><h5>Development</h5><p>Build the materials, simulations, and campaign mechanics.</p></div>
+        <div class="tl-step"><span class="n">STAGE 4</span><h5>Delivery &amp; Implementation</h5><p>Roll the training out and launch the simulated phishing emails.</p></div>
+        <div class="tl-step"><span class="n">STAGE 5</span><h5>Evaluation &amp; Feedback</h5><p>Review who clicked and who reported, then gather feedback on the program.</p></div>
+        <div class="tl-step"><span class="n">STAGE 6</span><h5>Ongoing Reinforcement</h5><p>Keep awareness fresh with repeated, varied campaigns.</p></div>
+        <div class="tl-step"><span class="n">STAGE 7</span><h5>Monitoring &amp; Adaptation</h5><p>Track impact over time and adjust for emerging risks and changing requirements.</p></div>
+      </div>
+    </section>
+    <!-- ===================== REVIEW ACTIVITY ===================== -->
+    <section class="panel" id="review">
+      <div class="section-head">
+        <div class="kicker">Test Yourself</div>
+        <h2>Review Activity &middot; Data Protection &amp; Compliance</h2>
+      </div>
+      <div class="rv-intro">
+        <p style="margin-top:0">Thirty CompTIA Security+ style questions across the two review activities for this lesson: <strong>Data Classification and Compliance</strong> and <strong>Personnel Policies</strong>. Each question has one best answer among four plausible options. Answer choices are shuffled on every load. Pick an option to see immediate feedback explaining why it is right or wrong. Your final score out of 30 appears once you have answered them all, with 70% to pass. Use <strong>Reshuffle &amp; reset</strong> to start over with a fresh order.</p>
+      </div>
+
+      <div class="rv-progress-wrap">
+        <div class="rv-stat">
+          <span class="count" id="rvCount">Answered 0 / 30</span>
+          <div class="rv-controls">
+            <button class="rv-btn ghost" id="rvResults" disabled>See my score</button>
+            <button class="rv-btn" id="rvReset">Reshuffle &amp; reset</button>
+          </div>
+        </div>
+        <div class="rv-bar"><div class="rv-bar-fill" id="rvFill"></div></div>
+      </div>
+
+      <div class="rv-results" id="rvResultsPanel">
+        <h3>Your Result</h3>
+        <div class="rv-score-num" id="rvScoreNum">0 / 30</div>
+        <div class="rv-score-pct" id="rvScorePct">0%</div>
+        <div class="rv-verdict" id="rvVerdict">&nbsp;</div>
+        <p class="note">Pass line is 70% (21 / 30). Review any questions you missed, then reshuffle and try again.</p>
+      </div>
+
+      <div id="rvQuiz"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="credit">Dr. Solomon Seifu (Lead Technical Instructor &amp; Author)</div>
+    <div class="credit2">CyberEdge &middot; CompTIA Security+ SY0-701 &middot; Lesson 16</div>
+  </footer>
+</div>
+
+<script>
+/* ---------- TAB NAVIGATION ---------- */
+(function(){
+  var nav=document.getElementById('tabnav');
+  nav.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b)return;
+    var t=b.getAttribute('data-target');
+    document.querySelectorAll('nav.tabs button').forEach(function(x){x.classList.remove('active')});
+    b.classList.add('active');
+    document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});
+    document.getElementById(t).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+})();
+
+/* ---------- REVIEW ACTIVITY QUIZ ---------- */
+(function(){
+  var RV_TOTAL=30, RV_PASS=0.70;
+
+  /* Each question: s=section, scn=scenario flag, q=text, o=[{t,c,f}] (c=correct, f=feedback) */
+  var RV_QUESTIONS=[
+    /* ===== SECTION 1: DATA CLASSIFICATION & COMPLIANCE ===== */
+    {s:1,scn:true,q:"A hospital stores patient names, diagnoses, and insurance IDs. Which data type best describes this information, and what drives its handling requirements?",o:[
+      {t:"Regulated data, because laws such as HIPAA mandate specific protections for this kind of information",c:true,f:"Correct. Health information is regulated data, and statutes like HIPAA impose specific controls and reporting duties."},
+      {t:"Trade secret data, because the diagnoses give the hospital a competitive advantage",c:false,f:"Trade secrets are proprietary business information protected by NDAs, not patient health records governed by law."},
+      {t:"Intellectual property, because the records were created and are owned by the hospital",c:false,f:"IP covers patents, copyrights, trademarks, and creative works, not a patient's personal health data."},
+      {t:"Public data, because a medical condition is not financial information",c:false,f:"Protected health information is highly sensitive regulated data; the financial vs non-financial split is not the distinction."}
+    ]},
+    {s:1,scn:false,q:"Which statement best distinguishes privacy from data sensitivity?",o:[
+      {t:"Privacy is a person's right to control their personal information, while data sensitivity classifies data by confidentiality and impact",c:true,f:"Correct. Privacy is about the individual's rights; sensitivity is about how data is classified."},
+      {t:"Privacy applies only to government data, while data sensitivity applies only to corporate data",c:false,f:"Both concepts apply across sectors; the real difference is rights versus classification."},
+      {t:"Privacy is a technical control, while data sensitivity is a legal requirement",c:false,f:"Neither is purely a control or a law: privacy is a right, sensitivity is a classification scheme."},
+      {t:"Privacy and data sensitivity are interchangeable terms for the same idea",c:false,f:"They are related but distinct: one concerns individual rights, the other classifies data."}
+    ]},
+    {s:1,scn:true,q:"An organization labels its documents as Public, Confidential, Secret, and Top Secret. Which classification approach is in use?",o:[
+      {t:"A confidentiality-based classification schema",c:true,f:"Correct. These labels rank data by how damaging disclosure would be."},
+      {t:"An asset-type schema using Proprietary, Private, Sensitive, and Restricted",c:false,f:"That is the alternate schema; these particular labels are the confidentiality tiers."},
+      {t:"A data sovereignty classification",c:false,f:"Sovereignty concerns jurisdiction and storage location, not these labels."},
+      {t:"A retention-based classification",c:false,f:"Retention is about how long data is kept, not these confidentiality levels."}
+    ]},
+    {s:1,scn:true,q:"An administrator wants documents to be automatically labeled and watermarked based on their content. Which capability best supports this?",o:[
+      {t:"Automated labeling tools such as Microsoft Purview",c:true,f:"Correct. Purview can auto-classify and watermark documents by content."},
+      {t:"A DLP tombstone action",c:false,f:"Tombstoning replaces a file with a stub after a policy violation; it does not auto-label by content."},
+      {t:"A tokenization gateway",c:false,f:"Tokenization substitutes sensitive values with tokens; it does not classify or watermark documents."},
+      {t:"A constraint-based access control",c:false,f:"That restricts access by attributes like location; it is not a labeling tool."}
+    ]},
+    {s:1,scn:true,q:"A European company is told its EU customers' data must be stored and processed within the EU/EEA. This requirement is an example of:",o:[
+      {t:"Data sovereignty",c:true,f:"Correct. A jurisdiction requiring data to stay within its borders is data sovereignty."},
+      {t:"Data masking",c:false,f:"Masking conceals parts of a value; it says nothing about storage jurisdiction."},
+      {t:"Data minimization",c:false,f:"Minimization limits how much data is collected, not where it resides."},
+      {t:"Data tokenization",c:false,f:"Tokenization substitutes values; it does not address geographic jurisdiction."}
+    ]},
+    {s:1,scn:true,q:"A company decides why and how customer data will be processed and is accountable for obtaining consent. Under GDPR, this party is the:",o:[
+      {t:"Data controller",c:true,f:"Correct. The controller decides purpose and means and carries accountability."},
+      {t:"Data processor",c:false,f:"A processor only acts on the controller's instructions and makes no independent decisions."},
+      {t:"Data subject",c:false,f:"The subject is the individual the data is about, not the decision-maker."},
+      {t:"Data custodian",c:false,f:"A custodian safeguards data day to day but does not decide its purpose."}
+    ]},
+    {s:1,scn:true,q:"A payroll SaaS provider handles employee data strictly according to its client's instructions and makes no independent decisions about its use. This provider is the:",o:[
+      {t:"Data processor",c:true,f:"Correct. Acting only on the controller's instructions is the defining trait of a processor."},
+      {t:"Data controller",c:false,f:"The controller decides purpose and means; this provider only follows instructions."},
+      {t:"Data owner",c:false,f:"Organizations are custodians or stewards, and this role follows instructions rather than owning data."},
+      {t:"Data subject",c:false,f:"The subject is the individual whose data it is, not a service provider."}
+    ]},
+    {s:1,scn:true,q:"A customer asks an EU company to erase all of their personal data. Which right are they invoking, and what is the company's obligation?",o:[
+      {t:"The right to be forgotten; the controller must erase the data promptly unless a legitimate ground to retain it applies",c:true,f:"Correct. Erasure must be prompt unless an exception such as a legal obligation applies."},
+      {t:"The right to portability; the company must export the data to a competitor",c:false,f:"Portability is about transferring data to the subject or another controller, not erasure."},
+      {t:"The right to rectification; the company must correct inaccurate data",c:false,f:"Rectification fixes errors; the request here is to delete the data."},
+      {t:"The right to restriction; the company must pause processing but keep the data",c:false,f:"Restriction limits processing, but the customer is asking for deletion."}
+    ]},
+    {s:1,scn:false,q:"Which statement best reflects how data ownership is treated under modern privacy regimes?",o:[
+      {t:"Organizations act as custodians or stewards of personal data rather than outright owners",c:true,f:"Correct. Personal data is not traditional property owned by the organization."},
+      {t:"Organizations own all data they collect as traditional property",c:false,f:"Personal data is not treated as property the organization owns."},
+      {t:"Data subjects legally own the servers their data is stored on",c:false,f:"Subjects hold rights over their data, not the organization's hardware."},
+      {t:"Processors automatically own any data they handle",c:false,f:"Processors act on instructions and own nothing simply by handling data."}
+    ]},
+    {s:1,scn:true,q:"An attacker alters internal source code without authorization but accesses no personal data. This is best classified as:",o:[
+      {t:"A data breach, because information was modified without authorization",c:true,f:"Correct. Unauthorized modification of any data, including code, is a data breach."},
+      {t:"A privacy breach, because confidentiality was lost",c:false,f:"Privacy breaches specifically involve personal or sensitive personal data, which was not touched here."},
+      {t:"Not a breach, because nothing was stolen",c:false,f:"Unauthorized modification is a breach even when no data is exfiltrated."},
+      {t:"A compliance exemption",c:false,f:"An exemption is a deliberate risk decision, not an unauthorized change to code."}
+    ]},
+    {s:1,scn:false,q:"Under GDPR, within what timeframe must a qualifying personal data breach be reported to the supervisory authority?",o:[
+      {t:"Within 72 hours of becoming aware of it",c:true,f:"Correct. GDPR sets a 72-hour deadline from awareness of the breach."},
+      {t:"Within 24 hours of the breach occurring",c:false,f:"The deadline is 72 hours from awareness, not 24 from occurrence."},
+      {t:"Within 30 days of completing remediation",c:false,f:"Notification cannot wait for remediation; the clock is 72 hours from awareness."},
+      {t:"Only after affected individuals have been notified first",c:false,f:"Authority notification runs on its own timeline and is not gated on notifying individuals."}
+    ]},
+    {s:1,scn:true,q:"A database administrator accidentally emails a report of unredacted customer records to the wrong distribution list. The recipients say they did not open it. What is the best course of action?",o:[
+      {t:"Treat it as a notifiable breach and escalate, because the data was exposed regardless of whether it was viewed",c:true,f:"Correct. Accidental exposure is still a breach; it must be escalated and disclosed, not quietly fixed."},
+      {t:"Quietly delete the email and take no further action since no one read it",c:false,f:"Quietly remediating an exposure violates notification duties; the breach still occurred."},
+      {t:"Reclassify the records as public to avoid the reporting requirement",c:false,f:"Reclassifying data to dodge reporting is improper and does not undo the breach."},
+      {t:"Wait to see whether any harm results before deciding",c:false,f:"Notification obligations do not depend on waiting for downstream harm."}
+    ]},
+    {s:1,scn:true,q:"A US healthcare provider suffers a breach affecting 700 individuals' health records. Beyond notifying the affected individuals, HIPAA also requires notifying:",o:[
+      {t:"The HHS Secretary and prominent media outlets, because the breach affects more than 500 people",c:true,f:"Correct. Breaches over 500 individuals trigger HHS and media notification."},
+      {t:"Only the state attorney general",c:false,f:"HIPAA's large-breach rule adds HHS and media notice, not just a state AG."},
+      {t:"The EU supervisory authority within 72 hours",c:false,f:"That is GDPR; HIPAA governs this US healthcare scenario."},
+      {t:"No one else, since individual notice is sufficient",c:false,f:"Over 500 affected adds HHS Secretary and media notification."}
+    ]},
+    {s:1,scn:true,q:"An audit finds a company installed software on far more machines than its license permits. This is best described as:",o:[
+      {t:"A software licensing compliance issue that can lead to revocation, penalties, and remediation",c:true,f:"Correct. Exceeding permitted installations is a recognized licensing compliance issue."},
+      {t:"A contractual noncompliance unrelated to licensing",c:false,f:"This is specifically a licensing violation, its own compliance category."},
+      {t:"A data sovereignty violation",c:false,f:"Sovereignty concerns where data is stored, not license counts."},
+      {t:"A privacy breach",c:false,f:"No personal data exposure is described; this is a licensing matter."}
+    ]},
+    {s:1,scn:true,q:"A privacy officer prepares a detailed operational compliance report for internal risk managers and executives. This is an example of:",o:[
+      {t:"Internal compliance reporting",c:true,f:"Correct. The audience is internal leadership, and the report carries operational detail."},
+      {t:"External compliance reporting to regulators",c:false,f:"External reporting targets outside parties like regulators and shareholders, not internal leadership."},
+      {t:"A vendor attestation",c:false,f:"Attestation is a formal confirmation of controls, not this internal operational report."},
+      {t:"A public breach disclosure",c:false,f:"Breach disclosure notifies affected or public parties about an incident, not routine internal reporting."}
+    ]},
+    {s:1,scn:false,q:"Which protection is specifically designed to safeguard data while it is being processed in memory?",o:[
+      {t:"A trusted execution environment such as Intel SGX",c:true,f:"Correct. A TEE protects data in use, while it sits decrypted in volatile memory."},
+      {t:"TLS for the connection",c:false,f:"TLS protects data in transit, not data being processed in memory."},
+      {t:"Whole-disk encryption",c:false,f:"That protects data at rest on storage, not data in use."},
+      {t:"A network DLP agent",c:false,f:"Network DLP inspects data in motion, not data in volatile memory."}
+    ]},
+    {s:1,scn:true,q:"A payment system replaces card numbers with randomly generated values that have no mathematical relationship to the original. Which method is this?",o:[
+      {t:"Tokenization",c:true,f:"Correct. Tokens are random substitutes stored in a vault with no math link to the original."},
+      {t:"Encryption",c:false,f:"Encryption is reversible with a key and mathematically derived from the original."},
+      {t:"Hashing",c:false,f:"Hashing is one-way, used for integrity and passwords, not reversible payment substitution."},
+      {t:"Masking",c:false,f:"Masking hides part of a value while preserving its format; it does not substitute a random token."}
+    ]},
+    {s:1,scn:true,q:"A customer service screen shows a credit card as **** **** **** 1234. Which method conceals most of the value while preserving its format?",o:[
+      {t:"Masking",c:true,f:"Correct. Masking hides characters while keeping the field's recognizable format."},
+      {t:"Tokenization",c:false,f:"Tokenization substitutes a random token, not a partially shown original value."},
+      {t:"Obfuscation of source code",c:false,f:"Obfuscation targets code and IP, not displaying a partial card number."},
+      {t:"Segmentation",c:false,f:"Segmentation isolates systems or networks; it does not conceal characters in a field."}
+    ]},
+    {s:1,scn:true,q:"A hospital isolates its electronic health record systems on a separate network zone with least-privilege access. This control is best described as:",o:[
+      {t:"Segmentation",c:true,f:"Correct. Isolating components into controlled zones is segmentation."},
+      {t:"Hashing",c:false,f:"Hashing verifies integrity or stores passwords; it is not network isolation."},
+      {t:"Geographic restriction",c:false,f:"Geographic restriction limits access by location, not by isolating internal components."},
+      {t:"Masking",c:false,f:"Masking conceals field values; it is not a network isolation control."}
+    ]},
+    {s:1,scn:true,q:"A DLP system detects sensitive data being copied to a USB drive and replaces the original file on the share with a placeholder stub explaining the violation. Which remediation action is this?",o:[
+      {t:"Tombstone",c:true,f:"Correct. Tombstoning leaves a stub in place of the file after a violation."},
+      {t:"Quarantine",c:false,f:"Quarantine moves the file to a secure holding area rather than leaving a stub."},
+      {t:"Alert only",c:false,f:"Alert-only logs or notifies without altering the file; here the file was replaced."},
+      {t:"Block",c:false,f:"Blocking stops the transfer; tombstoning replaces the file with a stub."}
+    ]},
+    {s:1,scn:true,q:"A vendor signs a formal statement, validated by a qualified independent party, confirming that its security controls are operating effectively. This is best described as:",o:[
+      {t:"Attestation",c:true,f:"Correct. A validated formal confirmation that controls work is attestation."},
+      {t:"A statement of work",c:false,f:"An SOW defines deliverables and tasks, not a confirmation that controls work."},
+      {t:"A memorandum of understanding",c:false,f:"An MOU is a nonbinding expression of intent, not a controls confirmation."},
+      {t:"A questionnaire",c:false,f:"A questionnaire gathers self-reported information; attestation is an independently validated confirmation."}
+    ]},
+    /* ===== SECTION 2: PERSONNEL POLICIES ===== */
+    {s:2,scn:false,q:"Which document defines what employees may and may not do with organizational systems, such as prohibiting unauthorized software and illegal activity?",o:[
+      {t:"An acceptable use policy (AUP)",c:true,f:"Correct. The AUP sets the boundaries for acceptable use of organizational systems."},
+      {t:"A clean desk policy",c:false,f:"That governs physical handling of materials at a workstation, not overall system use."},
+      {t:"A statement of work",c:false,f:"An SOW defines project deliverables, not employee system-use rules."},
+      {t:"A service-level agreement",c:false,f:"An SLA defines service performance commitments, not acceptable use."}
+    ]},
+    {s:2,scn:true,q:"Employees install unapproved cloud apps on personal devices to do their work. Which risk does this shadow IT most directly introduce?",o:[
+      {t:"Data exfiltration, malware, and software license violations outside IT's visibility",c:true,f:"Correct. Shadow IT operates beyond IT's oversight and brings exactly these risks."},
+      {t:"Improved compliance through faster tooling",c:false,f:"Shadow IT undermines compliance and visibility rather than improving it."},
+      {t:"Stronger network segmentation",c:false,f:"Unmanaged apps do not create segmentation; they bypass existing controls."},
+      {t:"Guaranteed encryption of all traffic",c:false,f:"Unsanctioned tools offer no such guarantee and evade oversight."}
+    ]},
+    {s:2,scn:false,q:"Why is role-based security training graded and aligned to job roles rather than to titles?",o:[
+      {t:"Because responsibilities and required knowledge depend on what the role actually does, not the title someone holds",c:true,f:"Correct. Training maps to the duties and KSAs of the role, not the label."},
+      {t:"Because titles change too often to track",c:false,f:"The reason is alignment to actual duties, not the volatility of titles."},
+      {t:"Because only executives need security training",c:false,f:"All users need training; the point is tailoring depth to the role."},
+      {t:"Because compliance forbids naming job titles in training",c:false,f:"There is no such prohibition; training is mapped to role duties."}
+    ]},
+    {s:2,scn:true,q:"An organization periodically sends simulated phishing emails to employees and tracks who reports them. This technique is best described as:",o:[
+      {t:"A simulated phishing campaign used to build and measure recognition and reporting",c:true,f:"Correct. Simulated phishing trains and measures the workforce's recognition skills."},
+      {t:"A penetration test of the email server",c:false,f:"Pentesting actively exploits systems; this measures human recognition, not server flaws."},
+      {t:"A gamified capture-the-flag exercise",c:false,f:"CTF uses challenges and badges; this is specifically a phishing simulation."},
+      {t:"A clean desk audit",c:false,f:"That checks physical workspace handling, not email recognition."}
+    ]},
+    {s:2,scn:true,q:"Security awareness training warns staff about dropped USB drives and malicious charging cables. Which training topic does this fall under?",o:[
+      {t:"Removable media and cables",c:true,f:"Correct. USB drops and malicious cables are the removable media and cables topic."},
+      {t:"Hybrid and remote work",c:false,f:"That topic covers off-site work risks, not USB and cable threats specifically."},
+      {t:"Operational security",c:false,f:"OPSEC is broader; the USB and cable focus maps to removable media and cables."},
+      {t:"Password management",c:false,f:"That addresses credentials and MFA, not physical media threats."}
+    ]},
+    {s:2,scn:true,q:"In the security awareness training lifecycle, the team reviews phishing-test results and refines the program for emerging threats. Which stages does this best represent?",o:[
+      {t:"Evaluation and feedback, feeding into ongoing reinforcement and adaptation",c:true,f:"Correct. Reviewing results and adjusting for new threats is the evaluation and adaptation end of the cycle."},
+      {t:"Assessment and initial planning only",c:false,f:"Those are the earliest stages; reviewing results and refining happens later."},
+      {t:"Delivery and implementation only",c:false,f:"Delivery is rolling out training; analyzing results and adjusting is evaluation and adaptation."},
+      {t:"Development only",c:false,f:"Development builds the materials; reviewing outcomes and refining is evaluation and adaptation."}
+    ]},
+    {s:2,scn:true,q:"A policy sets behavioral rules for staff and includes stricter clauses for privileged users with elevated access. This document is the:",o:[
+      {t:"Code of conduct",c:true,f:"Correct. The code of conduct sets behavioral rules, often with privileged-user clauses."},
+      {t:"Business partnership agreement",c:false,f:"A BPA is a vendor agreement, not internal behavioral rules."},
+      {t:"Recovery point objective",c:false,f:"An RPO is a backup metric, unrelated to conduct rules."},
+      {t:"Master service agreement",c:false,f:"An MSA governs vendor service terms, not employee behavior."}
+    ]},
+    {s:2,scn:true,q:"An organization aligns its security workforce training to recognized knowledge, skills, and abilities (KSAs). Which framework most directly supports this approach?",o:[
+      {t:"The NIST NICE framework, with SP 800-50 guidance",c:true,f:"Correct. NIST NICE and SP 800-50 underpin role-based, KSA-aligned training."},
+      {t:"The PCI DSS cardholder data environment standard",c:false,f:"PCI DSS governs payment card data, not workforce KSA training design."},
+      {t:"The FIPS 199 categorization standard",c:false,f:"FIPS 199 categorizes systems by impact, not training KSAs."},
+      {t:"The GDPR right-to-be-forgotten provision",c:false,f:"That is a privacy right, not a training framework."}
+    ]},
+    {s:2,scn:true,q:"An organization monitors corporate communications and reviews employees' public social media for security risks. Which conduct policy area governs this?",o:[
+      {t:"Social media use and analysis",c:true,f:"Correct. Monitoring communications and reviewing public social media falls under social media use and analysis."},
+      {t:"Clean desk policy",c:false,f:"That concerns leaving sensitive materials exposed at a desk, not social media monitoring."},
+      {t:"Acceptable use of removable media",c:false,f:"That addresses USB and portable media, not social media activity."},
+      {t:"Data retention policy",c:false,f:"Retention governs how long data is kept, not social media monitoring."}
+    ]}
+  ];
+
+  var SECTION_META={
+    1:{label:"Review Activity 1 \u00b7 Data Classification and Compliance",sub:"Data types, classifications, sovereignty, privacy data, breaches, compliance, monitoring, and data protection / DLP."},
+    2:{label:"Review Activity 2 \u00b7 Personnel Policies",sub:"Conduct policies, user and role-based training, training topics and techniques, and the awareness training lifecycle."}
+  };
+
+  var LETTERS=['A','B','C','D','E'];
+  var rvOrder=[], rvAnswered={}, rvCorrectCount=0;
+
+  function shuffle(a){
+    for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
+    return a;
+  }
+
+  function buildQuiz(){
+    rvAnswered={}; rvCorrectCount=0;
+    rvOrder=shuffle(RV_QUESTIONS.map(function(_,i){return i;}));
+    /* stable section grouping: keep section 1 block then section 2 block, shuffle within each */
+    var s1=rvOrder.filter(function(i){return RV_QUESTIONS[i].s===1;});
+    var s2=rvOrder.filter(function(i){return RV_QUESTIONS[i].s===2;});
+    shuffle(s1); shuffle(s2);
+    rvOrder=s1.concat(s2);
+
+    var host=document.getElementById('rvQuiz');
+    host.innerHTML='';
+    var displayNum=0, lastSection=null;
+
+    rvOrder.forEach(function(qi){
+      var Q=RV_QUESTIONS[qi];
+      if(Q.s!==lastSection){
+        lastSection=Q.s;
+        var meta=SECTION_META[Q.s];
+        var lab=document.createElement('div');
+        lab.className='rv-section-label';
+        lab.innerHTML='<span class="badge">'+(Q.s===1?'RA1':'RA2')+'</span> '+meta.label;
+        host.appendChild(lab);
+        var sub=document.createElement('div');
+        sub.className='rv-section-sub'; sub.textContent=meta.sub;
+        host.appendChild(sub);
+      }
+      displayNum++;
+      var card=document.createElement('div');
+      card.className='rv-q'; card.setAttribute('data-qi',qi);
+
+      var chips='<div class="qchips"><span class="rv-chip topic">'+(Q.s===1?'Data &amp; Compliance':'Personnel Policies')+'</span>'+(Q.scn?'<span class="rv-chip scn">Scenario</span>':'')+'</div>';
+      var head='<div class="qhead"><span class="qnum">Q'+displayNum+'</span><span class="qtext">'+Q.q+'</span></div>';
+      card.innerHTML=chips+head;
+
+      var optOrder=shuffle(Q.o.map(function(_,i){return i;}));
+      optOrder.forEach(function(oi,pos){
+        var O=Q.o[oi];
+        var btn=document.createElement('button');
+        btn.className='rv-opt';
+        btn.innerHTML='<span class="ltr">'+LETTERS[pos]+'</span><span>'+O.t+'</span>';
+        btn.addEventListener('click',function(){ answer(card,qi,O,btn); });
+        card.appendChild(btn);
+      });
+
+      var fb=document.createElement('div');
+      fb.className='rv-fb';
+      card.appendChild(fb);
+      host.appendChild(card);
+    });
+
+    document.getElementById('rvResultsPanel').classList.remove('show');
+    document.getElementById('rvResults').disabled=true;
+    updateProgress();
+  }
+
+  function answer(card,qi,O,btn){
+    if(rvAnswered[qi]) return;
+    rvAnswered[qi]=true;
+    if(O.c) rvCorrectCount++;
+
+    var opts=card.querySelectorAll('.rv-opt');
+    opts.forEach(function(b){ b.disabled=true; });
+    /* mark the chosen */
+    btn.classList.add(O.c?'correct':'wrong');
+    /* if wrong, also reveal the correct option */
+    if(!O.c){
+      var Q=RV_QUESTIONS[qi];
+      var correctText=Q.o.filter(function(x){return x.c;})[0].t;
+      opts.forEach(function(b){
+        if(b.querySelector('span:last-child').innerHTML===correctText){ b.classList.add('correct'); }
+        else if(b!==btn){ b.classList.add('dim'); }
+      });
+    } else {
+      opts.forEach(function(b){ if(b!==btn) b.classList.add('dim'); });
+    }
+
+    var fb=card.querySelector('.rv-fb');
+    fb.className='rv-fb show '+(O.c?'good':'bad');
+    fb.innerHTML='<b>'+(O.c?'Correct.':'Not the best answer.')+'</b> '+O.f;
+
+    updateProgress();
+  }
+
+  function updateProgress(){
+    var n=Object.keys(rvAnswered).length;
+    document.getElementById('rvCount').textContent='Answered '+n+' / '+RV_TOTAL;
+    document.getElementById('rvFill').style.width=(n/RV_TOTAL*100)+'%';
+    var btn=document.getElementById('rvResults');
+    btn.disabled = n<RV_TOTAL;
+    if(n>=RV_TOTAL) showResults(false);
+  }
+
+  function showResults(scroll){
+    var pct=Math.round(rvCorrectCount/RV_TOTAL*100);
+    var pass=(rvCorrectCount/RV_TOTAL)>=RV_PASS;
+    document.getElementById('rvScoreNum').textContent=rvCorrectCount+' / '+RV_TOTAL;
+    document.getElementById('rvScorePct').textContent=pct+'% correct';
+    var v=document.getElementById('rvVerdict');
+    v.textContent=pass?'PASS \u2713':'Keep studying';
+    v.className='rv-verdict '+(pass?'pass':'fail');
+    var panel=document.getElementById('rvResultsPanel');
+    panel.classList.add('show');
+    if(scroll) panel.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+
+  document.getElementById('rvResults').addEventListener('click',function(){ showResults(true); });
+  document.getElementById('rvReset').addEventListener('click',function(){
+    buildQuiz();
+    document.getElementById('review').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  buildQuiz();
+})();
+</script>
+  <script src="../shared/lesson-bridge.js"></script>
+</body>
+</html>
